@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- char_status_actions class -->
+	<windowclass name="char_status_actions">
+		<margins control="0,0,0,5" />
+		<script>
+			function onInit()
+				OptionsManager.registerCallback("CHARPSI", onOptionsChanged);
+				OptionsManager.registerCallback("CHARMOR", onOptionsChanged);
+				OptionsManager.registerCallback("CHARLUC", onOptionsChanged);
+				OptionsManager.registerCallback("CHARSAN", onOptionsChanged);
+				OptionsManager.registerCallback("CHARWEA", onOptionsChanged);
+				OptionsManager.registerCallback("CHARCHA", onOptionsChanged);
+
+				onOptionsChanged();
+			end
+			function onClose()
+				OptionsManager.unregisterCallback("CHARPSI", onOptionsChanged);
+				OptionsManager.unregisterCallback("CHARMOR", onOptionsChanged);
+				OptionsManager.unregisterCallback("CHARLUC", onOptionsChanged);
+				OptionsManager.unregisterCallback("CHARSAN", onOptionsChanged);
+				OptionsManager.unregisterCallback("CHARWEA", onOptionsChanged);
+				OptionsManager.unregisterCallback("CHARCHA", onOptionsChanged);
+			end
+			local tOptions = {
+				"CHARPSI",
+				"CHARMOR",
+				"CHARLUC",
+				"CHARSAN",
+				"CHARWEA",
+				"CHARCHA",
+			};
+			function onOptionsChanged()
+				for _,v in ipairs(tOptions) do
+					local bVisible = (OptionsManager.getOption(v) == "yes");
+					local sStat = v:gsub("CHAR", "");
+					local sShortStat = sStat:lower();
+					local sFullStat = DataCommon.optional_characterisics_stol[sShortStat]:lower();
+
+					self[("woundtrack_%s_current"):format(sShortStat)].setVisible(bVisible)
+					self[("%s_mod"):format(sShortStat)].setVisible(bVisible)
+					self[("reset_%s"):format(sFullStat)].setVisible(bVisible)
+					self[sFullStat].setVisible(bVisible)
+					self[("%s_label"):format(sFullStat)].setVisible(bVisible)
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_content_top />
+
+			<!-- Strength -->
+			<numberc_linked_framed name="strength">
+				<anchored width="30" height="20">
+					<top parent="contentanchor" anchor="bottom" relation="relative" offset="20" />
+					<left offset="15" />
+				</anchored>
+				<source><name>attributes.strength</name><op>+</op></source>
+			</numberc_linked_framed>
+			<basicnumber name="woundtrack_str_current" source="woundtrack.str">
+				<anchored to="strength" width="40" height="30">
+					<left anchor="right" offset="-17" />
+					<top anchor="bottom" offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						updateHealthColor();
+					end
+					function onValueChanged()
+						updateHealthColor();
+					end
+					function updateHealthColor()
+						local nPercentWounded = ActorHealthManager.getWoundPercent(window.getDatabaseNode());
+						local sColor = ColorManager.getTieredHealthColor(nPercentWounded);
+						setColor(sColor);
+					end
+				</script>
+			</basicnumber>
+			<number_charattributesdm name="str_mod" source="woundtrack.str_mod">
+				<anchored to="strength" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>woundtrack.str</name><op>+</op></source>
+				<source><name>woundtrack.str_equipment</name><op>+</op></source>
+				<displaysign />
+				<rollable/>
+			</number_charattributesdm>
+			<label_fieldtop>
+				<anchored to="strength" position="aboveright" offset="-17,1" />
+				<font name="sheetlabel" />
+				<static textres="STR" />
+			</label_fieldtop>
+			<woundtrack_reset_button name="reset_strength">
+				<anchored to="woundtrack_str_current" position="insidebottomleft" offset="-5,-5" width="12" height="12" />
+			</woundtrack_reset_button>
+
+			<!-- Dexterity -->
+			<numberc_linked_framed name="dexterity">
+				<anchored to="strength" width="30" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.dexterity</name><op>+</op></source>
+			</numberc_linked_framed>
+			<basicnumber name="woundtrack_dex_current" source="woundtrack.dex">
+				<anchored to="dexterity" width="40" height="30">
+					<left anchor="right" offset="-17" />
+					<top anchor="bottom" offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						updateHealthColor();
+					end
+					function onValueChanged()
+						updateHealthColor();
+					end
+					function updateHealthColor()
+						local nPercentWounded = ActorHealthManager.getWoundPercent(window.getDatabaseNode());
+						local sColor = ColorManager.getTieredHealthColor(nPercentWounded);
+						setColor(sColor);
+					end
+				</script>
+			</basicnumber>
+			<number_charattributesdm name="dex_mod" source="woundtrack.dex_mod">
+				<anchored to="strength" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>woundtrack.dex</name><op>+</op></source>
+				<source><name>woundtrack.dex_equipment</name><op>+</op></source>
+				<rollable/>
+				<displaysign />
+			</number_charattributesdm>
+			<label_fieldtop>
+				<anchored to="dexterity" position="aboveright" offset="-17,1" />
+				<font name="sheetlabel" />
+				<static textres="DEX" />
+			</label_fieldtop>
+			<woundtrack_reset_button name="reset_dexterity">
+				<anchored to="woundtrack_dex_current" position="insidebottomleft" offset="-5,-5" width="12" height="12" />
+			</woundtrack_reset_button>
+
+			<!-- Endurance -->
+			<numberc_linked_framed name="endurance">
+				<anchored to="strength" width="30" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.endurance</name><op>+</op></source>
+			</numberc_linked_framed>
+			<basicnumber name="woundtrack_end_current" source="woundtrack.end">
+				<anchored to="endurance" width="40" height="30">
+					<left anchor="right" offset="-17" />
+					<top anchor="bottom" offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						updateHealthColor();
+					end
+					function onValueChanged()
+						updateHealthColor();
+					end
+					function updateHealthColor()
+						local nPercentWounded = ActorHealthManager.getWoundPercent(window.getDatabaseNode());
+						local sColor = ColorManager.getTieredHealthColor(nPercentWounded);
+						setColor(sColor);
+					end
+				</script>
+			</basicnumber>
+			<number_charattributesdm name="end_mod" source="woundtrack.end_mod">
+				<anchored to="strength" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>woundtrack.end</name><op>+</op></source>
+				<source><name>woundtrack.end_equipment</name><op>+</op></source>
+				<rollable/>
+				<displaysign />
+			</number_charattributesdm>
+			<label_fieldtop>
+				<anchored to="endurance" position="aboveright" offset="-17,1" />
+				<font name="sheetlabel" />
+				<static textres="END" />
+			</label_fieldtop>
+			<woundtrack_reset_button name="reset_endurance">
+				<anchored to="woundtrack_end_current" position="insidebottomleft" offset="-5,-5" width="12" height="12" />
+			</woundtrack_reset_button>
+
+			<!-- Intellect -->
+			<numberc_linked_framed name="intelligence">
+				<anchored to="strength" width="30" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.intelligence</name><op>+</op></source>
+			</numberc_linked_framed>
+			<basicnumber name="woundtrack_int_current" source="woundtrack.int">
+				<anchored to="intelligence" width="40" height="30">
+					<left anchor="right" offset="-17" />
+					<top anchor="bottom" offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						updateHealthColor();
+					end
+					function onValueChanged()
+						updateHealthColor();
+					end
+					function updateHealthColor()
+						local nPercentWounded = ActorHealthManager.getWoundPercent(window.getDatabaseNode());
+						local sColor = ColorManager.getTieredHealthColor(nPercentWounded);
+						setColor(sColor);
+					end
+				</script>
+			</basicnumber>
+			<number_charattributesdm name="int_mod" source="woundtrack.int_mod">
+				<anchored to="strength" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>woundtrack.int</name><op>+</op></source>
+				<source><name>woundtrack.int_equipment</name><op>+</op></source>
+				<rollable/>
+				<displaysign />
+			</number_charattributesdm>
+			<label_fieldtop>
+				<anchored to="intelligence" position="aboveright" offset="-17,1" />
+				<font name="sheetlabel" />
+				<static textres="INT" />
+			</label_fieldtop>
+			<woundtrack_reset_button name="reset_intelligence">
+				<anchored to="woundtrack_int_current" position="insidebottomleft" offset="-5,-5" width="12" height="12" />
+			</woundtrack_reset_button>
+
+			<!-- Education -->
+			<numberc_linked_framed name="education">
+				<anchored to="strength" width="30" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.education</name><op>+</op></source>
+			</numberc_linked_framed>
+			<basicnumber name="woundtrack_edu_current" source="woundtrack.edu">
+				<anchored to="education" width="40" height="30">
+					<left anchor="right" offset="-17" />
+					<top anchor="bottom" offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						updateHealthColor();
+					end
+					function onValueChanged()
+						updateHealthColor();
+					end
+					function updateHealthColor()
+						local nPercentWounded = ActorHealthManager.getWoundPercent(window.getDatabaseNode());
+						local sColor = ColorManager.getTieredHealthColor(nPercentWounded);
+						setColor(sColor);
+					end
+				</script>
+			</basicnumber>
+			<number_charattributesdm name="edu_mod" source="woundtrack.edu_mod">
+				<anchored to="strength" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>woundtrack.edu</name><op>+</op></source>
+				<source><name>woundtrack.edu_equipment</name><op>+</op></source>
+				<rollable/>
+				<displaysign />
+			</number_charattributesdm>
+			<label_fieldtop>
+				<anchored to="education" position="aboveright" offset="-17,1" />
+				<font name="sheetlabel" />
+				<static textres="EDU" />
+			</label_fieldtop>
+			<woundtrack_reset_button name="reset_education">
+				<anchored to="woundtrack_edu_current" position="insidebottomleft" offset="-5,-5" width="12" height="12" />
+			</woundtrack_reset_button>
+
+			<!-- Social -->
+			<numberc_linked_framed name="social">
+				<anchored to="strength" width="30" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.social</name><op>+</op></source>
+			</numberc_linked_framed>
+			<basicnumber name="woundtrack_soc_current" source="woundtrack.soc">
+				<anchored to="social" width="40" height="30">
+					<left anchor="right" offset="-17" />
+					<top anchor="bottom" offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						updateHealthColor();
+					end
+					function onValueChanged()
+						updateHealthColor();
+					end
+					function updateHealthColor()
+						local nPercentWounded = ActorHealthManager.getWoundPercent(window.getDatabaseNode());
+						local sColor = ColorManager.getTieredHealthColor(nPercentWounded);
+						setColor(sColor);
+					end
+				</script>
+			</basicnumber>
+			<number_charattributesdm name="soc_mod" source="woundtrack.soc_mod">
+				<anchored to="strength" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>woundtrack.soc</name><op>+</op></source>
+				<source><name>woundtrack.soc_equipment</name><op>+</op></source>
+				<rollable/>
+				<displaysign />
+			</number_charattributesdm>
+			<label_fieldtop>
+				<anchored to="social" position="aboveright" offset="-17,1" />
+				<font name="sheetlabel" />
+				<static textres="SOC" />
+			</label_fieldtop>
+			<woundtrack_reset_button name="reset_social">
+				<anchored to="woundtrack_soc_current" position="insidebottomleft" offset="-5,-5" width="12" height="12" />
+			</woundtrack_reset_button>
+
+			<!-- PSI -->
+			<numberc_linked_framed name="psi">
+				<anchored width="30" height="20">
+					<top parent="contentanchor" anchor="bottom" relation="relative" offset="70" />
+					<left offset="15" />
+				</anchored>
+				<source><name>attributes.psi</name><op>+</op></source>
+			</numberc_linked_framed>
+			<basicnumber name="woundtrack_psi_current" source="woundtrack.psi">
+				<anchored to="psi" width="40" height="30">
+					<left anchor="right" offset="-17" />
+					<top anchor="bottom" offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						updateHealthColor();
+					end
+					function onValueChanged()
+						updateHealthColor();
+					end
+					function updateHealthColor()
+						local nPercentWounded = ActorHealthManager.getWoundPercent(window.getDatabaseNode());
+						local sColor = ColorManager.getTieredHealthColor(nPercentWounded);
+						setColor(sColor);
+					end
+				</script>
+			</basicnumber>
+			<number_charattributesdm name="psi_mod" source="woundtrack.psi_mod">
+				<anchored to="psi" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>woundtrack.psi</name><op>+</op></source>
+				<source><name>woundtrack.psi_equipment</name><op>+</op></source>
+				<rollable/>
+				<displaysign />
+			</number_charattributesdm>
+			<label_fieldtop name="psi_label">
+				<anchored to="psi" position="aboveright" offset="-17,1" />
+				<font name="sheetlabel" />
+				<static textres="PSI" />
+			</label_fieldtop>
+			<woundtrack_reset_button name="reset_psi">
+				<anchored to="woundtrack_psi_current" position="insidebottomleft" offset="-5,-5" width="12" height="12" />
+			</woundtrack_reset_button>
+
+			<!-- Morale -->
+			<numberc_linked_framed name="morale">
+				<anchored to="psi" width="30" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.morale</name><op>+</op></source>
+			</numberc_linked_framed>
+			<basicnumber name="woundtrack_mor_current" source="woundtrack.mor">
+				<anchored to="morale" width="40" height="30">
+					<left anchor="right" offset="-17" />
+					<top anchor="bottom" offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						updateHealthColor();
+					end
+					function onValueChanged()
+						updateHealthColor();
+					end
+					function updateHealthColor()
+						local nPercentWounded = ActorHealthManager.getWoundPercent(window.getDatabaseNode());
+						local sColor = ColorManager.getTieredHealthColor(nPercentWounded);
+						setColor(sColor);
+					end
+				</script>
+			</basicnumber>
+			<number_charattributesdm name="mor_mod" source="woundtrack.mor_mod">
+				<anchored to="psi" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>woundtrack.mor</name><op>+</op></source>
+				<source><name>woundtrack.mor_equipment</name><op>+</op></source>
+				<rollable/>
+				<displaysign />
+			</number_charattributesdm>
+			<label_fieldtop name="morale_label">
+				<anchored to="morale" position="aboveright" offset="-17,1" />
+				<font name="sheetlabel" />
+				<static textres="MOR" />
+			</label_fieldtop>
+			<woundtrack_reset_button name="reset_morale">
+				<anchored to="woundtrack_mor_current" position="insidebottomleft" offset="-5,-5" width="12" height="12" />
+			</woundtrack_reset_button>
+
+			<!-- Luck -->
+			<numberc_linked_framed name="luck">
+				<anchored to="psi" width="30" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.luck</name><op>+</op></source>
+			</numberc_linked_framed>
+			<basicnumber name="woundtrack_luc_current" source="woundtrack.luc">
+				<anchored to="luck" width="40" height="30">
+					<left anchor="right" offset="-17" />
+					<top anchor="bottom" offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						updateHealthColor();
+					end
+					function onValueChanged()
+						updateHealthColor();
+					end
+					function updateHealthColor()
+						local nPercentWounded = ActorHealthManager.getWoundPercent(window.getDatabaseNode());
+						local sColor = ColorManager.getTieredHealthColor(nPercentWounded);
+						setColor(sColor);
+					end
+				</script>
+			</basicnumber>
+			<number_charattributesdm name="luc_mod" source="woundtrack.luc_mod">
+				<anchored to="psi" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>woundtrack.luc</name><op>+</op></source>
+				<source><name>woundtrack.luc_equipment</name><op>+</op></source>
+				<rollable/>
+				<displaysign />
+			</number_charattributesdm>
+			<label_fieldtop name="luck_label">
+				<anchored to="luck" position="aboveright" offset="-17,1" />
+				<font name="sheetlabel" />
+				<static textres="LUC" />
+			</label_fieldtop>
+			<woundtrack_reset_button name="reset_luck">
+				<anchored to="woundtrack_luc_current" position="insidebottomleft" offset="-5,-5" width="12" height="12" />
+			</woundtrack_reset_button>
+
+			<!-- Sanity -->
+			<numberc_linked_framed name="sanity">
+				<anchored to="psi" width="30" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.sanity</name><op>+</op></source>
+			</numberc_linked_framed>
+			<basicnumber name="woundtrack_san_current" source="woundtrack.san">
+				<anchored to="sanity" width="40" height="30">
+					<left anchor="right" offset="-17" />
+					<top anchor="bottom" offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						updateHealthColor();
+					end
+					function onValueChanged()
+						updateHealthColor();
+					end
+					function updateHealthColor()
+						local nPercentWounded = ActorHealthManager.getWoundPercent(window.getDatabaseNode());
+						local sColor = ColorManager.getTieredHealthColor(nPercentWounded);
+						setColor(sColor);
+					end
+				</script>
+			</basicnumber>
+			<number_charattributesdm name="san_mod" source="woundtrack.san_mod">
+				<anchored to="psi" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>woundtrack.san</name><op>+</op></source>
+				<source><name>woundtrack.san_equipment</name><op>+</op></source>
+				<rollable/>
+				<displaysign />
+			</number_charattributesdm>
+			<label_fieldtop name="sanity_label">
+				<anchored to="sanity" position="aboveright" offset="-17,1" />
+				<font name="sheetlabel" />
+				<static textres="SAN" />
+			</label_fieldtop>
+			<woundtrack_reset_button name="reset_sanity">
+				<anchored to="woundtrack_san_current" position="insidebottomleft" offset="-5,-5" width="12" height="12" />
+			</woundtrack_reset_button>
+
+			<!-- Wealth -->
+			<numberc_linked_framed name="wealth">
+				<anchored to="psi" width="30" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.wealth</name><op>+</op></source>
+			</numberc_linked_framed>
+			<basicnumber name="woundtrack_wea_current" source="woundtrack.wea">
+				<anchored to="wealth" width="40" height="30">
+					<left anchor="right" offset="-17" />
+					<top anchor="bottom" offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						updateHealthColor();
+					end
+					function onValueChanged()
+						updateHealthColor();
+					end
+					function updateHealthColor()
+						local nPercentWounded = ActorHealthManager.getWoundPercent(window.getDatabaseNode());
+						local sColor = ColorManager.getTieredHealthColor(nPercentWounded);
+						setColor(sColor);
+					end
+				</script>
+			</basicnumber>
+			<number_charattributesdm name="wea_mod" source="woundtrack.wea_mod">
+				<anchored to="psi" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>woundtrack.wea</name><op>+</op></source>
+				<source><name>woundtrack.wea_equipment</name><op>+</op></source>
+				<rollable/>
+				<displaysign />
+			</number_charattributesdm>
+			<label_fieldtop name="wealth_label">
+				<anchored to="wealth" position="aboveright" offset="-17,1" />
+				<font name="sheetlabel" />
+				<static textres="WEA" />
+			</label_fieldtop>
+			<woundtrack_reset_button name="reset_wealth">
+				<anchored to="woundtrack_wea_current" position="insidebottomleft" offset="-5,-5" width="12" height="12" />
+			</woundtrack_reset_button>
+
+			<!-- Charm -->
+			<numberc_linked_framed name="charm">
+				<anchored to="psi" width="30" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.charm</name><op>+</op></source>
+			</numberc_linked_framed>
+			<basicnumber name="woundtrack_cha_current" source="woundtrack.cha">
+				<anchored to="charm" width="40" height="30">
+					<left anchor="right" offset="-17" />
+					<top anchor="bottom" offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						updateHealthColor();
+					end
+					function onValueChanged()
+						updateHealthColor();
+					end
+					function updateHealthColor()
+						local nPercentWounded = ActorHealthManager.getWoundPercent(window.getDatabaseNode());
+						local sColor = ColorManager.getTieredHealthColor(nPercentWounded);
+						setColor(sColor);
+					end
+				</script>
+			</basicnumber>
+			<number_charattributesdm name="cha_mod" source="woundtrack.cha_mod">
+				<anchored to="psi" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>woundtrack.cha</name><op>+</op></source>
+				<source><name>woundtrack.cha_equipment</name><op>+</op></source>
+				<rollable/>
+				<displaysign />
+			</number_charattributesdm>
+			<label_fieldtop name="charm_label">
+				<anchored to="charm" position="aboveright" offset="-17,1" />
+				<font name="sheetlabel" />
+				<static textres="CHA" />
+			</label_fieldtop>
+			<woundtrack_reset_button name="reset_charm">
+				<anchored to="woundtrack_cha_current" position="insidebottomleft" offset="-5,-5" width="12" height="12" />
+			</woundtrack_reset_button>
+		</sheetdata>
+	</windowclass>
+</root>

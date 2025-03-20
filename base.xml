@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+<root version="3.0" release="6" logo="rulesetlogo_mongoosetraveller2e.png">
+	<announcement text="Mongoose Traveller (2E) ruleset (2025-03-12) for Fantasy Grounds\rCopyright 2025 Smiteworks USA, LLC" font="emotefont" icon="rulesetlogo_traveller2e" />
+	<announcement text="Mongoose Traveller 2E\rCopyright 2016 Mongoose Publishing." font="emotefont" icon="mongoosepublishinglogo" />
+
+	<!-- Attributes -->
+	<description>
+		<displayname>Mongoose Traveller</displayname>
+		<displayversion>2E</displayversion>
+		<text>Mongoose Traveller 2nd Edition</text>
+		<author>Colin Richardson</author>
+		<website>http://www.fantasygrounds.com</website>
+	</description>
+
+	<!-- Import the Traveller 1E material -->
+	<importinfo>
+		<acceptfrom ruleset="Traveller" />
+	</importinfo>
+
+	<!-- Layers -->
+	<importruleset source="CoreRPG" />
+
+	<!-- Tabletop settings -->
+	<includefile source="gameelements.xml" />
+
+	<!-- Graphics -->
+	<includefile source="graphics/graphics_fonts.xml" />
+	<includefile source="graphics/graphics_frames.xml" />
+	<includefile source="graphics/graphics_icons.xml" />
+	<includefile source="graphics/graphics_radial.xml" />
+	<includefile source="graphics/graphics_portraits.xml" />
+	<includefile source="graphics/graphics_sidebar.xml" />
+	<includefile source="graphics/graphics_tabs.xml" />
+
+	<!-- Strings -->
+	<includefile source="strings/strings_travellercore.xml" />
+
+	<!-- Desktop -->
+	<includefile source="desktop/desktop_classestraveller.xml" />
+	<includefile source="desktop/desktop_panelstraveller.xml" />
+	<includefile source="desktop/template_desktoptraveller.xml" />
+	<script name="DesktopTraveller" file="scripts/data_desktop_traveller.lua" />
+
+	<!-- Utility -->
+	<includefile source="utility/utility_effects.xml" />
+
+	<!-- Reference -->
+	<includefile source="ref/ref_skills.xml" />
+	<includefile source="ref/ref_equipment.xml" />
+	<includefile source="ref/ref_equipment_lists.xml" />
+	<includefile source="ref/ref_homeworld.xml" />
+	<includefile source="ref/ref_career.xml" />
+	<includefile source="ref/ref_psionic.xml" />
+	<includefile source="ref/ref_psionic_lists.xml" />
+	<includefile source="ref/ref_race.xml" />
+	<includefile source="ref/ref_vehicle.xml" />
+	<includefile source="ref/ref_spacecraft.xml" />
+	<includefile source="ref/ref_task_chain.xml" />
+
+	<!-- Campaign Records -->
+	<includefile source="campaign/template_campaign.xml" />
+	<includefile source="campaign/template_char.xml" />
+
+	<includefile source="campaign/record_char.xml" />
+	<includefile source="campaign/record_char_main.xml" />
+	<includefile source="campaign/record_char_skills.xml" />
+	<includefile source="campaign/record_char_equipment.xml" />
+	<includefile source="campaign/record_char_personal.xml" />
+	<includefile source="campaign/record_char_psiabilities.xml" />
+	<includefile source="campaign/record_char_psitalents.xml" />
+	<includefile source="campaign/record_char_actions.xml" />
+	<includefile source="campaign/record_char_weapons.xml" />
+	<includefile source="campaign/record_psiabilities.xml" />
+	<includefile source="campaign/record_char_misc_actions.xml" />
+	<includefile source="campaign/record_char_spacecraft.xml" />
+
+	<includefile source="campaign/record_battlespacecraft.xml" />
+	<includefile source="campaign/record_item.xml" />
+	<includefile source="campaign/record_npc.xml" />
+	<includefile source="campaign/record_woundtrack.xml" />
+	<includefile source="campaign/record_worlds.xml" />
+	<includefile source="campaign/record_worlds_trade.xml" />
+	<includefile source="campaign/record_tradegoods.xml" />
+
+	<script name="CharManager" file="campaign/scripts/manager_char.lua" />
+
+	<!-- Common -->
+	<includefile source="common/template_common.xml" />
+	<includefile source="common/template_windows.xml" />
+
+	<!-- VERSION CONTROL -->
+	<script name="VersionManager2" file="scripts/manager_version2.lua"/>
+
+	<!-- Data -->
+	<script name="LibraryDataTraveller" file="scripts/data_library_traveller.lua" />
+	<script name="DataCommon" file="scripts/data_common.lua" />
+
+	<!-- Combat tracker -->
+	<includefile source="ct/template_ct.xml" />
+	<includefile source="ct/ct_host.xml" />
+	<includefile source="ct/ct_host_entry.xml" />
+	<includefile source="ct/ct_host_entry_section.xml" />
+	<includefile source="ct/ct_client.xml" />
+
+	<!-- Spacecraft Combat -->
+	<includefile source="ct/template_ctship.xml" />
+	<includefile source="ct/ct_spacecraft_host.xml" />
+	<includefile source="ct/ct_spacecraft_client.xml" />
+
+	<!-- High-level scripts -->
+	<script name="OptionsTraveller" file="scripts/data_options_traveller.lua" />
+	<script name="GameSystem" file="scripts/manager_gamesystem.lua" />
+
+	<script name="ActorManagerTraveller" file="scripts/manager_actor_traveller.lua" />
+	<script name="CharEncumbranceManagerTraveller" file="scripts/manager_char_encumbrance_traveller.lua" />
+	<script name="CombatManager2" file="scripts/manager_combat2.lua" />
+	<script name="DiceManagerTraveller" file="scripts/manager_dice_traveller.lua" />
+	<script name="EffectManagerTraveller" file="scripts/manager_effect_traveller.lua" />
+	<script name="ItemManager2" file="scripts/manager_item2.lua" />
+	<script name="NPCManagerTraveller" file="scripts/manager_npc.lua" />
+	<script name="PartyManager2" file="scripts/manager_ps2.lua" />
+	<script name="PsiManager" file="scripts/manager_psitalents.lua" />
+	<script name="SkillsManager" file="scripts/manager_skills.lua" />
+	<script name="VehicleManager" file="scripts/manager_vehicle.lua" />
+
+	<!-- Actions -->
+	<script name="ActionAttack" file="scripts/manager_action_attack.lua" />
+	<script name="ActionSkill" file="scripts/manager_action_skill.lua" />
+	<script name="ActionsManager2" file="scripts/manager_actions2.lua" />
+	<script name="ActionDamage" file="scripts/manager_action_damage.lua" />
+	<script name="ActionHeal" file="scripts/manager_action_heal.lua" />
+	<script name="ActionTactics" file="scripts/manager_action_tactics.lua" />
+	<script name="ActionsCharacteristics" file="scripts/manager_action_characteristics.lua" />
+	<script name="ActionInit" file="scripts/manager_action_init.lua" />
+	<script name="ActionGeneral" file="scripts/manager_action_general.lua" />
+	<script name="ActionShipInit" file="scripts/manager_action_shipinit.lua" />
+	<script name="ActionCombatMishaps" file="scripts/manager_combat_mishaps.lua" />
+	<script name="ActionHitLocation" file="scripts/manager_combat_hitlocations.lua" />
+	<script name="ActionDisablingWoundEffect" file="scripts/manager_combat_disabling_wound_effects.lua" />
+
+	<!-- Party sheet -->
+	<includefile source="ps/template_ps.xml" />
+	<includefile source="ps/ps_main.xml" />
+	<includefile source="ps/ps_partyship.xml" />
+
+	<!-- Spacecraft -->
+	<script name="ActionShipAttack" file="scripts/manager_action_shipattack.lua" />
+	<script name="ActionShipDamage" file="scripts/manager_action_shipdamage.lua" />
+	<includefile source="campaign/template_charspacecraft.xml" />
+
+	<script name="SpacecraftCombatManager" file="scripts/manager_spacecraft_combat.lua" />
+	<script name="SpacecraftTokenManager" file="scripts/manager_spacecraft_token.lua" />
+	<script name="SpacecraftManager" file="scripts/manager_spacecraft.lua" />
+	<script name="SpacecraftCriticalsManager" file="scripts/manager_spacecraft_criticals.lua" />
+
+	<!-- PC Ship -->
+	<includefile source="campaign/record_charspacecraft.xml" />
+	<includefile source="campaign/record_charspacecraft_main.xml" />
+	<includefile source="campaign/record_charspacecraft_systems.xml" />
+	<includefile source="campaign/record_charspacecraft_cargo.xml" />
+	<includefile source="campaign/record_charspacecraft_notes.xml" />
+	<includefile source="campaign/record_charspacecraft_weapons.xml" />
+	<includefile source="campaign/record_charspacecraft_status.xml" />
+
+	<!-- Task Chains -->
+	<includefile source="tc/tc_host.xml" />
+	<includefile source="tc/tc_client.xml" />
+	<includefile source="tc/template_tclist.xml" />
+	<script name="TaskChainManager" file="scripts/manager_taskchains.lua" />
+</root>

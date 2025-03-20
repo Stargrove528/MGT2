@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+ 	<windowclass name="shipcombattracker_client">
+		<frame>ctbox</frame>
+		<sizelimits>
+			<minimum width="400" height="400" />
+			<dynamic />
+		</sizelimits>
+		<softclose />
+		<script file="ct/scripts/clientct_window.lua" />
+		<sheetdata>
+			<windowtitlebar_ctbox name="title">
+				<resource>sct_shipwindow_title</resource>
+			</windowtitlebar_ctbox>
+			<windowmenubar_ctbox name="menubar" />
+
+			<anchor_content_ctbox_top name="contentanchor" />
+			<anchor_content_ctbox_bottom name="bottomanchor" />
+
+			<sub_ct_header_client name="sub_header">
+				<class>sub_sct_header_client</class>
+			</sub_ct_header_client>
+			
+			<sub_ct_controls_client name="sub_controls">
+				<class>sub_sct_controls_client</class>
+			</sub_ct_controls_client>
+
+			<list_ct_client name="list">
+				<datasource>combattracker.shiplist</datasource>
+				<class>client_sct_entry</class>
+				<empty font="list-empty-ct" textres="sct_emptyshiplist" />
+				<script file="ct/scripts/clientctship.lua" />
+			</list_ct_client>
+			<scrollbar_content_list />
+
+			<resize_ctbox />
+		</sheetdata>
+	</windowclass>
+	<windowclass name="sub_sct_header_client">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<anchor_ct_header_left />
+			<anchor_ct_header_right />
+
+			<spacer_ct_header_active name="spacer_header_active" />
+			<spacer_ct_header_token name="spacer_header_token" />
+
+			<spacer_ct_header_buttons_client name="spacer_buttons_header" />
+			<label_ct_header_right name="label_wounds">
+				<anchored width="60" />
+				<static textres="sct_label_hulldamage" />
+				<tooltip textres="sct_tooltip_hulldamage" />
+				<center />
+			</label_ct_header_right>
+			<label_ct_header_right name="label_hp">
+				<anchored width="60" />
+				<static textres="sct_label_maximumhullpoints" />
+				<tooltip textres="sct_tooltip_maximumhullpoints" />
+				<center />
+			</label_ct_header_right>
+			<label_ct_header_initresult name="label_init">
+				<static textres="sct_label_shortinit" />
+				<tooltip textres="sct_tooltip_init" />
+			</label_ct_header_initresult>
+			<label_ct_header_name_v2 name="label_name">
+				<static textres="sct_label_shipname" />
+			</label_ct_header_name_v2>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="sub_sct_controls_client">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<hn name="phasenumber" />
+			
+			<anchor_ct_controls_left />
+			<anchor_ct_controls_right />
+
+			<number_ct_controls_rounds name="round" />
+			<label_ct_controls_rounds name="label_round" />
+
+			<string_sct_controls_phase name="phase" />
+			<label_sct_controls_phase name="label_phase" />
+
+			<area_ct_controls_center name="area_center" />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="client_sct_entry">
+		<margins control="0,0,0,2" />
+		<frame>ctentrybox</frame>
+		<script file="ct/scripts/clientct_shipentry.lua" />
+		<sheetdata>
+			<hidden_record_isidentified name="isidentified" />
+			<hlink_clientct name="link" />
+			<hs name="tokenrefid" />
+			<hs name="tokenrefnode" />
+			<hn name="tokenvis" />
+
+			<spacer_ctentry_active_top name="active_spacer_top" />
+			<anchor_ct_entry_left name="leftanchor" />
+			<anchor_ct_entry_right name="rightanchor" />
+
+			<button_clientct_active name="active" />
+			<token_clientct name="token" />
+
+			<button_ct_section_effects name="button_section_effects" />
+			<button_ctentry_friendfoe name="friendfoe" />
+
+			<number_ct_static name="hpdamage">
+				<anchored to="rightanchor" width="60" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+			</number_ct_static>
+			<number_ct_static name="hptotal">
+				<anchored to="rightanchor" width="60" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+			</number_ct_static>
+			<string_clientct_shipstatus name="status" />
+
+			<number_clientct_init name="initresult" />
+
+			<string_clientct_name name="name" />
+			<string_clientct_name name="nonid_name">
+				<invisible />
+			</string_clientct_name>
+
+			<sub_ct_section name="sub_effects" />
+			<sub_ct_section name="sub_criticals">
+				<class>client_sct_section_criticals</class>
+				<fastinit />
+			</sub_ct_section>
+
+			<string_ct_entry_targets name="summary_targets" />
+			<string_ct_entry_effects name="summary_effects" />
+
+			<spacer_ctentry_middle name="spacer" />
+			<spacer_ctentry_active_bottom name="active_spacer_bottom" />
+		</sheetdata>
+	</windowclass>
+
+	<!-- Section - Criticals -->
+	<windowclass name="client_sct_section_criticals">
+		<sizelimits>
+			<minimum height="40" />
+		</sizelimits>
+		<script>
+			function onInit()
+				DB.addHandler(criticals.getDatabaseNode(), "onChildUpdate", self.update);
+				self.update();
+			end
+			function onClose()
+				DB.removeHandler(criticals.getDatabaseNode(), "onChildUpdate", self.update);
+			end
+			function update()
+				local bVisible = (DB.getChildCount(criticals.getDatabaseNode()) > 0);
+				parentcontrol.setVisible(bVisible);
+			end
+		</script>
+		<sheetdata>
+			<icon_ct_section name="icon_section">
+				<icon>button_section_criticals_down</icon>
+				<tooltip textres="sct_tooltip_criticals_icon" />
+			</icon_ct_section>
+
+			<windowlist name="criticals">
+				<anchored position="insidetopright" offset="0,4">
+					<left parent="icon_section" anchor="right" />
+				</anchored>
+				<datasource>.criticals</datasource>
+				<class>client_sct_critical</class>
+				<noscroll />
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="client_sct_critical">
+		<margins control="0,0,0,5" />
+		<sheetdata>
+			<anchor_listitem_left />
+
+			<anchor_listitem_right />
+			<number_listitem_right_static name="severity">
+				<anchored width="30" />
+				<tooltip textres="sct_tooltip_criticals_severity" />
+			</number_listitem_right_static>
+			<string_listitem_right_static name="system">
+				<anchored width="100" />
+				<tooltip textres="sct_tooltip_criticals_system" />
+			</string_listitem_right_static>
+
+			<string_listitem_center_static name="text">
+				<tooltip textres="sct_tooltip_criticals_effect" />
+			</string_listitem_center_static>
+		</sheetdata>
+	</windowclass>
+</root>

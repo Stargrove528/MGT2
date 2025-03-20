@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<icon name="rulesetlogo_traveller2e" file="graphics/icons/rulesetlogo_traveller2e.png" />
+	<icon name="mongoosepublishinglogo" file="graphics/icons/mongoosepublishing.png" />
+
+	<!-- Modifier stack -->
+	<icon name="modcollector" file="graphics/icons/modcollector.png" />
+	<icon name="modcollector_counter" file="graphics/icons/modcollector_counter.png" />
+
+	<!-- Dice tower -->
+	<icon name="dicetower_normal" file="graphics/icons/dicetower_normal.png" />
+	<icon name="dicetower_drop" file="graphics/icons/dicetower_normal.png" />
+	
+	<!-- Common -->
+	<icon name="expand" file="graphics/icons/expand.png" />
+	<icon name="expand_down" file="graphics/icons/expand_down.png" />
+	<icon name="window_resize" file="graphics/icons/window_resize.png" />
+	<icon name="reorder" file="graphics/buttons/button_swap.png" />
+	<icon name="reorder_down" file="graphics/buttons/button_swap.png" />
+
+	<!-- Override CoreRPG -->
+	<!-- Common -->
+	<icon name="button_close" file="graphics/buttons/button_close.png" />
+	<icon name="button_close_down" file="graphics/buttons/button_close_down.png" />
+	<icon name="button_close_hover" file="graphics/buttons/button_close_hover.png" />
+	<icon name="button_help" file="graphics/buttons/button_help.png" />
+	<icon name="button_help_down" file="graphics/buttons/button_help_down.png" />
+	<icon name="button_help_hover" file="graphics/buttons/button_help_hover.png" />
+	<icon name="button_link" file="graphics/buttons/button_link.png" />
+	<icon name="button_link_down" file="graphics/buttons/button_link_down.png" />
+	<icon name="button_link_empty" file="graphics/buttons/button_link_empty.png" />
+	<icon name="button_link_share" file="graphics/buttons/button_link_share.png" />
+	<icon name="button_toolbar_link" file="graphics/buttons/button_toolbar_link.png" />
+
+	<icon name="button_add" file="graphics/buttons/button_add.png" />
+	<icon name="button_add_down" file="graphics/buttons/button_add_down.png" />
+	<icon name="button_edit" file="graphics/buttons/button_edit.png" />
+	<icon name="button_edit_down" file="graphics/buttons/button_edit_down.png" />
+	<icon name="button_delete" file="graphics/buttons/button_delete.png" />
+	<icon name="button_delete_down" file="graphics/buttons/button_delete_down.png" />
+	<icon name="button_deleteconfirm" file="graphics/buttons/button_deleteconfirm.png" />
+	<icon name="button_deleteconfirm_down" file="graphics/buttons/button_deleteconfirm_down.png" />
+	<icon name="button_back" file="graphics/buttons/button_back.png" />
+	<icon name="button_back_down" file="graphics/buttons/button_back_down.png" />
+	<icon name="button_import" file="graphics/buttons/button_import.png" />
+	<icon name="button_import_down" file="graphics/buttons/button_import_down.png" />
+	<icon name="button_export" file="graphics/buttons/button_export.png" />
+	<icon name="button_export_down" file="graphics/buttons/button_export_down.png" />
+
+	<!-- Buttons -->
+	<icon name="button_char_inv_none" file="graphics/buttons/button_inv_none.png" />
+	<icon name="button_char_inv_carried" file="graphics/buttons/button_inv_carried.png" />
+	<icon name="button_char_inv_equipped" file="graphics/buttons/button_inv_equipped.png" />
+	<icon name="char_inv_carried_header" file="graphics/icons/char_inv_carried_header.png" />
+	<icon name="button_details" file="graphics/buttons/button_details.png" />
+	<icon name="button_details_down" file="graphics/buttons/button_details_down.png" />
+
+	<!-- Token Bag -->
+	<icon name="tokenbag" file="graphics/icons/tokenbag.png" />
+	<icon name="tokenbagup" file="graphics/icons/tokenbag_up.png" />
+
+	<!-- Override CoreRPG ruleset graphics -->
+	<icon name="button_roll" file="graphics/buttons/button_roll.png" />
+	<icon name="button_roll_down" file="graphics/buttons/button_roll_down.png" />
+	<icon name="arrowleft" file="graphics/icons/arrow_left.png" />
+	<icon name="arrowright" file="graphics/icons/arrow_right.png" />
+	<icon name="footer_wide" file="graphics/icons/footer_wide.png" />
+
+	<!-- Override CoreRPG CT ruleset graphics -->
+	<icon name="turn_flag" file="graphics/icons/turn_flag.png" />
+	<icon name="ct_active" file="graphics/icons/ct_active.png" />
+	<icon name="ct_passive" file="graphics/icons/ct_passive.png" />
+	<icon name="ct_faction_empty" file="graphics/icons/ct_faction_empty.png" />
+	<icon name="ct_faction_friend" file="graphics/icons/ct_faction_friend.png" />
+	<icon name="ct_faction_neutral" file="graphics/icons/ct_faction_neutral.png" />
+	<icon name="ct_faction_foe" file="graphics/icons/ct_faction_foe.png" />
+	<icon name="button_sword" file="graphics/buttons/button_sword.png" />
+	<icon name="button_sword_down" file="graphics/buttons/button_sword_down.png" />
+	<icon name="button_shield" file="graphics/buttons/button_shield.png" />
+	<icon name="button_shield_down" file="graphics/buttons/button_shield_down.png" />
+	<icon name="button_effect" file="graphics/buttons/button_effect.png" />
+	<icon name="button_effect_down" file="graphics/buttons/button_effect_down.png" />
+	<icon name="button_section_targeting" file="graphics/buttons/button_section_targeting.png" />
+	<icon name="button_section_targeting_down" file="graphics/buttons/button_section_targeting_down.png" />
+	<icon name="button_targeting" file="graphics/buttons/button_targeting.png" />
+	<icon name="button_targeting_down" file="graphics/buttons/button_targeting_down.png" />
+	<icon name="drag_targeting" file="graphics/icons/drag_targeting.png" />
+	<icon name="button_menu" file="graphics/buttons/button_menu.png" />
+	<icon name="button_menu_down" file="graphics/buttons/button_menu_down.png" />
+	<icon name="button_ctnextround" file="graphics/buttons/button_ctnextround.png" />
+	<icon name="button_ctnextround_down" file="graphics/buttons/button_ctnextround_down.png" />
+	<icon name="button_ctnextactor" file="graphics/buttons/button_ctnextactor.png" />
+	<icon name="button_ctnextactor_down" file="graphics/buttons/button_ctnextactor_down.png" />
+	<icon name="button_ct_spacecraft" file="graphics/buttons/button_spacecraft.png" />
+	<icon name="button_ct_spacecraft_down" file="graphics/buttons/button_spacecraft_down.png" />
+	<icon name="button_checkon" file="graphics/buttons/button_checkon.png" />
+	<icon name="button_checkoff" file="graphics/buttons/button_checkoff.png" />
+
+	<!-- Campaign lists -->
+	<icon name="woundtrack_reset" file="graphics/icons/resethealth.png" />
+	<icon name="psipoints_reset" file="graphics/icons/resethealth.png" />
+
+	<!-- Misc -->
+	<icon name="visibilityon" file="graphics/icons/visibilityon.png" />
+	<icon name="visibilityoff" file="graphics/icons/visibilityoff.png" />
+
+	<!-- spacecraft -->
+	<icon name="button_check_unselected" file="graphics/icons/button_check_empty.png" />
+	<icon name="button_check_selected" file="graphics/icons/button_check_selected.png" />
+	<icon name="button_section_crew" file="graphics/icons/crew.png" />
+	<icon name="button_section_crew_down" file="graphics/icons/crew_down.png" />
+	<icon name="button_section_pendingattacks_down" file="graphics/icons/damageburst.png" />
+	<icon name="button_section_criticals_down" file="graphics/icons/criticals.png" />
+	<icon name="button_spacecraft" file="graphics/buttons/button_spacecraft.png" />
+	<icon name="button_spacecraft_down" file="graphics/buttons/button_spacecraft_down.png" />
+	<icon name="button_spacecraft_hover" file="graphics/buttons/button_spacecraft_hover.png" />
+
+	<!-- Dice -->
+	<icon name="d6ricon" file="graphics/icons/d6_red_icon.png" />
+	<icon name="d6lbicon" file="graphics/icons/d6_lightblue_icon.png" />
+</root>

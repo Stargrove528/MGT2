@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charspacecraft_notes">
+		<sheetdata>
+			<frame_char name="notesframe">
+				<anchored position="insidetopleft" offset="0,5">
+					<right parent="" offset="0"/>
+					<bottom parent="" offset="-10"/>
+				</anchored>
+			</frame_char>
+			<label_frametop name="header_notes">
+				<anchored to="notesframe" position="insidetop" offset="-10,10" height="20" />
+				<static textres="charspacecraft_label_notes" />
+				<center />
+			</label_frametop>
+			<simpleft name="notes">
+				<anchored to="notesframe" position="insidetop" offset="-15,40">
+					<bottom offset="-15" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</simpleft>
+			<scrollbar_content_base>
+				<anchored to="notes" />
+				<target>notes</target>
+			</scrollbar_content_base>
+		</sheetdata>
+	</windowclass>
+</root>

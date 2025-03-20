@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- Racial Traits -->
+	<template name="list_racialtraits">
+		<list_text>
+			<datasource>.racialtraitslist</datasource>
+			<class>char_racialtraits</class>
+			<allowcreate />
+			<allowdelete />
+			<script>
+				function onDrop(x, y, draginfo)
+					if draginfo.getType() == "string" then
+						local w = createWindow();
+						w.name.setValue(draginfo.getStringData());
+						return true;
+					end
+				end
+			</script>
+		</list_text>
+	</template>
+
+	<!-- Skills -->
+	<template name="number_charskillfield">
+		<basicnumber>
+			<hideonvalue>-3</hideonvalue>
+			<nodrag />
+		</basicnumber>
+	</template>
+	<template name="number_charskillDMfield">
+		<basicnumber>
+			<delaykeyupdate />
+			<nodrag />
+			<readonly />
+		</basicnumber>
+	</template>
+	<template name="number_charskilltotal">
+		<number_linked>
+			<rollable />
+			<source><name>level</name><op>+</op></source>
+			<source><name>mod</name><op>+</op></source>
+			<source><name>characteristicDM</name><op>+</op></source>
+			<script>
+				function action(draginfo)
+					local nodeWin = window.getDatabaseNode();
+
+					if nodeWin then
+						local nTotal = getValue();
+						local nodeSkill = window.name.getValue();
+						local nodeChar = DB.getChild(nodeWin, "...");
+						local rActor = ActorManager.resolveActor(nodeChar);
+						local sSkillStat = window.characteristic.getValue()
+						local nStatMod = window.characteristicDM.getValue()
+
+						ActionSkill.performRoll(draginfo, rActor, nodeSkill, nTotal, sSkillStat, nStatMod);
+
+					end
+
+					return true;
+				end
+
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+
+				function onDoubleClick(x,y)
+					return action();
+				end
+			</script>
+		</number_linked>
+	</template>
+
+	<!-- Psionics Talents -->
+	<template name="number_charspsitalentfield">
+		<basicnumber>
+			<hideonvalue>-3</hideonvalue>
+			<nodrag />
+		</basicnumber>
+	</template>
+	<template name="number_charpsitotal">
+		<number_linked>
+			<rollable />
+			<source><name>level</name><op>+</op></source>
+			<source><name>...attributes.psi_mod</name><op>+</op></source>
+			<script>
+				function action(draginfo)
+					local nodeWin = window.getDatabaseNode();
+					local nodeChar = DB.getChild(window.getDatabaseNode(), "...")
+					
+					if nodeWin then
+
+						local nTotal = getValue();
+						local nodeSkill = window.name.getValue();
+						local nodeChar = DB.getChild(nodeWin, "...");
+						local rActor = ActorManager.resolveActor(nodeChar);
+						local nPSICost = -1
+
+						ActionSkill.performRoll(draginfo, rActor, nodeSkill, nTotal, nil, nPSICost, true);
+					end
+
+					return true;
+				end
+
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+
+				function onDoubleClick(x,y)
+					return action();
+				end
+			</script>
+		</number_linked>
+	</template>
+	<template name="number_charpsitotal2">
+		<number_linked>
+			<rollable />
+			<source><name>level</name><op>+</op></source>
+			<source><name>...woundtrack.psi_mod</name><op>+</op></source>
+			<script>
+				function action(draginfo)
+					local nodeWin = window.getDatabaseNode();
+					local nodeChar = DB.getChild(window.getDatabaseNode(), "...")
+
+					if nodeWin then
+
+						local nPSIStrength = DB.getValue(nodeChar, 'woundtrack.psi', -1);
+
+						if nPSIStrength == 0 then
+							local sMsg = Interface.getString("char_message_notenoughpsistrength");
+							ChatManager.SystemMessage(sMsg, true);	
+							return;
+						end
+
+						local nTotal = getValue();
+						local nodeSkill = window.name.getValue();
+						local nodeChar = DB.getChild(nodeWin, "...");
+						local rActor = ActorManager.resolveActor(nodeChar);
+						local nPSICost = -1
+						if window.ability_cost ~= nil then
+							nPSICost = window.ability_cost.getValue()
+						end
+
+						ActionSkill.performRoll(draginfo, rActor, nodeSkill, nTotal, nil, nPSICost, true);
+					end
+
+					return true;
+				end
+
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+
+				function onDoubleClick(x,y)
+					return action();
+				end
+			</script>
+		</number_linked>
+	</template>
+	<template name="number_charpsicost">
+		<basicnumber>
+			<min>0</min>
+			<max>100</max>
+		</basicnumber>
+	</template>
+
+	<!-- Characteristics -->
+	<template name="number_characteristic">
+		<basicnumber>
+			<default>7</default>
+			<delaykeyupdate />
+			<nodrag />
+			<script file="campaign/scripts/char_characteristic_check.lua" />
+		</basicnumber>
+	</template>
+	<template name="number_optional_characteristic">
+		<number_characteristic>
+			<default>0</default>
+		</number_characteristic>
+	</template>
+	<template name="number_charattributesdm">
+		<number_linked>
+			<anchored>
+				<top offset="0" />
+				<left />
+			</anchored>
+			<rollable />
+			<script file="campaign/scripts/char_characteristics.lua" />
+		</number_linked>
+	</template>
+	<template name="number_charattributes_mod">
+		<basicnumber>
+			<anchored>
+				<top offset="0" />
+				<left />
+			</anchored>
+			<hideonvalue>0</hideonvalue>
+			<delaykeyupdate />
+			<nodrag />
+		</basicnumber>
+	</template>
+	<template name="number_charattributes_equipment">
+		<number_linked>
+			<anchored>
+				<top offset="0" />
+				<left />
+			</anchored>
+			<hideonvalue>0</hideonvalue>
+		</number_linked>
+	</template>
+	<template name="cycler_skillcharacteristic">
+		<button_stringcycler>
+			<parameters>
+				<defaultlabel> - </defaultlabel>
+				<labels>Str|Dex|End|Int|Edu|Soc</labels>
+				<values>str_mod|dex_mod|end_mod|int_mod|edu_mod|soc_mod</values>
+			</parameters>
+			<script file="campaign/scripts/char_statcycler.lua" />
+		</button_stringcycler>
+	</template>
+	<template name="cycler_misccharacteristic">
+		<button_stringcycler>
+			<parameters>
+				<defaultlabel> - </defaultlabel>
+				<labels>Str|Dex|End|Int|Edu|Soc|PSI</labels>
+				<values>str_mod|dex_mod|end_mod|int_mod|edu_mod|soc_mod|psi_mod</values>
+			</parameters>
+			<script file="campaign/scripts/char_statcycler.lua" />
+		</button_stringcycler>
+	</template>
+	<template name="number_charactiontotal">
+		<number_linked>
+			<rollable />
+			<source><name>skill</name><op>+</op></source>
+			<source><name>characteristicDM</name><op>+</op></source>
+			<source><name>actionMod</name><op>+</op></source>
+			<script>
+				function action(draginfo)
+					local nodeWin = window.getDatabaseNode();
+
+					if nodeWin then
+						local nTotal = getValue();
+						local nodeSkill = window.name.getValue();
+						local nodeChar = DB.getChild(nodeWin, "...");
+						local rActor = ActorManager.resolveActor(nodeChar);
+						local rollType = window.action.getValue():lower()
+
+						if rollType == "skill" then
+							ActionSkill.performRoll(draginfo, rActor, nodeSkill, nTotal, nil, nil, false);
+						end
+						if rollType == "heal" then
+							ActionHeal.performRoll(draginfo, rActor, nodeSkill, nTotal, nil, nil, false);
+						end
+						if rollType == "tactics" then
+							ActionTactics.performRoll(draginfo, rActor, nodeSkill, nTotal, nil, nil, false);
+						end
+					end
+
+					return true;
+				end
+
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+
+				function onDoubleClick(x,y)
+					return action();
+				end
+			</script>
+		</number_linked>
+	</template>
+	<template name="cycler_actions_action">
+		<button_stringcycler>
+			<parameters>
+				<labels>Skill|Heal|Tactics</labels>
+				<values>skill|heal|tactics</values>
+			</parameters>
+			<!-- <script>
+				function onValueChanged()
+					local sValue = getStringValue();
+					local nodeWin = window.getDatabaseNode();
+					if nodeWin then
+						nDBtoapply = DB.getValue(nodeWin, "...attributes." ..sValue, 0);
+						window.characteristicDM.setValue(nDBtoapply);
+					end
+				end
+			</script> -->
+		</button_stringcycler>
+	</template>
+	<template name="cycler_weapons_rateoffire">
+		<button_stringcycler>
+			<parameters>
+				<labels>Single|Burst|Full Auto</labels>
+				<values>single|burst|full_auto</values>
+			</parameters>
+		</button_stringcycler>
+	</template>
+
+	<template name="label_charframetop">
+		<stringcontrol>
+			<font>subwindowsmalltitle</font>
+			<nodrag />
+			<readonly />
+			<script file="campaign/scripts/char_labelframetop.lua" />
+		</stringcontrol>
+	</template>
+
+	<template name="list_ports">
+		<windowlist>
+			<datasource>.ports</datasource>
+			<allowdelete />
+			<script file="campaign/scripts/worlds_portslist.lua" />
+		</windowlist>
+	</template>
+
+	<template name="list_charweapon">
+		<windowlist>
+			<datasource>.inventorylist</datasource>
+			<sortby><control>name</control></sortby>
+			<allowdelete />
+			<script file="campaign/scripts/char_weaponlist.lua" />
+		</windowlist>
+	</template>
+	<template name="list_charpsiability">
+		<windowlist>
+			<datasource>.psiabilitieslist</datasource>
+			<sortby><control>name</control></sortby>
+			<allowdelete />
+		</windowlist>
+	</template>
+
+	<template name="list_charmiscaction">
+		<windowlist>
+			<datasource>.miscactions</datasource>
+			<sortby><control>name</control></sortby>
+			<allowdelete />
+			<allowdelete />
+			<script file="campaign/scripts/char_actionlist.lua" />
+		</windowlist>
+	</template>
+
+	<template name="string_weapondamage">
+		<basicstring_rollable>
+			<center />
+			<rollable />
+			<script>
+				function onDoubleClick(x, y)
+					window.actionDamage();
+					return true;
+				end
+				function onDragStart(button, x, y, draginfo)
+					window.actionDamage(draginfo);
+					return true;
+				end
+			</script>
+		</basicstring_rollable>
+	</template>
+	<template name="number_weaponattack">
+		<number_linked>
+			<stateframe>
+				<keyedit name="fieldfocus" offset="7,5,7,5" />
+				<hover name="fieldfocus" offset="7,5,7,5" hidereadonly="true" />
+				<drophilight name="fieldfocus" offset="7,5,7,5" hidereadonly="true" />
+			</stateframe>
+			<rollable />
+			<script>
+				function onDoubleClick(x, y)
+					window.actionAttack();
+					return true;
+				end
+				function onDragStart(button, x, y, draginfo)
+					window.actionAttack(draginfo);
+					return true;
+				end
+			</script>
+		</number_linked>
+	</template>
+	<template name="number_initiative">
+		<basicnumber>
+			<source mergerule="resetandadd" />
+			<rollable />
+			<script file="common/scripts/number_linked.lua" />
+			<script>
+				function action(draginfo)
+					local rActor = ActorManager.resolveActor(window.getDatabaseNode());
+					ActionInit.performRoll(draginfo, rActor);
+
+					return true;
+				end
+
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+
+				function onDoubleClick(x,y)
+					return action();
+				end
+			</script>
+		</basicnumber>
+	</template>
+	<template name="number_raditation">
+		<basicnumber>
+			<script file="common/scripts/number_linked.lua" />
+		</basicnumber>
+	</template>
+	<template name="label_optional_characteristic">
+		<label name="label_optional_characteristic">
+			<script file="campaign/scripts/char_optional_characteristics.lua" />
+		</label>
+	</template>
+	<template name="woundtrack_reset_button">
+		<buttoncontrol>
+			<state icon="woundtrack_reset" color="4180C5" frame="fieldlight" frameoffset="4,4,4,4" tooltipres="char_label_woundtrack_reset_tooltip" />
+			<script file="campaign/scripts/char_reset_button.lua" />
+		</buttoncontrol>
+	</template>
+</root>

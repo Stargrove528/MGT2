@@ -1,0 +1,842 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<string name="tab_equipment">Equipment</string>
+	<string name="tab_psi">Psionics</string>
+	<string name="tab_trade">Trade</string>
+	<string name="tab_spaceports">Spaceports</string>
+	<string name="tab_status">Status</string>
+	<string name="tab_systems">Systems</string>
+
+	<!-- Common -->
+	<string name="STR">STR</string>
+	<string name="DEX">DEX</string>
+	<string name="END">END</string>
+	<string name="INT">INT</string>
+	<string name="EDU">EDU</string>
+	<string name="SOC">SOC</string>
+	<string name="PSI">PSI</string>
+	<string name="MOR">MOR</string>
+	<string name="LUC">LUC</string>
+	<string name="SAN">SAN</string>
+	<string name="CHA">CHA</string>
+	<string name="WEA">WEA</string>
+	<string name="str">Str</string>
+	<string name="dex">Dex</string>
+	<string name="end">End</string>
+	<string name="int">Int</string>
+	<string name="edu">Edu</string>
+	<string name="soc">Soc</string>
+	<string name="psi">Psi</string>
+	<string name="mor">Mor</string>
+	<string name="luc">Luc</string>
+	<string name="san">San</string>
+	<string name="cha">Cha</string>
+	<string name="wea">Wea</string>
+	<string name="strength">Strength</string>
+	<string name="dexterity">Dexterity</string>
+	<string name="endurance">Endurance</string>
+	<string name="intelligence">Intellect</string>
+	<string name="education">Education</string>
+	<string name="social">Social</string>
+	<string name="Strength">Strength</string>
+	<string name="Dexterity">Dexterity</string>
+	<string name="Endurance">Endurance</string>
+	<string name="Intelligence">Intellect</string>
+	<string name="Education">Education</string>
+	<string name="Social">Social</string>
+	<string name="defenses">Armour:</string>
+	<string name="armourname">Name</string>
+	<string name="armourrating">Rating</string>
+	<string name="wounds">Wounds</string>
+	<string name="init">Init</string>
+
+	<!-- Optional Characteristics  -->
+	<string name="Psi">Psi</string>
+	<string name="Morale">Morale</string>
+	<string name="Luck">Luck</string>
+	<string name="Sanity">Sanity</string>
+	<string name="Territory">Territory</string>
+	<string name="Wealth">Wealth</string>
+	<string name="Charisma">Charisma</string>
+	<string name="Resolve">Resolve</string>
+	<string name="psi">Psi</string>
+	<string name="morale">Morale</string>
+	<string name="luck">Luck</string>
+	<string name="sanity">Sanity</string>
+	<string name="territory">Territory</string>
+	<string name="wealth">Wealth</string>
+	<string name="charm">Charm</string>
+	<string name="resolve">Resolve</string>
+
+	<!-- General -->
+	<string name="desktop_difficultynumber">Task Diff.</string>
+	<string name="difficultynumber_tooltip">Task Difficulty</string>
+	<string name="desktop_difficultylevel">Task Difficulty</string>
+	<string name="difficultylevel_tooltip">Task Difficulty Level</string>
+
+	<!-- Option -->
+	<string name="option_header_characteristics">Characteristics</string>
+	<string name="option_header_characteristics_companion">Traveller Companion Characteristics</string>
+	<string name="option_header_combat_companion">Traveller Companion Combat</string>
+	<string name="option_label_DDCV">Damage Characteristic Order</string>
+	<string name="option_label_HDCV">Heal Characteristic Order</string>
+	<string name="option_label_ARMOUR">Show Armour value</string>
+	<string name="option_label_CHARPSI">Use PSI Characteristic</string>
+	<string name="option_label_CHARMOR">Use Morale Characteristic</string>
+	<string name="option_label_CHARLUC">Use Luck Characteristic</string>
+	<string name="option_label_CHARSAN">Use Sanity Characteristic</string>
+	<string name="option_label_CHARWLT">Use Wealth Characteristic</string>
+	<string name="option_label_CHARCHA">Use Charm Characteristic</string>
+	<string name="option_label_CHARTER">Use Territory (Aslan) Characteristic</string>
+	<string name="option_label_CHARRES">Use Resolve (Hivers) Characteristic</string>
+
+	<string name="option_label_STUDYP">Show Study Period on Skills Tab</string>
+	<string name="option_label_EHW">Allow Heavy Weapons over 100Kg in Inventory</string>
+	<string name="option_label_SPCRIT">Automatically roll for Spacecraft Criticals</string>
+	<string name="option_label_SPACRIT">Apply Sustained Damage based Criticals</string>
+	<string name="option_label_COMPMISHAPS">Use Combat Mishaps</string>
+	<string name="option_label_COMPWOUNDEFFECTS">Use Additional Wound Effects</string>
+	<string name="option_label_COMPDISABLINGWOUNDEFFECTS">Use Disabling Wound Effects</string>
+	<string name="option_label_COMPHITLOCATIONS">Use Hit Locations</string>
+	<string name="option_label_COMPNATURALRESILIENCE">Use Natural Resilience</string>
+	<string name="option_label_COMPKNOCKOUTBLOW">Use Knockout Blow</string>
+	<string name="option_label_COMPRANDOMFIRSTBLOOD">Use Random First Blood</string>
+	<string name="option_label_UWPAG">Use UWP Auto-Generation</string>
+
+	<string name="option_val_endstrdex">END STR DEX</string>
+	<string name="option_val_enddexstr">END DEX STR</string>
+	<string name="option_val_strdexend">STR DEX END</string>
+	<string name="option_val_strenddex">STR END DEX</string>
+	<string name="option_val_dexendstr">DEX END STR</string>
+	<string name="option_val_dexstrend">DEX STR END</string>
+
+	<!-- Characters -->
+	<string name="char_label_name">NAME</string>
+	<string name="char_label_race">RACE</string>
+	<string name="char_label_gender">GENDER</string>
+	<string name="char_label_age">AGE</string>
+	<string name="char_label_homeworld">HOMEWORLD</string>
+	<string name="char_label_racialtraits">Racial Traits</string>
+	<string name="char_label_initiative">Initiative</string>
+	<string name="char_label_radiation">Radiation</string>
+	<string name="char_label_weapon_traits">Traits</string>
+	<string name="char_label_cargo">Cargo</string>
+	<string name="char_label_inventory">Inventory</string>
+	<string name="char_label_ships">Assigned Spacecraft</string>
+	<string name="char_label_shipview">View</string>
+	<string name="char_label_role">Role</string>
+	<string name="char_label_show">Show</string>
+	<string name="char_label_shipactions">Actions</string>
+
+	<!-- Combat Tracker -->
+	<string name="ct_label_currenthealth">CH</string>
+	<string name="ct_label_init_mod">Mod</string>
+	<string name="ct_label_actions">Attack</string>
+	<string name="ct_label_menu">Menu</string>
+	<string name="ct_label_round">Round</string>
+	<string name="ct_label_strength">STR</string>
+	<string name="ct_label_endurance">END</string>
+	<string name="ct_label_dexterity">DEX</string>
+	<string name="ct_label_armour">Armour</string>
+	<string name="ct_label_armour_protection">Protection</string>
+	<string name="ct_label_hits">Hits</string>
+	<string name="ct_label_pendingdamage">Incoming Damage</string>
+	<string name="ct_tooltip_statuses">Effects/Conditions</string>
+	<string name="ct_tooltip_endurance">Endurance</string>
+	<string name="ct_tooltip_strength">Strength</string>
+	<string name="ct_tooltip_dexterity">Dexterity</string>
+	<string name="ct_tooltip_offense">Attacks</string>
+	<string name="ct_tooltip_attribute">Attributes</string>
+	<string name="ct_tooltip_targeting">Targeting</string>
+	<string name="ct_tooltip_statusoff">Inactive</string>
+	<string name="ct_tooltip_statuson">Active</string>
+	<string name="ct_tooltip_statusskip">Status One Use</string>
+	<string name="ct_tooltip_statusdelete">Remove Status</string>
+	<string name="ct_tooltip_statusdragtarget">Drag onto new effect target</string>
+	<string name="ct_tooltip_statusdur">Duration</string>
+	<string name="ct_tooltip_statusinit">Initiative to adjust on</string>
+	<string name="ct_tooltip_init_mod">Modifier for the Init total</string>
+	<string name="ct_tooltip_hits">Animals current Hit total</string>
+	<string name="ct_tooltip_spacecraftcombatoff">Spacecraft Combat Show</string>
+	<string name="ct_tooltip_spacecraftcombaton">Spacecraft Combat Hide</string>
+	<string name="ct_tooltip_apply_pendingdamage">Apply this Damage</string>
+	<string name="ct_tooltip_ignore_pendingdamage">Ignore this Damage</string>
+	<string name="menu_init">Initiative</string>
+	<string name="menu_initall">Roll All Initiatives</string>
+	<string name="menu_initnpc">Roll NPC Initiatives</string>
+	<string name="menu_initpc">Roll PC Initiatives</string>
+	<string name="menu_initclear">Clear All Initiatives</string>
+	<string name="button_apply">Apply</string>
+	<string name="button_ignore">Ignore</string>
+	<string name="button_reduce">Reduce</string>
+	<string name="button_remove">Remove</string>
+	<string name="char_tactics_modifier">Initiative Modifier of %d applied to all friendly combatants</string>
+
+	<!-- Attributes -->
+	<string name="char_label_strength">Strength</string>
+	<string name="char_label_dexterity">Dexterity</string>
+	<string name="char_label_endurance">Endurance</string>
+	<string name="char_label_intelligence">Intellect</string>
+	<string name="char_label_education">Education</string>
+	<string name="char_label_social">Social Standing</string>
+	<string name="char_label_morale">Morale</string>
+	<string name="char_label_luck">Luck</string>
+	<string name="char_label_sanity">Sanity</string>
+	<string name="char_label_charm">Charm</string>
+	<string name="char_label_wealth">Wealth</string>
+	<string name="char_label_territory">Territory</string>
+	<string name="char_label_resolve">Resolve</string>
+	<string name="char_label_psi">PSI</string>
+	<string name="char_label_mod">Mod</string>
+	<string name="char_label_dm">DM</string>
+	<string name="char_label_characteristic">Char.</string>
+	<string name="char_label_equip">Equip.</string>
+
+	<string name="char_label_itemmass">Kg</string>
+	<string name="char_tooltip_itemmass">Kg</string>
+
+	<string name="char_label_attributes">Characteristics</string>
+	<string name="char_label_extracharacterdetails">Additional Info</string>
+	<string name="char_label_equipment">Equipment </string>
+	<string name="char_label_encumbrance">Encumbrance</string>
+	<string name="char_label_skills">Skills</string>
+	<string name="char_label_itemlocation">Location</string>
+	<string name="char_label_itemname">Name</string>
+	<string name="char_label_totalmass">Total mass</string>
+	<string name="char_label_money">Currency</string>
+	<string name="char_label_background">Background</string>
+	<string name="char_label_notes">Notes</string>
+	<string name="char_label_alliesetc">Allies, Contacts, Enemies, Rivals</string>
+	<string name="char_label_psionic_characteristics">Psionic Characteristics</string>
+	<string name="char_label_psionic_abilities">Psionic Abilities</string>
+	<string name="char_label_psi_talents">PSI Talents</string>
+	<string name="char_label_psiname">Name</string>
+	<string name="char_label_psilevel">Level</string>
+	<string name="char_label_psiattributeDM">PSI DM</string>
+	<string name="char_label_psitotal">Total</string>
+	<string name="char_label_study_period">Study Period</string>
+	<string name="char_label_training_in_skill">Training in Skill</string>
+	<string name="char_label_week_number">Week#</string>
+	<string name="char_label_week_number_of">Of</string>
+	<string name="char_label_study_periods">Study Periods</string>
+	<string name="char_label_complete">Complete</string>
+	<string name="char_label_cargo_totals">Cargo Totals</string>
+	<string name="char_label_cargo_free_space">Free Space</string>
+	<string name="char_label_cargo_space">Total Space</string>
+
+	<!-- Addition Messages -->
+	<string name="char_abilities_message_raceadd">Race '%s' added to '%s'.</string>
+	<string name="char_abilities_message_skillincrease">Skill '%s' increased to Level '%s'.</string>
+	<string name="char_abilities_message_skilladd">Skill '%s' added to '%s'</string>
+	<string name="char_abilities_message_exploitadd">Exploit '%s' added to '%s'.</string>
+	<string name="char_abilities_message_careeradd">Career '%s' added to '%s'.</string>
+	<string name="char_abilities_message_careergrade">Career '%s' Grade changed from '%s' to '%s'.</string>
+	<string name="char_abilities_message_traitadd">Trait '%s' added to '%s'.</string>
+	<string name="char_abilities_message_languageadd">Language '%s' added to '%s'.</string>
+	<string name="char_abilities_message_homeworldadd">Homeworld '%s' added to '%s'.</string>
+	<string name="char_abilities_message_psitalentadd">Psi Talent '%s' added to '%s'.</string>
+	<string name="char_actions_message_actionsadd">Action '%s' added to '%s'.</string>
+	<string name="char_actions_message_addammo">Ammunition type '%s' not available for this weapon '%s'.</string>
+	<string name="char_psitalent_psistrength">PSI Strength reduced by '%s' to '%s'.</string>
+	<string name="char_add_heavy_weaponry">Unable to add '%s' due to the weight.</string>
+
+	<string name="char_menu_addweapon">Add Weapon</string>
+	<string name="char_menu_addaction">Add Action</string>
+	<string name="char_menu_addammo">Add Ammo</string>
+
+	<!-- Other Messages -->
+	<string name="char_message_atkwithnoammo">[ATTACKING WHILE OUT OF AMMO]</string>
+	<string name="char_message_atkwithoutenoughammo">[ATTACKING WITHOUT ENOUGH AMMO]</string>
+	<string name="char_message_armourpreventeddamage">[ARMOUR prevented any damage]</string>
+	<string name="char_message_armourreduceddamage">[ARMOUR reduced damage]</string>
+	<string name="char_message_naturalresiliencereduceddamage">[NATURAL RESILIENCE reduced damage</string>
+	<string name="char_message_naturalresilienceincreaseddamage">[NATURAL RESILIENCE increased damage</string>
+	<string name="char_message_notenoughpsistrength">No PSI Strength available</string>
+
+	<!-- Modifiers -->
+	<string name="modifier_label_BOON">Boon</string>
+	<string name="modifier_label_BANE">Bane</string>
+	<string name="modifier_label_PLUS1">+1</string>
+	<string name="modifier_label_MINUS1">-1</string>
+	<string name="modifier_label_PLUS2">+2</string>
+	<string name="modifier_label_MINUS2">-2</string>
+	<string name="modifier_label_PLUS3">+3</string>
+	<string name="modifier_label_MINUS3">-3</string>
+	<string name="modifier_label_STR">STR</string>
+	<string name="modifier_label_DEX">DEX</string>
+	<string name="modifier_label_END">END</string>
+	<string name="modifier_label_INT">INT</string>
+	<string name="modifier_label_EDU">EDU</string>
+	<string name="modifier_label_SOC">SOC</string>
+	<string name="modifier_label_PSI">PSI</string>
+
+	<string name="modifier_category_bonus">BONUS</string>
+	<string name="modifier_label_BON_AIMING_1">+1 Aim</string>
+	<string name="modifier_label_BON_AIMING_2">+2 Aim</string>
+	<string name="modifier_label_BON_AIMING_3">+3 Aim</string>
+	<string name="modifier_label_BON_LASER_SIGHT">+1 Laser Sight</string>
+	<string name="modifier_label_BON_SHORT_RANGE">+1 Short Range</string>
+
+	<string name="modifier_category_shipbonus">SHIP BONUS</string>
+	<string name="modifier_label_BON_FIRECONTROL1">Fire Control/1</string>
+	<string name="modifier_label_BON_FIRECONTROL2">Fire Control/2</string>
+	<string name="modifier_label_BON_FIRECONTROL3">Fire Control/3</string>
+	<string name="modifier_label_BON_FIRECONTROL4">Fire Control/4</string>
+	<string name="modifier_label_BON_FIRECONTROL5">Fire Control/5</string>
+
+	<string name="modifier_category_penalty">PENALTY</string>
+	<string name="modifier_label_PEN_FAST_MOVING_1">-1 Fast Target</string>
+	<string name="modifier_label_PEN_FAST_MOVING_2">-2 Fast Target</string>
+	<string name="modifier_label_PEN_FAST_MOVING_3">-3 Fast Target</string>
+	<string name="modifier_label_PEN_FAST_MOVING_4">-4 Fast Target</string>
+	<string name="modifier_label_PEN_COVER">-2 Target Cover</string>
+	<string name="modifier_label_PEN_PRONE">-1 Prone Target</string>
+	<string name="modifier_label_PEN_LONG_RANGE">-2 Long Rng</string>
+	<string name="modifier_label_PEN_EXTREME_RANGE">-4 Extreme Rng</string>
+
+	<!-- NPC's -->
+	<string name="npc_label_psiskills">PSI Talents</string>
+	<string name="npc_label_items">Equipment</string>
+	<string name="npc_label_race">Race</string>
+	<string name="npc_label_homeworld">Homeworld</string>
+	<string name="npc_label_career">Profession</string>
+	<string name="npc_label_upp">UPP</string>
+	<string name="npc_label_age">Age</string>
+	<string name="npc_label_str">Str</string>
+	<string name="npc_label_dex">Dex</string>
+	<string name="npc_label_end">End</string>
+	<string name="npc_label_int">Int</string>
+	<string name="npc_label_edu">Edu</string>
+	<string name="npc_label_soc">Soc</string>
+	<string name="npc_label_psi">PSI</string>
+	<string name="npc_label_morale">Mor</string>
+	<string name="npc_label_luck">Luc</string>
+	<string name="npc_label_sanity">San</string>
+	<string name="npc_label_wealth">Wea</string>
+	<string name="npc_label_charm">Cha</string>
+	<string name="npc_label_territory">Ter</string>
+	<string name="npc_header_actions">Actions</string>
+	<string name="npc_label_weapon">Weapon</string>
+	<string name="npc_label_weaponattack">Attack</string>
+	<string name="npc_label_weapondmg">Damage</string>
+	<string name="npc_label_weaponrange">Range</string>
+	<string name="npc_label_armour">Armour Type</string>
+	<string name="npc_label_weapontraits">Traits</string>
+	<string name="npc_tooltip_armour">The Type of Armour such as 'Hide', 'Combat Armour'</string>
+	<string name="npc_label_armour_protection">Protection</string>
+	<string name="npc_tooltip_protection">Protection value such as '3', 'Laser 10', 'Radiation 50'</string>
+	<string name="npc_label_traits">Traits</string>
+	<string name="npc_type_patron">Patron</string>
+	<string name="npc_type_npc">NPC</string>
+	<string name="npc_type_creature">Creature/Animal</string>
+	<string name="npc_type_drone">Robot/Drone</string>
+	<string name="npc_label_hits">Hits</string>
+	<string name="npc_label_behaviour">Behaviour</string>
+	<string name="npc_label_tl">TL</string>
+	<string name="npc_label_cost">Cost</string>
+	<string name="npc_label_programming">Programming</string>
+
+	<!-- Worlds -->
+	<string name="worlds_label_uwp">UWP</string>
+	<string name="worlds_label_hexlocation">Hex Location</string>
+	<string name="worlds_label_starport_quality">Starport</string>
+	<string name="worlds_label_size">Size</string>
+	<string name="worlds_label_atmosphere_type">Atmosphere</string>
+	<string name="worlds_label_hydrographics">Hydrographic</string>
+	<string name="worlds_label_population">Population</string>
+	<string name="worlds_label_government_type">Government</string>
+	<string name="worlds_label_law_level">Law Level</string>
+	<string name="worlds_label_tech_level">Tech Level</string>
+	<string name="worlds_label_bases">Bases</string>
+	<string name="worlds_label_trade_codes">Trade Codes</string>
+	<string name="worlds_label_travel_code">Travel Code</string>
+	<string name="worlds_label_domain">Domain</string>
+	<string name="worlds_label_system">System</string>
+	<string name="worlds_label_sector">Sector</string>
+	<string name="worlds_label_subsector">SubSector</string>
+	<string name="worlds_label_allegiances">Allegiances</string>
+	<string name="worlds_label_berthing_cost">Berthing Cost</string>
+	<string name="worlds_label_fuel">Fuel</string>
+	<string name="worlds_label_starport_facilities">Starport Facilities</string>
+	<string name="worlds_label_facilities">Facilities</string>
+	<string name="worlds_label_bases">Bases</string>
+	<string name="worlds_label_extras">Extras</string>
+	<string name="worlds_label_trade_cost">Cost per Ton</string>
+	<string name="worlds_label_trade">Trade Goods Available</string>
+	<string name="worlds_label_trade_goods">Goods</string>
+	<string name="worlds_label_trade_tons_available">Tons Avail.</string>
+	<string name="worlds_label_spaceport_type">Port Type</string>
+	<string name="worlds_label_additional_port_facilities">Additional Ports</string>
+
+	<!-- Worlds Tooltips -->
+	<string name="worlds_tooltip_berthing_costs">This is the price paid by any ship that wants to land or dock at the starport.</string>
+	<string name="worlds_tooltip_fuel">This refers to the fuel available for purchase – either refined or unrefined.</string>
+	<string name="worlds_tooltip_facilities">These are the starport's repair and construction ability.</string>
+	<string name="worlds_tooltip_extras">Any additional details to know about the facilities.</string>
+	<string name="worlds_tooltip_spaceport_type">What type of port is this, Downport, Highport, Seaport etc.</string>
+
+	<!-- Weapons -->
+	<string name="char_label_weapons">Weapons</string>
+	<string name="char_label_weapon_range_modifiers">Range Modifiers</string>
+	<string name="char_label_weapon_name">Name</string>
+	<string name="char_label_weapon_attack">Attack</string>
+	<string name="char_label_weapon_damage">Damage</string>
+	<string name="char_label_weapon_mod">Mod</string>
+	<string name="char_label_weapon_range">Range</string>
+	<string name="char_label_weapon_notes">Notes</string>
+	<string name="char_label_weapon_ammo">Ammo</string>
+	<string name="char_label_weapon_rate_of_fire">RoF</string>
+
+	<!-- Armour -->
+	<string name="char_label_armour">Armour</string>
+	<string name="char_label_armour_name">Armour</string>
+	<string name="char_label_armour_type">Type</string>
+	<string name="char_label_armour_techlevel">TL</string>
+	<string name="char_label_armour_rating">Protection</string>
+	<string name="char_label_armour_mass">Kg</string>
+	<string name="char_label_armour_notes">Notes</string>
+
+	<!-- PSI Abilities -->
+	<string name="char_label_psiabilities">PSI Abilities</string>
+	<string name="char_label_psiability_total">Total</string>
+	<string name="char_label_psiability_talentDM">Talent DM</string>
+	<string name="char_label_psiability_psiDM">PSI DM</string>
+	<string name="char_label_psiability_cost">Cost</string>
+
+	<!-- Skills -->
+	<string name="char_label_skillpointsspent">Points Spent</string>
+	<string name="char_label_skilltotal">Total</string>
+	<string name="char_label_skillspent">Level</string>
+	<string name="char_label_skillname">Name</string>
+	<string name="char_label_skillattributeDM">DM</string>
+	<string name="char_label_skillattribute">Characteristic</string>
+	<string name="char_label_skillmod">Mod</string>
+
+	<!-- Skills Tooltips -->
+	<string name="char_tooltip_skillattributeDM">Characteristic DM</string>
+	<string name="char_tooltip_skillattribute">Characteristic</string>
+	<string name="char_tooltip_skillmod">Modifier for this skill from gear, augments etc</string>
+
+	<!-- Finances -->
+	<string name="char_label_finances">Finances</string>
+	<string name="char_label_finances_pension">Pension</string>
+	<string name="char_label_finances_debt">Debt</string>
+	<string name="char_label_finances_cash">Cash on Hand</string>
+	<string name="char_label_finances_monthly_ship_payment">MSP</string>
+	<string name="char_tooltip_finances_monthly_ship_payment">Monthly Ship Payment</string>
+	<string name="char_label_finances_other">Other</string>
+
+	<!-- Career History -->
+	<string name="char_label_career_history">Career History</string>
+	<string name="char_label_career_name">Career</string>
+	<string name="char_label_career_branch">Branch</string>
+	<string name="char_label_career_events">Events</string>
+	<string name="char_label_career_rank">Rank</string>
+	<string name="char_label_career_title">Title</string>
+
+	<!-- Psionic Abilities -->
+	<string name="char_label_psi-abilitypointsspent">Points Spent</string>
+	<string name="char_label_psi-abilitytotal">Total</string>
+	<string name="char_label_psi-abilityspent">Level</string>
+	<string name="char_label_psi-abilityname">Ability Name</string>
+	<string name="char_label_psi-abilityattributeDM">DM</string>
+
+	<!-- Actions -->
+	<string name="char_label_woundtrack">Characteristic Status</string>
+	<string name="char_label_woundtrackcurrent">Current</string>
+	<string name="char_label_woundtrack_endurance">Endurance</string>
+	<string name="char_label_woundtrack_strength">Strength</string>
+	<string name="char_label_woundtrack_dexterity">Dexterity</string>
+	<string name="char_label_woundtrack_intellect">Intellect</string>
+	<string name="char_label_woundtrack_education">Education</string>
+	<string name="char_label_woundtrack_social">Social</string>
+	<string name="woundtrackreset_tooltip">Reset Woundtrack</string>
+	<string name="char_label_woundtrack_psi_strength">PSI Strength</string>
+	<string name="char_label_woundtrack_reset_tooltip">Reset to max.</string>
+	<string name="char_label_weapon_attribute">Characteristic</string>
+	<string name="char_label_skillDM">Skill</string>
+	<string name="char_tooltip_skillDM">Skill DM</string>
+	<string name="char_label_effects">Effects</string>
+	<string name="char_label_fatigued">Fatigued</string>
+	<string name="char_label_miscactions">Misc Actions</string>
+	<string name="char_label_miscaction_name">Name</string>
+	<string name="char_label_miscaction_skill">Skill</string>
+	<string name="char_label_miscaction_mod">Mod</string>
+	<string name="char_label_miscaction_characteristic">Characteristic</string>
+	<string name="char_label_miscaction_action">Action</string>
+	<string name="char_label_miscaction_total">Total</string>
+	<string name="char_tooltip_radiation_status">Radiation Status</string>
+	<string name="char_tooltip_weapon_mod">Any modifier that changes the Attack total</string>
+	<string name="char_message_removeweapon">Removed '%s' due to the 'One Use' trait.</string>
+	<string name="char_message_reducedweaponcount">Reduced '%s' weapon count down to '%d' due to the 'One Use' trait.</string>
+
+	<!-- Encounters -->
+	<string name="button_battle_spacecraft">Spacecraft Battles</string>
+	<string name="battle_emptyspacecraftlist">Drop NPC Spacecraft here to add to the battle.</string>
+
+	<!-- Items -->
+	<string name="item_label_cost">Cost (Cr)</string>
+	<string name="item_label_ammocost">Ammo (Cr)</string>
+	<string name="item_label_mass">Kg</string>
+	<string name="item_label_protection">Protection</string>
+	<string name="item_label_damage">Damage</string>
+	<string name="item_label_range">Range</string>
+	<string name="item_label_tl">TL</string>
+	<string name="item_label_magazine">Magazine</string>
+	<string name="item_label_traits">Traits</string>
+	<string name="item_label_subtype">Sub Type</string>
+	<string name="item_label_type">Type</string>
+	<string name="item_label_skill">Skill</string>
+	<string name="item_label_modifiers">Modifiers</string>
+	<string name="item_label_power">Power</string>
+	<string name="item_tooltip_modifiers">Characteristic Modifiers when this item is equipped</string>
+
+	<string name="ref_label_listname">Name</string>
+	<string name="ref_label_listprotection">Protection</string>
+	<string name="ref_label_listskill">Required Skill</string>
+	<string name="ref_label_listcost">Cost (Cr)</string>
+	<string name="ref_label_listmass">Kg</string>
+	<string name="ref_label_listtl">TL</string>
+	<string name="ref_label_listdamage">Damage</string>
+	<string name="ref_label_listdescription">Description</string>
+	<string name="ref_label_listrad">Rad</string>
+	<string name="ref_label_listtraits">Traits</string>
+	<string name="ref_label_listpistol">Ptl</string>
+	<string name="ref_label_listrifle">Rfl</string>
+	<string name="ref_label_listshotgun">Shg</string>
+	<string name="ref_label_listheavy">Hvy</string>
+	<string name="ref_label_listdmg">Dmg</string>
+	<string name="ref_label_listrange">Range</string>
+	<string name="ref_label_cost">Cost (Cr)</string>
+	<string name="ref_label_description">Description</string>
+	<string name="ref_label_ammocost">Ammo (Cr)</string>
+	<string name="ref_label_mass">Kg</string>
+	<string name="ref_label_protection">Protection</string>
+	<string name="ref_label_slots">Slots</string>
+	<string name="ref_label_str">STR</string>
+	<string name="ref_label_dex">DEX</string>
+	<string name="ref_label_tl">TL</string>
+	<string name="ref_label_damage">Damage</string>
+	<string name="ref_label_range">Range</string>
+	<string name="ref_label_magazine">Magazine</string>
+	<string name="ref_label_skill">Skill</string>
+	<string name="ref_label_qualification">Qualification</string>
+	<string name="ref_label_assignments">Assignments:</string>
+	<string name="ref_label_basictraining">Basic Training:</string>
+	<string name="ref_label_characteristics">Characteristics</string>
+	<string name="ref_label_traits">Traits</string>
+	<string name="ref_label_auto">Auto</string>
+	<string name="ref_label_notes">System Notes:</string>
+	<string name="ref_label_worldprofile">System Profile</string>
+	<string name="ref_label_typeanddescription">Description</string>
+	<string name="ref_label_commission">Commission</string>
+	<string name="ref_label_check">Check</string>
+	<string name="ref_label_reach">Reach</string>
+	<string name="ref_label_psicost">PSI Cost</string>
+	<string name="ref_label_careers">Careers</string>
+	<string name="ref_label_modifiers">Modifiers</string>
+	<string name="ref_label_pistol">Pistol</string>
+	<string name="ref_label_rifle">Rifle</string>
+	<string name="ref_label_shotgun">Shotgun</string>
+	<string name="ref_label_heavy">Heavy</string>
+	<string name="ref_label_power">Power</string>
+	<string name="ref_label_skillslist">Skills Required</string>
+
+	<string name="ref_tooltip_listpistol">Pistol Weapons</string>
+	<string name="ref_tooltip_listrifle">Rifle Weapons</string>
+	<string name="ref_tooltip_listshotgun">Shotgun Weapons</string>
+	<string name="ref_tooltip_listheavy">Heavy Weapons</string>
+	<string name="ref_tooltip_modifiers">Characteristic Modifiers when this item is equipped</string>
+	<string name="ref_tooltip_pistol">An 'X' here indicates suitable for Pistol Weapons</string>
+	<string name="ref_tooltip_rifle">An 'X' here indicates suitable for Rifle Weapons</string>
+	<string name="ref_tooltip_shotgun">An 'X' here indicates suitable for Shotgun Weapons</string>
+	<string name="ref_tooltip_heavy">An 'X' here indicates suitable for Heavy Weapons</string>
+
+	<!-- Encumbrance -->
+	<string name="char_label_totalmass">Current</string>
+	<string name="char_label_encbase">Base</string>
+	<string name="char_label_encdm">Mod</string>
+	<string name="char_label_enclight">Light</string>
+	<string name="char_label_encmax">Max</string>
+	<string name="char_label_encstatus">Status</string>
+
+	<!-- Psionic -->
+	<string name="psionic_label_attributes">Attributes</string>
+	<string name="psionic_label_talent">PSI Talent</string>
+
+	<!-- Library Records -->
+ 	<string name="library_recordtype_label_skill">Skills</string>
+ 	<string name="library_recordtype_label_vehicle">Vehicles</string>
+ 	<string name="library_recordtype_label_spacecraft">Spacecraft</string>
+	<string name="library_recordtype_label_psionic">PSI Abilities</string>
+	<string name="library_recordtype_label_race">Races</string>
+	<string name="library_recordtype_label_homeworld">Homeworld</string>
+	<string name="library_recordtype_label_worlds">Systems</string>
+	<string name="library_recordtype_label_career">Careers</string>
+	<string name="library_recordtype_label_battle">Battles</string>
+	<string name="library_recordtype_label_battlerandom">Battles (Random)</string>
+	<string name="library_recordtype_label_battlespacecraft">Spacecraft Battles</string>
+	<string name="library_recordtype_label_charspacecraftsheet">PC Spacecraft</string>
+	<string name="library_recordtype_label_tradegoods">Trade Goods</string>
+	<string name="library_recordtype_label_quest">Missions</string>
+	<string name="library_recordtype_label_taskchains">Task Chains</string>
+
+	<string name="library_recordtype_empty_tradegoods">&#171; New Trade Goods &#187;</string>
+	<string name="library_recordtype_empty_worlds">&#171; New System &#187;</string>
+	<string name="library_recordtype_empty_spacecraft">&#171; New Spacecraft &#187;</string>
+	<string name="library_recordtype_empty_battle">&#171; New Battle &#187;</string>
+	<string name="library_recordtype_empty_battlerandom">&#171; New Battle (Random) &#187;</string>
+	<string name="library_recordtype_empty_world">&#171; New World &#187;</string>
+	<string name="library_recordtype_empty_homeworld">&#171; New Homeworld &#187;</string>
+	<string name="library_recordtype_empty_career">&#171; New Career &#187;</string>
+	<string name="library_recordtype_empty_psiability">&#171; New PSI Ability &#187;</string>
+	<string name="library_recordtype_empty_battlespacecraft">&#171; New Battle (Spacecraft) &#187;</string>
+	<string name="library_recordtype_empty_taskchains">&#171; New Task Chain &#187;</string>
+	<string name="library_recordtype_empty_quest">&#171; New Mission &#187;</string>
+	<string name="library_recordtype_empty_charspacecraftsheet">&#171; New PC Spacecraft &#187;</string>
+
+	<string name="button_pcvehicle">PC Vehicles</string>
+  	<string name="window_pcvehicle">PC Vehicles</string>
+
+	<!-- Party Sheet -->
+	<string name="ps_label_race">Race</string>
+	<string name="ps_label_abilities">Attributes</string>
+	<string name="ps_label_quests">Missions</string>
+
+	<string name="ps_label_armour">Armour</string>
+	<string name="ps_label_armourname">Name</string>
+	<string name="ps_label_armourrating">Rating</string>
+
+	<string name="ps_label_shipname">Spacecraft Name</string>
+	<string name="ps_label_shiparmour">Armour</string>
+	<string name="ps_label_shiptl">TL</string>
+	<string name="ps_label_shiptons">Tons</string>
+	<string name="ps_label_shiparmourrating">Rating</string>
+
+	<!-- Vehicles  -->
+	<string name="vehicle_label_tl">TL</string>
+	<string name="vehicle_label_skill">Skill</string>
+	<string name="vehicle_label_agility">Agility</string>
+	<string name="vehicle_label_crew">Crew</string>
+	<string name="vehicle_label_passengers">Passengers</string>
+	<string name="vehicle_label_openclosed">Open/Closed</string>
+	<string name="vehicle_label_armour">Armour</string>
+	<string name="vehicle_label_armour_front">Front</string>
+	<string name="vehicle_label_armour_sides">Sides</string>
+	<string name="vehicle_label_armour_rear">Rear</string>
+	<string name="vehicle_label_hull">Hull</string>
+	<string name="vehicle_label_structure">Structure</string>
+	<string name="vehicle_label_weapons">Weapons</string>
+	<string name="vehicle_label_equipment">Equipment and Traits</string>
+	<string name="vehicle_label_shipping">Shipping</string>
+	<string name="vehicle_label_cargo">Cargo</string>
+	<string name="vehicle_label_range">Range</string>
+
+	<string name="vehicle_grouped_label_tl">TL</string>
+	<string name="vehicle_grouped_tooltip_tl">Tech level</string>
+	<string name="vehicle_grouped_label_skill">Skill</string>
+	<string name="vehicle_grouped_tooltip_skill">Required skill to pilot</string>
+
+	<string name="vehiclerole_captain">Captain</string>
+	<string name="vehiclerole_astrogator">Astrogator</string>
+  	<string name="vehiclerole_engineer">Engineer</string>
+  	<string name="vehiclerole_gunner">Gunner</string>
+  	<string name="vehiclerole_pilot">Pilot</string>
+  	<string name="vehiclerole_medic">Medic</string>
+  	<string name="vehiclerole_marine">Marine</string>
+  	<string name="vehiclerole_steward">Steward</string>
+	<string name="vehiclerole_maintenance">Maintenance</string>
+	<string name="vehiclerole_administator">Administator</string>
+	<string name="vehiclerole_officer">Officer</string>
+	<string name="vehiclerole_othercrew">Other Crew</string>
+
+	<!-- Spacecraft  -->
+	<string name="spacecraft_label_tl">TL</string>
+	<string name="spacecraft_label_tons">Tons</string>
+	<string name="spacecraft_label_cost">Cost (MCr)</string>
+	<string name="spacecraft_label_type">Type</string>
+	<string name="spacecraft_label_crew">Crew</string>
+	<string name="spacecraft_label_running_costs">Costs</string>
+	<string name="spacecraft_label_maintenance">Maintenance</string>
+	<string name="spacecraft_label_purchase">Purchase</string>
+	<string name="spacecraft_label_power_requirements">Power Requirements</string>
+	<string name="spacecraft_label_manoeuvre_drive">M Drive</string>
+	<string name="spacecraft_label_jump_drive">J Drive</string>
+	<string name="spacecraft_label_basic_ship_systems">Basic Systems</string>
+	<string name="spacecraft_label_sensors">Sensors</string>
+	<string name="spacecraft_label_weapons">Weapons</string>
+	<string name="spacecraft_label_hull_points">Hull Pts</string>
+	<string name="spacecraft_tooltip_hull_points">Hull Points</string>
+	<string name="spacecraft_label_fuel_consumption">Fuel Consumption</string>
+	<string name="spacecraft_label_details_tons">Tons</string>
+	<string name="spacecraft_label_details_cost">Cost (MCr)</string>
+	<string name="spacecraft_label_hull">Hull</string>
+	<string name="spacecraft_label_armour">Armour</string>
+	<string name="spacecraft_label_mdrive">M-Drive</string>
+	<string name="spacecraft_label_jdrive">J-Drive</string>
+	<string name="spacecraft_label_power_plant">Power Plant</string>
+	<string name="spacecraft_label_fuel_tanks">Fuel Tanks</string>
+	<string name="spacecraft_label_bridge">Bridge</string>
+	<string name="spacecraft_label_computer">Computer</string>
+	<string name="spacecraft_label_systems">Systems</string>
+	<string name="spacecraft_label_staterooms">Staterooms</string>
+	<string name="spacecraft_label_cargo">Cargo</string>
+	<string name="spacecraft_label_common_areas">Common Areas</string>
+	<string name="spacecraft_header_details">Systems</string>
+	<string name="spacecraft_label_actions_tl">TL</string>
+	<string name="spacecraft_label_actions_range">Range</string>
+	<string name="spacecraft_label_actions_attack">Attack</string>
+	<string name="spacecraft_label_actions_damage">Damage</string>
+	<string name="spacecraft_label_actions_weapontraits">Traits</string>
+	<string name="spacecraft_label_actions_mod">Mod</string>
+	<string name="spacecraft_label_actions_skilldm">Skill</string>
+	<string name="spacecraft_label_actions_attribute">Characteristic</string>
+	<string name="spacecraft_label_name">Spacecraft Name</string>
+	<string name="spacecraft_tooltip_name">Name of the Spacecraft</string>
+	<string name="spacecraft_tooltip_type">Type of the Spacecraft</string>
+	<string name="spacecraft_tooltip_type">Class of the Spacecraft</string>
+	<string name="spacecraft_tooltip_tl">Tech Level of the Spacecraft</string>
+	<string name="spacecraft_label_crew">Crew</string>
+	<string name="spacecraft_label_crew_requirements">Crew Requirements</string>
+	<string name="spacecraft_label_running_costs">Running Costs</string>
+	<string name="spacecraft_label_power_requirements">Power Requirements</string>
+	<string name="spacecraft_label_weapons">Weapons</string>
+	<string name="spacecraft_label_cargo">Cargo</string>
+	<string name="spacecraft_label_ships_locker">Ship's Locker</string>
+	<string name="spacecraft_label_craft">Vehicles</string>
+	<string name="spacecraft_label_actions">Weapons</string>
+	<string name="spacecraft_label_purchase_costs">Purchase Cost</string>
+	<string name="spacecraft_label_actions_weapon_name">Weapon Name</string>
+	<string name="spacecraft_tooltip_attacknumber">Number of Attacks</string>
+	<string name="spacecraft_label_status">Spacecraft Status</string>
+	<string name="spacecraft_label_hull_damage">Hull Damage</string>
+	<string name="spacecraft_label_remaining_fuel">Remaining Fuel (Tons)</string>
+	<string name="spacecraft_label_refined_fuel">Refined</string>
+	<string name="spacecraft_label_unrefined_fuel">Unrefined</string>
+	<string name="spacecraft_label_class">Class</string>
+	<string name="spacecraft_header_cei">Crew Effectiveness Index (CEI)</string>
+	<string name="spacecraft_label_crew_morale">Crew Morale</string>
+	<string name="spacecraft_label_mortgage_remaining">Remaining</string>
+	<string name="spacecraft_label_mortgage_payments_remaining">Payments Remaining</string>
+	<string name="spacecraft_label_mortgage">Mortgage</string>
+	<string name="spacecraft_label_total_power">Total Power</string>
+	<string name="spacecraft_label_current_power">Current Power</string>
+	<string name="spacecraft_label_recalc_tooltip">Recalculate Cargo Space</string>
+
+	<string name="sidebar_tooltip_shipct">Spacecraft Combat Tracker</string>
+	<string name="sct_shipwindow_title">Spacecraft Combat Tracker</string>
+	<string name="sct_label_shipname">Ship Name</string>
+	<string name="sct_spacecraft_phase0">Manoeuvre Step</string>
+	<string name="sct_spacecraft_phase1">Attack Step</string>
+	<string name="sct_spacecraft_phase2">Actions Step</string>
+	<string name="sct_tooltip_nextphase">Next Phase</string>
+	<string name="sct_label_crew">Crew</string>
+	<string name="sct_tooltip_crew">Crew</string>
+	<string name="sct_label_hullpoints">Hull Points</string>
+	<string name="sct_label_hulldamage">Damage</string>
+	<string name="sct_tooltip_hullpoints">Hull Points</string>
+	<string name="sct_tooltip_hulldamage">Hull Damage</string>
+	<string name="sct_tooltip_shields">Shields</string>
+	<string name="sct_tooltip_shieldsdamage">Shields Damage</string>
+	<string name="sct_label_shields">Shields</string>
+	<string name="sct_label_shielddam">SDmg</string>
+	<string name="sct_label_init">Initiative</string>
+	<string name="sct_label_shortinit">Init</string>
+	<string name="sct_label_maximum">Max</string>
+	<string name="sct_label_maximumshields">SMax</string>
+	<string name="sct_tooltip_maximumshields">Maximum Shields</string>
+	<string name="sct_label_maximumhullpoints">Hull</string>
+	<string name="sct_tooltip_maximumhullpoints">Maximum Hull Points</string>
+	<string name="sct_label_initmod">Mod</string>
+	<string name="sct_label_shield">Shields</string>
+	<string name="sct_tooltip_initmod">Initative Modifier</string>
+	<string name="sct_label_initresult">Init</string>
+	<string name="sct_tooltip_initresult">Initative Result</string>
+	<string name="sct_tooltip_criticals_icon">Criticals on this Spacecraft, Severity, System and Description</string>
+	<string name="sct_tooltip_criticals_severity">The Severity of this Critical</string>
+	<string name="sct_tooltip_criticals_system">The system affected by this Critical</string>
+	<string name="sct_tooltip_criticals_effect">The effects of this Critical Severity</string>
+	<string name="sct_menu_pendingentries_delete_all">Delete All</string>
+	<string name="sct_menu_criticalentries_delete_all">Delete All Criticals</string>
+	<string name="sct_emptylist">Drop PC or NPC Spacecaft links to add entries.</string>
+	<string name="sct_pendingattack_message_pen">%s Damage taken by the ships hull</string>
+	<string name="sct_pendingattack_message_nodam">No Damage taken to the ships hull</string>
+	<string name="sct_message_ion_damage">Ion weapons ignore Armour</string>
+	<string name="sct_criticals_severity">Severity</string>
+	<string name="sct_criticals_system">System</string>
+	<string name="sct_tooltip_reduce_critical">Reduce Critical Severity by 1 </string>
+	<string name="sct_tooltip_remove_critical">Removal this Critical Effect</string>
+
+	<!-- PC Ships -->
+	<string name="charspacecraft_label_notes">Notes</string>
+	<string name="charspacecraft_label_crew">Crew</string>
+	<string name="charspacecraft_label_cargo">Cargo</string>
+	<string name="charspacecraft_label_cargo_mass">Tons</string>
+	<string name="charspacecraft_label_cargo_location">Location</string>
+	<string name="charspacecraft_label_cargo_name">Cargo</string>
+	<string name="charspacecraft_label_weapons">Weapons</string>
+	<string name="charspacecraft_label_change_role">%s changed role to %s (%s)</string>
+	<string name="charspacecraft_label_ships_locker">Ship's Locker</string>
+	<string name="ps_ship_title">Crew</string>
+
+	<!-- Trade Goods -->
+	<string name="tradegoods_label_availability">Availability</string>
+	<string name="tradegoods_label_tons">Tons</string>
+	<string name="tradegoods_label_base_price">Base Price</string>
+	<string name="tradegoods_label_purchase_dm">Purchase DM</string>
+	<string name="tradegoods_label_sale_dm">Sale DM</string>
+	<string name="tradegoods_label_examples">Examples</string>
+
+	<!-- Common Lighting/Vision Settings -->
+	<string name="lighting_spell_darkness">Psi - Darkness</string>
+	<string name="lighting_spell_light">Psi - Light</string>
+
+	<!-- Game System Specific Lighting/Vision Settings -->
+	<string name="lighting_spell_daylight">Psi - Daylight</string>
+
+	<!-- Task Chains -->
+	<string name="sidebar_tooltip_button_taskchains">Task Chains</string>
+	<string name="tc_window_title">Task Chains</string>
+	<string name="tc_tooltip_showtaskson">Show all tasks</string>
+	<string name="tc_tooltip_showtasksoff">Hide all tasks</string>
+	<string name="tc_emptytasklist">No Tasks Available</string>
+	<string name="tc_label_taskname">Task Chain Name</string>
+	<string name="tc_label_effect">Next DM</string>
+	<string name="tc_label_result">Result</string>
+	<string name="tc_label_taskmod">Mod</string>
+	<string name="tc_label_skillrequired">Skill Required</string>
+	<string name="tc_label_taskdifficulty">Task Difficulty</string>
+	<string name="tc_menu_itemdelete">Delete from Task List</string>
+	<string name="tc_menu_taskdelete">Delete roll history from Task</string>
+	<string name="tc_label_statrequired">Characteristic</string>
+	<string name="tc_tooltip_addtask">Add Another Task to this Chain</string>
+	<string name="tc_tooltip_showtaskoff">Hide Task from players</string>
+	<string name="tc_tooltip_showtaskon">Share Task from players</string>
+	<string name="tc_tooltip_skillrequired">Drag the Required Skill here</string>
+	<string name="tc_tooltip_skillrequired_client">Drag your Skill Roll Dice here</string>
+	<string name="tc_tooltip_requiredskill">The Skill required for each step of the Task</string>
+	<string name="tc_tooltip_showsubtasks">Show the Subtasks</string>
+	<string name="tc_tooltip_hidesubtasks">Hide the Subtasks</string>
+	<string name="tc_tooltip_effect">This is the DM applied to the next check in this chain</string>
+	<string name="sidebar_tooltip_taskchains">Task Chains</string>
+	<string name="tc_completed">The task chain '%s' has been completed</string>
+
+	<string name="library_recordview_label_item_armor">Armour</string>
+	<string name="library_recordview_label_item_armour">Armour</string>
+	<string name="taskdifficulty">Task Diff.</string>
+	<string name="ps_label_groupcheck">Check</string>
+	<string name="ps_label_groupskill">Skill</string>
+
+	<string name="item_grouped_label_name">Name</string>
+	<string name="item_grouped_label_cost">Cost</string>
+	<string name="item_grouped_label_weight">Kg</string>
+	<string name="item_grouped_label_tl">TL</string>
+	<string name="item_grouped_label_damage">Damage</string>
+	<string name="item_grouped_label_skill">Skill</string>
+</root>

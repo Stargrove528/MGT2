@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="spacecraft" copy="record_window_tabbed">
+		<minimize>minimized_item</minimize>
+		<sizelimits>
+			<minimum width="530" height="400" />
+		</sizelimits>
+		<tab>
+			<name>main</name>
+			<resource>tab_main</resource>
+			<class>spacecraft_main</class>
+			<embed />
+		</tab>
+		<tab merge="add">
+			<name>systems</name>
+			<resource>tab_systems</resource>
+			<class>spacecraft_systems</class>
+			<embed />
+		</tab>
+		<tab merge="add">
+			<name>actions</name>
+			<resource>tab_actions</resource>
+			<class>spacecraft_actions</class>
+			<embed />
+		</tab>
+		<tab merge="add">
+			<name>notes</name>
+			<resource>tab_notes</resource>
+			<class>record_content_notes</class>
+			<embed />
+		</tab>
+	</windowclass>
+	<windowclass name="spacecraft_header" copy="record_header" />
+
+	<windowclass name="spacecraft_main">
+        <script file="ref/scripts/spacecraft_main.lua" />
+		<sheetdata>
+			<hsspacecraftimages name="spacecraftimage" />
+			<anchor_column name="columnanchor" />
+
+			<label_column name="class_label">
+				<static textres="spacecraft_label_class" />
+                <anchored>
+					<left offset="15" />
+				</anchored>
+			</label_column>
+
+			<string_column_full name="class" >
+                <anchored>
+					<left offset="56" />
+				</anchored>
+            </string_column_full>
+
+			<label_column name="type_label">
+				<static textres="spacecraft_label_type" />
+                <anchored>
+					<left offset="15" />
+				</anchored>
+			</label_column>
+			<string_column_spacecraft_left name="type" >
+                <anchored width="100">
+					<left offset="56" />
+				</anchored>
+            </string_column_spacecraft_left>
+
+			<label_column_remainder name="hull_points_label">
+				<anchored to="type">
+					<left offset="213" />
+				</anchored>
+				<static textres="spacecraft_label_hull_points"/>
+			</label_column_remainder>
+
+			<number_column_middle name="hull_points">
+				<anchored width="60">
+                    <top parent="type" />
+                    <left parent="hull_points_label" offset="81" />
+                </anchored>
+			</number_column_middle>
+
+			<label_column name="tl_label">
+				<static textres="spacecraft_label_tl" />
+                <anchored>
+					<left offset="30" />
+				</anchored>
+			</label_column>
+			<number_columnh name="tl">
+                <anchored>
+					<left offset="56" />
+				</anchored>
+            </number_columnh>
+
+			<label_column_remainder name="tons_label">
+				<anchored to="tl">
+					<left offset="253" />
+				</anchored>
+				<static textres="spacecraft_label_tons"/>
+			</label_column_remainder>
+
+			<number_column_middle name="tons">
+				<anchored width="60">
+                    <top parent="tl" />
+                    <left parent="tons_label" offset="41" />
+                </anchored>
+			</number_column_middle>
+
+			<line_column name="divider" />
+            <header_column name="crew_label">
+				<static textres="spacecraft_label_crew" />
+			</header_column>
+
+            <string_column_full name="crew">
+                <anchored>
+					<top offset="5"/>
+					<left offset="5" />
+				</anchored>
+			</string_column_full>
+
+            <line_column name="divider" />
+
+            <header_column name="running_costs_label">
+				<static textres="spacecraft_label_running_costs" />
+			</header_column>
+
+            <label_column name="maintenance_label">
+				<static textres="spacecraft_label_maintenance" />
+                <anchored to="running_costs_label">
+                    <top offset="5"/>
+					<left offset="2" />
+				</anchored>
+			</label_column>
+			<string_column name="maintenance_cost">
+				<anchored>
+                    <right offset="-150" />
+                </anchored>
+                <center />
+            </string_column>
+
+ 			<label_column name="purchase_label">
+			 	<anchored>
+					<left offset="26" />
+				</anchored>
+				<static textres="spacecraft_label_purchase"/>
+			</label_column>
+
+			<string_column name="purchase_cost">
+				<anchored>
+                    <right offset="-150" />
+                </anchored>
+                <center />
+			</string_column>
+
+            <line_column name="divider" />
+
+            <header_column name="header_power_requirements">
+				<static textres="spacecraft_label_power_requirements" />
+			</header_column>
+
+			<button_iedit name="power_requirements_iedit">
+				<anchored to="header_power_requirements" position="righthigh" offset="-15,0" />
+				<edittarget>power_requirements</edittarget>
+			</button_iedit>
+			<button_iadd name="power_requirements_iadd">
+				<anchored to="power_requirements_iedit" position="lefthigh" offset="5,0" />
+				<target>power_requirements</target>
+			</button_iadd>
+
+			<list_spacecraftpowerrequirements name="power_requirements">
+				<anchored to="header_power_requirements" position="bottom">
+					<top offset="5" />
+					<left offset="2" />
+				</anchored>
+				<datasource>.power_requirements</datasource>
+				<allowcreate />
+				<allowdelete />
+				<class>spacecraft_power_requirements</class>
+				<columns width="200" fillwidth="true" />
+				<sortby><control>order</control></sortby>
+			</list_spacecraftpowerrequirements>
+
+            <line_column name="divider" />
+
+			<header_column name="header_cei" >
+				<static textres="spacecraft_header_cei"/>
+			</header_column>
+
+			<line_column name="fuel_divider" />
+
+            <header_column name="fuel_consumption_label">
+				<static textres="spacecraft_label_fuel_consumption" />
+			</header_column>
+
+            <string_column_full name="fuel_consumption">
+                <anchored>
+					<top offset="5"/>
+					<left offset="5" />
+				</anchored>
+			</string_column_full>
+
+			<spacer_column name="spacer" />
+		</sheetdata>
+	</windowclass>
+	<windowclass name="spacecraft_power_requirements">
+		<margins control="0,0,0,2" />
+		<script>
+			function onInit()
+				update()
+				WindowManager.setInitialOrder(self);
+			end
+			function update()
+				local nodeShip = DB.getChild(getDatabaseNode(), "...");
+				local bReadOnly = WindowManager.getReadOnlyState(nodeShip);
+
+				name.setReadOnly(bReadOnly);
+				power.setReadOnly(bReadOnly);
+			end
+			function onDrop(x, y, draginfo)
+				return WindowManager.handleDropReorder(self, draginfo);
+			end
+		</script>
+		<sizelimits>
+			<maximum width="190" />
+		</sizelimits>
+		<sheetdata>
+			<hn name="order" />
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top/>
+					<right />
+				</anchored>
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored>
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<editmode>power_requirements_iedit</editmode>
+			</button_idelete>
+			<button_ireorder name="ireorder">
+				<anchored>
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<editmode>power_requirements_iedit</editmode>
+			</button_ireorder>
+			<basicstring name="power">
+				<anchored>
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-4" />
+					<size width="45" height="20" />
+				</anchored>
+				<hideonvalue>0</hideonvalue>
+				<center />
+				<tabtarget prev="name" />
+			</basicstring>
+			<basicstring name="name">
+				<anchored>
+					<top offset="2" />
+					<right parent="power" anchor="left" offset="-8" />
+					<left offset="5" />
+					<size height="20" />
+				</anchored>
+				<tabtarget next="power" />
+			</basicstring>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="spacecraft_systems">
+		<margins control="0,0,0,5" />
+		<script>
+			function update()
+				details.update(WindowManager.getReadOnlyState(getDatabaseNode()));
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			<header_column name="header_details" >
+				<static textres="spacecraft_header_details" />
+			</header_column>
+			<button_iedit name="details_iedit">
+				<anchored to="header_details" position="righthigh" offset="-15,0" />
+				<edittarget>details</edittarget>
+			</button_iedit>
+			<button_iadd name="details_iadd">
+				<anchored to="details_iedit" position="lefthigh" offset="5,0" />
+				<target>details</target>
+			</button_iadd>
+
+			<label name="label_tons">
+				<anchored to="header_details" width="40" position="righthigh" offset="-105,25" />
+				<static textres="spacecraft_label_tons" />
+			</label>
+			<label name="label_cost">
+				<anchored to="label_tons" position="righthigh" offset="8,0" width="68" />
+				<static textres="spacecraft_label_cost" />
+			</label>
+
+			<list_spacecraftdetails name="details">
+				<anchored to="header_details" position="bottom">
+					<top offset="25" />
+					<right offset="10" />
+				</anchored>
+				<datasource>.details</datasource>
+				<class>spacecraft_details</class>
+				<sortby><control>order</control></sortby>
+				<script file="ref/scripts/spacecraft_details.lua" />
+			</list_spacecraftdetails>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="spacecraft_details">
+		<margins control="0,0,0,2" />
+		<script>
+			function onInit()
+				update()
+				WindowManager.setInitialOrder(self);
+			end
+			function update()
+				local nodeShip = DB.getChild(getDatabaseNode(), "...");
+				local bReadOnly = WindowManager.getReadOnlyState(nodeShip);
+
+				name.setReadOnly(bReadOnly);
+				detail.setReadOnly(bReadOnly);
+				tons.setReadOnly(bReadOnly);
+				cost.setReadOnly(bReadOnly);
+			end
+			function onDrop(x, y, draginfo)
+				return WindowManager.handleDropReorder(self, draginfo);
+			end
+		</script>
+		<sheetdata>
+			<hn name="order" />
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top/>
+					<right />
+				</anchored>
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored>
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<editmode>details_iedit</editmode>
+			</button_idelete>
+			<button_ireorder name="ireorder">
+				<anchored>
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<editmode>details_iedit</editmode>
+			</button_ireorder>
+			<basicstring name="cost">
+				<anchored>
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+					<size width="60" height="20" />
+				</anchored>
+				<hideonvalue>0</hideonvalue>
+				<tabtarget next="name" />
+			</basicstring>
+			<basicstring name="tons">
+				<anchored>
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-8" />
+					<size width="50" height="20" />
+				</anchored>
+				<hideonvalue>0</hideonvalue>
+				<center />
+				<tabtarget prev="details" next="cost" />
+			</basicstring>
+			<basicstring name="name">
+				<bounds>5,2,90,20</bounds>
+			</basicstring>
+			<basicstring name="detail">
+				<anchored>
+					<top offset="2" />
+					<right parent="tons" anchor="left" offset="-8" />
+					<left parent="name" anchor="right" offset="8" />
+					<size height="20" />
+				</anchored>
+				<tabtarget next="tons" />
+				<!-- <tabtarget prev="name" next="tons" /> -->
+			</basicstring>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="spacecraft_actions">
+		<margins control="0,0,0,10" />
+		<script>
+			function onInit()
+				update();
+			end
+
+			function update()
+				local bReadOnly = true;
+				if Session.IsHost then
+					bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				end
+
+				actions_iedit.setVisible(not bReadOnly);
+				actions_iadd.setVisible(not bReadOnly);
+				if bReadOnly then
+					actions_iedit.setValue(0);
+				end
+
+				actions.update(WindowManager.getReadOnlyState(getDatabaseNode()));
+ 			end
+
+			function onDrop(x, y, draginfo)
+				SpacecraftManager.onWeaponDrop(draginfo, getDatabaseNode());
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			<header_column name="header_actions" >
+				<static textres="spacecraft_label_actions" />
+			</header_column>
+
+			<button_iedit name="actions_iedit">
+				<anchored to="header_actions" position="righthigh" offset="-15,0" />
+			</button_iedit>
+			<button_iadd name="actions_iadd">
+				<anchored to="actions_iedit" position="lefthigh" offset="5,0" />
+				<target>actions</target>
+			</button_iadd>
+
+			<label name="count_label">
+				<anchored to="header_actions" position="insidetopleft" offset="7,25" width="20" />
+				<center />
+				<static>#</static>
+				<tooltip textres="spacecraft_tooltip_attacknumber" />
+			</label>
+
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="25" />
+					<right anchor="right" offset="0" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<spacer_header_idelete name="idelete_header">
+				<editmode>actions_iedit</editmode>
+			</spacer_header_idelete>
+			<label name="label_actions_attack">
+				<anchored to="rightanchor" width="45">
+					<top />
+					<right anchor="left" relation="relative" offset="-7" />
+				</anchored>
+				<static textres="spacecraft_label_actions_attack" />
+				<center />
+			</label>
+			<label name="label_actions_range">
+				<anchored to="rightanchor" width="80">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<static textres="spacecraft_label_actions_range" />
+				<center />
+			</label>
+			<label name="label_actions_tl">
+				<anchored to="rightanchor" width="30">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<static textres="spacecraft_label_actions_tl" />
+				<center />
+			</label>
+			<label name="label_actions_weapon_name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="40" />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="spacecraft_label_actions_weapon_name" />
+				<center />
+			</label>
+
+			<list_spacecraftactions name="actions">
+				<anchored>
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="25" />
+					<left offset="0" />
+					<right offset="0" />
+				</anchored>
+				<datasource>.actions</datasource>
+				<sortby><control>order</control></sortby>
+				<class>spacecraft_weapons</class>
+			</list_spacecraftactions>
+
+			<spacer_column name="spacer" />
+		</sheetdata>
+	</windowclass>
+    <windowclass name="spacecraft_weapons">
+		<margins control="0,5,0,10" />
+		<script file="ref/scripts/spacecraft_weapons.lua" />
+		<sheetdata>
+			<hn name="order" />
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top/>
+					<right />
+				</anchored>
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored>
+					<top />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<editmode>actions_iedit</editmode>
+			</button_idelete>
+			<button_ireorder name="ireorder">
+				<anchored>
+					<top />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<editmode>actions_iedit</editmode>
+			</button_ireorder>
+			<linkfield name="link">
+				<anchored width="20" height="20">
+					<top />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<class>item</class>
+				<description field="name" />
+				<readonly />
+			</linkfield>
+
+			<basicstring_rollable name="attack">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<hideonvalue>0</hideonvalue>
+				<rollable />
+				<center />
+				<tabtarget next="damage" prev="range" />
+				<script>
+					function action(draginfo)
+						window.actionAttack(draginfo);
+						return true;
+					end
+					function onDragStart(button, x, y, draginfo)
+						return self.action(draginfo);
+					end
+					function onDoubleClick(button, x, y)
+						return self.action();
+					end
+				</script>
+			</basicstring_rollable>
+			<basicstring name="range">
+				<anchored width="70" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<hideonvalue>0</hideonvalue>
+				<center />
+				<tabtarget next="attack" prev="tl" />
+			</basicstring>
+			<basicnumber name="tl">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<hideonvalue>0</hideonvalue>
+				<center />
+				<tabtarget next="range" prev="name" />
+			</basicnumber>
+			<basicstring name="name">
+				<anchored position="insidetopleft" offset="45,2" height="20">
+					<right parent="rightanchor" anchor="left" relation="current" offset="-10" />
+				</anchored>
+				<tabtarget next="tl" prev="attacks" />
+			</basicstring>
+
+			<number_charinv name="attacks">
+				<bounds>5,2,30,20</bounds>
+				<tabtarget next="name" />
+				<default>1</default>
+			</number_charinv>
+
+			<!-- Traits and Damage here -->
+			<label name="label_actions_traits">
+				<anchored height="20" width="55">
+					<top offset="28" />
+					<left offset="15" />
+				</anchored>
+				<static textres="spacecraft_label_actions_weapontraits" />
+			</label>
+			<basicstring name="traits">
+				<anchored height="20">
+					<top offset="28" />
+					<right offset="-200" />
+					<left offset="62" />
+				</anchored>
+			</basicstring>
+			<label name="label_actions_damage">
+				<anchored height="20" width="55">
+					<top offset="28" />
+					<right offset="-130" />
+				</anchored>
+				<static textres="spacecraft_label_actions_damage" />
+			</label>
+
+			<basicstring_rollable name="damage">
+				<anchored width="110" height="20">
+					<top offset="28" />
+					<right offset="-10" />
+				</anchored>
+				<rollable />
+				<center />
+				<tabtarget next="name" prev="attack" />
+				<script>
+					function action(draginfo)
+						window.actionDamage(draginfo);
+						return true;
+					end
+					function onDragStart(button, x, y, draginfo)
+						return self.action(draginfo);
+					end
+					function onDoubleClick(button, x, y)
+						return self.action();
+					end
+				</script>
+			</basicstring_rollable>
+		</sheetdata>
+	</windowclass>
+</root>

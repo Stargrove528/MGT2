@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="label_list_ps_optional">
+		<label_list_content_base>
+			<center />
+			<script>
+				function onInit()
+					local sName = getName():sub(1,3):upper();
+					OptionsManager.registerCallback("CHAR" .. sName, onUpdate);
+					onUpdate()
+				end
+				function onUpdate()
+					local sName = getName():sub(1,3):upper();
+					local sCHAROPTION = OptionsManager.getOption("CHAR" ..sName);
+					local bVisible = sCHAROPTION:lower() == "yes"
+					setVisible(bVisible)
+				end
+			</script>
+		</label_list_content_base>
+	</template>
+	<template name="number_ps_ability_optional">
+		<number_ps_ability>
+			<anchored to="social">
+				<left offset="10" relation="relative" />
+			</anchored>
+			<script>
+				function onInit()
+					local sName = getName():sub(1,3):upper();
+					OptionsManager.registerCallback("CHAR" .. sName, onUpdate);
+					onUpdate()
+				end
+				function onUpdate()
+					local sName = getName():sub(1,3):upper();
+					local sCHARPSI = OptionsManager.getOption("CHAR" .. sName);
+					local bVisible = sCHARPSI:lower() == "yes"
+
+					window[sName:lower().."dice"].setVisible(bVisible)
+					setVisible(bVisible)
+				end
+			</script>
+		</number_ps_ability>
+	</template>
+
+	<template name="number_ps_ability">
+		<number_ps_linked>
+			<anchored width="30" height="20">
+				<top parent="" offset="10" />
+				<left anchor="right" offset="8" />
+			</anchored>
+		</number_ps_linked>
+	</template>
+	<template name="number_ps_abilitybonus">
+		<number_ps_linked>
+			<anchored width="30" height="20">
+				<top anchor="bottom" offset="1" />
+				<left />
+			</anchored>
+			<gmrollable2 />
+			<script>
+				function onInit()
+					super.onInit();
+					if not Session.IsHost then
+						setEnabled(false);
+					end
+				end
+
+				function action(draginfo)
+					if not Session.IsHost then
+						return false;
+					end
+
+					local rActor = ActorManager.resolveActor(window.link.getTargetDatabaseNode());
+
+					local bSecretRoll = (DB.getValue("partysheet.hiderollresults", 0) == 1);
+
+					local nTotal = getValue();
+					local sAttribute = getName();
+
+					local nEncModifier = DB.getValue(window.getDatabaseNode(), "encumbrance.mod", 0);
+
+					if sAttribute == "strdex" then
+						sAttribute = "Strength" ;
+					elseif sAttribute == "dexdice" then
+						sAttribute = "Dexterity" ;
+					elseif sAttribute == "enddice" then
+						sAttribute = "Endurance" ;
+					elseif sAttribute == "intdice" then
+						sAttribute = "Intelligence" ;
+						nEncModifier = 0;
+					elseif sAttribute == "edudice" then
+						sAttribute = "Education" ;
+						nEncModifier = 0;
+					elseif sAttribute == "socdice" then
+						sAttribute = "Social" ;
+						nEncModifier = 0;
+					end
+
+					ActionsCharacteristics.performRoll(draginfo, rActor, 2, sAttribute, nTotal, nEncModifier);
+
+					return true;
+				end
+
+				function onDragStart(button, x, y, draginfo)
+					return action(draginfo);
+				end
+
+				function onDoubleClick(x,y)
+					return action();
+				end
+			</script>
+			<!-- ActionCheck.performRoll(draginfo, rActor, target[1], nTarget, bSecretRoll, getValue(), true); -->
+		</number_ps_linked>
+	</template>
+	<template name="number_ps_defense">
+		<number_ps_linked>
+			<anchored width="25" height="20">
+				<top />
+				<left anchor="right" offset="8" />
+			</anchored>
+		</number_ps_linked>
+	</template>
+
+	<template name="list_ps_charspacecraft_cargo">
+		<windowlist>
+			<child></child>
+			<child><backcolor>1A40301E</backcolor></child>
+			<class>charspacecraft_ps_cargoitem</class>
+			<allowdelete />
+			<script file="campaign/scripts/spacecraft_cargolist.lua" />
+		</windowlist>
+	</template>
+</root>

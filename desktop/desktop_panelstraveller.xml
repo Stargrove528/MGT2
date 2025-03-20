@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<panel name="chat" merge="join">
+		<anchored>
+			<bottom offset="-180" />
+		</anchored>
+	</panel>
+
+	<panel name="frame_up" insertbefore="desktopdecalpanel">
+		<anchored height="144" width="700">
+			<top offset="0" />
+			<left offset="0"/>
+		</anchored>
+		<class>frameupper</class>
+		<disabled />
+	</panel>
+	<panel name="logo_right" insertbefore="desktopdecalpanel">
+		<anchored height="125" width="401">
+			<bottom offset="-32" />
+			<right offset="-210"/>
+		</anchored>
+		<class>logoright</class>
+		<disabled />
+	</panel>
+
+	<panel name="lightsplatleft" insertbefore="desktopdecalpanel">
+		<anchored height="800" width="800">
+			<bottom offset="-32" />
+			<left offset="0"/>
+		</anchored>
+		<class>lightsplatone</class>
+		<disabled />
+	</panel>
+	<panel name="lightsplatright" insertbefore="desktopdecalpanel">
+		<anchored height="800" width="800">
+			<top offset="-32" />
+			<right offset="0"/>
+		</anchored>
+		<class>lightsplattwo</class>
+		<disabled />
+	</panel>
+
+	<panel name="difficultynumberpanel" insertbefore="modifierstack">
+		<anchored height="22" width="400">
+			<bottom offset="-75" />
+			<left offset="360"/>
+		</anchored>
+		<class>difficultynumber</class>
+		<dynamic />
+		<locked />
+	</panel>
+</root>

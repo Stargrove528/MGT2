@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	  <icon name="sidebar_icon_link_taskchains" file="graphics/sidebar/sidebar_icon_link_tc.png" />
+    <icon name="sidebar_icon_link_shipct" file="graphics/sidebar/sidebar_icon_link_sct.png" />
+
+    <icon name="sidebar_icon_recordtype_battle" file="graphics/sidebar/sidebar_icon_link_ct.png" />
+    <icon name="sidebar_icon_recordtype_taskchains" file="graphics/sidebar/sidebar_icon_taskchains.png" />
+    <icon name="sidebar_icon_recordtype_worlds" file="graphics/sidebar/sidebar_icon_systems.png" />
+    <icon name="sidebar_icon_recordtype_charspacecraftsheet" file="graphics/sidebar/sidebar_icon_pcspacecraftsheet.png" />
+    <icon name="sidebar_icon_recordtype_spacecraft" file="graphics/sidebar/sidebar_icon_spacecraft.png" />
+    <icon name="sidebar_icon_recordtype_tradegoods" file="graphics/sidebar/sidebar_icon_tradegoods.png" />
+    <icon name="sidebar_icon_recordtype_vehicle" file="graphics/sidebar/sidebar_icon_vehicle.png" />
+    <icon name="sidebar_icon_recordtype_item" file="graphics/sidebar/sidebar_icon_item.png" />
+    <icon name="sidebar_icon_recordtype_quest" file="graphics/sidebar/sidebar_icon_missions.png" />
+    <icon name="sidebar_icon_recordtype_career" file="graphics/sidebar/sidebar_icon_career.png" />
+    <icon name="sidebar_icon_recordtype_homeworld" file="graphics/sidebar/sidebar_icon_planet.png" />
+    <icon name="sidebar_icon_recordtype_psionic" file="graphics/sidebar/sidebar_icon_fire.png" />
+    <icon name="sidebar_icon_recordtype_race" file="graphics/sidebar/sidebar_icon_race_3.png" />
+</root>

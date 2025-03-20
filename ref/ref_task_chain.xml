@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="reference_taskchain" copy="record_window" />
+
+	<windowclass name="reference_taskchain_main">
+		<script>
+			function onInit()
+				self.update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				description.setReadOnly(bReadOnly);
+				subtasks_iadd.setVisible(not bReadOnly);
+				subtasks_iedit.setVisible(not bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+            <label_column name="label_description">
+				<static textres="ref_label_description" />
+                <font>reference-b-large</font>
+			</label_column>
+			<string_columnh name="description">
+                <anchored>
+					<top offset="30"/>
+					<left offset="5" />
+				</anchored>
+			</string_columnh>
+
+			<label_column name="label_skillslist">
+				<anchored>
+					<top offset="20"/>
+				</anchored>
+				<static textres="ref_label_skillslist" />
+                <font>reference-b-large</font>
+			</label_column>
+
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top parent="description" anchor="bottom" offset="20" />
+					<right anchor="right" offset="0" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_iadd name="subtasks_iadd">
+				<anchored to="rightanchor" position="insidetopright" offset="25,0" />
+				<tooltip textres="char_tooltip_skillsadd" />
+				<target>subtasklist</target>
+			</button_iadd>
+			<button_iedit name="subtasks_iedit">
+				<anchored to="rightanchor" position="insidetopright" offset="0,0" />
+				<edittarget>subtasklist</edittarget>
+			</button_iedit>
+
+			<label name="label_taskmod">
+				<anchored to="rightanchor" width="40">
+					<top parent="rightanchor" offset="30" />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="tc_label_taskmod" />
+				<tooltip textres="tc_tooltip_taskmod" />
+				<center />
+			</label>
+
+			<label name="label_taskdifficulty">
+				<anchored to="rightanchor" width="90">
+					<top parent="rightanchor" offset="30" />
+					<right anchor="left" relation="relative" offset="-20" />
+				</anchored>
+				<static textres="tc_label_taskdifficulty" />
+				<tooltip textres="tc_tooltip_taskdifficulty" />
+				<center />
+			</label>
+
+			<label name="label_statrequired">
+				<anchored to="rightanchor" width="90">
+					<top parent="rightanchor" offset="30" />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="tc_label_statrequired" />
+				<tooltip textres="tc_tooltip_statrequired" />
+				<center />
+			</label>
+
+			<label name="label_skillrequired">
+				<anchored>
+					<top parent="rightanchor" offset="30" />
+					<left anchor="left" offset="25" />
+					<right parent="rightanchor" anchor="left" relation="current" offset="-10" />
+				</anchored>
+				<static textres="tc_label_skillrequired" />
+				<tooltip textres="tc_tooltip_requiredskill" />
+				<center />
+			</label>
+
+			<windowlist name="subtasklist">
+				<anchored>
+					<top parent="rightanchor" offset="50" />
+					<left anchor="left" offset="5" />
+					<right anchor="right" offset="-5" />
+				</anchored>
+				<datasource>.subtasks</datasource>
+				<class>ref_taskchain_tasklist</class>
+				<sortby><control>order</control></sortby>
+			</windowlist>
+			<scrollbar_subtasklist name="scrollbar_subtasklist" />
+		</sheetdata>
+	</windowclass>
+	<windowclass name="ref_taskchain_tasklist">
+		<margins control="0,0,0,2" />
+		<script file="tc/scripts/tc_subtasklistentry.lua" />
+		<sheetdata>
+            <genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="5" />
+					<right anchor="right" offset="0" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<hn name="order" />
+
+			<button_idelete name="idelete">
+				<anchored width="20" height="20">
+					<top offset="4" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="0" />
+				</anchored>
+				<editmode>subtasks_iedit</editmode>
+			</button_idelete>
+			<button_ireorder name="ireorder">
+				<anchored>
+					<top offset="4" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<editmode>subtasks_iedit</editmode>
+			</button_ireorder>
+
+			<basicnumber name="mod">
+				<anchored to="rightanchor" width="40" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<tabtarget prev="skillrequired" next="effect" />
+			</basicnumber>
+
+			<combobox name="taskdifficulty">
+				<listdirection>down</listdirection>
+				<anchored to="rightanchor" width="110" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<script>
+					function onInit()
+						super.onInit();
+                        add('Simple - 2');
+						add('Easy - 4');
+						add('Routine - 6');
+						add('Average - 8');
+						add('Difficult - 10');
+                        add('Very Difficult - 12');
+                        add('Formidable - 14');
+                        add('Impossible - 16');
+					end
+				</script>
+                <tabtarget prev="statrequired" next="name" />
+			</combobox>
+
+			<cycler_tc_characteristic name="statrequired">
+				<anchored to="rightanchor" width="60" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="effect" next="taskdifficulty" />
+			</cycler_tc_characteristic>
+
+            <string_ct_boxed_static name="skillrequired">
+				<anchored position="insidetopleft" offset="5,5" height="20">
+					<right parent="rightanchor" anchor="left" relation="current" offset="-10" />
+				</anchored>
+                <tabtarget prev="lasteffect" next="taskdifficulty" />
+				<tooltip textres="tc_tooltip_skillrequired" />
+                <center/>
+                <script>
+                    function onDrop(x, y, draginfo)
+						if draginfo.isType("shortcut") then
+                            local sClass,sRecord = draginfo.getShortcutData();
+                            if sClass == 'reference_skill' then
+                                local skillNode = DB.findNode(sRecord);
+                                local sSkillName = DB.getValue(skillNode, 'name', '');
+                                if sSkillName ~= "" then
+                                    setValue(sSkillName);
+                                end
+                            end
+                        end
+                    end
+                </script>
+			</string_ct_boxed_static>
+		</sheetdata>
+	</windowclass>
+</root>

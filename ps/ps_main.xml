@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="ps_main_labels">
+		<sheetdata>
+			<label_list_content_base name="namelabel">
+				<anchored position="insidetopleft" offset="55,0" width="185" />
+				<static textres="ps_label_name" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="racelabel">
+				<anchored position="insidetopleft" offset="55,17" width="185" />
+				<static textres="ps_label_race" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="woundtracklabel">
+				<anchored position="insidetopleft" offset="250,17" width="55" />
+				<static textres="wounds" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="abilitieslabel">
+				<anchored position="insidetopleft" offset="305,0" width="232" />
+				<static textres="ps_label_abilities" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="strlabel">
+				<anchored to="abilitieslabel" position="belowleft" offset="6,-3" width="30" />
+				<static textres="str" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="dexlabel">
+				<anchored to="strlabel" position="righthigh" offset="10,0" width="30" />
+				<static textres="dex" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="endlabel">
+				<anchored to="dexlabel" position="righthigh" offset="10,0" width="30" />
+				<static textres="end" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="intlabel">
+				<anchored to="endlabel" position="righthigh" offset="10,0" width="30" />
+				<static textres="int" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="edulabel">
+				<anchored to="intlabel" position="righthigh" offset="10,0" width="30" />
+				<static textres="edu" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="soclabel">
+				<anchored to="edulabel" position="righthigh" offset="10,0" width="30" />
+				<static textres="soc" />
+				<center />
+			</label_list_content_base>
+			<label_list_ps_optional name="psilabel">
+				<anchored to="soclabel" position="righthigh" offset="5,0" width="40" />
+				<static textres="psi" />
+				<center />
+			</label_list_ps_optional>
+			<label_list_ps_optional name="moralelabel">
+				<anchored to="psilabel" position="righthigh" offset="0,0" width="40" />
+				<static textres="mor" />
+				<center />
+			</label_list_ps_optional>
+			<label_list_ps_optional name="lucklabel">
+				<anchored to="moralelabel" position="righthigh" offset="0,0" width="40" />
+				<static textres="luc" />
+			</label_list_ps_optional>
+			<label_list_ps_optional name="sanitylabel">
+				<anchored to="lucklabel" position="righthigh" offset="0,0" width="40" />
+				<static textres="san" />
+			</label_list_ps_optional>
+			<label_list_ps_optional name="wealthlabel">
+				<anchored to="sanitylabel" position="righthigh" offset="0,0" width="40" />
+				<static textres="wea" />
+			</label_list_ps_optional>
+			<label_list_ps_optional name="charmlabel">
+				<anchored to="wealthlabel" position="righthigh" offset="0,0" width="40" />
+				<static textres="cha" />
+			</label_list_ps_optional>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="ps_main_rolls">
+		<margins control="0,0,0,10" />
+		<script>
+			function onInit()
+				OptionsManager.registerCallback("REVL", update);
+				self.update();
+			end
+			function onClose()
+				OptionsManager.unregisterCallback("REVL", update);
+			end
+			function update()
+				hiderollresults.setVisible(OptionsManager.isOption("REVL", "on"));
+			end
+		</script>
+		<sheetdata>
+			<genericcontrol name="leftanchor">
+				<anchored position="insidetopleft" offset="0,10" width="0" height="20" />
+				<disabled />
+			</genericcontrol>
+			
+			<buttonfield name="hiderollresults">
+				<anchored to="leftanchor" height="20" width="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<frame name="fielddark" offset="10,8,10,6" />
+				<state icon="visibilityon" tooltipres="ps_tooltip_showrollon" />
+				<state icon="visibilityoff" tooltipres="ps_tooltip_showrolloff" />
+			</buttonfield>
+
+			<genericcontrol name="checkframe">
+				<anchored to="leftanchor" height="20" width="295">
+					<top />
+					<left anchor="right" relation="relative" offset="15" />
+				</anchored>
+				<frame name="groupbox" offset="10,10,10,10" />
+			</genericcontrol>			
+			<button_roll name="checkroll">
+				<anchored to="checkframe" position="insidetopleft" offset="2,0" />
+				<script file="ps/scripts/ps_roll_check.lua" />
+			</button_roll>
+			<label name="checklabel">
+				<anchored to="checkroll" position="righthigh" offset="3,0" />
+				<static textres="ps_label_groupcheck" />
+			</label>
+			<combobox name="checkselected">
+				<anchored to="checklabel" position="righthigh" offset="10,0" width="100" height="20" />
+				<default textres="ps_default_groupability" />
+				<listdirection>down</listdirection>
+				<listmaxsize>5</listmaxsize>
+				<script file="ps/scripts/ps_characteristic_list.lua" />
+			</combobox>
+			<label name="checkdclabel">
+				<anchored to="checkselected" position="righthigh" offset="10,0" />
+				<static textres="taskdifficulty" />
+			</label>
+			<basicnumber name="checkdc">
+				<anchored to="checkdclabel" position="righthigh" offset="10,0" width="30" height="20" />
+			</basicnumber>
+			
+			<genericcontrol name="skillframe">
+				<anchored to="checkframe" position="belowleft" offset="0,15" height="20" width="450" />
+				<frame name="groupbox" offset="10,10,10,10" />
+			</genericcontrol>							
+			<button_roll name="skillroll">
+				<anchored to="skillframe" position="insidetopleft" offset="2,0" />
+				<script file="ps/scripts/ps_roll_skill.lua" />
+			</button_roll>
+			<label name="skilllabel">
+				<anchored to="skillroll" position="righthigh" offset="3,0" />
+				<static textres="ps_label_groupskill" />
+			</label>
+			<combobox name="skillselected">
+				<anchored to="skilllabel" position="righthigh" offset="10,0" width="160" height="20" />
+				<listdirection>down</listdirection>
+				<listmaxsize>5</listmaxsize>
+				<script>
+					function onInit()
+						super.onInit();
+						local aSkills = GameSystem.buildSkillsList(window)
+						addItems(aSkills);
+					end
+				</script>
+			</combobox>
+			<combobox name="skillcharacteristicselected">
+				<anchored to="skillselected" position="righthigh" offset="10,0" width="100" height="20" />
+				<default textres="ps_default_groupability" />
+				<listdirection>down</listdirection>
+				<listmaxsize>5</listmaxsize>
+				<script file="ps/scripts/ps_characteristic_list.lua" />
+			</combobox>
+			<label name="skilldclabel">
+				<anchored to="skillcharacteristicselected" position="righthigh" offset="10,0" />
+				<static textres="taskdifficulty" />
+			</label>
+			<basicnumber name="skilldc">
+				<anchored to="skilldclabel" position="righthigh" offset="10,0" width="30" height="20" />
+			</basicnumber>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="ps_mainitem">
+		<margins control="0,0,0,10" />
+		<frame>fieldlight</frame>
+		<sheetdata>
+			<hlink name="link">
+				<script>
+					function onValueChanged()
+						window.portrait.update();
+					end
+				</script>
+			</hlink>
+			<hnx name="maxend" />
+			<hnx name="maxstr" />
+			<hnx name="maxdex" />
+			<hnx name="wtend" />
+			<hnx name="wtstr" />
+			<hnx name="wtdex" />
+
+			<portrait_ps name="portrait">
+				<bounds>10,10,40,40</bounds>
+			</portrait_ps>
+
+			<string_ps name="name">
+				<anchored position="insidetopleft" offset="55,10" width="200" />
+				<empty textres="library_recordtype_empty_charsheet" />
+			</string_ps>
+			<string_ps name="race">
+				<anchored position="insidetopleft" offset="55,30" width="200" />
+			</string_ps>
+
+			<progressbar name="woundtrackend">
+				<anchored position="insidetopleft" offset="260,10" width="10" height="40" />
+				<source><max>maxend</max><current>wtend</current></source>
+				<textprefix><textres>end</textres></textprefix>
+				<healthbar />
+			</progressbar>
+			<progressbar name="woundtrackstr">
+				<anchored position="insidetopleft" offset="273,10" width="10" height="40" />
+				<source><max>maxstr</max><current>wtstr</current></source>
+				<textprefix><textres>str</textres></textprefix>
+				<healthbar />
+			</progressbar>
+			<progressbar name="woundtrackdex">
+				<anchored position="insidetopleft" offset="286,10" width="10" height="40" />
+				<source><max>maxdex</max><current>wtdex</current></source>
+				<textprefix><textres>dex</textres></textprefix>
+				<healthbar />
+			</progressbar>
+
+			<number_ps_ability name="strength">
+				<anchored to="woundtrackdex">
+					<left offset="15" />
+				</anchored>
+			</number_ps_ability>
+			<number_ps_ability name="dexterity">
+				<anchored to="strength">
+					<left offset="10" />
+				</anchored>
+			</number_ps_ability>
+			<number_ps_ability name="endurance">
+				<anchored to="dexterity">
+					<left offset="10" />
+				</anchored>
+			</number_ps_ability>
+			<number_ps_ability name="intelligence">
+				<anchored to="endurance">
+					<left offset="10" />
+				</anchored>
+			</number_ps_ability>
+			<number_ps_ability name="education">
+				<anchored to="intelligence">
+					<left offset="10" />
+				</anchored>
+			</number_ps_ability>
+			<number_ps_ability name="social">
+				<anchored to="education">
+					<left offset="10" />
+				</anchored>
+			</number_ps_ability>
+			<number_ps_ability_optional name="psi" />
+			<number_ps_ability_optional name="morale" />
+			<number_ps_ability_optional name="luck" />
+			<number_ps_ability_optional name="sanity" />
+			<number_ps_ability_optional name="wealth" />
+			<number_ps_ability_optional name="charm" />
+			<number_ps_abilitybonus name="strdice">
+				<anchored to="strength" />
+				<target>strength</target>
+			</number_ps_abilitybonus>
+			<number_ps_abilitybonus name="dexdice">
+				<anchored to="dexterity" />
+				<target>dexterity</target>
+			</number_ps_abilitybonus>
+			<number_ps_abilitybonus name="enddice">
+				<anchored to="endurance" />
+				<target>endurance</target>
+			</number_ps_abilitybonus>
+			<number_ps_abilitybonus name="intdice">
+				<anchored to="intelligence" />
+				<target>intelligence</target>
+			</number_ps_abilitybonus>
+			<number_ps_abilitybonus name="edudice">
+				<anchored to="education" />
+				<target>education</target>
+			</number_ps_abilitybonus>
+			<number_ps_abilitybonus name="socdice">
+				<anchored to="social" />
+				<target>social</target>
+			</number_ps_abilitybonus>
+			<number_ps_abilitybonus name="psidice">
+				<anchored to="psi" />
+				<target>psi</target>
+			</number_ps_abilitybonus>
+			<number_ps_abilitybonus name="mordice">
+				<anchored to="morale" />
+				<target>morale</target>
+			</number_ps_abilitybonus>
+			<number_ps_abilitybonus name="lucdice">
+				<anchored to="luck" />
+				<target>luck</target>
+			</number_ps_abilitybonus>
+			<number_ps_abilitybonus name="sandice">
+				<anchored to="sanity" />
+				<target>sanity</target>
+			</number_ps_abilitybonus>
+			<number_ps_abilitybonus name="weadice">
+				<anchored to="wealth" />
+				<target>wealth</target>
+			</number_ps_abilitybonus>
+			<number_ps_abilitybonus name="chadice">
+				<anchored to="charm" />
+				<target>charm</target>
+			</number_ps_abilitybonus>
+
+			<!-- Make this cover the rest of the row -->
+			<label name="armourlabel">
+				<anchored>
+					<top parent="race" relation="bottom" offset="25" />
+					<left offset="35" />
+				</anchored>
+				<static textres="ps_label_armour" />
+				<center />
+			</label>
+			<string_ps name="armourname">
+				<anchored>
+					<top parent="race" relation="bottom" offset="25" />
+					<left parent="armourlabel" anchor="right" offset="5" />
+					<right offset="-110" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</string_ps>
+
+			<label name="armourratinglabel">
+				<anchored width="45">
+					<top parent="race" relation="bottom" offset="25" />
+					<left parent="armourname" anchor="right" offset="15" />
+				</anchored>
+				<static textres="ps_label_armourrating" />
+				<center />
+			</label>
+			<number_ps_defense name="armourrating">
+				<anchored to="armourratinglabel"/>
+			</number_ps_defense>
+
+			<button_idelete name="idelete">
+				<anchored position="insidetopright" offset="8,10" />
+				<editmode>list_iedit</editmode>
+			</button_idelete>
+		</sheetdata>
+	</windowclass>
+</root>

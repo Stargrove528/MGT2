@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="charspacecraft_label">
+		<label>
+			<anchored height="20" width="70">
+				<top />
+			</anchored>
+			<font>charspacecraft-sheetlabel</font>
+		</label>
+	</template>
+
+
+	<template name="charspacecraft_shieldnumber">
+		<simplenumber>
+			<font>charspacecraft-sheetnumber-large</font>
+			<center />
+		</simplenumber>
+	</template>
+
+	<template name="charspacecraft_critdamageradioh" >
+		<genericcontrol>
+			<stateicons>
+				<on>button_check_selected</on>
+				<off>button_check_unselected</off>
+			</stateicons>
+			<parameters>
+				<optionwidth>30</optionwidth>
+				<labelsres>charspacecraft_critdamage_g|charspacecraft_critdamage_m|charspacecraft_critdamage_w</labelsres>
+				<values>g|m|w</values>
+				<defaultindex>0</defaultindex>
+			</parameters>
+			<script file="campaign/scripts/charspacecraft_critdamageradioh.lua" />
+		</genericcontrol>
+	</template>
+	<template name="charspacecraft_critdamageradiov" >
+		<genericcontrol>
+			<stateicons>
+				<on>button_check_selected</on>
+				<off>button_check_unselected</off>
+			</stateicons>
+			<parameters>
+				<optionheight>25</optionheight>
+				<labelsres>charspacecraft_critdamage_g|charspacecraft_critdamage_m|charspacecraft_critdamage_w</labelsres>
+				<values>g|m|w</values>
+				<defaultindex>0</defaultindex>
+			</parameters>
+			<script file="campaign/scripts/charspacecraft_critdamageradiov.lua" />
+		</genericcontrol>
+	</template>
+
+	<template name="charspacecraft_cargonumber">
+		<basicnumber>
+			<nodrag />
+			<hideonvalue>0</hideonvalue>
+			<min>0</min>
+		</basicnumber>
+	</template>
+	<template name="charspacecraft_number">
+		<basicnumber>
+			<nodrag />
+			<min>0</min>
+			<font>charspacecraft-sheet</font>
+		</basicnumber>
+	</template>
+	<template name="charspacecraft_numbers">
+		<basicnumber>
+			<anchored width="20" height="20">
+				<top />
+				<left />
+			</anchored>
+			<nodrag />
+			<font>charspacecraft-sheet</font>
+			<displaysign />
+		</basicnumber>
+	</template>
+	<template name="charspacecraft_numbercs">
+		<numberc_static>
+			<anchored width="20" height="20">
+				<top />
+				<left />
+			</anchored>
+			<nodrag />
+			<displaysign />
+			<font>charspacecraft-sheet</font>
+		</numberc_static>
+	</template>
+	<template name="charspacecraft_numbercs_crosslinked">
+		<charspacecraft_numbercs>
+			<script file="common/scripts/number_crosslink.lua" />
+		</charspacecraft_numbercs>
+	</template>
+	<template name="charspacecraft_numberc">
+		<numberc_static>
+			<anchored width="20" height="20">
+				<top />
+				<left />
+			</anchored>
+			<nodrag />
+			<font>charspacecraft-sheet</font>
+		</numberc_static>
+	</template>
+
+	<template name="charspacecraft_string">
+		<simplestring>
+			<nodrop />
+		</simplestring>
+	</template>
+	<template name="charspacecraft_damagestring">
+		<simplestring>
+			<anchored width="20" height="20">
+				<top />
+				<left />
+			</anchored>
+			<nodrop />
+			<center />
+		</simplestring>
+	</template>
+	<template name="charspacecraft_stringc">
+		<simplestringc>
+			<anchored width="20" height="20">
+				<top />
+				<left />
+			</anchored>
+			<nodrop />
+		</simplestringc>
+	</template>
+	<template name="charspacecraft_string_listitem">
+		<string_textlistitem>
+			<nodrop />
+		</string_textlistitem>
+	</template>
+	<template name="charspacecraft_string_labeled">
+		<string_labeled />
+	</template>
+	<template name="charspacecraft_label">
+		<label>
+			<anchored height="20" width="70">
+				<top />
+			</anchored>
+			<font>charspacecraft-sheetlabel</font>
+		</label>
+	</template>
+	<template name="charspacecraft_label_fieldtop">
+		<stringcontrol>
+			<anchored position="above" offset="3,1" />
+			<font>charspacecraft-sheetlabelmini</font>
+			<center />
+		</stringcontrol>
+	</template>
+	<template name="charspacecraft_label_fieldleft">
+		<stringcontrol>
+			<anchored position="left" offset="10,1" />
+			<font>charspacecraft-sheetlabelmini</font>
+			<center />
+		</stringcontrol>
+	</template>
+	<template name="charspacecraft_label_fieldright">
+		<stringcontrol>
+			<anchored position="right" offset="10,1" />
+			<font>charspacecraft-sheetlabelmini</font>
+			<center />
+		</stringcontrol>
+	</template>
+	<template name="charspacecraft_label_frametop">
+		<label>
+			<anchored position="insidetop" offset="0,10" />
+			<center />
+			<font>charspacecraft-sheetlabel</font>
+		</label>
+	</template>
+
+	<template name="button_charspacecraft_cargoonboard">
+		<buttonfield>
+			<state icon="button_charspacecraft_cargonone" tooltipres="charspacecraft_cargonone" />
+			<state icon="button_charspacecraft_cargocarried" tooltipres="charspacecraft_cargocarried" />
+			<default>1</default>
+		</buttonfield>
+	</template>
+	<template name="button_charspacecraft_action">
+		<button_roll>
+			<anchored height="20" width="20">
+				<top />
+				<left />
+			</anchored>
+			<script file="campaign/scripts/charspacecraft_actionroll.lua" />
+		</button_roll>
+	</template>
+	<template name="button_charspacecraftskillcycler">
+		<button_stringcycler>
+			<anchored height="20" width="120">
+				<top />
+				<left />
+			</anchored>
+			<font>charspacecraft-sheet</font>
+			<tooltip>
+				<textres>charspacecraft_tooltip_crew_skill</textres>
+			</tooltip>
+		</button_stringcycler>
+	</template>
+	<template name="button_charspacecraftweaponcycler">
+		<button_stringcycler>
+			<anchored height="20" width="120">
+				<top />
+				<left />
+			</anchored>
+			<font>charspacecraft-sheet</font>
+			<target></target>
+			<tooltip>
+				<textres>charspacecraft_tooltip_crew_weapon</textres>
+			</tooltip>
+			<script>
+				function onValueChanged()
+					if target and target[1] then
+						window[target[1]].setValue(CharSpacecraftManager.getWeaponDamage(window.windowlist.window.windowlist.window.getDatabaseNode(), getStringValue()));
+					end
+				end
+			</script>
+		</button_stringcycler>
+
+	</template>
+	<template name="button_charspacecraftcheckbox">
+		<buttonfield>
+			<state icon="button_charspacecraftcheckon" />
+			<state icon="button_charspacecraftcheckoff" />
+			<tooltip>
+				<textres>charspacecraft_tooltip_systemstatus</textres>
+			</tooltip>
+			<script>
+				function onButtonPress()
+					local sMsg = Interface.getString("charspacecraft_message_notimplemented");
+					ChatManager.SystemMessage(sMsg, true);
+				end
+			</script>
+		</buttonfield>
+	</template>
+
+	<template name="link_charspacecraftcrewentry">
+		<linkfield>
+			<anchored width="20" height="20" />
+			<class>charsheet</class>
+			<selfonempty />
+			<readonly />
+			<script>
+				function onValueChanged()
+					window.onLinkChanged();
+				end
+			</script>
+		</linkfield>
+	</template>
+
+	<template name="charspacecraft_string_labeled">
+		<string_labeled />
+	</template>
+	<template name="charspacecraft_number_labeled">
+		<simplenumber>
+			<font>sheettext</font>
+			<lineoffset default="on">1</lineoffset>
+			<script>
+				labelwidget = nil;
+
+				function onInit()
+					if labelres then
+						labelwidget = addTextWidget("sheetlabelinline", string.upper(Interface.getString(labelres[1])));
+					else
+						labelwidget = addTextWidget("sheetlabelinline", string.upper(label[1]));
+					end
+					if labelwidget then
+						local w,h = labelwidget.getSize();
+						labelwidget.setPosition("bottommiddle", 0, h/2-3);
+					end
+				end
+			</script>
+		</simplenumber>
+	</template>
+	<template name="charspacecraft_label_frametop">
+		<label>
+			<anchored position="insidetop" offset="0,10" />
+			<center />
+			<font>charspacecraft-sheetlabel</font>
+		</label>
+	</template>
+
+	<template name="list_charspacecraft_cargo">
+		<windowlist>
+			<child></child>
+			<child><backcolor>1A40301E</backcolor></child>
+			<datasource>.cargolist</datasource>
+			<class>charspacecraft_cargoitem</class>
+			<allowdelete />
+			<script file="campaign/scripts/spacecraft_cargolist.lua" />
+		</windowlist>
+	</template>
+
+	<template name="charspacecraft_label">
+		<label>
+			<anchored height="20" width="70">
+				<top />
+			</anchored>
+			<font>charspacecraft-sheetlabel</font>
+		</label>
+	</template>
+</root>

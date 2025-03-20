@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<font name="tooltipbox">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Regular.ttf" name="Noto Sans" size="16" />
+		<color value="#000000" />
+	</font>	
+
+	<font name="taskdifficulty">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="36" />
+		<color value="#FFFFFE" />
+	</font>
+	<font name="subwindowsmalltitle">
+		<ttf file="graphics/fonts/Walkway Expand Black.ttf" name="Walkway Expand Black"  size="14" bold="true" />
+		<color value="#000011" />
+		<shadow offset="1,1" color="#000000" />
+	</font>
+	<font name="charspacecraft-sheetlabel">
+		<ttf file="graphics/fonts/erasmd.ttf" name="Eras Medium ITC" size="12" />
+		<color value="#000000" />
+	</font>
+	<font name="charspacecraft-sheetinline">
+		<ttf file="graphics/fonts/erasmd.ttf" name="Eras Medium ITC" size="12" />
+		<color value="#100000" />
+	</font>
+
+	<!-- CoreRPG Overrides -->
+
+	<!-- Chat fonts - REQUIRED -->
+	<font name="chatfont" merge="join">
+		<color value="#000000" />
+	</font>
+	<font name="emotefont" merge="join">
+		<color value="#000000" />
+	</font>
+	<font name="narratorfont" merge="join">
+		<color value="#000011" />
+	</font>
+	<font name="systemfont" merge="join">
+		<color value="#000000" />
+	</font>
+	<font name="msgfont" merge="join">
+		<color value="#000011" />
+	</font>
+	<font name="oocfont" merge="join">
+		<color value="#005500" />
+	</font>
+
+	<!-- Chat fonts -->
+	<font name="chatnpcfont" merge="join">
+		<color value="#000011" />
+	</font>
+	<font name="chatgmfont" merge="join">
+		<color value="#000011" />
+	</font>
+	<font name="whisperfont" merge="join">
+		<color value="#000011" />
+	</font>
+
+	<!-- Modifier stack -->
+	<font name="modcollector">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="34" />
+		<color value="#FFFFFE" />
+	</font>
+	<font name="modcollectorlabel" merge="join">
+		<color value="#FFFFFE" />
+	</font>
+
+	<!-- Windows -->
+	<font name="windowtitle">
+		<ttf file="graphics/fonts/Walkway Expand Black.ttf" name="Walkway Expand Black" size="20" />
+		<color value="#FFFFFE" />
+		<shadow offset="1,1" color="#808080" />
+	</font>
+
+	<!-- Formatted text fields -->
+	<font name="reference-h">
+		<ttf file="graphics/fonts/Trade-Gothic-Bold-Font.otf" name="TradeGothic" bold="true" size="24" />
+		<color value="#000011" />
+		<shadow offset="1,1" color="#000000" />
+	</font>
+	<font name="reference-r">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Regular.ttf" name="Noto Sans" size="18" />
+		<color value="#000000" />
+	</font>
+	<font name="reference-i">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Italic.ttf" name="Noto Sans Italic" size="18" />
+		<color value="#000000" />
+	</font>
+	<font name="reference-b">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="18" />
+		<color value="#000000" />
+	</font>
+	<font name="reference-bi">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-BoldItalic.ttf" name="Noto Sans Bold Italic" size="18" />
+		<color value="#000000" />
+	</font>
+	<font name="reference-b-large">
+		<ttf file="graphics/fonts/Walkway Expand Black.ttf" name="Walkway Expand Black" size="18" bold="true" />
+		<color value="#000011" />
+		<shadow offset="1,1" color="#000000" />
+	</font>
+
+	<!-- Standard fields -->
+	<font name="sheetlabel">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="18" />
+		<color value="#000000" />
+	</font>
+	<font name="sheetnumber">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="18" />
+		<color value="#000000" />
+	</font>
+	<font name="sheettext">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Regular.ttf" name="Noto Sans" size="18" />
+		<color value="#000000" />
+	</font>
+
+	<!-- Character selection -->
+	<font name="charselecttitle">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="20" />
+		<color value="#000000" />
+	</font>
+	<font name="charselectbody">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="20" />
+		<color value="#3B2C21" />
+	</font>
+
+	<!-- Reference -->
+	<font name="reference-header">
+		<ttf file="graphics/fonts/erasdemi.ttf" name="Eras Demi ITC" size="18" />
+		<color value="#FFFFFF" />
+	</font>
+	<font name="reference-groupdesc">
+		<ttf file="graphics/fonts/erasdemi.ttf" name="Eras Demi ITC" size="18" />
+		<color value="#FFFFFF" />
+	</font>
+
+	<!-- Utility Windows -->
+	<font name="list-empty-ct">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Italic.ttf" name="Noto Sans Italic" size="16" />
+		<color value="#000000" />
+	</font>
+	
+	<!-- Assets -->
+	<font name="tokenbagasset_grid">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="16" />
+		<color value="#000000" />
+	</font>
+	<font name="tokenbagasset_list">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="24" />
+		<color value="#000000" />
+	</font>
+	<font name="assetview_empty">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="16" />
+		<color value="#FFFFFF" />
+	</font>
+
+	<!-- Misc -->
+	<font name="button-white">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="16" />
+		<color value="#FFFFFF" />	
+	</font>
+</root>

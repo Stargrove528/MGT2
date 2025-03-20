@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="button_taskdifficultykey">
+		<button_text>
+			<script>
+				function onButtonPress()
+					local buttonName = getName();
+					if (buttonName == "SIMPLE") then
+						window.difficultynumber.setValue(2);
+					elseif (buttonName == "EASY") then
+						window.difficultynumber.setValue(4);
+					elseif (buttonName == "ROUTINE") then
+						window.difficultynumber.setValue(6);
+					elseif (buttonName == "AVERAGE") then
+						window.difficultynumber.setValue(8);
+					elseif (buttonName == "DIFFICULT") then
+						window.difficultynumber.setValue(10);
+					elseif (buttonName == "VERYDIFFICULT") then
+						window.difficultynumber.setValue(12);
+					elseif (buttonName == "FORMIDABLE") then
+						window.difficultynumber.setValue(14);
+                    elseif (buttonName == "IMPOSSIBLE") then
+						window.difficultynumber.setValue(16);
+					end
+				end
+			</script>
+		</button_text>
+	</template>
+</root>

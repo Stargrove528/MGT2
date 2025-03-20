@@ -1,0 +1,626 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- Equipment -->
+	<windowclass name="reference_equipment" copy="record_window" />
+	<windowclass name="reference_equipment_main">
+		<script>
+			function onInit()
+				type_label.setValue(string.format("[%s; %s]", type.getValue(), subtype.getValue()));
+				if (mass.getValue() &lt;= 0) then
+					mass.setVisible(false);
+					masslabel.setVisible(false);
+					costdivider.setVisible(false);
+				end
+				if (skill.getValue() == "") then
+					skill_label.setVisible(false);
+					skill.setVisible(false);
+				end
+				if type.getValue() == "Armour" then
+					label_protection.setVisible(true);
+					resistances.setVisible(true);
+				end
+				if type.getValue() == "Communications" or type.getValue() == "Computers" or type.getValue() == "Augments" then
+					label_description.setVisible(true);
+					description.setVisible(true);
+				end
+				if modifiers.getValue() ~= "" then
+					label_modifiers.setVisible(true);
+					modifiers.setVisible(true);
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<hs name="type" />
+			<hs name="subtype" />
+			<hsequipmentimages name="equipmentimage" />
+
+			<label_column name="type_label">
+				<anchored>
+					<top relation="relative" offset="7" />
+				</anchored>
+				<font>reference-b-large</font>
+			</label_column>
+
+			<line_column />
+
+			<label_column>
+				<static textres="ref_label_tl" />
+			</label_column>
+			<number_column name="tl">
+				<readonly />
+			</number_column>
+
+			<line_column />
+
+			<label_column>
+				<static textres="ref_label_cost" />
+			</label_column>
+			<string_columnh name="cost">
+				<readonly />
+			</string_columnh>
+
+			<line_column name="costdivider"/>
+
+			<label_column name="masslabel">
+				<static textres="ref_label_mass" />
+			</label_column>
+			<number_column name="mass">
+				<readonly />
+			</number_column>
+
+			<label_column name="label_protection">
+				<static textres="ref_label_protection" />
+				<invisible />
+			</label_column>
+			<string_column name="resistances">
+				<invisible />
+			</string_column>
+
+			<label_column name="skill_label">
+				<static textres="ref_label_skill" />
+			</label_column>
+			<string_columnh name="skill">
+				<readonly />
+			</string_columnh>
+
+			<label_column name="label_description">
+				<static textres="ref_label_typeanddescription" />
+				<invisible />
+			</label_column>
+			<string_column name="description">
+				<readonly />
+				<invisible />
+			</string_column>
+
+			<label_column name="label_modifiers">
+				<static textres="ref_label_modifiers" />
+				<invisible />
+				<tooltip textres="ref_tooltip_modifiers" />
+			</label_column>
+			<string_column name="modifiers">
+				<readonly />
+				<invisible />
+				<tooltip textres="ref_tooltip_modifiers" />
+			</string_column>
+			<line_column name="line_desc" />
+
+			<ft_columnh name="notes">
+				<separator>line_desc</separator>
+				<readonly />
+			</ft_columnh>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Weapons -->
+	<windowclass name="reference_weapons" copy="record_window" />
+	<windowclass name="reference_weapons_main">
+		<script>
+			function onInit()
+				if subtype.getValue() ~= "Melee Weapons" then
+					if (magazine.getValue() &lt; 1) then
+						label_magazine.setVisible(false);
+						magazine.setVisible(false);
+					end
+
+					if (ammocost.getValue() == '') then
+						label_ammocost.setVisible(false);
+						ammocost.setVisible(false);
+					end
+
+				else
+					label_ammocost.setVisible(false);
+					ammocost.setVisible(false);
+					label_magazine.setVisible(false);
+					magazine.setVisible(false);
+				end
+
+				if type.getValue() == "Spacecraft Scale Weapons" then
+					label_power.setVisible(true);
+					power.setVisible(true);
+					label_mass.setVisible(false);
+					mass.setVisible(false);
+				else
+					label_power.setVisible(false);
+					power.setVisible(false);
+				end
+
+				type_label.setValue(string.format("[%s]", type.getValue()));
+				subtype_label.setValue(string.format("[%s]", subtype.getValue()));
+				traits.setTooltipText(ItemManager2.updateToolTip(traits.getValue()));
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<hs name="type" />
+			<hs name="subtype" />
+			<!-- <hsequipmentimages name="equipmentimage" /> -->
+
+			<label_column name="type_label">
+				<anchored>
+					<top relation="relative" offset="2" />
+				</anchored>
+				<font>sheetlabel</font>
+			</label_column>
+			<label_column name="subtype_label">
+				<anchored>
+					<top relation="relative" offset="2" />
+				</anchored>
+				<font>sheetlabel</font>
+			</label_column>
+
+			<line_column />
+
+			<label_column>
+				<static textres="ref_label_tl" />
+			</label_column>
+			<number_column name="tl">
+				<readonly />
+			</number_column>
+
+			<line_column />
+
+			<label_column>
+				<static textres="ref_label_damage" />
+			</label_column>
+			<string_column name="damage">
+				<readonly />
+			</string_column>
+
+			<label_column name="label_magazine">
+				<static textres="ref_label_magazine" />
+			</label_column>
+			<number_column name="magazine">
+				<readonly />
+			</number_column>
+
+			<label_column>
+				<static textres="ref_label_range" />
+			</label_column>
+			<string_column name="range">
+				<readonly />
+			</string_column>
+
+			<label_column>
+				<static textres="ref_label_traits" />
+			</label_column>
+			<string_column name="traits">
+				<readonly />
+			</string_column>
+
+			<line_column />
+
+			<label_column>
+				<static textres="ref_label_cost" />
+			</label_column>
+			<string_columnh name="cost">
+				<readonly />
+			</string_columnh>
+
+			<label_column name="label_ammocost">
+				<static textres="ref_label_ammocost" />
+			</label_column>
+			<string_columnh name="ammocost">
+				<readonly />
+			</string_columnh>
+
+			<line_column name="divider_mass"/>
+
+			<label_column name="label_power">
+				<static textres="ref_label_power" />
+			</label_column>
+
+			<number_column name="power">
+				<readonly />
+			</number_column>
+
+			<label_column name="label_mass">
+				<static textres="ref_label_mass" />
+			</label_column>
+
+			<number_column name="mass">
+				<readonly />
+			</number_column>
+
+			<line_column />
+
+			<label_column>
+				<static textres="ref_label_skill" />
+			</label_column>
+			<string_column name="skill">
+				<readonly />
+			</string_column>
+
+			<line_column />
+
+			<ft_columnh name="notes">
+				<separator>line_desc</separator>
+				<readonly />
+			</ft_columnh>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Heavy Weaponry -->
+	<windowclass name="reference_heavyweaponry" copy="record_window">
+		<sheetdata>
+			<sub_content_framed_groupbox name="content">
+				<class>reference_weapons_main</class>
+			</sub_content_framed_groupbox>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Armour -->
+	<windowclass name="reference_armor" copy="record_window" />
+	<windowclass name="reference_armor_main">
+		<script>
+			function onInit()
+				type_label.setValue(string.format("[%s; %s]", type.getValue(), subtype.getValue()));
+				if (slots.getValue() == 0) then
+					slots.setVisible(false)
+					slots_label.setVisible(false)
+				end
+				if (str.getValue() == 0) then
+					str.setVisible(false)
+					str_label.setVisible(false)
+				end
+				if (dex.getValue() == 0) then
+					dex.setVisible(false)
+					dex_label.setVisible(false)
+				end
+				if (skill == nil or skill.getValue() == "") then
+					ref_label_skill.setVisible(false)
+				end
+				if (modifiers.getValue() ~= "") then
+					label_modifiers.setVisible(true);
+					modifiers.setVisible(true);
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<hs name="type" />
+			<hs name="subtype" />
+
+			<label_column name="type_label">
+				<anchored>
+					<top relation="relative" offset="7" />
+				</anchored>
+				<font>reference-b-large</font>
+			</label_column>
+
+			<line_column />
+			<label_column>
+				<static textres="ref_label_tl" />
+			</label_column>
+			<number_column name="tl">
+				<readonly />
+			</number_column>
+			<line_column />
+
+			<label_column>
+				<static textres="ref_label_cost" />
+			</label_column>
+			<string_columnh name="cost">
+				<readonly />
+			</string_columnh>
+
+			<line_column />
+
+			<label_column>
+				<static textres="ref_label_mass" />
+			</label_column>
+			<number_column name="mass">
+				<readonly />
+			</number_column>
+			<line_column />
+
+			<label_column>
+				<static textres="ref_label_protection" />
+			</label_column>
+			<string_columnh name="resistances">
+				<readonly />
+			</string_columnh>
+
+			<label_column name="ref_label_skill">
+				<static textres="ref_label_skill" />
+			</label_column>
+			<string_columnh name="skill">
+				<readonly />
+			</string_columnh>
+
+			<label_column name="slots_label">
+				<static textres="ref_label_slots" />
+			</label_column>
+			<number_column name="slots">
+				<readonly />
+			</number_column>
+			<label_column name="str_label">
+				<static textres="ref_label_str" />
+			</label_column>
+			<number_column name="str">
+				<readonly />
+			</number_column>
+			<label_column name="dex_label">
+				<static textres="ref_label_dex" />
+			</label_column>
+			<number_column name="dex">
+				<readonly />
+			</number_column>
+			<label_column name="label_modifiers">
+				<static textres="ref_label_modifiers" />
+				<invisible />
+				<tooltip textres="ref_tooltip_modifiers" />
+			</label_column>
+			<string_columnh name="modifiers">
+				<readonly />
+				<invisible />
+				<tooltip textres="ref_tooltip_modifiers" />
+			</string_columnh>
+
+			<line_column />
+
+			<ft_columnh name="notes">
+				<separator>line_desc</separator>
+				<readonly />
+			</ft_columnh>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Ammunition -->
+	<windowclass name="reference_ammunition" copy="record_window" />
+	<windowclass name="reference_ammunition_main">
+		<script>
+			function onInit()
+				type_label.setValue(string.format("[%s; %s]", type.getValue(), subtype.getValue()));
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<hs name="type" />
+			<hs name="subtype" />
+
+			<label_column name="type_label">
+				<anchored>
+					<top relation="relative" offset="7" />
+				</anchored>
+				<font>reference-b-large</font>
+			</label_column>
+
+			<line_column />
+
+			<label_column>
+				<static textres="ref_label_tl" />
+			</label_column>
+			<number_column name="tl">
+				<readonly />
+			</number_column>
+
+			<line_column />Weapons
+
+			<label_column>
+				<static textres="ref_label_damage" />
+			</label_column>
+			<string_column name="damage">
+				<readonly />
+			</string_column>
+
+			<label_column>
+				<static textres="ref_label_range" />
+			</label_column>
+			<string_column name="range">
+				<readonly />
+			</string_column>
+
+			<label_column>
+				<static textres="ref_label_traits" />
+			</label_column>
+			<string_column name="traits">
+				<readonly />
+			</string_column>
+
+			<line_column />
+
+			<label_column>
+				<static textres="ref_label_cost" />
+			</label_column>
+			<string_columnh name="cost">
+				<readonly />
+			</string_columnh>
+
+			<line_column />
+
+			<!-- Ammo Types -->
+			<label_column name="headerpistol">
+				<static textres="ref_label_pistol" />
+				<tooltip textres="ref_tooltip_listpistol" />
+			</label_column>
+			<string_column name="pistol">
+				<readonly />
+				<tooltip textres="ref_tooltip_pistol" />
+			</string_column>
+			<label_column name="headerrifle">
+				<static textres="ref_label_rifle" />
+				<tooltip textres="ref_tooltip_listrifle" />
+			</label_column>
+			<string_column name="rifle">
+				<readonly />
+				<tooltip textres="ref_tooltip_rifle" />
+			</string_column>
+			<label_column name="headershotgun">
+				<static textres="ref_label_shotgun" />
+				<tooltip textres="ref_tooltip_listshotgun" />
+			</label_column>
+			<string_column name="shotgun">
+				<readonly />
+				<tooltip textres="ref_tooltip_shotgun" />
+			</string_column>
+			<label_column name="headerheavy">
+				<static textres="ref_label_heavy" />
+				<tooltip textres="ref_tooltip_listheavy" />
+			</label_column>
+			<string_column name="heavy">
+				<readonly />
+				<tooltip textres="ref_tooltip_heavy" />
+			</string_column>
+
+			<line_column />
+
+			<ft_columnh name="notes">
+				<separator>line_desc</separator>
+				<readonly />
+			</ft_columnh>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Sighting Aids -->
+	<windowclass name="reference_sightingaids" copy="record_window" />
+	<windowclass name="reference_sightingaids_main">
+		<script>
+			function onInit()
+				type_label.setValue(string.format("[%s; %s]", type.getValue(), subtype.getValue()));
+				if (mass.getValue() &lt;= 0) then
+					mass.setVisible(false);
+					masslabel.setVisible(false);
+				end
+
+				if (magazine.getValue() &lt; 1) then
+					label_magazine.setVisible(false);
+					magazine.setVisible(false);
+				end
+
+				if (ammocost.getValue() == '') then
+					label_ammocost.setVisible(false);
+					ammocost.setVisible(false);
+				end
+				if (damage.getValue() == '') then
+					label_damage.setVisible(false);
+					damage.setVisible(false);
+				end
+				if (range.getValue() == '') then
+					label_range.setVisible(false);
+					range.setVisible(false);
+				end
+				if (traits.getValue() == '') then
+					label_traits.setVisible(false);
+					traits.setVisible(false);
+				end
+
+				if (range.getValue() == '' and damage.getValue() == '' and traits.getValue() == '') then
+					weapon_divider.setVisible(false);
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<hs name="type" />
+			<hs name="subtype" />
+
+			<label_column name="type_label">
+				<anchored>
+					<top relation="relative" offset="7" />
+				</anchored>
+				<font>reference-b-large</font>
+			</label_column>
+
+			<line_column />
+
+			<label_column>
+				<static textres="ref_label_tl" />
+			</label_column>
+			<number_column name="tl">
+				<readonly />
+			</number_column>
+
+			<line_column />
+
+			<label_column name="label_damage">
+				<static textres="ref_label_damage" />
+			</label_column>
+			<string_column name="damage">
+				<readonly />
+			</string_column>
+
+			<label_column name="label_magazine">
+				<static textres="ref_label_magazine" />
+			</label_column>
+			<number_column name="magazine">
+				<readonly />
+			</number_column>
+
+			<label_column name="label_range">
+				<static textres="ref_label_range" />
+			</label_column>
+			<string_column name="range">
+				<readonly />
+			</string_column>
+
+			<label_column name="label_traits">
+				<static textres="ref_label_traits" />
+			</label_column>
+			<string_column name="traits">
+				<readonly />
+			</string_column>
+
+			<line_column name="weapon_divider"/>
+
+			<label_column>
+				<static textres="ref_label_cost" />
+			</label_column>
+			<string_columnh name="cost">
+				<readonly />
+			</string_columnh>
+
+			<label_column name="label_ammocost">
+				<static textres="ref_label_ammocost" />
+			</label_column>
+			<string_columnh name="ammocost">
+				<readonly />
+			</string_columnh>
+
+			<label_column name="masslabel">
+				<static textres="ref_label_mass" />
+			</label_column>
+			<number_column name="mass">
+				<readonly />
+			</number_column>
+
+			<line_column />
+
+			<ft_columnh name="notes">
+				<separator>line_desc</separator>
+				<readonly />
+			</ft_columnh>
+		</sheetdata>
+	</windowclass>
+</root>

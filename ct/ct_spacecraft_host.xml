@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="ct_ship_combat">
+		<frame>ctbox</frame>
+		<sizelimits>
+			<minimum width="800" height="400" />
+			<dynamic />
+		</sizelimits>
+		<softclose />
+		<sheetdata>
+			<windowtitlebar_ctbox name="title">
+				<resource>sct_shipwindow_title</resource>
+			</windowtitlebar_ctbox>
+			<windowmenubar_ctbox name="menubar" />
+
+			<anchor_content_ctbox_top name="contentanchor" />
+			<anchor_content_ctbox_bottom name="bottomanchor" />
+
+			<sub_ct_header_host name="sub_header">
+				<class>sub_sct_header_host</class>
+			</sub_ct_header_host>
+
+			<sub_ct_controls_host name="sub_controls">
+				<class>sub_sct_controls_host</class>
+			</sub_ct_controls_host>
+
+			<list_ct_host name="list">
+				<datasource>combattracker.shiplist</datasource>
+				<class>ct_shipentry</class>
+				<empty font="list-empty-ct" textres="sct_emptyshiplist" />
+				<script file="ct/scripts/ctship.lua" />
+			</list_ct_host>
+			<scrollbar_content_list />
+			
+			<resize_ctbox />
+		</sheetdata>
+	</windowclass>
+	<windowclass name="sub_sct_header_host">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<anchor_ct_header_left />
+			<anchor_ct_header_right />
+
+			<spacer_ct_header_active name="spacer_header_active" />
+			<spacer_ct_header_token name="spacer_header_token" />
+			<button_ct_header_visibility name="button_global_visibility" />
+
+			<spacer_ct_header_buttons_host name="spacer_buttons_header" />
+			<spacer_ct_header_right name="spacer_buttons_header_add" insertbefore="label_init">
+				<anchored width="60" />
+			</spacer_ct_header_right>
+			<label_ct_header_right name="label_shieldsdamage">
+				<anchored width="40" />
+				<static textres="sct_label_shielddam" />
+				<tooltip textres="sct_tooltip_shieldsdamage" />
+			</label_ct_header_right>
+			<label_ct_header_right name="label_shields">
+				<anchored width="40" />
+				<static textres="sct_label_maximumshields" />
+				<tooltip textres="sct_tooltip_maximumshields" />
+			</label_ct_header_right>
+			<label_ct_header_right name="label_wounds">
+				<anchored width="60" />
+				<static textres="sct_label_hulldamage" />
+				<tooltip textres="sct_tooltip_hulldamage" />
+			</label_ct_header_right>
+			<label_ct_header_right name="label_hp">
+				<anchored width="60" />
+				<static textres="sct_label_maximumhullpoints" />
+				<tooltip textres="sct_tooltip_maximumhullpoints" />
+			</label_ct_header_right>
+			<spacer_ct_header_right name="spacer_init">
+				<anchored width="5" />
+			</spacer_ct_header_right>
+			<label_ct_header_right name="label_initmod">
+				<static textres="sct_label_initmod" />
+				<tooltip textres="sct_tooltip_initmod" />
+			</label_ct_header_right>
+			<label_ct_header_right name="label_init">
+				<static textres="sct_label_initresult" />
+				<tooltip textres="sct_tooltip_initresult" />
+			</label_ct_header_right>
+			<label_ct_header_name_v2 name="label_name">
+				<static textres="sct_label_shipname" />
+			</label_ct_header_name_v2>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="sub_sct_controls_host">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<hn name="phasenumber">
+				<script>
+					function onValueChanged()
+						window.phase.update();
+					end
+				</script>
+			</hn>
+
+			<anchor_ct_controls_left />
+			<anchor_ct_controls_right />
+
+			<button_ct_controls_setactive name="button_setactive" />
+			<button_ct_controls_nextturn name="button_nextactor">
+				<tooltip textres="ct_tooltip_nextship" />
+				<script>
+					function onButtonPress()
+						SpacecraftCombatManager.nextShip();
+					end
+					function onDragStart(button, x, y, draginfo)
+						draginfo.setType("combattrackernextship");
+						draginfo.setIcon("button_ctnextactor");
+						return true;
+					end
+				</script>
+			</button_ct_controls_nextturn>
+			<button_ct_controls_menu name="button_menu">
+				<script file="ct/scripts/ct_shipmenu.lua" />
+			</button_ct_controls_menu>
+
+			<button_sct_controls_nextround name="button_nextround" />
+			<number_ct_controls_rounds name="shiproundnumber" />
+			<label_ct_controls_rounds name="label_shiproundnumber" />
+
+			<button_sct_controls_nextphase name="button_nextphase" />
+			<string_sct_controls_phase name="phase" />
+			<label_sct_controls_phase name="label_phase" />
+
+			<area_ct_controls_center name="area_center" />
+			<button_ct_controls_faction_friend name="button_faction_friend" />
+			<button_ct_controls_faction_neutral name="button_faction_neutral" />
+			<button_ct_controls_faction_foe name="button_faction_foe" />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="ct_shipentry">
+		<margins control="0,5,0,5" />
+		<frame>ctentrybox</frame>
+		<sizelimits>
+			<minimum height="40" />
+		</sizelimits>
+		<script file="ct/scripts/ct_shipentry.lua" />
+		<sheetdata>
+			<hs name="tokenrefid" />
+			<hs name="tokenrefnode" />
+			<hs name="status" />
+
+			<hn name="initresult_saved" />
+			<hs name="type" />
+			<hsx name="armour" />
+			<hnx name="armour_rating" />
+
+			<hsx name="critdmg_lifesupport" />
+			<hsx name="critdmg_sensors" />
+			<hsx name="critdmg_weapons" />
+			<hsx name="critdmg_engines" />
+			<hsx name="critdmg_powercore" />
+
+			<hsx name="shields_critdmg_forward" />
+			<hsx name="shields_critdmg_aft" />
+			<hsx name="shields_critdmg_port" />
+			<hsx name="shields_critdmg_starboard" />
+
+			<spacer_ctentry_active_top name="active_spacer_top" />
+			<anchor_ct_entry_left name="leftanchor" />
+			<anchor_ct_entry_right name="rightanchor" />
+
+			<button_ctentry_active name="active" />
+			<token_ctentry name="token" />
+			<button_ct_entry_isidentified name="isidentified" />
+
+			<button_ct_entry_idelete name="idelete" />
+			<link_ct_entry name="link">
+				<class>spacecraft</class>
+			</link_ct_entry>
+
+			<button_ct_section_effects name="button_section_effects" />
+			<button_ct_section_defense name="button_section_defense" />
+			<spacer_button_ct_section name="spacer_button_section_defense" />
+			<button_ct_section_active name="button_section_active" />
+			<spacer_button_ct_section name="spacer_button_section_active" />
+			<button_ct_section_crew name="button_section_crew" />
+			<spacer_button_ct_section name="spacer_button_section_crew" />
+			<button_ct_section_space name="button_section_space" />
+			<button_ct_section_targets name="button_section_targets" />
+
+			<button_ctentry_friendfoe name="friendfoe" />
+
+			<number_ct_crosslink name="shieldsdamage">
+				<anchored to="rightanchor" width="40" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<min>0</min>
+				<tabtarget prev="shields" next="initresult" />
+			</number_ct_crosslink>
+			<number_ct_crosslink name="shields">
+				<anchored to="rightanchor" width="40" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<min>0</min>
+				<readonly/>
+				<tabtarget prev="hpdamage" next="shieldsdamage" />
+			</number_ct_crosslink>
+			<number_ct_crosslink name="hpdamage">
+				<anchored to="rightanchor" width="60" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<hideonvalue value="0" />
+				<min>0</min>
+				<tabtarget prev="nonlethal" next="init" />
+				<script>
+					function handleDrop(draginfo)
+						if draginfo.getType() == "number" then
+							local node = window.getDatabaseNode();
+							local rActor = ActorManager.resolveActor(node);
+							ActionDamage.applyDamage(nil, rActor, CombatManager.isCTHidden(node), "number", draginfo.getDescription(), draginfo.getNumberData());
+						end
+					end
+
+					function update()
+						window.onHealthChanged();
+					end
+				</script>
+			</number_ct_crosslink>
+			<number_ct_crosslink name="hptotal">
+				<anchored to="rightanchor" width="60" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<min>0</min>
+				<readonly/>
+				<tabtarget prev="init_mod" next="hpdamage" />
+				<script>
+					function update()
+						window.onHealthChanged();
+					end
+				</script>
+			</number_ct_crosslink>
+
+			<number_sctentry_initmod name="init_mod">
+				<tabtarget prev="initresult" next="hpdamage" />
+			</number_sctentry_initmod>
+			<number_ctentry_shipinitresult name="initresult">
+				<tabtarget next="init_mod" />
+			</number_ctentry_shipinitresult>
+
+			<string_ct_entry_name name="name" />
+			<string_ct_entry_name_nonid name="nonid_name" />
+
+			<sub_ct_section name="sub_targets" />
+			<sub_ct_section name="sub_space" />
+			<sub_ct_section name="sub_crew" />
+			<sub_ct_section name="sub_active" />
+			<sub_ct_section name="sub_defense" />
+			<sub_ct_section name="sub_effects" />
+			<sub_ct_section name="sub_pendingattacks">
+				<class>sct_section_pendingattacks</class>
+				<fastinit />
+			</sub_ct_section>
+			<sub_ct_section name="sub_criticals">
+				<class>sct_section_criticals</class>
+				<fastinit />
+			</sub_ct_section>
+
+			<!-- Quick labels -->
+			<string_ct_entry_targets name="summary_targets" />
+			<string_ct_entry_effects name="summary_effects" />
+
+			<!-- NOTE: Visibility control moved to bottom to avoid sections overlaying it -->
+			<button_ct_entry_tokenvis name="tokenvis" />
+
+			<spacer_ctentry_middle name="spacer" />
+			<spacer_ctentry_active_bottom name="active_spacer_bottom" />
+		</sheetdata>
+	</windowclass>
+
+	<!-- Section - Crew -->
+	<windowclass name="sct_section_crew">
+		<sheetdata>
+			<icon_ct_section name="icon_section">
+				<icon>button_section_crew_down</icon>
+			</icon_ct_section>
+
+			<anchor_ct_section name="anchor_section" />
+
+			<genericcontrol name="spacer">
+				<anchored to="anchor_section" height="30">
+					<top anchor="bottom" relation="relative" />
+					<left />
+					<right />
+				</anchored>
+				<disabled />
+			</genericcontrol>
+			
+			<frame_ct_section name="frame_section">
+				<anchored>
+					<left parent="icon_section" anchor="right" offset="0" />
+					<bottom parent="spacer" offset="10" />
+				</anchored>
+			</frame_ct_section>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="sct_section_crew_starship">
+		<sheetdata>
+			<icon_ct_section name="icon_section">
+				<icon>button_section_crew_down</icon>
+			</icon_ct_section>
+
+			<anchor_ct_section name="anchor_section" />
+
+			<list_ct_section_labeled name="crew">
+				<datasource>.crew</datasource>
+                <class>sct_crew</class>
+            </list_ct_section_labeled>
+			<label_ct_section name="crew_label">
+				<anchored to="crew" />
+				<static textres="sct_label_crew" />
+			</label_ct_section>
+
+			<frame_ct_section name="frame_section">
+				<anchored>
+					<left parent="icon_section" anchor="right" offset="0" />
+					<bottom parent="crew" offset="10" />
+				</anchored>
+			</frame_ct_section>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="sct_crew">
+		<margins control="0,0,0,2" />
+		<script>
+			function onGunnerSelectButtonPressed()
+				for _,wCrew in pairs(windowlist.window.crew.getWindows()) do
+					wCrew.gunnerselected.setValue(0);
+				end
+				gunnerselected.setValue(1);
+			end
+		</script>
+		<sheetdata>
+			<anchor_listitem_left_sm />
+			<anchor_listitem_right_sm />
+			<string_listitem_right name="bonuses">
+				<anchored width="50" />
+				<font>sheetlabel</font>
+				<empty textres="spacecraft_newlabel_crewpositionbonus" />
+				<multilinespacing>20</multilinespacing>
+				<nohighlight />
+				<actortype>ct</actortype>
+				<actorpath>....</actorpath>
+				<script file="campaign/scripts/spacecraft_skill.lua" />
+			</string_listitem_right>
+			<button_listitem_checkbox_right name="gunnerselected">
+				<tooltip textres="ct_tooltip_gunnerselected" />
+				<script>
+					function onButtonPress()
+						window.onGunnerSelectButtonPressed();
+					end
+				</script>
+			</button_listitem_checkbox_right>
+
+			<string_listitem_center_noframe_static name="name">
+				<empty textres="spacecraft_newlabel_crewposition"/>
+			</string_listitem_center_noframe_static>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Section - Active -->
+	<windowclass name="sct_section_active">
+		<sheetdata>
+			<icon_ct_section name="icon_section">
+				<icon>button_sword_down</icon>
+			</icon_ct_section>
+
+			<anchor_ct_section name="anchor_section" />
+
+			<list_ct_section_full name="actions">
+				<datasource>.actions</datasource>
+				<class>spacecraft_weapons</class>
+				<sortby><control>order</control></sortby>
+				<noscroll />
+			</list_ct_section_full>
+			<button_iadd name="actions_iadd">
+				<anchored to="anchor_section">
+					<top anchor="bottom" relation="relative" offset="3" />
+					<right offset="-4" />
+				</anchored>
+				<target>actions</target>
+			</button_iadd>
+
+			<frame_ct_section name="frame_section">
+				<anchored>
+					<left parent="icon_section" anchor="right" offset="0" />
+					<bottom parent="actions_iadd" offset="10" />
+				</anchored>
+			</frame_ct_section>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Section - Defense -->
+	<windowclass name="sct_section_defense">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<icon_ct_section name="icon_section">
+				<icon>button_shield_down</icon>
+			</icon_ct_section>
+
+			<anchor_ct_section name="anchor_section" />
+
+			<label name="armour_label">
+				<anchored to="anchor_section" position="insidetopleft" offset="5,10"/>
+				<static textres="ct_label_immediate" />
+			</label>
+			<basicstring name="armour">
+				<anchored to="armour_label" position="righthigh" offset="5,0" height="20">
+					<right parent="anchor_section" offset="-15" />
+				</anchored>
+				<readonly />
+			</basicstring>
+
+			<genericcontrol name="spacer">
+				<anchored to="anchor_section" height="30">
+					<top anchor="bottom" relation="relative" />
+					<left />
+					<right />
+				</anchored>
+				<disabled />
+			</genericcontrol>
+
+			<frame_ct_section name="frame_section">
+				<anchored>
+					<left parent="icon_section" anchor="right" offset="0" />
+					<bottom parent="spacer" offset="10" />
+				</anchored>
+			</frame_ct_section>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Section - Pending attacks -->
+	<windowclass name="sct_section_pendingattacks">
+		<script>
+			function onInit()
+				if Session.IsHost then
+					registerMenuItem(Interface.getString("sct_menu_pendingentries_delete_all"), "logoff", 4)
+				end
+
+				DB.addHandler(pendingattacks.getDatabaseNode(), "onChildUpdate", self.update);
+				self.update();
+			end
+			function onClose()
+				DB.removeHandler(pendingattacks.getDatabaseNode(), "onChildUpdate", self.update);
+			end
+			function onMenuSelection(nOption)
+				if nOption == 4 then
+					DB.deleteChildren(pendingattacks.getDatabaseNode());
+				end
+			end
+			function update()
+				local bVisible = (DB.getChildCount(pendingattacks.getDatabaseNode()) > 0);
+				parentcontrol.setVisible(bVisible);
+			end
+		</script>
+		<sheetdata>
+			<icon_ct_section name="icon_section">
+				<icon>button_section_pendingattacks_down</icon>
+			</icon_ct_section>
+
+			<anchor_ct_section name="anchor_section" />
+
+			<windowlist name="pendingattacks">
+				<anchored>
+					<top parent="anchor_section" anchor="bottom" relation="relative" offset="5" />
+					<left parent="icon_section" anchor="right" />
+					<right offset="-7" />
+				</anchored>
+				<class>sct_pendingattack</class>
+				<datasource>.pendingattacks</datasource>
+			</windowlist>
+
+			<frame_ct_section name="frame_section">
+				<anchored>
+					<left parent="icon_section" anchor="right" offset="0" />
+					<bottom parent="pendingattacks" offset="10" />
+				</anchored>
+			</frame_ct_section>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="sct_pendingattack">
+		<margins control="0,7,0,7" />
+		<frame offset="0,-5">ct_subgroupbox</frame>
+		<script file="ct/scripts/ct_pendingattacks_entry.lua" />
+		<sheetdata>
+			<genericcontrol name="rowanchor">
+				<anchored position="insidetop" height="0" />
+				<invisible />
+			</genericcontrol>
+
+			<!-- Description -->
+			<pendingresult_rowanchor name="descriptionrow">
+				<anchored height="30" />
+			</pendingresult_rowanchor>
+			<simplestring name="attackdescription">
+				<anchored height="25">
+					<top parent="descriptionrow" offset="5" />
+					<left offset="10" />
+					<right offset="-10" />
+				</anchored>
+				<font>sheetlabel</font>
+				<readonly />
+				<script>
+
+					function onDragStart(...)
+						return window.onDragStart(...)
+					end
+				</script>
+			</simplestring>
+
+			<!-- Pending attack -->
+			<pendingresult_rowanchor name="attackrow" />
+
+			<pendingattack_number name="attackscore">
+				<anchored>
+					<left offset="60" />
+				</anchored>
+			</pendingattack_number>
+			<pendingresult_label name="attackscore_label">
+				<anchored to="attackscore" />
+				<static textres="ct_label_pendingattack" />
+			</pendingresult_label>
+
+			<pendingattack_number name="defensescore">
+				<anchored>
+					<left parent="attackscore" anchor="right" offset="68" />
+				</anchored>
+			</pendingattack_number>
+			<pendingresult_label name="defensescore_label">
+				<anchored to="defensescore" />
+				<static textres="ct_label_pendingdefense" />
+			</pendingresult_label>
+
+			<pendingattack_icon name="hiticon">
+				<anchored>
+					<left parent="defensescore" anchor="right" offset="8" />
+				</anchored>
+			</pendingattack_icon>
+
+			<!-- Pending damage -->
+			<hn name="damageresult" />
+			<pendingresult_rowanchor name="damagerow" />
+
+			<pendingdamage_number name="damage">
+				<anchored>
+					<left offset="160" />
+				</anchored>
+			</pendingdamage_number>
+			<pendingresult_label name="damage_label">
+				<anchored to="damage" offset="10,5" />
+				<static textres="ct_label_pendingdamage" />
+			</pendingresult_label>
+
+			<button_text name="apply">
+				<anchored width="40">
+					<top parent="damage" offset="2" />
+					<left parent="damage" relation="relative" offset="60" />
+				</anchored>
+				<state textres="button_apply" />
+				<script>
+					function onButtonPress()
+						window.applyDamage()
+					end
+				</script>
+				<tooltip textres="ct_tooltip_apply_pendingdamage" />
+			</button_text>
+			<button_text name="ignore">
+				<anchored to="apply" width="40">
+					|<top />
+					<left relation="bottomright" offset="70" />
+				</anchored>
+				<state textres="button_ignore" />
+				<script>
+					function onButtonPress()
+						window.removeEntry()
+					end
+				</script>
+				<tooltip textres="ct_tooltip_ignore_pendingdamage" />
+			</button_text>
+
+			<stringcontrol name="attacknote">
+				<anchored height="25">
+					<top parent="attackrow" offset="6" />
+					<left parent="hiticon" anchor="right" offset="5" />
+					<right parent="apply" anchor="left" offset="-3" />
+				</anchored>
+				<font>sheetlabel</font>
+				<invisible />
+				<static />
+			</stringcontrol>
+			<stringcontrol name="damagenote">
+				<anchored height="25">
+					<top parent="damagerow" offset="6" />
+					<left parent="damage" anchor="right" offset="-2" />
+					<right parent="apply" anchor="left" offset="-5" />
+				</anchored>
+				<font>sheetlabel</font>
+				<invisible />
+				<static />
+				<center />
+			</stringcontrol>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Section - Criticals -->
+	<windowclass name="sct_section_criticals">
+		<sizelimits>
+			<minimum height="40" />
+		</sizelimits>
+		<script>
+			function onInit()
+				if Session.IsHost then
+					registerMenuItem(Interface.getString("sct_menu_criticalentries_delete_all"), "logoff", 4)
+				end
+
+				DB.addHandler(criticals.getDatabaseNode(), "onChildUpdate", self.update);
+				self.update();
+			end
+			function onClose()
+				DB.removeHandler(criticals.getDatabaseNode(), "onChildUpdate", self.update);
+			end
+			function onMenuSelection(nOption)
+				if nOption == 4 then
+					DB.deleteChildren(criticals.getDatabaseNode());
+				end
+			end
+			function update()
+				local bVisible = (DB.getChildCount(criticals.getDatabaseNode()) > 0);
+				parentcontrol.setVisible(bVisible);
+			end
+		</script>
+		<sheetdata>
+			<icon_ct_section name="icon_section">
+				<icon>button_section_criticals_down</icon>
+				<tooltip textres="sct_tooltip_criticals_icon" />
+			</icon_ct_section>
+
+			<windowlist name="criticals">
+				<anchored position="insidetopright" offset="0,4">
+					<left parent="icon_section" anchor="right" />
+				</anchored>
+				<datasource>.criticals</datasource>
+				<class>sct_critical</class>
+				<noscroll />
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="sct_critical">
+		<margins control="0,0,0,5" />
+		<script>
+			function onInit()
+				self.updateReduceDisplay();
+			end
+			function updateReduceDisplay()
+				if severity.getValue() &lt;= 1 then
+					reduce.setText(Interface.getString("button_remove"));
+					reduce.setTooltipText(Interface.getString("sct_tooltip_remove_critical"));
+				else
+					reduce.setText(Interface.getString("button_reduce"));
+					reduce.setTooltipText(Interface.getString("sct_tooltip_reduce_critical"));
+				end
+			end
+			function onReduceButtonPressed()
+				if severity.getValue() &lt;= 1 then
+					DB.deleteNode(getDatabaseNode());
+				else
+					SpacecraftCriticalsManager.reduceCriticalSeverity(DB.getChild(getDatabaseNode(), "..."), system.getValue());
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_listitem_left />
+			<label_listitem_left name="label_severity">
+				<anchored width="55" />
+				<static textres="sct_criticals_severity" />
+			</label_listitem_left>
+			<number_listitem_left name="severity">
+				<anchored width="30" />
+				<tooltip textres="sct_tooltip_criticals_severity" />
+				<script>
+					function onValueChanged()
+						window.updateReduceDisplay();
+					end
+				</script>
+			</number_listitem_left>
+			<button_text_sm name="reduce">
+				<anchored to="leftanchor" width="50" height="20">
+					<top />
+					<left relation="relative" offset="10" postoffset="10" />
+				</anchored>
+				<state textres="button_reduce" />
+				<tooltip textres="sct_tooltip_reduce_critical" />
+				<script>
+					function onButtonPress()
+						window.onReduceButtonPressed();
+					end
+				</script>
+			</button_text_sm>
+			<spacer_listitem_left>
+				<anchored width="60" />
+			</spacer_listitem_left>
+			<label_listitem_left name="label_system">
+				<anchored width="55" />
+				<static textres="sct_criticals_system" />
+			</label_listitem_left>
+			<string_listitem_left_static name="system">
+				<anchored width="100" />
+				<tooltip textres="sct_tooltip_criticals_system" />
+			</string_listitem_left_static>
+
+			<anchor_listitem_right />
+
+			<string_listitem_center_static name="text">
+				<tooltip textres="sct_tooltip_criticals_effect" />
+			</string_listitem_center_static>
+		</sheetdata>
+	</windowclass>
+</root>

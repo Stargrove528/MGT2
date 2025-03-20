@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="tradegoods" copy="record_window" />
+
+	<windowclass name="tradegoods_main">
+		<script>
+            function onInit()
+                self.update();
+            end
+            function update()
+                local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+
+                availability.setReadOnly(bReadOnly);
+                tons.setReadOnly(bReadOnly);
+                base_price.setReadOnly(bReadOnly);
+                purchase_dm.setReadOnly(bReadOnly);
+                sale_dm.setReadOnly(bReadOnly);
+                examples.setReadOnly(bReadOnly);
+            end
+        </script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+            <!-- Availability -->
+            <label_column name="availability_label">
+				<anchored>
+					<left offset="14" />
+				</anchored>
+				<static textres="tradegoods_label_availability" />
+			</label_column>
+			<string_column name="availability">
+				<nodrag />
+			</string_column>
+
+            <!-- Tons -->
+            <label_column name="tons_label">
+				<anchored>
+					<left offset="55" />
+				</anchored>
+				<static textres="tradegoods_label_tons" />
+			</label_column>
+			<string_column name="tons">
+				<nodrag />
+			</string_column>
+
+            <!-- Base Price -->
+            <label_column name="baseprice_label">
+				<anchored>
+					<left offset="20" />
+				</anchored>
+				<static textres="tradegoods_label_base_price" />
+			</label_column>
+            <string_column name="base_price">
+				<nodrag />
+			</string_column>
+
+            <!-- Purchase DM -->
+            <label_column name="purchasedm_label">
+				<anchored>
+					<left offset="1" />
+				</anchored>
+				<static textres="tradegoods_label_purchase_dm" />
+			</label_column>
+            <string_column name="purchase_dm">
+				<nodrag />
+			</string_column>
+
+            <!-- Sale DM -->
+            <label_column name="saledm_label">
+				<anchored>
+					<left offset="34" />
+				</anchored>
+				<static textres="tradegoods_label_sale_dm" />
+			</label_column>
+            <string_column name="sale_dm">
+				<nodrag />
+			</string_column>
+
+            <!-- Sale DM -->
+            <label_column name="examples_label">
+				<anchored>
+					<left offset="25" />
+				</anchored>
+				<static textres="tradegoods_label_examples" />
+			</label_column>
+            <string_column name="examples">
+				<nodrag />
+			</string_column>
+
+			<spacer_column name="spacer" />
+		</sheetdata>
+	</windowclass>
+</root>

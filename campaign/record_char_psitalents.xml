@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<!-- Traveller Core Rules -->
+
+<root>
+	<windowclass name="char_psitalents_content">
+		<script>
+			function onDrop(x, y, draginfo)
+			    if draginfo.isType("shortcut") then
+
+					local sFullClass = draginfo.getShortcutData();
+					local node = draginfo.getDatabaseNode();
+					local sClass = string.sub(sFullClass,1,17)
+					local sTalent = string.sub(sFullClass,18)
+
+					if StringManager.contains({"reference_psionic"}, sClass) then
+						CharManager.addInfoDB(getDatabaseNode(), node, sClass, sTalent);
+						return true;
+					end
+				end
+			end
+		</script>
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			<label_frametop name="psititle">
+				<anchored height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="5" />
+					<right offset="-10" />
+				</anchored>
+				<static textres="char_label_psi_talents" />
+			</label_frametop>
+
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="25" />
+					<right anchor="right" offset="0" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_iedit name="psi_iedit">
+				<anchored to="rightanchor" position="insidetopright" offset="0,-25" />
+			</button_iedit>
+			<spacer_header_idelete name="idelete_header">
+				<editmode>psi_iedit</editmode>
+			</spacer_header_idelete>
+
+			<label name="label_psitotal">
+				<anchored to="rightanchor" width="35">
+					<top />
+					<right anchor="left" relation="relative" offset="-6" />
+				</anchored>
+				<static textres="char_label_psitotal" />
+				<tooltip textres="char_tooltip_psitotal" />
+				<center />
+			</label>
+			<label name="label_psilevel">
+				<anchored to="rightanchor" width="40">
+					<top />
+					<right anchor="left" relation="relative" offset="-8" />
+				</anchored>
+				<static textres="char_label_psilevel" />
+				<tooltip textres="char_tooltip_psilevel" />
+				<center />
+			</label>
+			<label name="label_psiattributeDM">
+				<anchored to="rightanchor" width="50">
+					<top />
+					<right anchor="left" relation="relative" offset="-8" />
+				</anchored>
+				<static textres="char_label_psiattributeDM" />
+				<tooltip textres="char_tooltip_psiattributeDM" />
+				<center />
+			</label>
+
+			<label name="label_psiname">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="0" />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="char_label_psiname" />
+				<center />
+			</label>
+
+			<windowlist name="psi">
+				<anchored>
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="20" />
+					<left offset="-10" />
+					<right offset="0" />
+				</anchored>
+				<allowcreate/>
+				<allowdelete/>
+				<datasource>.psitalentlist</datasource>
+				<class>char_psi</class>
+				<sortby><control>name</control></sortby>
+				<script file="campaign/scripts/char_psilist.lua" />
+			</windowlist>
+			<scrollbar>
+				<anchored to="psi" />
+				<target>psi</target>
+			</scrollbar>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_psi">
+		<margins control="0,0,0,2" />
+		<script>
+			function onInit()
+				addHandler(getDatabaseNode());
+			end
+			function onClose()
+				removeHandler();
+			end
+
+			local _node;
+			function addHandler(node)
+				if node then
+					_node = node;
+					DB.addHandler(_node, "onDelete", onDelete);
+				end
+			end
+			function removeHandler()
+				if _node then
+					DB.removeHandler(_node, "onDelete", onDelete);
+					_node = nil;
+				end
+			end
+			function onDelete(node)
+				CharManager.removePsionicActions(node);
+				removeHandler();
+			end
+		</script>
+		<sheetdata>
+			<hn name="noedit" />
+
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<editmode>psi_iedit</editmode>
+			</button_idelete>
+			<number_charpsitotal name="total">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</number_charpsitotal>
+			<number_charspsitalentfield name="level">
+				<anchored width="25" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<tabtarget prev="characteristicDM" next="total" />
+				<script>
+					function onValueChanged()
+						local nodeWin = DB.getChild(window.getDatabaseNode(), "...")
+						local sPSITalent = window.name.getValue()
+						local nLevel = getValue()
+
+						for _,vPSIItem in ipairs(DB.getChildList(nodeWin, "psiabilitieslist")) do
+							if DB.getValue(vPSIItem, "talent", "") == sPSITalent then
+								DB.setValue(vPSIItem, "level", "number", nLevel)
+							end
+						end
+					end
+				</script>
+			</number_charspsitalentfield>
+
+			<number_charskillDMfield name="characteristicDM" source="...attributes.psi_mod">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-20" />
+				</anchored>
+				<tabtarget prev="characteristic" next="level" />
+			</number_charskillDMfield>
+
+			<stringu name="name">
+				<anchored height="20">
+					<top offset="2" />
+					<left offset="20" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<readonly />
+				<tabtarget next="attributeDM" />
+			</stringu>
+			<stringu name="sublabel">
+				<anchored to="name" height="20">
+					<top anchor="bottom" />
+					<left />
+					<right />
+				</anchored>
+				<invisible />
+				<tabtarget prev="level" />
+				<script>
+					function onEnter()
+						window.windowlist.addNewInstance(window.label.getValue());
+						return true;
+					end
+				</script>
+			</stringu>
+		</sheetdata>
+	</windowclass>
+</root>

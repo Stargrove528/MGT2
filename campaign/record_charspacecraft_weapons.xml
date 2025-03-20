@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charspacecraft_weapons">
+		<script>
+			function onDrop(x, y, draginfo)
+				SpacecraftManager.onWeaponDrop(draginfo, getDatabaseNode());
+			end
+		</script>
+		<sheetdata>
+			<frame_char name="weaponsframe">
+				<!-- <bounds>20,5,-25,-5</bounds> -->
+				<anchored position="insidetopleft" offset="0,5">
+					<right parent="" offset="0"/>
+					<bottom parent="" offset="-10"/>
+				</anchored>
+			</frame_char>
+
+			<subwindow name="weaponwindow">
+				<anchored to="weaponsframe">
+					<top offset="5" />
+					<left offset="7" />
+					<right offset="-18" />
+					<bottom offset="-12" />
+				</anchored>
+				<class>char_spacecraft_weapons_content</class>
+				<fastinit />
+				<activate />
+			</subwindow>
+			<scrollbar>
+				<anchored to="weaponwindow" offset="-5,-10"/>
+				<target>weaponwindow</target>
+			</scrollbar>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_spacecraft_weapons_content">
+		<margins control="0,0,0,5" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			<label_charframetop name="weaponstitle">
+				<anchored height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="5" />
+					<left offset="5" />
+					<right offset="-10" />
+				</anchored>
+				<static textres="charspacecraft_label_weapons" />
+			</label_charframetop>
+
+			<genericcontrol name="rightanchor">
+				<!-- <anchored width="0" height="0">
+					<top offset="20" />
+					<right anchor="right" offset="-15" />
+				</anchored> -->
+				<anchored width="0" height="0">
+					<top offset="5" />
+					<right anchor="right" offset="0" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+
+			<button_iadd name="actions_iadd">
+				<anchored to="rightanchor" position="insidetopright" offset="30,0" />
+				<target>actions</target>
+			</button_iadd>
+			<button_iedit name="actions_iedit">
+				<anchored to="rightanchor" position="insidetopright" offset="10,0" />
+			</button_iedit>
+
+			<spacer_header_idelete name="idelete_header">
+				<editmode>actions_iedit</editmode>
+			</spacer_header_idelete>
+
+			<label name="label_actions_attack">
+				<anchored to="rightanchor" width="45">
+					<top offset="20" />
+					<right anchor="left" relation="relative" offset="-20" />
+				</anchored>
+				<static textres="spacecraft_label_actions_attack" />
+				<center />
+			</label>
+			<label name="label_actions_range">
+				<anchored to="rightanchor" width="80">
+					<top  offset="20"/>
+					<right anchor="left" relation="relative" />
+				</anchored>
+				<static textres="spacecraft_label_actions_range" />
+				<center />
+			</label>
+			<label name="label_actions_tl">
+				<anchored to="rightanchor" width="30">
+					<top  offset="20"/>
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<static textres="spacecraft_label_actions_tl" />
+				<center />
+			</label>
+			<label name="label_actions_weapon_name">
+				<anchored to="rightanchor">
+					<top  offset="20"/>
+					<left parent="" offset="40" />
+					<right anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<static textres="spacecraft_label_actions_weapon_name" />
+				<center />
+			</label>
+			<label name="count_label">
+				<anchored>
+					<top offset="20"/>
+					<right />
+					<left offset="20" />
+				</anchored>
+				<static>#</static>
+			</label>
+
+			<list_spacecraftactions name="actions">
+				<anchored>
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="20" />
+					<left offset="5" />
+					<right offset="-2" />
+				</anchored>
+				<datasource>.actions</datasource>
+				<sortby><control>order</control></sortby>
+				<class>spacecraft_weapons</class>
+			</list_spacecraftactions>
+		</sheetdata>
+	</windowclass>
+</root>

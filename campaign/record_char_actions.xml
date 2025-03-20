@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet_actions">
+		<script>
+			function onDrop(x, y, draginfo)
+				if contents.subwindow.weapons.onDrop(x, y, draginfo) then
+					return true;
+				end
+				return false;
+			end
+		</script>
+        <sheetdata>
+			<anchor_content_top />
+			<anchor_content_bottom />
+
+			<sub_content_framed_groupbox_top name="charstatusactions">
+				<class>char_status_actions</class>
+			</sub_content_framed_groupbox_top>
+			<sub_content_framed_groupbox_narrow_top name="charinitradactions">
+				<class>char_intrad_actions</class>
+			</sub_content_framed_groupbox_narrow_top>
+
+			<sub_content_framed_groupbox name="contents">
+				<class>charsheet_actions_contents</class>
+			</sub_content_framed_groupbox>
+			<scrollbar_contents />
+        </sheetdata>
+	</windowclass>
+
+	<windowclass name="char_intrad_actions">
+		<margins control="0,0,0,5" />
+		<sheetdata>
+			<!-- initiative -->
+			<number_initiative name="initiative" source="initiative">
+				<anchored position="insidetopleft" offset="10,15" width="40" height="25" />
+			</number_initiative>
+			<label_fieldtop name="charinittitle">
+				<anchored to="initiative" />
+				<static textres="char_label_initiative" />
+			</label_fieldtop>
+
+			<!-- Radiation -->
+			<number_raditation name="radiation" source="radiation">
+				<anchored to="initiative" position="righthigh" offset="50,0" width="40" height="25" />
+			</number_raditation>
+			<label_fieldtop name="charradtitle">
+				<anchored to="radiation" />
+				<static textres="char_label_radiation" />
+			</label_fieldtop>
+
+			<basicstring name="radiation_status">
+				<anchored to="radiation" height="25">
+					<left anchor="right" relation="relative" offset="15" />
+					<top />
+					<right parent="" offset="-45" />
+				</anchored>
+				<readonly />
+				<tooltip textres="char_tooltip_radiation_status" />
+			</basicstring>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="charsheet_actions_contents">
+		<margins control="0,0,0,2" />
+		<script>
+			function onDrop(x, y, draginfo)
+				if draginfo.isType("shortcut") then
+					local sClass,sRecord = draginfo.getShortcutData();
+					if ItemManager2.isWeapon(sClass,sRecord) then
+						return ItemManager.handleAnyDrop(getDatabaseNode(), draginfo);
+					end
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_charframetop name="weapontitle">
+				<anchored height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" />
+					<left />
+					<right />
+				</anchored>
+				<static textres="char_label_weapons" />
+				<script>
+					function onClickDown()
+						return true;
+					end
+
+					function onClickRelease()
+						local bVisible = window.weapons.isVisible ();
+
+						if bVisible then
+							window.weapontitle.setValue("Weapons (collapsed)")
+						else
+							window.weapontitle.setValue("Weapons")
+						end
+						window.weapons.setVisible(bVisible == false);
+						window.weapon_attack.setVisible(bVisible == false);
+						window.weapon_mod.setVisible(bVisible == false);
+						window.weapon_skilldm.setVisible(bVisible == false);
+						window.weapon_attribute.setVisible(bVisible == false);
+						window.weapon_name.setVisible(bVisible == false);
+						window.weapons_iedit.setVisible(bVisible == false);
+						window.weapons_iadd.setVisible(bVisible == false);
+
+						return true;
+					end
+				</script>
+			</label_charframetop>
+			<button_iadd name="weapons_iadd">
+				<anchored>
+					<top parent="weapontitle" offset="3"/>
+					<right offset="-25" />
+				</anchored>
+				<target>weapons</target>
+			</button_iadd>
+			<button_iedit name="weapons_iedit">
+				<anchored>
+					<top parent="weapontitle" offset="3"/>
+					<right offset="-5" />
+				</anchored>
+			</button_iedit>
+
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="20" />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<spacer_header_idelete name="idelete_header">
+				<editmode>weapons_iedit</editmode>
+			</spacer_header_idelete>
+
+			<!-- Columns from right to left -->
+			<label name="weapon_attack">
+				<anchored to="rightanchor" width="45">
+					<top />
+					<right anchor="left" relation="relative" offset="-27" />
+				</anchored>
+				<static textres="char_label_weapon_attack" />
+				<center />
+			</label>
+			<label name="weapon_mod">
+				<anchored to="rightanchor" width="40">
+					<top />
+					<right anchor="left" relation="relative" offset="-16" />
+				</anchored>
+				<static textres="char_label_weapon_mod" />
+				<tooltip textres="char_tooltip_weapon_mod" />
+				<center />
+			</label>
+			<label name="weapon_skilldm">
+				<anchored to="rightanchor" width="30">
+					<top />
+					<right anchor="left" relation="relative" offset="-16" />
+				</anchored>
+				<static textres="char_label_skillDM" />
+				<tooltip textres="char_tooltip_skillDM" />
+				<center />
+			</label>
+			<label name="weapon_attribute">
+				<anchored to="rightanchor" width="95">
+					<top />
+					<right anchor="left" relation="relative" offset="-7" />
+				</anchored>
+				<static textres="char_label_weapon_attribute" />
+				<tooltip textres="char_tooltip_skillattribute" />
+				<center />
+			</label>
+			<label name="weapon_name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="0" />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="char_label_weapon_name" />
+				<center />
+			</label>
+
+			<list_charweapon name="weapons">
+				<anchored>
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="30" />
+					<left />
+					<right />
+				</anchored>
+				<class>char_weapon</class>
+				<noscroll />
+			</list_charweapon>
+
+			<line_column />
+
+			<subwindow name="misc_actions">
+				<anchored>
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="0" />
+					<left />
+					<right />
+				</anchored>
+				<class>char_misc_actions</class>
+				<activate />
+				<fastinit />
+				<invisible />
+			</subwindow>
+
+			<line_column />
+
+			<subwindow name="psionic_abilities">
+				<anchored>
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="0" />
+					<left />
+					<right />
+				</anchored>
+				<class>char_psionic_abilities</class>
+				<activate />
+				<fastinit />
+				<invisible />
+			</subwindow>
+		</sheetdata>
+	</windowclass>
+</root>

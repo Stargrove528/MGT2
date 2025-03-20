@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- Section - Active -->
+	<windowclass name="ct_section_active">
+		<sheetdata>
+			<icon_ct_section name="icon_section">
+				<icon>button_sword_down</icon>
+			</icon_ct_section>
+
+			<anchor_ct_section name="anchor_section" />
+
+			<genericcontrol name="spacer">
+				<anchored to="anchor_section" height="30">
+					<top anchor="bottom" relation="relative" />
+					<left />
+					<right />
+				</anchored>
+				<disabled />
+			</genericcontrol>
+			
+			<frame_ct_section name="frame_section">
+				<anchored>
+					<left parent="icon_section" anchor="right" offset="0" />
+					<bottom parent="spacer" offset="10" />
+				</anchored>
+			</frame_ct_section>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="ct_section_active_npc">
+		<sheetdata>
+			<icon_ct_section name="icon_section">
+				<icon>button_sword_down</icon>
+			</icon_ct_section>
+
+			<anchor_ct_section name="anchor_section" />
+
+			<list_ct_section_full name="actions">
+				<datasource>.actions</datasource>
+				<class>npc_actions</class>
+			</list_ct_section_full>
+			
+			<frame_ct_section name="frame_section">
+				<anchored>
+					<left parent="icon_section" anchor="right" offset="0" />
+					<bottom parent="actions" offset="10" />
+				</anchored>
+			</frame_ct_section>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Section - Defense -->
+	<windowclass name="ct_section_defense">
+		<script>
+			function onInit()
+				if parentcontrol.window.isPC() then
+					armour.setReadOnly(true);
+					armour_protection.setReadOnly(true);
+				end
+			end
+		</script>
+		<sheetdata>
+			<icon_ct_section name="icon_section">
+				<icon>button_shield_down</icon>
+			</icon_ct_section>
+
+			<anchor_ct_section name="anchor_section" />
+
+			<string_ct_section_labeled name="armour" />
+			<label_ct_section name="armour_label">
+				<anchored to="armour" />
+				<static textres="ct_label_armour" />
+			</label_ct_section>
+
+			<string_ct_section_labeled name="armour_protection" />
+			<label_ct_section name="armour_protection_label">
+				<anchored to="armour_protection" />
+				<static textres="ct_label_armour_protection" />
+			</label_ct_section>
+
+			<frame_ct_section name="frame_section">
+				<anchored>
+					<left parent="icon_section" anchor="right" offset="0" />
+					<bottom parent="armour_protection" offset="10" />
+				</anchored>
+			</frame_ct_section>
+		</sheetdata>
+	</windowclass>
+</root>

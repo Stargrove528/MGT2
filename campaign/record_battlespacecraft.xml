@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="battlespacecraft" copy="record_window">
+		<minimize>minimized_combat</minimize>
+	</windowclass>
+	<windowclass name="battlespacecraft_header" copy="record_header" />
+	<windowclass name="battlespacecraft_main">
+		<script>
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				
+				list_iedit.setVisible(not bReadOnly);
+
+				list.setReadOnly(bReadOnly);
+				for _,w in pairs(list.getWindows()) do
+					w.count.setReadOnly(bReadOnly);
+					w.token.setReadOnly(bReadOnly);
+					w.name.setReadOnly(bReadOnly);
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_content_top />
+			<anchor_content_bottom />
+
+			<area_content_bottom name="area_controls">
+				<anchored height="30" />
+			</area_content_bottom>
+			<button_text_sm name="addct">
+				<anchored to="area_controls" width="120">
+					<top offset="5" />
+					<left anchor="center" offset="-60" />
+				</anchored>
+				<state textres="battle_label_addct" />
+				<gmvisibleonly />
+				<script>
+					function onButtonPress()
+						CombatRecordManager.onBattleButtonAdd(window);
+					end
+				</script>
+			</button_text_sm>
+
+			<list_content_labeled_alternating name="list">
+				<datasource>.spacecraftlist</datasource>
+				<class>battle_spacecraft</class>
+				<allowdelete />
+				<sortby><field>name</field></sortby>
+				<empty font="list-empty" gmtextres="battle_emptyspacecraftlist" />
+				<script file="campaign/scripts/battle_spacecraftlist.lua" />
+			</list_content_labeled_alternating>
+			<scrollbar_content_list />
+
+			<anchor_list_content_label_left />
+			<anchor_list_content_label_right />
+			<label_list_content_left name="label_token">
+				<anchored width="30" />
+				<center />
+			</label_list_content_left>
+			<label_list_content_number_left name="label_count">
+				<anchored width="25" />
+				<static>#</static>
+			</label_list_content_number_left>
+			<label_list_content_button_iedit_right name="list_iedit" />
+			<label_list_content_noframe name="label_name">
+				<static textres="battle_label_name" />
+			</label_list_content_noframe>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="battle_spacecraft">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<anchor_listitem_left_encounter name="leftanchor" />
+			<token_listitem_encounterspacecraft name="token" />
+			<number_listitem_count_encounterspacecraft name="count" />
+
+			<anchor_listitem_rightspacecraft name="rightanchor" />
+			<button_listitem_idelete name="idelete">
+				<editmode>spacecrafts_iedit</editmode>
+			</button_listitem_idelete>
+			<link_listitem_right name="link" />
+			<button_listitem_faction_right name="faction" />
+			<button_record_isidentified name="isidentified" />
+
+			<string_listitem_name_encounter name="name" />
+		</sheetdata>
+	</windowclass>
+</root>

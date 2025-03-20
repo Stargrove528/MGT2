@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+
+<root>
+	<windowclass name="charspacecraftsheet" copy="charsheet_base">
+		<script>
+			function onDrop(x, y, draginfo)
+				SpacecraftManager.dragSpaceShip(draginfo, getDatabaseNode());
+			end
+		</script>
+		<sizelimits>
+			<minimum width="525" height="568" />
+            <maximum width="675"/>
+			<dynamic />
+		</sizelimits>
+		<sharable />
+		<tooltip field="name" />
+		<export merge="delete"/>
+		<tab>
+			<name>main</name>
+			<resource>tab_main</resource>
+			<class>charspacecraft_main</class>
+		</tab>
+		<tab merge="add">
+			<name>systems</name>
+			<resource>tab_systems</resource>
+			<class>charspacecraft_systems</class>
+		</tab>
+		<tab merge="add">
+			<name>weapons</name>
+			<resource>tab_weapons</resource>
+			<class>charspacecraft_weapons</class>
+		</tab>
+		<tab merge="add">
+			<name>cargo</name>
+			<resource>tab_cargo</resource>
+			<class>charspacecraft_cargo</class>
+		</tab>
+		<tab merge="add">
+			<name>notes</name>
+			<resource>tab_notes</resource>
+			<class>charspacecraft_notes</class>
+		</tab>
+		<tab merge="add">
+			<name>status</name>
+			<resource>tab_status</resource>
+			<class>charspacecraft_status</class>
+		</tab>
+		<sheetdata>
+			<sub_content_top name="overview" merge="replace">
+				<class>charspacecraftsheet_overview</class>
+			</sub_content_top>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="charspacecraftsheet_overview" copy="charsheet_overview_base">
+		<sheetdata>
+			<picture_charsheet name="portrait" merge="delete"/>
+			<frame_char name="overviewframe">
+				<anchored to="rightanchor" height="60">
+					<top />
+					<left parent="leftanchor" relation="relative" offset="75" />
+					<right relation="relative" offset="-260"/>
+				</anchored>
+			</frame_char>
+			<string_labeled name="name" merge="delete"/>
+
+			<tokenfield name="token">
+				<anchored position="insidetopleft" offset="20,10" width="50" height="50"/>
+                <empty>token_empty</empty>
+                <tooltip textres="char_tooltip_token" />
+                <script>
+                    function onDragStart(button, x, y, draginfo)
+                        local nodeShip = window.getDatabaseNode();
+                        if nodeShip then
+                            local sIdentity = DB.getName(nodeShip);
+
+                            draginfo.setType("shortcut");
+                            draginfo.setTokenData(getPrototype ());
+                            draginfo.setShortcutData("charspacecraftsheet", "charspacecraftsheet." .. sIdentity);
+                        end
+
+                        return true;
+                    end
+
+                    function onDoubleClick(x, y)
+                        local node = window.getDatabaseNode();
+                        local sToken = DB.getValue(node, "token", "");
+                        if sToken == "" or sToken == nil then
+                            local nodeShip = window.getDatabaseNode();
+                            if nodeShip then
+                                Interface.openWindow("tokenbag", "");
+
+                                return true;
+                            end
+                        end
+                    end
+                </script>
+            </tokenfield>
+
+			<!-- Name -->
+			<charspacecraft_string_labeled name="name">
+				<anchored to="overviewframe" position="insidetop" offset="-15,10" height="20" />
+				<labelres>spacecraft_label_name</labelres>
+				<tooltip>
+					<textres>spacecraft_tooltip_name</textres>
+				</tooltip>
+				<empty textres="library_recordtype_empty_charspacecraftsheet" />
+			</charspacecraft_string_labeled>
+
+			<frame_char name="tlframe">
+				<anchored to="overviewframe" position="righthigh" offset="5,0" width="60" height="60"/>
+			</frame_char>
+
+			<charspacecraft_number_labeled name="tl">
+				<anchored to="tlframe" position="insidetop" offset="-15,10" height="20" />
+				<labelres>spacecraft_label_tl</labelres>
+				<tooltip>
+					<textres>spacecraft_tooltip_tl</textres>
+				</tooltip>
+			</charspacecraft_number_labeled>
+
+			<frame_char name="hullpointsframe">
+				<anchored to="tlframe" position="righthigh" offset="5,0" width="80" height="60"/>
+			</frame_char>
+
+			<charspacecraft_number_labeled name="hull_points">
+				<anchored to="hullpointsframe" position="insidetop" offset="-15,10" height="20" />
+				<labelres>spacecraft_label_hull_points</labelres>
+				<tooltip textres="spacecraft_tooltip_hull_points" />
+			</charspacecraft_number_labeled>
+
+            <frame_char name="tonsframe">
+				<anchored to="hullpointsframe" position="righthigh" offset="5,0" width="75" height="60"/>
+			</frame_char>
+
+			<charspacecraft_number_labeled name="tons">
+				<anchored to="tonsframe" position="insidetop" offset="-15,10" height="20" />
+				<labelres>spacecraft_label_tons</labelres>
+				<tooltip>
+					<textres>spacecraft_tooltip_tons</textres>
+				</tooltip>
+			</charspacecraft_number_labeled>
+		</sheetdata>
+	</windowclass>
+</root>

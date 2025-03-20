@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<!-- Traveller Core Rules -->
+
+<root>
+	<windowclass name="char_psi_ability">
+		<margins control="0,0,0,5" />
+		<script file="campaign/scripts/char_psiweapon.lua" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<editmode>psiabilities_iedit</editmode>
+			</button_idelete>
+			<linkcontrol name="shortcut">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<class>reference_psionic</class>
+				<description field="name" />
+				<readonly />
+			</linkcontrol>
+			<button_toggledetail name="activatedetail">
+				<anchored to="rightanchor">
+					<top offset="2" />
+					<right anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<script>
+					function onValueChanged()
+						local bVisible = getValue() == 1
+						window.damagelabel.setVisible(bVisible)
+						window.ability_damage.setVisible(bVisible)
+					end
+				</script>
+			</button_toggledetail>
+			<hn name="noedit" />
+			<number_charpsitotal2 name="total">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-8" />
+				</anchored>
+			</number_charpsitotal2>
+
+			<number_charpsicost name="ability_cost">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<min>0</min>
+				<max>100</max>
+				<tabtarget prev="level" next="total" />
+			</number_charpsicost>
+
+			<number_charspsitalentfield name="level">
+				<readonly />
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<tabtarget prev="characteristicDM" next="ability_cost" />
+				<source><name>talent</name><op>+</op></source>
+				<script>
+					function onSourceUpdate(source)
+						local nodeWin = DB.getChild(window.getDatabaseNode(), "...")
+						local sPSITalent = DB.getValue(window.getDatabaseNode(), "talent", "")
+
+						for _,vPSIItem in ipairs(DB.getChildList(nodeWin, "psitalentlist")) do
+							if DB.getValue(vPSIItem, "name", "") == sPSITalent then
+								setValue(DB.getValue(vPSIItem, "level", 0))
+							end
+						end
+					end
+				</script>
+			</number_charspsitalentfield>
+
+			<number_charskillDMfield name="characteristicDM" source="...woundtrack.psi_mod">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-20" />
+				</anchored>
+				<tabtarget prev="characteristic" next="level" />
+			</number_charskillDMfield>
+
+			<stringu name="name">
+				<anchored height="20">
+					<top offset="2" />
+					<left offset="5" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<readonly />
+				<tabtarget next="attributeDM" />
+			</stringu>
+
+			<label name="damagelabel">
+				<anchored position="insidetopleft" offset="15,30" />
+				<static textres="power_label_dmg" />
+				<invisible />
+			</label>
+			<string_weapondamage name="ability_damage">
+				<anchored to="damagelabel" position="righthigh" offset="20,0" width="100" />
+				<multilinespacing>20</multilinespacing>
+				<invisible />
+			</string_weapondamage>
+
+		</sheetdata>
+	</windowclass>
+</root>

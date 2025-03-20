@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="number_column_middle">
+		<basicnumber>
+			<script file="common/scripts/column_number.lua" />
+			<anchored position="righthigh" height="20" width="40" />
+		</basicnumber>
+	</template>
+	<template name="label_column_remainder">
+		<label>
+			<anchored>
+				<top />
+				<left parent="" offset="162" />
+			</anchored>
+		</label>
+	</template>
+	<template name="number_column_npc_mod1">
+		<number_linked_framed>
+			<anchored position="righthigh" offset="10,5" height="20" width="40">
+				<left offset="50" />
+			</anchored>
+			<rollable />
+			<script file="campaign/scripts/npcs_characteristics_mod.lua" />
+		</number_linked_framed>
+	</template>
+	<template name="label_column_npc_middle">
+		<label>
+			<anchored>
+				<top />
+				<left parent="" offset="220" />
+			</anchored>
+		</label>
+	</template>
+	<template name="number_column_npc_middle">
+		<basicnumber>
+			<anchored width="40" height="20">
+				<top />
+				<left parent="" offset="250" />
+			</anchored>
+			<nodrag />
+		</basicnumber>
+	</template>
+
+	<template name="string_upp">
+		<basicstring>
+			<anchored width="100">
+				<top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
+				<left offset="97" />
+			</anchored>
+			<multilinespacing>20</multilinespacing>
+			<script file="campaign/scripts/npcs_characteristics.lua" />
+		</basicstring>
+	</template>
+	<template name="string_uwp">
+		<basicstring>
+			<anchored>
+				<top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
+				<left offset="97" />
+				<right offset="-25" />
+			</anchored>
+			<multilinespacing>20</multilinespacing>
+			<script file="campaign/scripts/worlds_profile.lua" />
+		</basicstring>
+	</template>
+
+	<template name="list_npcactions">
+		<list_column>
+			<child merge="delete" />
+			<sortby merge="delete" />
+		</list_column>
+	</template>
+
+	<template name="list_playerspacecraftdetails">
+		<windowlist>
+			<child merge="delete" />
+			<sortby merge="delete" />
+			<script file="common/scripts/column_list.lua" />
+		</windowlist>
+	</template>
+
+	<template name="list_spacecraftdetails">
+		<list_column>
+			<child merge="delete" />
+			<sortby merge="delete" />
+		</list_column>
+	</template>
+
+	<template name="list_spacecraftpowerrequirements">
+		<list_column>
+			<child merge="delete" />
+			<sortby merge="delete" />
+		</list_column>
+	</template>
+
+	<template name="list_spacecraftactions">
+		<list_column>
+			<child merge="delete" />
+			<sortby merge="delete" />
+		</list_column>
+	</template>
+
+	<template name="list_npcarmour">
+		<list_column>
+			<child merge="delete" />
+			<sortby merge="delete" />
+		</list_column>
+	</template>
+
+	<template name="string_worlds_profile">
+		<string_column_small>
+			<nodrag />
+			<script file="campaign/scripts/worlds_profile_values.lua" />
+		</string_column_small>
+	</template>
+
+	<template name="list_damageaction">
+		<windowlist>
+			<datasource>.damageactions</datasource>
+			<class>damage_action</class>
+			<noscroll />
+			<sortby><control>order</control></sortby>
+			<script file="campaign/scripts/char_ammolist.lua" />
+		</windowlist>
+	</template>
+
+	<template name="string_characteristicmodtext">
+		<basicstring>
+			<frame name="characteristicmodifier" />
+			<font>sheetlabelmini</font>
+			<center />
+			<script>
+				function onInit()
+					onValueChanged();
+				end
+				function onValueChanged()
+					local sValue = getValue();
+					if sValue == "" or not sValue then
+						setVisible(false);
+					elseif sValue ~= "" then
+						setVisible(true);
+					end
+				end
+			</script>
+		</basicstring>
+	</template>
+	<template name="button_battlespacecraft">
+		<button_text_sm>
+			<anchored to="buttonanchor" width="120">
+				<top />
+				<left anchor="right" relation="relative" offset="5" />
+			</anchored>
+			<state textres="button_battle_spacecraft" />
+			<script>
+				function onButtonPress()
+					Interface.openWindow("masterindex", "battlespacecraft");
+				end
+			</script>
+		</button_text_sm>
+	</template>
+	<template name="token_listitem_encounterspacecraft">
+		<tokenfield name="token">
+			<anchored to="leftanchor" width="48" height="48">
+				<top offset="1" />
+				<left anchor="right" relation="relative" offset="0" />
+			</anchored>
+			<empty>token_empty</empty>
+		</tokenfield>
+	</template>
+	<template name="number_listitem_count_encounterspacecraft">
+		<basicnumber name="count">
+			<anchored to="leftanchor" width="25" height="20">
+				<top offset="10" />
+				<left anchor="right" relation="relative" offset="10" />
+			</anchored>
+			<default>1</default>
+			<min>1</min>
+		</basicnumber>
+	</template>
+	<template name="anchor_listitem_rightspacecraft">
+		<genericcontrol name="rightanchor">
+			<anchored position="insidetopright" offset="10,5" width="0" height="0" />
+			<invisible />
+		</genericcontrol>
+	</template>
+	<template name="button_item_armour">
+		<button_text_sm>
+			<anchored to="buttonanchor" width="80">
+				<top />
+				<left anchor="right" relation="relative" offset="5" />
+			</anchored>
+			<state textres="library_recordview_label_item_armor" />
+			<script>
+				function onButtonPress()
+					ListManager.toggleRecordView("item", "armour", "reference.armour");
+				end
+			</script>
+		</button_text_sm>
+	</template>
+	<template name="button_item_weapons">
+		<button_text_sm>
+			<anchored to="buttonanchor" width="80">
+				<top />
+				<left anchor="right" relation="relative" offset="5" />
+			</anchored>
+			<state textres="library_recordview_label_item_weapon" />
+			<script>
+				function onButtonPress()
+					ListManager.toggleRecordView("item", "weapon", "reference.weapon");
+				end
+			</script>
+		</button_text_sm>
+	</template>
+
+	<template name="npc_actions">
+		<basicstring_rollable />
+	</template>
+</root>

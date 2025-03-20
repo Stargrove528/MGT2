@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="worlds" copy="record_window_tabbed">
+		<tab>
+			<name>main</name>
+			<resource>tab_main</resource>
+			<class>worlds_main</class>
+			<embed />
+		</tab>
+		<tab merge="add">
+			<name>spaceports</name>
+			<resource>tab_spaceports</resource>
+			<class>worlds_spaceports</class>
+			<embed />
+		</tab>
+		<tab merge="add">
+			<name>appearance</name>
+			<resource>tab_notes</resource>
+			<class>record_content_notes</class>
+			<embed />
+		</tab>
+		<tab merge="add">
+			<name>trade</name>
+			<resource>tab_trade</resource>
+			<class>worlds_trade</class>
+			<embed />
+		</tab>
+	</windowclass>
+	<windowclass name="worlds_header" copy="record_header" />
+
+	<windowclass name="worlds_main">
+		<script file="campaign/scripts/worlds_main.lua" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<!-- Now stats and modifiers -->
+			<label_column name="uwp_label">
+				<anchored>
+					<left offset="52" />
+				</anchored>
+				<static textres="worlds_label_uwp" />
+			</label_column>
+			<string_uwp name="uwp" />
+
+            <line_column name="divider" />
+
+            <!-- Sector -->
+            <label_column name="sector_label">
+				<anchored>
+					<left offset="47" />
+				</anchored>
+				<static textres="worlds_label_sector" />
+			</label_column>
+			<string_column name="sector">
+				<nodrag />
+			</string_column>
+
+            <!-- SubSector -->
+            <label_column name="subsector_label">
+				<anchored>
+					<left offset="25" />
+				</anchored>
+				<static textres="worlds_label_subsector" />
+			</label_column>
+			<string_column name="subsector">
+				<nodrag />
+			</string_column>
+
+            <!-- Hex Location -->
+            <label_column name="hexlocation_label">
+				<anchored>
+					<left offset="5" />
+				</anchored>
+				<static textres="worlds_label_hexlocation" />
+			</label_column>
+			<string_column_spacecraft_left name="hexlocation">
+				<nodrag />
+			</string_column_spacecraft_left>
+
+            <line_column name="divider2" />
+
+            <!-- Starport Quality -->
+            <label_column name="starport_quality_label">
+				<anchored>
+					<left offset="33" />
+				</anchored>
+				<static textres="worlds_label_starport_quality" />
+			</label_column>
+			<string_worlds_profile name="starport_quality" />
+			<string_column_remainder name="starport_quality_text">
+				<anchored to="starport_quality" />
+				<readonly/>
+			</string_column_remainder>
+
+            <!-- Size -->
+            <label_column name="size_label">
+            	<anchored>
+					<left offset="58" />
+				</anchored>
+				<static textres="worlds_label_size" />
+			</label_column>
+			<string_worlds_profile name="size" />
+			<string_column_remainder name="size_text">
+				<anchored to="size" />
+				<readonly/>
+			</string_column_remainder>
+
+            <!-- Atmosphere Type -->
+            <label_column name="atmosphere_type_label">
+            	<anchored>
+					<left offset="7" />
+				</anchored>
+				<static textres="worlds_label_atmosphere_type" />
+			</label_column>
+			<string_worlds_profile name="atmosphere_type" />
+
+			<string_column_remainder name="atmosphere_type_text">
+				<anchored to="atmosphere_type" />
+				<readonly/>
+			</string_column_remainder>
+
+            <!-- Hydrographic % -->
+            <label_column name="hydrographics_type_label">
+                <anchored>
+					<left offset="0" />
+				</anchored>
+				<static textres="worlds_label_hydrographics" />
+			</label_column>
+			<string_worlds_profile name="hydrographics">
+				<nodrag />
+			</string_worlds_profile>
+			<string_column_remainder name="hydrographics_text">
+				<anchored to="hydrographics" />
+				<readonly/>
+			</string_column_remainder>
+
+            <!-- Population -->
+            <label_column name="population_label">
+                <anchored>
+					<left offset="15" />
+				</anchored>
+				<static textres="worlds_label_population" />
+			</label_column>
+			<string_worlds_profile name="population">
+				<nodrag />
+			</string_worlds_profile>
+			<string_column_remainder name="population_text">
+				<anchored to="population" />
+				<readonly/>
+			</string_column_remainder>
+
+            <!-- Government Type -->
+            <label_column name="government_type_label">
+                <anchored>
+					<left offset="5" />
+				</anchored>
+				<static textres="worlds_label_government_type" />
+			</label_column>
+			<string_worlds_profile name="government_type">
+				<nodrag />
+			</string_worlds_profile>
+			<string_column_remainder name="government_type_text">
+				<anchored to="government_type" />
+				<readonly/>
+			</string_column_remainder>
+
+            <!-- Law Level -->
+            <label_column name="law_level_label">
+                <anchored>
+					<left offset="22" />
+				</anchored>
+				<static textres="worlds_label_law_level" />
+			</label_column>
+			<string_worlds_profile name="law_level">
+				<nodrag />
+			</string_worlds_profile>
+			<string_column_remainder name="law_level_text">
+				<anchored to="law_level" />
+				<readonly/>
+			</string_column_remainder>
+
+            <!-- Tech Level -->
+            <label_column name="tech_level_label">
+                <anchored>
+					<left offset="20" />
+				</anchored>
+				<static textres="worlds_label_tech_level" />
+			</label_column>
+			<string_worlds_profile name="tech_level">
+				<nodrag />
+			</string_worlds_profile>
+			<string_column_remainder name="tech_level_text">
+				<anchored to="tech_level" />
+				<readonly/>
+			</string_column_remainder>
+
+            <line_column name="divider3" />
+
+            <!-- Bases -->
+            <label_column name="bases_label">
+                <anchored>
+					<left offset="48" />
+				</anchored>
+				<static textres="worlds_label_bases" />
+			</label_column>
+            <string_column name="bases">
+				<!-- <script file="campaign/scripts/worlds_profile_values.lua" /> -->
+			</string_column>
+
+            <!-- Trade Codes -->
+            <label_column name="trade_codes_label">
+                <anchored>
+					<left offset="10" />
+				</anchored>
+				<static textres="worlds_label_trade_codes" />
+			</label_column>
+            <string_column name="trade_codes">
+				<!-- <script file="campaign/scripts/worlds_profile_values.lua" /> -->
+			</string_column>
+
+            <!-- Travel Codes -->
+            <label_column name="travel_code_label">
+                <anchored>
+					<left offset="15" />
+				</anchored>
+				<static textres="worlds_label_travel_code" />
+			</label_column>
+            <string_column name="travel_code">
+				<!-- <script file="campaign/scripts/worlds_profile_values.lua" /> -->
+			</string_column>
+
+            <!-- System -->
+            <label_column name="system_label">
+                <anchored>
+					<left offset="40" />
+				</anchored>
+				<static textres="worlds_label_system" />
+			</label_column>
+            <string_column name="system" />
+
+            <!-- Allegiances -->
+            <label_column name="allegiances_label">
+                <anchored>
+					<left offset="15" />
+				</anchored>
+				<static textres="worlds_label_allegiances" />
+			</label_column>
+            <string_column name="allegiances" />
+
+			<!-- Domain -->
+            <label_column name="domain_label">
+				<anchored>
+					<left offset="38" />
+				</anchored>
+				<static textres="worlds_label_domain" />
+			</label_column>
+			<string_column name="domain">
+				<nodrag />
+			</string_column>>
+
+			<spacer_column name="spacer" />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="worlds_spaceports">
+		<script>
+			function onInit()
+				update();
+			end
+
+			function update()
+				local bReadOnly = true;
+				if Session.IsHost then
+					bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				end
+				spaceport_type.setReadOnly(bReadOnly);
+				berthing_cost.setReadOnly(bReadOnly);
+				fuel.setReadOnly(bReadOnly);
+				facilities.setReadOnly(bReadOnly);
+				extras.setReadOnly(bReadOnly);
+
+				ports_iedit.setVisible(not bReadOnly);
+				ports_iadd.setVisible(not bReadOnly);
+				if bReadOnly then
+					ports_iedit.setValue(0);
+				end
+				ports.update(bReadOnly);
+ 			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<!-- Starport Facilities Header -->
+            <label_column name="starport_facilities_label">
+				<static textres="worlds_label_starport_facilities" />
+				<font>reference-b-large</font>
+			</label_column>
+
+			<!-- Spaceport Type -->
+			<label_column name="spaceport_type_label">
+                <anchored>
+					<top offset="35"/>
+					<left offset="25" />
+				</anchored>
+				<static textres="worlds_label_spaceport_type" />
+				<tooltip textres="worlds_tooltip_spaceport_type" />
+			</label_column>
+            <string_column name="spaceport_type">
+				<anchored>
+					<top offset="35"/>
+				</anchored>
+			</string_column>
+
+			<!-- Berthing Costs -->
+			<label_column name="berthing_cost_label">
+				<static textres="worlds_label_berthing_cost" />
+				<tooltip textres="worlds_tooltip_berthing_costs" />
+			</label_column>
+            <string_column name="berthing_cost" />
+
+            <!-- Fuel -->
+            <label_column name="fuel_label">
+                <anchored>
+					<left offset="58" />
+				</anchored>
+				<static textres="worlds_label_fuel" />
+				<tooltip textres="worlds_tooltip_fuel" />
+			</label_column>
+            <string_column name="fuel" />
+
+            <!-- Facilities -->
+            <label_column name="facilities_label">
+                <anchored>
+					<left offset="31" />
+				</anchored>
+				<static textres="worlds_label_facilities" />
+				<tooltip textres="worlds_tooltip_facilities" />
+			</label_column>
+            <string_column name="facilities" />
+
+			<!-- Extras -->
+            <label_column name="extras_label">
+                <anchored>
+					<left offset="46" />
+				</anchored>
+				<static textres="worlds_label_extras" />
+				<tooltip textres="worlds_tooltip_extras" />
+			</label_column>
+            <string_column name="extras" />
+
+			<line_column name="divider" />
+
+			<!-- Starport Facilities Header -->
+            <label_column name="additional_port_facilities_label">
+				<static textres="worlds_label_additional_port_facilities" />
+				<font>reference-b-large</font>
+			</label_column>
+
+			<button_iadd name="ports_iadd">
+				<anchored>
+					<top parent="additional_port_facilities_label" offset="0"/>
+					<right offset="-25" />
+				</anchored>
+				<target>ports</target>
+			</button_iadd>
+			<button_iedit name="ports_iedit">
+				<anchored>
+					<top parent="additional_port_facilities_label" offset="0"/>
+					<right offset="0" />
+				</anchored>
+				<edittarget>ports</edittarget>
+			</button_iedit>
+
+			<list_ports name="ports">
+				<anchored>
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="25" />
+					<left offset="0" />
+					<right offset="0" />
+				</anchored>
+				<class>worlds_ports</class>
+				<noscroll />
+			</list_ports>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="worlds_ports">
+		<margins control="0,5,0,5" />
+		<script>
+			function onInit()
+				update();
+			end
+			function update(bReadOnly)
+				port_type.setReadOnly(bReadOnly);
+				berthing_cost.setReadOnly(bReadOnly);
+				fuel.setReadOnly(bReadOnly);
+				facilities.setReadOnly(bReadOnly);
+				extras.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top />
+					<right />
+				</anchored>
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored  width="25">
+					<top offset="4" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="0" />
+				</anchored>
+				<editmode>ports_iedit</editmode>
+			</button_idelete>
+
+			<!-- Port Type -->
+			<label_column name="spaceport_type_label">
+                <anchored>
+					<top offset="10"/>
+					<left offset="25" />
+				</anchored>
+				<static textres="worlds_label_spaceport_type" />
+				<tooltip textres="worlds_tooltip_spaceport_type" />
+			</label_column>
+            <string_column name="port_type">
+				<anchored>
+					<top offset="10"/>
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</string_column>
+
+			<!-- Berthing Costs -->
+			<label_column name="berthing_cost_label">
+				<static textres="worlds_label_berthing_cost" />
+				<tooltip textres="worlds_tooltip_berthing_costs" />
+			</label_column>
+            <string_column name="berthing_cost" />
+
+            <!-- Fuel -->
+            <label_column name="fuel_label">
+                <anchored>
+					<left offset="58" />
+				</anchored>
+				<static textres="worlds_label_fuel" />
+				<tooltip textres="worlds_tooltip_fuel" />
+			</label_column>
+            <string_column name="fuel" />
+
+            <!-- Facilities -->
+            <label_column name="facilities_label">
+                <anchored>
+					<left offset="31" />
+				</anchored>
+				<static textres="worlds_label_facilities" />
+				<tooltip textres="worlds_tooltip_facilities" />
+			</label_column>
+            <string_column name="facilities" />
+
+			<!-- Extras -->
+            <label_column name="extras_label">
+                <anchored>
+					<left offset="46" />
+				</anchored>
+				<static textres="worlds_label_extras" />
+				<tooltip textres="worlds_tooltip_extras" />
+			</label_column>
+            <string_column name="extras" />
+
+		</sheetdata>
+	</windowclass>
+</root>

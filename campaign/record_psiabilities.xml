@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<!-- Traveller Core Rules -->
+
+<root>
+	<windowclass name="char_psionic_abilities">
+	    <script>
+			function onInit()
+				OptionsManager.registerCallback("CHARPSI", onUpdate);
+				onUpdate();
+			end
+			function onClose()
+				OptionsManager.unregisterCallback("CHARPSI", onUpdate);
+			end
+			function onUpdate()
+				local sCHARPSI = OptionsManager.getOption("CHARPSI");
+				local bVisible = (sCHARPSI:lower() == "yes");
+
+				psiabilitiestitle.setVisible(bVisible)
+				psiabilities.setVisible(bVisible);
+				psiability_total.setVisible(bVisible);
+				psiability_talentlevel.setVisible(bVisible);
+				psiability_psidm.setVisible(bVisible);
+				psiability_name.setVisible(bVisible);
+				psiabilities_iedit.setVisible(bVisible);
+				psiability_cost.setVisible(bVisible);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_charframetop name="psiabilitiestitle">
+				<anchored height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="10" />
+					<right offset="-10" />
+				</anchored>
+				<static textres="char_label_psiabilities" />
+				<script>
+					function onClickDown()
+						return true;
+					end
+
+					function onClickRelease()
+						local bVisible = window.psiabilities.isVisible();
+
+                        if bVisible then
+							window.psiabilitiestitle.setValue("PSI Abilities (collapsed)")
+						else
+							window.psiabilitiestitle.setValue("PSI Abilities")
+						end
+
+						window.psiabilities.setVisible(bVisible == false);
+						window.psiability_total.setVisible(bVisible == false);
+						window.psiability_talentlevel.setVisible(bVisible == false);
+						window.psiability_psidm.setVisible(bVisible == false);
+						window.psiability_name.setVisible(bVisible == false);
+						window.psiability_cost.setVisible(bVisible == false);
+
+						window.psiabilities_iedit.setVisible(bVisible == false);
+
+						return true;
+					end
+				</script>
+			</label_charframetop>
+
+			<button_iedit name="psiabilities_iedit">
+				<anchored>
+					<top parent="psiabilitiestitle" offset="5"/>
+					<right offset="0" />
+				</anchored>
+			</button_iedit>
+
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="25" />
+					<right anchor="right" offset="-25" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<spacer_header_idelete name="idelete_header">
+				<editmode>psiabilities_iedit</editmode>
+			</spacer_header_idelete>
+
+			<!-- Columns from right to left -->
+			<label name="psiability_total">
+				<anchored to="rightanchor" width="40">
+					<top />
+					<right anchor="left" relation="relative" offset="-26" />
+				</anchored>
+				<static textres="char_label_psiability_total" />
+				<center />
+			</label>
+			<label name="psiability_cost">
+				<anchored to="rightanchor" width="40">
+					<top />
+					<right anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<static textres="char_label_psiability_cost" />
+				<center />
+			</label>
+			<label name="psiability_talentlevel">
+				<anchored to="rightanchor" width="67">
+					<top />
+					<right anchor="left" relation="relative" offset="-3" />
+				</anchored>
+				<static textres="char_label_psiability_talentDM" />
+				<center />
+			</label>
+			<label name="psiability_psidm">
+				<anchored to="rightanchor" width="50">
+					<top />
+					<right anchor="left" relation="relative" offset="-8" />
+				</anchored>
+				<static textres="char_label_psiability_psiDM" />
+				<tooltip textres="char_tooltip_psiability_psiDM" />
+				<center />
+			</label>
+			<label name="psiability_name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="0" />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="char_label_weapon_name" />
+				<center />
+			</label>
+
+			<list_charpsiability name="psiabilities">
+				<anchored>
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="20" />
+					<left offset="10" />
+					<right offset="5" />
+				</anchored>
+				<class>char_psi_ability</class>
+				<noscroll />
+			</list_charpsiability>
+        </sheetdata>
+	</windowclass>
+
+	<windowclass name="char_psionic_abilities_npc">
+	    <script>
+			function onInit()
+				OptionsManager.registerCallback("CHARPSI", onUpdate);
+				onUpdate();
+			end
+			function onClose()
+				OptionsManager.unregisterCallback("CHARPSI", onUpdate);
+			end
+			function onUpdate()
+				local sCHARPSI = OptionsManager.getOption("CHARPSI");
+				local bVisible = (sCHARPSI:lower() == "yes");
+
+				if psiabilitiestitle then
+					psiabilitiestitle.setVisible(bVisible)
+				end
+				if psiabilities then
+					psiabilities.setVisible(bVisible);
+				end
+				if psiability_total then
+					psiability_total.setVisible(bVisible);
+				end
+				if psiability_talentlevel then
+					psiability_talentlevel.setVisible(bVisible);
+				end
+				if psiability_psidm then
+					psiability_psidm.setVisible(bVisible);
+				end
+				if psiability_name then
+					psiability_name.setVisible(bVisible);
+				end
+				if psiabilities_iedit then
+					psiabilities_iedit.setVisible(bVisible);
+				end
+				if psiability_cost then
+					psiability_cost.setVisible(bVisible);
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_charframetop name="psiabilitiestitle">
+				<anchored height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="10" />
+					<right offset="-10" />
+				</anchored>
+				<static textres="char_label_psiabilities" />
+				<script>
+					function onClickDown()
+						return true;
+					end
+
+					function onClickRelease()
+						local bVisible = window.psiabilities.isVisible();
+
+                        if bVisible then
+							window.psiabilitiestitle.setValue("PSI Abilities (collapsed)")
+						else
+							window.psiabilitiestitle.setValue("PSI Abilities")
+						end
+
+						window.psiabilities.setVisible(bVisible == false);
+						window.psiability_total.setVisible(bVisible == false);
+						window.psiability_talentlevel.setVisible(bVisible == false);
+						window.psiability_psidm.setVisible(bVisible == false);
+						window.psiability_name.setVisible(bVisible == false);
+						window.psiability_cost.setVisible(bVisible == false);
+
+						window.psiabilities_iedit.setVisible(bVisible == false);
+
+						return true;
+					end
+				</script>
+			</label_charframetop>
+
+			<button_iedit name="psiabilities_iedit">
+				<anchored>
+					<top parent="psiabilitiestitle" offset="5"/>
+					<right offset="0" />
+				</anchored>
+			</button_iedit>
+
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="25" />
+					<right anchor="right" offset="-25" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<spacer_header_idelete name="idelete_header">
+				<editmode>psiabilities_iedit</editmode>
+			</spacer_header_idelete>
+
+			<!-- Columns from right to left -->
+			<label name="psiability_total">
+				<anchored to="rightanchor" width="40">
+					<top />
+					<right anchor="left" relation="relative" offset="-26" />
+				</anchored>
+				<static textres="char_label_psiability_total" />
+				<center />
+			</label>
+			<label name="psiability_cost">
+				<anchored to="rightanchor" width="40">
+					<top />
+					<right anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<static textres="char_label_psiability_cost" />
+				<center />
+			</label>
+			<label name="psiability_talentlevel">
+				<anchored to="rightanchor" width="67">
+					<top />
+					<right anchor="left" relation="relative" offset="-3" />
+				</anchored>
+				<static textres="char_label_psiability_talentDM" />
+				<center />
+			</label>
+			<label name="psiability_psidm">
+				<anchored to="rightanchor" width="50">
+					<top />
+					<right anchor="left" relation="relative" offset="-8" />
+				</anchored>
+				<static textres="char_label_psiability_psiDM" />
+				<tooltip textres="char_tooltip_psiability_psiDM" />
+				<center />
+			</label>
+			<label name="psiability_name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="0" />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="char_label_weapon_name" />
+				<center />
+			</label>
+
+			<list_charpsiability name="psiabilities">
+				<anchored>
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="20" />
+					<left offset="10" />
+					<right offset="5" />
+				</anchored>
+				<class>char_psi_ability_npc</class>
+				<noscroll />
+			</list_charpsiability>
+        </sheetdata>
+	</windowclass>
+	<windowclass name="char_psi_ability_npc" copy="char_psi_ability" merge="join">
+		<sheetdata>
+			<number_charpsitotal2 name="total" merge="replace">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-8" />
+				</anchored>
+				<script>
+					function onInit()
+						local sPath = DB.getPath(DB.getParent(DB.getParent(window.getDatabaseNode())))
+						DB.addHandler(sPath .. ".attributes.psi_mod", "onUpdate", update);
+						local sPathLevel = DB.getPath(window.getDatabaseNode(), "level")
+						DB.addHandler(sPathLevel, "onUpdate", update);
+						self.update();
+					end
+					function onClose()
+						local sPath = DB.getPath(DB.getParent(DB.getParent(window.getDatabaseNode())))
+						DB.removeHandler(sPath .. ".attributes.psi_mod", "onUpdate", update);
+						local sPathLevel = DB.getPath(window.getDatabaseNode(), "level")
+						DB.removeHandler(sPathLevel, "onUpdate", update);
+					end
+
+					function update()
+						local node = window.getDatabaseNode();
+						local sPath = DB.getPath(DB.getParent(DB.getParent(window.getDatabaseNode())))
+						local nPSIMOD = DB.getValue(DB.findNode(sPath), "attributes.psi_mod", 0);
+						local nLevel = DB.getValue(node, "level", 0);
+						DB.setValue(node, "total", "number", nPSIMOD + nLevel);
+					end
+				</script>
+			</number_charpsitotal2>
+			<number_charskillDMfield name="characteristicDM" source="...attributes.psi_mod" merge="replace">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-20" />
+				</anchored>
+				<tabtarget prev="characteristic" next="level" />
+			</number_charskillDMfield>
+			<number_charspsitalentfield name="level" merge="replace">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<tabtarget prev="characteristicDM" next="ability_cost" />
+			</number_charspsitalentfield>
+		</sheetdata>
+	</windowclass>
+</root>

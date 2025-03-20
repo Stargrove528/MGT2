@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet" copy="charsheet_base">
+		<sizelimits>
+			<minimum width="545" height="645" />
+			<dynamic />
+		</sizelimits>
+		<tab>
+			<name>main</name>
+			<resource>tab_main</resource>
+			<class>charsheet_main</class>
+		</tab>
+		<tab merge="add">
+			<name>skills</name>
+			<resource>tab_skills</resource>
+			<class>charsheet_skills</class>
+		</tab>
+		<tab merge="add">
+			<name>equipment</name>
+			<resource>tab_equipment</resource>
+			<class>charsheet_inventory</class>
+		</tab>
+		<tab merge="add">
+			<name>personal</name>
+			<resource>tab_personal</resource>
+			<class>charsheet_personal</class>
+		</tab>
+		<tab merge="add">
+			<name>actions</name>
+			<resource>tab_actions</resource>
+			<class>charsheet_actions</class>
+		</tab>
+		<tab merge="add">
+			<name>spacecraftactions</name>
+			<resource>tab_ships</resource>
+			<class>charsheet_actions_spacecraft</class>
+		</tab>
+		<sheetdata/>
+	</windowclass>
+	<windowclass name="charsheet_overview" copy="charsheet_overview_base_v2" />
+</root>

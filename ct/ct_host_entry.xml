@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="ct_entry" merge="join">
+		<script file="ct/scripts/ct_entry.lua" />
+		<sheetdata>
+			<hs name="status" />
+
+			<hs name="type">
+				<script>
+					function onValueChanged()
+						window.onTypeChanged();
+					end
+				</script>
+			</hs>
+			<hn name="originalhits" />
+			<hn name="initresult_saved" />
+
+			<hnx name="dex_mod" source="attributes.dex_mod" />
+			<hnx name="int_mod" source="attributes.int_mod" />
+			<hnx name="originaldexterity" source="attributes.dexterity" />
+			<hnx name="originalendurance" source="attributes.endurance" />
+			<hnx name="originalstrength" source="attributes.strength" />
+
+			<hsx name="armour" />
+			<hsx name="armour_protection" />
+
+			<button_ct_section_defense name="button_section_defense" insertbefore="button_section_space" />
+			<spacer_button_ct_section name="spacer_button_section_defense" insertbefore="button_section_space" />
+			<button_ct_section_active name="button_section_active" insertbefore="button_section_space" />
+			<spacer_button_ct_section name="spacer_button_section_active" insertbefore="button_section_space" />
+
+			<base_ct_health name="healthbase" insertbefore="initresult" />
+            <number_ct_dexterity name="dexterity" source="woundtrack.dex" insertbefore="initresult" />
+            <number_ct_strength name="strength" source="woundtrack.str" insertbefore="initresult" />
+            <number_ct_endurance name="endurance" source="woundtrack.end" insertbefore="initresult" />
+			<number_ct_hits name="hits" source="woundtrack.hits" insertbefore="initresult" />
+			<label name="hits_label" insertbefore="initresult">
+				<anchored to="hits" position="lefthigh" offset="10,0" width="30" height="20" />
+				<static textres="ct_label_hits" />
+			</label>
+
+			<number_ctentry_initmod name="init_mod" insertbefore="initresult" />
+
+			<sub_ct_section name="sub_active" insertbefore="sub_effects" />
+			<sub_ct_section name="sub_defense" insertbefore="sub_effects" />
+		</sheetdata>
+	</windowclass>
+</root>

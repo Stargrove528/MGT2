@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="taskchains_host">
+		<frame>ctbox</frame>
+		<sizelimits>
+			<minimum width="700" height="400" />
+			<dynamic />
+		</sizelimits>
+		<softclose />
+		<script>
+			function onDrop(x, y, draginfo)
+				if draginfo.isType("shortcut") then
+					local sClass,sRecord = draginfo.getShortcutData();
+					local targetNode = DB.createChild(DB.createChild(getDatabaseNode(), 'tasklist'));
+
+					DB.copyNode(DB.findNode(sRecord), targetNode)
+				end
+			end
+		</script>
+		<sheetdata>
+			<windowtitlebar_ctbox name="title">
+				<resource>tc_window_title</resource>
+			</windowtitlebar_ctbox>
+			<windowmenubar_ctbox name="menubar" />
+
+			<anchor_content_ctbox_top name="contentanchor" />
+			<anchor_content_ctbox_bottom name="bottomanchor" />
+
+			<sub_ct_header_host name="sub_header">
+				<class>sub_tc_header_host</class>
+			</sub_ct_header_host>
+
+			<list_tc_host name="list" />
+			<scrollbar_content_list />
+			
+			<resize_ctbox />
+		</sheetdata>
+	</windowclass>
+	<windowclass name="sub_tc_header_host">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<anchor_ct_header_left />
+			<anchor_ct_header_right />
+
+			<spacer_ct_header_active name="spacer_header_active" />
+			<spacer_ct_header_token name="spacer_header_token" />
+			<button_ct_header_visibility name="button_global_visibility" />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="tc_tasklist">
+		<margins control="0,0,0,10" />
+		<frame>tcentrybox</frame>
+		<script file="tc/scripts/tc_listentry.lua" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="15" />
+					<right anchor="right" offset="0" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_iadd name="subtasks_iadd">
+				<anchored to="rightanchor" position="insidetopright" offset="35,20" />
+				<tooltip textres="char_tooltip_skillsadd" />
+				<target>subtasklist</target>
+			</button_iadd>
+			<button_iedit name="subtasks_iedit" merge="replace">
+				<anchored to="rightanchor" position="lefthigh" offset="10,20" width="20" height="20" />
+				<edittarget>subtasklist</edittarget>
+			</button_iedit>
+
+			<spacer_ctentry_active_top name="active_spacer_top" />
+
+			<button_tcentry_vis name="taskvis">
+				<anchored position="topleft" offset="0,5" />
+			</button_tcentry_vis>
+
+			<button_togglesubtasks name="activatesubtasks" source="activatesubtasks">
+				<anchored>
+					<top offset="10" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+			</button_togglesubtasks>
+
+			<string_tcname name="name" />
+
+			<label name="label_effect">
+				<anchored>
+					<top parent="active_spacer_top" anchor="bottom" relation="relative" offset="7"/>
+					<right parent="subtasks_iadd" anchor="left" relation="relative" offset="-7" />
+				</anchored>
+				<static textres="tc_label_effect" />
+				<tooltip textres="tc_tooltip_effect" />
+				<center />
+			</label>
+			<label name="label_result">
+				<anchored>
+					<top parent="label_effect" anchor="top" />
+					<right parent="subtasks_iadd" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="tc_label_result" />
+				<center />
+			</label>
+			<label name="label_taskmod">
+				<anchored>
+					<top parent="label_effect" anchor="top" />
+					<right parent="subtasks_iadd" anchor="left" relation="relative" offset="-33" />
+				</anchored>
+				<static textres="tc_label_taskmod" />
+				<tooltip textres="tc_tooltip_taskmod" />
+				<center />
+			</label>
+			<label name="label_taskdifficulty">
+				<anchored>
+					<top parent="label_effect" anchor="top" />
+					<right parent="subtasks_iadd" anchor="left" relation="relative" offset="-50" />
+				</anchored>
+				<static textres="tc_label_taskdifficulty" />
+				<tooltip textres="tc_tooltip_taskdifficulty" />
+				<center />
+			</label>
+			<label name="label_statrequired">
+				<anchored>
+					<top parent="label_effect" anchor="top" />
+					<right parent="subtasks_iadd" anchor="left" relation="relative" offset="-30" />
+				</anchored>
+				<static textres="tc_label_statrequired" />
+				<tooltip textres="tc_tooltip_statrequired" />
+				<center />
+			</label>
+			<label name="label_skillrequired">
+				<anchored>
+					<top parent="label_effect" anchor="top" />
+					<right parent="subtasks_iadd" anchor="left" relation="relative" offset="-25" />
+				</anchored>
+				<static textres="tc_label_skillrequired" />
+				<tooltip textres="tc_tooltip_requiredskill" />
+				<center />
+			</label>
+
+			<windowlist name="subtasklist">
+				<anchored>
+					<left />
+					<top parent="active_spacer_top" anchor="bottom" relation="relative" offset="0"/>
+					<right offset="-7" />
+				</anchored>
+				<datasource>.subtasks</datasource>
+				<class>tc_subtasklist</class>
+				<empty font="list-empty" textres="tc_emptytasklist" />
+				<sortby><control>order</control></sortby>
+			</windowlist>
+
+			<string_columnh name="description">
+				<anchored>
+					<left offset="65" />
+					<top parent="active_spacer_top" anchor="bottom" relation="relative" offset="5"/>
+					<right parent="name" anchor="right" />
+				</anchored>
+			</string_columnh>
+
+			<scrollbar_subtasklist name="scrollbar_subtasklist" />
+
+			<spacer_ctentry_active_bottom name="active_spacer_bottom" />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="tc_subtasklist">
+		<margins control="0,2,0,2" />
+		<script file="tc/scripts/tc_subtasklistentry.lua" />
+		<sheetdata>
+			<hn name="order" />
+
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="5" />
+					<right anchor="right" offset="0" />
+				</anchored>
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored width="20" height="20">
+					<top offset="4" />
+					<right parent="rightanchor" anchor="left" offset="-2" />
+				</anchored>
+				<editmode>subtasks_iedit</editmode>
+			</button_idelete>
+			<genericcontrol name="idelete_spacer">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<disabled />
+			</genericcontrol>
+
+			<number_ct_crosslink name="effect">
+				<anchored to="rightanchor" width="50" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-30" />
+				</anchored>
+				<tabtarget prev="naresultme" next="statrequired" />
+				<hideonvalue value="0" />
+			</number_ct_crosslink>
+
+			<number_ct_crosslink name="result">
+				<anchored to="rightanchor" width="50" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="skillrequired" next="effect" />
+				<hideonvalue value="0" />
+			</number_ct_crosslink>
+
+			<number_ct_crosslink name="mod">
+				<anchored to="rightanchor" width="40" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-20" />
+				</anchored>
+				<tabtarget prev="skillrequired" next="effect" />
+			</number_ct_crosslink>
+
+			<combobox name="taskdifficulty">
+				<listdirection>down</listdirection>
+				<anchored to="rightanchor" width="150" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<center />
+				<script>
+					function onInit()
+						super.onInit();
+						add('Simple - 2');
+						add('Easy - 4');
+						add('Routine - 6');
+						add('Average - 8');
+						add('Difficult - 10');
+						add('Very Difficult - 12');
+						add('Formidable - 14');
+						add('Impossible - 16');
+					end
+				</script>
+				<tabtarget prev="statrequired" next="name" />
+			</combobox>
+
+			<cycler_tc_characteristic name="statrequired">
+				<anchored to="rightanchor" width="60" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="effect" next="taskdifficulty" />
+			</cycler_tc_characteristic>
+
+			<string_ct_boxed_static name="skillrequired">
+				<anchored position="insidetopleft" height="20">
+					<left offset="65" />
+					<top offset="5" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tooltip textres="tc_tooltip_skillrequired" />
+				<center/>
+				<tabtarget prev="lasteffect" next="taskdifficulty" />
+				<script>
+					function onDrop(x, y, draginfo)
+
+						vTarget = getDatabaseNode();
+
+						if draginfo.isType("shortcut") then
+							local sClass,sRecord = draginfo.getShortcutData();
+
+							if sClass == 'reference_skill' then
+								local skillNode = DB.findNode(sRecord);
+								local sSkillName = DB.getValue(skillNode, 'name', '');
+								if sSkillName ~= "" then
+									setValue(sSkillName);
+								end
+							end
+
+						end
+					end
+				</script>
+			</string_ct_boxed_static>
+		</sheetdata>
+	</windowclass>
+</root>

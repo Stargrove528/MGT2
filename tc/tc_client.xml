@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="taskchains_client">
+		<frame>ctbox</frame>
+		<sizelimits>
+			<minimum width="690" height="300" />
+			<dynamic />
+		</sizelimits>
+		<softclose />
+		<sheetdata>
+			<windowtitlebar_ctbox name="title">
+				<resource>tc_window_title</resource>
+			</windowtitlebar_ctbox>
+			<windowmenubar_ctbox name="menubar" />
+
+			<anchor_content_ctbox_top name="contentanchor" />
+			<anchor_content_ctbox_bottom name="bottomanchor" />
+
+			<list_tc_client name="list" />
+			<scrollbar_content_list />
+
+			<resize_ctbox />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="client_tc_tasklist">
+		<margins control="0,0,0,2" />
+		<frame>tcentrybox</frame>
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="10" />
+					<right anchor="right" offset="0" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+
+			<hn name="taskvis" />
+
+			<spacer_ctentry_active_top name="active_spacer_top" />
+
+			<string_client_tcname name="name">
+				<readonly />
+				<script>
+					function onInit()
+						setLine(false);
+					end
+				</script>
+			</string_client_tcname>
+
+			<label name="label_effect">
+				<anchored>
+					<top parent="active_spacer_top" anchor="bottom" relation="relative" offset="27"/>
+					<right parent="rightanchor" anchor="left" offset="-12" />
+				</anchored>
+				<static textres="tc_label_effect" />
+				<tooltip textres="tc_tooltip_effect" />
+				<center />
+			</label>
+			<label name="label_result">
+				<anchored>
+					<top parent="label_effect" anchor="top" />
+					<right parent="label_effect" anchor="left" relation="relative" offset="-12" />
+				</anchored>
+				<static textres="tc_label_result" />
+				<center />
+			</label>
+			<label name="label_taskmod">
+				<anchored>
+					<top parent="label_effect" anchor="top" />
+					<right parent="label_effect" anchor="left" relation="relative" offset="-35" />
+				</anchored>
+				<static textres="tc_label_taskmod" />
+				<tooltip textres="tc_tooltip_taskmod" />
+				<center />
+			</label>
+			<label name="label_taskdifficulty">
+				<anchored>
+					<top parent="label_effect" anchor="top" />
+					<right parent="label_effect" anchor="left" relation="relative" offset="-50" />
+				</anchored>
+				<static textres="tc_label_taskdifficulty" />
+				<tooltip textres="tc_tooltip_taskdifficulty" />
+				<center />
+			</label>
+			<label name="label_statrequired">
+				<anchored>
+					<top parent="label_effect" anchor="top" />
+					<right parent="label_effect" anchor="left" relation="relative" offset="-30" />
+				</anchored>
+				<static textres="tc_label_statrequired" />
+				<tooltip textres="tc_tooltip_statrequired" />
+				<center />
+			</label>
+			<label name="label_skillrequired">
+				<anchored>
+					<top parent="label_effect" anchor="top" />
+					<right parent="label_effect" anchor="left" relation="relative" offset="-45" />
+				</anchored>
+				<static textres="tc_label_skillrequired" />
+				<tooltip textres="tc_tooltip_requiredskill" />
+				<center />
+			</label>
+
+			<list_tcsubbox_client />
+
+			<anchor_ct_entry_right name="rightanchor" />
+			<string_client_tcname name="name" />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="client_tc_subtasklist">
+		<margins control="0,2,0,12" />
+		<script file="tc/scripts/tc_client_subtasklistentry.lua" />
+		<sheetdata>
+			<hn name="order" />
+
+            <genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="5" />
+					<right anchor="right" offset="0" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<genericcontrol name="idelete_spacer">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<disabled />
+			</genericcontrol>
+
+			<number_ct_crosslink name="effect">
+				<anchored to="rightanchor" width="50" height="20">
+					<top />
+					<right anchor="left" offset="-7" />
+				</anchored>
+				<tabtarget prev="naresultme" next="statrequired" />
+				<readonly />
+				<hideonvalue value="0" />
+				<frame name="" />
+			</number_ct_crosslink>
+
+			<number_ct_crosslink name="result">
+				<anchored to="effect" width="50" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="skillrequired" next="effect" />
+				<readonly />
+				<hideonvalue value="0" />
+				<frame name="" />
+			</number_ct_crosslink>
+
+			<number_ct_crosslink name="mod">
+				<anchored to="effect" width="40" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-20" />
+				</anchored>
+				<readonly />
+				<tabtarget prev="skillrequired" next="effect" />
+				<frame name="" />
+			</number_ct_crosslink>
+
+			<string_ct_boxed name="taskdifficulty">
+				<anchored to="effect" width="150" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+                <tabtarget prev="statrequired" next="name" />
+				<readonly />
+				<center />
+			</string_ct_boxed>
+
+			<string_ct_boxed name="statrequired">
+				<anchored to="effect" width="60" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="effect" next="taskdifficulty" />
+				<readonly />
+				<center />
+			</string_ct_boxed>
+
+            <string_ct_boxed name="skillrequired">
+				<anchored to="effect" width="200" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+                <center/>
+				<tooltip textres="tc_tooltip_skillrequired_client" />
+                <tabtarget prev="lasteffect" next="taskdifficulty" />
+				<readonly />
+				<script>
+					function onInit()
+						setEnabled(true);
+					end
+				</script>
+			</string_ct_boxed>
+		</sheetdata>
+	</windowclass>
+</root>

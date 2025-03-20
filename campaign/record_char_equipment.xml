@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet_inventory" merge="join">
+		<sheetdata>
+			<frame_char name="inventoryframe">
+				<anchored>
+					<bottom anchor="center" offset="-20" />
+				</anchored>
+			</frame_char>
+			<label_list_content_number_right name="label_weight" merge="join">
+				<static textres="char_label_itemmass" />
+			</label_list_content_number_right>
+			<number_static name="encumbranceload" source="encumbrance.load" merge="delete" />
+			<label name="encumbrance_label" merge="delete" />
+			<sub_content_framed_groupbox_base name="armouractions" insertbefore="encumbranceframe">
+				<anchored to="inventorylist">
+					<left offset="0" />
+					<top relation="relative" offset="30" postoffset="15" />
+					<right offset="-0" />
+					<bottom parent="" offset="-135" />
+				</anchored>
+				<class>char_armour_actions</class>
+				<script>
+					function onDrop(x, y, draginfo)
+						return ItemManager.handleAnyDrop(subwindow.getDatabaseNode(), draginfo);
+					end
+				</script>
+			</sub_content_framed_groupbox_base>
+
+			<frame_char name="encumbranceframe">
+				<anchored position="insidebottomleft" height="120">
+					<right anchor="center" />
+				</anchored>
+			</frame_char>
+			<subwindow name="encumbrance">
+				<anchored to="encumbranceframe" position="over" offset="-10,-10" />
+				<class>charsheet_encumbrance_contents</class>
+				<activate />
+				<fastinit />
+			</subwindow>
+
+			<frame_char name="coinframe" merge="join">
+				<anchored position="insidebottomright" height="120">
+					<left anchor="center" offset="0" />
+				</anchored>
+			</frame_char>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_invitem" merge="join">
+		<sheetdata>
+			<number_charinv name="weight" merge="join" source="mass" />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="charsheet_encumbrance_contents">
+		<margins control="0,0,0,2" />
+		<script>
+			function onInit()
+				CharEncumbranceManagerTraveller.calcEncumbranceLimit(getDatabaseNode());
+			end
+		</script>
+		<sheetdata>
+			<number_static name="encumbranceload" source="encumbrance.load">
+				<anchored position="insidetopleft" offset="10,30" width="40" height="20" />
+				<font>sheetlabel</font>
+			</number_static>
+			<label_fieldtop name="encumbranceload_label">
+				<anchored to="encumbranceload" />
+				<static textres="char_label_totalmass" />
+			</label_fieldtop>
+
+			<number_static name="encumbrancebase" source="encumbrance.base">
+				<anchored to="encumbranceload" position="righthigh" offset="20,0" width="40" height="20" />
+			</number_static>
+			<label_fieldtop name="encumbrancebase_label">
+				<anchored to="encumbrancebase" />
+				<static textres="char_label_encbase" />
+			</label_fieldtop>
+
+			<number_static name="encumbrancelight" source="encumbrance.light">
+				<anchored to="encumbrancebase" position="righthigh" offset="10,0" width="40" height="20" />
+			</number_static>
+			<label_fieldtop name="encumbrancelight_label">
+				<anchored to="encumbrancelight" />
+				<static textres="char_label_enclight" />
+			</label_fieldtop>
+
+			<number_static name="encumbrancemax" source="encumbrance.max">
+				<anchored to="encumbrancelight" position="righthigh" offset="10,0" width="40" height="20" />
+			</number_static>
+			<label_fieldtop name="encumbrancemax_label">
+				<anchored to="encumbrancemax" />
+				<static textres="char_label_encmax" />
+			</label_fieldtop>
+
+			<string_static name="encumbrancestatus" source="encumbrance.status">
+				<anchored position="insidetopleft" offset="10,70" width="160" height="20" />
+			</string_static>
+			<label_fieldtop name="encumbrancestatus_label">
+				<anchored to="encumbrancestatus" />
+				<static textres="char_label_encstatus" />
+			</label_fieldtop>
+
+			<number_static name="encumbrancemod" source="encumbrance.mod">
+				<anchored to="encumbrancestatus" position="righthigh" offset="10,0" width="30" height="20" />
+			</number_static>
+			<label_fieldtop name="encumbrancemod_label">
+				<anchored to="encumbrancemod" />
+				<static textres="char_label_encdm" />
+			</label_fieldtop>
+		</sheetdata>
+	</windowclass>
+</root>

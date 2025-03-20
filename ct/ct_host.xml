@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="combattracker_host" merge="join">
+		<sizelimits>
+			<minimum width="600" />
+		</sizelimits>
+	</windowclass>
+	<windowclass name="sub_ct_header_host" merge="join">
+		<sheetdata>
+			<spacer_ct_header_right name="spacer_buttons_header_add" insertbefore="label_init">
+				<anchored width="40" />
+			</spacer_ct_header_right>
+
+			<label_ct_header_right name="label_dexterity" insertbefore="label_init">
+				<static textres="ct_label_dexterity" />
+				<tooltip textres="ct_tooltip_dexterity" />
+			</label_ct_header_right>
+			<label_ct_header_right name="label_strength" insertbefore="label_init">
+				<static textres="ct_label_strength" />
+				<tooltip textres="ct_tooltip_strength" />
+			</label_ct_header_right>
+			<label_ct_header_right name="label_endurance" insertbefore="label_init">
+				<static textres="ct_label_endurance" />
+				<tooltip textres="ct_tooltip_endurance" />
+			</label_ct_header_right>
+			<label_ct_header_right name="label_init_mod" insertbefore="label_init">
+				<anchored>
+					<right offset="-15" />
+				</anchored>
+				<static textres="ct_label_init_mod" />
+				<tooltip textres="ct_tooltip_init_mod" />
+			</label_ct_header_right>
+		</sheetdata>
+	</windowclass>
+</root>

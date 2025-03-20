@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<!-- Traveller Core Rules -->
+
+<root>
+	<windowclass name="charsheet_skills">
+		<script>
+		function onInit()
+			OptionsManager.registerCallback("CHARPSI", onUpdate);
+			OptionsManager.registerCallback("STUDYP", onUpdate);
+			self.onUpdate();
+		end
+		function onClose()
+			OptionsManager.unregisterCallback("CHARPSI", onUpdate);
+			OptionsManager.unregisterCallback("STUDYP", onUpdate);
+		end
+
+		function onUpdate()
+			local sSTUDYP = OptionsManager.getOption("STUDYP");
+			local bSTUDYPVisible = (sSTUDYP:lower() == "yes");
+
+			local sCHARPSI = OptionsManager.getOption("CHARPSI");
+			local bCHARPSIVisible = (sCHARPSI:lower() == "yes");
+
+			psitalentswindow.setVisible(bCHARPSIVisible);
+			studyperiodwindow.setVisible(bSTUDYPVisible);
+
+			nHidePSI.onValueChanged();
+		end
+		</script>
+		<sheetdata>
+			<hn name="nHidePSI">
+				<script>
+					function onInit()
+						self.onValueChanged();
+					end
+					function onValueChanged()
+						local sCHARPSI = OptionsManager.getOption("CHARPSI");
+						local bCHARPSIVisible = (sCHARPSI:lower() == "yes");
+
+						if not bCHARPSIVisible then
+							setValue(0);
+						end
+
+						local bHide = (getValue() &gt; 0);
+						window.psitalentswindow.setVisible(bHide);
+					end
+				</script>
+			</hn>
+			<anchor_content_top />
+			<anchor_content_bottom />
+
+			<sub_content_framed_groupbox_top name="psitalentswindow">
+				<class>char_psitalents_content</class>
+			</sub_content_framed_groupbox_top>
+
+			<sub_content_framed_groupbox_top name="studyperiodwindow">
+				<class>char_studyperiod_content</class>
+			</sub_content_framed_groupbox_top>
+			<sub_content_framed_groupbox_top name="content">
+				<class>char_skill_content</class>
+			</sub_content_framed_groupbox_top>
+			<scrollbar_content/>
+			<label_frametop name="skills">
+				<anchored to="content" offset="5,-10" />
+				<static textres="char_label_skills" />
+			</label_frametop>
+			<button_iadd name="skills_iadd">
+				<anchored to="content" position="insidetopright" offset="50,-10" />
+				<tooltip textres="char_tooltip_skillsadd" />
+				<edittarget>content</edittarget>
+			</button_iadd>
+			<button_iedit name="skills_iedit">
+				<anchored to="content" position="insidetopright" offset="30,-10" />
+				<edittarget>content</edittarget>
+			</button_iedit>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_skill_content">
+		<margins control="0,0,0,2" />
+		<script>
+			function addEntry()
+				skills.createWindow(nil, true);
+			end
+			function onDrop(x, y, draginfo)
+				if draginfo.isType("shortcut") then
+
+					local sClass = draginfo.getShortcutData();
+					local node = draginfo.getDatabaseNode();
+
+					if StringManager.contains({"reference_skill"}, sClass) then
+						CharManager.addInfoDB(getDatabaseNode(), node, sClass);
+						return true;
+					end
+
+			        if StringManager.contains({"reference_psionic"}, string.sub(sClass,1,17)) then
+
+						local sClass = string.sub(sClass,1,17)
+						local sTalent = string.sub(sClass,18)
+
+						CharManager.addInfoDB(getDatabaseNode(), node, sClass, sTalent);
+						return true;
+					end
+
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_content_top />
+
+			<button_toggledetail name="togglePSI">
+				<anchored position="insidetopright" offset="0,0" width="20" height="20"/>
+				<script>
+					function onInit()
+						OptionsManager.registerCallback("CHARPSI", onUpdate);
+						self.onUpdate();
+					end
+					function onClose()
+						OptionsManager.unregisterCallback("CHARPSI", onUpdate);
+					end
+
+					function onUpdate()
+						local sCHARPSI = OptionsManager.getOption("CHARPSI");
+						local bCHARPSIVisible = (sCHARPSI:lower() == "yes");
+
+						self.setVisible(bCHARPSIVisible);
+					end
+
+					function onButtonPress()
+						local bHidePSI = (DB.getValue(window.getDatabaseNode(), "nHidePSI", 0) &lt;= 0);
+						if bHidePSI then
+							DB.setValue(window.getDatabaseNode(), "nHidePSI", "number", 1);
+						else
+							DB.setValue(window.getDatabaseNode(), "nHidePSI", "number", 0);
+						end
+					end
+				</script>
+			</button_toggledetail>
+
+			<!-- Headers -->
+			<genericcontrol name="rightanchor">
+				<anchored position="insidetopright" offset="0,10" width="0" height="0" />
+				<invisible />
+			</genericcontrol>
+			<label>
+				<anchored to="rightanchor" width="37">
+					<top />
+					<right anchor="left" relation="relative" offset="-28" />
+				</anchored>
+				<static textres="char_label_skilltotal" />
+				<tooltip textres="char_tooltip_skilltotal" />
+				<center />
+			</label>
+			<label>
+				<anchored to="rightanchor" width="35">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="char_label_skillmod" />
+				<tooltip textres="char_tooltip_skillmod" />
+				<center />
+			</label>
+			<label>
+				<anchored to="rightanchor" width="35">
+					<top />
+					<right anchor="left" relation="relative" offset="-12" />
+				</anchored>
+				<static textres="char_label_skillspent" />
+				<tooltip textres="char_tooltip_skillspent" />
+				<center />
+			</label>
+			<label>
+				<anchored to="rightanchor" width="95">
+					<top />
+					<right anchor="left" relation="relative" offset="-6" />
+				</anchored>
+				<static textres="char_label_skillattribute" />
+				<tooltip textres="char_tooltip_skillattribute" />
+				<center />
+			</label>
+			<label>
+				<anchored to="rightanchor">
+					<left parent="" />
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="char_label_skillname" />
+				<center />
+			</label>
+
+			<windowlist name="skills">
+				<anchored position="insidetop" offset="0,30" />
+				<datasource>.skilllist</datasource>
+				<class>char_skill</class>
+				<sortby><control>name</control></sortby>
+				<allowcreate />
+				<script file="campaign/scripts/char_skilllist.lua" />
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_skill">
+		<margins control="0,0,0,2" />
+		<script>
+			function onInit()
+				self.onEditModeChanged();
+			end
+			function onEditModeChanged()
+				local bEditMode = WindowManager.getEditMode(windowlist, "skills_iedit");
+
+				local bAllowDelete = true;
+				local sLabel = name.getValue();
+				if (sLabel == "Unskilled Skill") then
+					bAllowDelete = false;
+					name.setReadOnly(true);
+				elseif (sLabel == "Jack of All Trades") then
+					bAllowDelete = false;
+					total.setEnabled(false);
+				end
+
+				if bAllowDelete then
+					idelete_spacer.setVisible(false);
+					idelete.setVisible(bEditMode);
+				else
+					idelete_spacer.setVisible(bEditMode);
+					idelete.setVisible(false);
+				end
+			end
+		</script>
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored width="20" height="20">
+					<top offset="1" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-2" />
+				</anchored>
+			</button_idelete>
+			<genericcontrol name="idelete_spacer">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<disabled />
+				<invisible />
+			</genericcontrol>
+			<hn name="noedit" />
+			<hn name="locked" />
+			<hn name="speciality" />
+			<linkcontrol name="shortcut">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<class>reference_skill</class>
+				<readonly />
+			</linkcontrol>
+			<genericcontrol name="shortcut_spacer">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<disabled />
+				<invisible />
+			</genericcontrol>
+			<number_charskilltotal name="total">
+				<anchored width="35" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</number_charskilltotal>
+			<number_charskillfield name="mod">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<tabtarget prev="level" next="name" />
+			</number_charskillfield>
+			<number_charskillfield name="level">
+				<anchored width="35" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<hideonvalue>-4</hideonvalue>
+				<tabtarget prev="characteristicDM" next="mod" />
+				<script>
+					function onInit()
+						local nodeSkill = DB.getChild(window.getDatabaseNode(), "..")
+
+						local skillName = DB.getValue(nodeSkill, "name", "");
+						if skillName == "Unskilled Skill" then
+							setReadOnly(true);
+							window.shortcut.setVisible(false);
+							window.shortcut_spacer.setVisible(true);
+						end
+					end
+					function onValueChanged()
+						local nodeChar = DB.getChild(window.getDatabaseNode(), "...")
+						local sSkill = window.name.getValue():lower()
+						CharManager.checkSkillHasMiscActions(DB.getParent(nodeChar), sSkill, getValue())
+					end
+				</script>
+			</number_charskillfield>
+			<!-- The attribute/characteristic Dice Modifier -->
+			<number_charskillDMfield name="characteristicDM">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<tabtarget prev="characteristic" next="mod" />
+			</number_charskillDMfield>
+			<!-- The attribute/characteristic -->
+			<cycler_skillcharacteristic name="characteristic">
+				<anchored width="35" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="name" next="characteristicDM" />
+			</cycler_skillcharacteristic>
+			<stringu name="name">
+				<anchored height="20">
+					<top offset="2" />
+					<left />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget next="attributeDM" />
+			</stringu>
+			<stringu name="sublabel">
+				<anchored to="name" height="20">
+					<top anchor="bottom" />
+					<left />
+					<right />
+				</anchored>
+				<invisible />
+				<tabtarget prev="level" />
+				<script>
+					function onEnter()
+						window.windowlist.addNewInstance(window.label.getValue());
+						return true;
+					end
+				</script>
+			</stringu>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_studyperiod_content">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_charframetop name="studyperiodtitle">
+				<anchored height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="5" />
+					<right offset="-10" />
+				</anchored>
+				<static textres="char_label_study_period" />
+			</label_charframetop>
+
+			<label name="skilltolearn_label">
+				<anchored>
+                    <top offset="25" />
+					<left offset="35" />
+				</anchored>
+				<static textres="char_label_training_in_skill" />
+			</label>
+
+			<stringu name="skilltolearn" source="studyperiod.skilltolearn">
+				<anchored height="20" width="215">
+                    <top offset="46" />
+					<left offset="10" />
+				</anchored>
+			</stringu>
+
+			<label name="weeknumber_label">
+				<anchored>
+                    <top offset="25" />
+					<left offset="232" />
+				</anchored>
+				<static textres="char_label_week_number" />
+			</label>
+
+			<basicnumber name="weeknumber" source="studyperiod.weeknumber">
+				<anchored height="20" width="40">
+					<top offset="45" />
+					<left offset="235" />
+				</anchored>
+			</basicnumber>
+
+			<label name="weeknumberof_label">
+				<anchored>
+                    <top offset="25" />
+					<left offset="295" />
+				</anchored>
+				<static textres="char_label_week_number_of" />
+			</label>
+
+			<basicnumber name="weeknumberof" source="studyperiod.weeknumberof">
+				<anchored height="20" width="40">
+					<top offset="45" />
+					<left offset="285" />
+				</anchored>
+			</basicnumber>
+
+			<label name="studyperiods_label">
+				<anchored>
+                    <top offset="12" />
+					<left offset="357" />
+				</anchored>
+				<static textres="char_label_study_periods" />
+			</label>
+			<label name="complete_label">
+				<anchored>
+                    <top offset="25" />
+					<left offset="372" />
+				</anchored>
+				<static textres="char_label_complete" />
+			</label>
+
+			<basicnumber name="periodscomplete" source="studyperiod.periodscomplete">
+				<anchored height="20" width="40">
+					<top offset="45" />
+					<left offset="380" />
+				</anchored>
+			</basicnumber>
+
+		</sheetdata>
+	</windowclass>
+</root>

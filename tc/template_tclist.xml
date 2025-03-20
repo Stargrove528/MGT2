@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="list_tc_host">
+		<list_ctbox_base name="list">
+			<datasource>taskchains.tasklist</datasource>
+			<class>tc_tasklist</class>
+			<allowcreate />
+			<empty font="list-empty-ct" textres="tc_emptytasklist" />
+			<script file="tc/scripts/tc_list.lua" />
+		</list_ctbox_base>
+	</template>
+	<template name="list_tc_client">
+		<list_ctbox_base name="list">
+			<datasource>taskchains.tasklist</datasource>
+			<class>client_tc_tasklist</class>
+			<script file="tc/scripts/tc_client.lua" />
+		</list_ctbox_base>
+	</template>
+
+	<template name="scrollbar_subtasklist">
+		<scrollbar>
+			<anchored to="subtasklist" />
+			<target>subtasklist</target>
+		</scrollbar>
+	</template>
+	<template name="scrollbar_tasklist_client">
+		<scrollbar>
+			<anchored to="tasklist_client" />
+			<target>tasklist_client</target>
+		</scrollbar>
+	</template>
+	<template name="button_tcentry_vis">
+		<buttonfield>
+			<anchored width="20" height="20">
+				<top parent="active_spacer_top" anchor="bottom"  relation="relative" offset="10" />
+				<left offset="35" />
+			</anchored>
+			<state icon="visibilityoff" tooltipres="tc_tooltip_showtaskon" />
+			<state icon="visibilityon" tooltipres="tc_tooltip_showtaskoff" />
+			<script>
+				function onValueChanged()
+					window.onVisibilityChanged();
+				end
+			</script>
+		</buttonfield>
+	</template>
+	<template name="string_tcname">
+		<string_ct>
+			<anchored height="20">
+				<top offset="10" />
+				<left parent="taskvis" anchor="right" relation="relative" offset="5" />
+				<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+			</anchored>
+		</string_ct>
+	</template>
+	<template name="string_client_tcname">
+		<string_ct>
+			<anchored height="20">
+				<top offset="10" />
+				<left offset="35" />
+				<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+			</anchored>
+		</string_ct>
+	</template>
+	<template name="cycler_tc_characteristic">
+		<button_stringcycler>
+			<parameters>
+				<defaultlabel> - </defaultlabel>
+				<labels>Str|Dex|End|Int|Edu|Soc|PSI</labels>
+				<values>Str|Dex|End|Int|Edu|Soc|PSI</values>
+			</parameters>
+		</button_stringcycler>
+	</template>
+
+	<template name="list_tcsubbox_client">
+		<windowlist name="subtasklist">
+			<anchored>
+				<left />
+				<top parent="active_spacer_top" anchor="bottom" relation="relative" offset="0"/>
+				<right offset="-7" />
+			</anchored>
+			<datasource>.subtasks</datasource>
+			<class>client_tc_subtasklist</class>
+			<sortby><control>order</control></sortby>
+		</windowlist>
+	</template>
+	<template name="button_togglesubtasks">
+		<buttonfield>
+			<anchored width="20" height="20" />
+			<state icon="expand" tooltipres="tc_tooltip_hidesubtasks" />
+			<state icon="expand_down" tooltipres="tc_tooltip_showsubtasks" />
+			<script>
+				function onValueChanged()
+					if window.toggleSubTasks then
+						window.toggleSubTasks();
+					end
+				end
+			</script>
+		</buttonfield>
+	</template>
+</root>

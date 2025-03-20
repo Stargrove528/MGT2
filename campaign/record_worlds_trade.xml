@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="worlds_trade">
+		<script>
+			function onInit()
+				self.update();
+			end
+			function update()
+				local bReadOnly = true;
+				if Session.IsHost then
+					bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				end
+
+				trade_iedit.setVisible(not bReadOnly);
+				trade_iadd.setVisible(not bReadOnly);
+				tradegoods.update(bReadOnly);
+ 			end
+		</script>
+		<sheetdata>
+			<label_frametop>
+				<anchored>
+					<top offset="-5" />
+					<left offset="0" />
+				</anchored>
+				<static textres="worlds_label_trade" />
+			</label_frametop>
+			<anchor_column name="columnanchor" />
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="25" />
+					<right anchor="right" offset="0" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+
+			<button_iadd name="trade_iadd">
+				<anchored to="rightanchor" position="insidetopright" offset="25,-25" />
+				<target>tradegoods</target>
+			</button_iadd>
+			<button_iedit name="trade_iedit">
+				<anchored to="rightanchor" position="insidetopright" offset="0,-25" />
+				<edittarget>trade</edittarget>
+			</button_iedit>
+
+			<genericcontrol name="rightanchor">
+				<anchored to="columnanchor" width="10" height="10">
+					<top offset="30" />
+					<right anchor="left" offset="390" />
+				</anchored>
+				<static></static>
+			</genericcontrol>
+
+			<!-- Headers -->
+			<label name="cost_label">
+				<anchored width="80">
+					<top offset="30" />
+					<right anchor="right" offset="-22" />
+				</anchored>
+				<center />
+				<static textres="worlds_label_trade_cost" />
+			</label>
+			<label name="name_label">
+				<anchored to="cost_label" width="50">
+					<top offset="0" />
+					<right anchor="left" relation="relative" offset="-100" />
+				</anchored>
+				<static textres="worlds_label_trade_goods" />
+				<center />
+			</label>
+			<label name="count_label">
+				<anchored width="80">
+					<top offset="30" />
+					<left />
+				</anchored>
+				<static textres="worlds_label_trade_tons_available" />
+				<center />
+			</label>
+
+			<windowlist name="tradegoods">
+				<anchored>
+					<top offset="50" />
+					<left offset="-20" />
+					<right offset="-10" />
+					<bottom offset="350" />
+				</anchored>
+				<allowcreate/>
+				<allowdelete />
+				<datasource>.goodslist</datasource>
+				<class>worlds_goodstrade_list</class>
+				<sortby><control>label</control></sortby>
+				<script>
+					function update(bReadOnly)
+						for _,w in ipairs(getWindows()) do
+							w.costperton.setReadOnly(bReadOnly);
+							w.goods.setReadOnly(bReadOnly);
+							w.count.setReadOnly(bReadOnly);
+						end
+					end
+				</script>
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="worlds_goodstrade_list">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored width="20" height="20">
+					<top offset="1" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="0" />
+				</anchored>
+				<editmode>trade_iedit</editmode>
+			</button_idelete>
+
+			<basicstring name="costperton">
+				<anchored width="80" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<center />
+				<tabtarget prev="goods" next="damage" />
+			</basicstring>
+
+			<stringu name="goods">
+				<anchored height="20">
+					<top offset="2" />
+					<left offset="90" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="count" next="costperton" />
+			</stringu>
+
+			<basicnumber name="count">
+				<anchored width="52" height="20">
+					<top offset="2" />
+					<left anchor="left" offset="30" />
+				</anchored>
+				<tabtarget next="goods" />
+			</basicnumber>
+		</sheetdata>
+	</windowclass>
+</root>

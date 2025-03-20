@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="char_weapon">
+		<margins control="5,0,0,15" />
+		<script file="campaign/scripts/char_weapon.lua" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<editmode>weapons_iedit</editmode>
+			</button_idelete>
+			<linkcontrol name="shortcut">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<class>item</class>
+				<description field="name" />
+				<readonly />
+			</linkcontrol>
+			<genericcontrol name="shortcut_spacer">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<number_weaponattack name="attack">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<source><name>skillDM</name><op>+</op></source>
+				<source><name>characteristicDM</name><op>+</op></source>
+				<source><name>actionMod</name><op>+</op></source>
+				<displaysign />
+			</number_weaponattack>
+
+			<basicnumber name="actionMod">
+				<anchored width="35" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-20" />
+				</anchored>
+				<displaysign />
+				<tabtarget prev="skillDM" next="attack" />
+			</basicnumber>
+
+			<number_linked_framed name="skillDM">
+				<anchored width="35" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<displaysign />
+				<script>
+					function onInit()
+						local nodeWeapon = window.getDatabaseNode();
+						if ItemManager2.isWeapon("item", DB.getPath(nodeWeapon)) then
+							local nodeChar = DB.getChild(nodeWeapon, "...");
+							DB.addHandler(DB.getPath(nodeChar, "skilllist.*.total"), "onUpdate", onSourceUpdate);
+							addSource("skill", "string");
+
+							super.onInit();
+							onSourceUpdate();
+						end
+					end
+					function onClose()
+						local nodeChar = DB.getChild(window.getDatabaseNode(), "...");
+						DB.removeHandler(DB.getPath(nodeChar, "skilllist.*.total"), "onUpdate", onSourceUpdate);
+					end
+					function onSourceUpdate(node)
+						local nodeWeapon = window.getDatabaseNode();
+						if ItemManager2.isWeapon("item", DB.getPath(nodeWeapon)) then
+							local nodeChar = DB.getChild(nodeWeapon, "...")
+							local sName = DB.getValue(nodeWeapon, "name", "");
+							local sSkill = DB.getValue(nodeWeapon, "skill", "");
+							local nLevel, sSkillLink, bJoAT = CharManager.getWeaponSkill(nodeChar, sSkill, sName)
+							if bJoAT then
+								setTooltipText(skill .. " (JoaT used)");
+							else
+								if sSkill ~= "" then
+									setTooltipText(sSkill .. " (skill found)");
+								else
+									setTooltipText(sSkill .. " (no skill found)");
+								end
+							end
+							setValue(nLevel);
+						end
+					end
+				</script>
+			</number_linked_framed>
+
+			<number_linked_framed name="characteristicDM">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<source><name>characteristic</name><string /></source>
+				<source><name>...woundtrack.dex_mod</name><op>+</op></source>
+				<source><name>...woundtrack.str_mod</name><op>+</op></source>
+				<displaysign />
+				<script>
+					function onSourceUpdate()
+						local nodeWeapon = window.getDatabaseNode();
+						local sValue = DB.getValue(nodeWeapon, "characteristic", "");
+						if (sValue or "") ~= "" then
+							local nDBtoApply = 0;
+							for k,v in pairs(self.getSources()) do
+								if k:match(sValue) then
+									nDBtoApply = self.onSourceValue(v, k);
+									break;
+								end
+							end
+							setValue(nDBtoApply);
+						end
+					end
+				</script>
+			</number_linked_framed>
+			<button_stringcycler name="characteristic">
+				<anchored width="35" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<parameters>
+					<defaultlabel> - </defaultlabel>
+					<labels>Str|Dex</labels>
+					<values>str_mod|dex_mod</values>
+				</parameters>
+			</button_stringcycler>
+
+			<string_textlistitem name="name">
+				<anchored height="20">
+					<top offset="2" />
+					<left offset="15" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget next="attack" />
+				<script>
+					function onDoubleClick(x, y)
+						window.actionAttack();
+						return true;
+					end
+
+					function onDragStart(button, x, y, draginfo)
+						window.actionAttack(draginfo);
+						return true;
+					end
+				</script>
+			</string_textlistitem>
+			<button_char_inv_carried name="carried">
+				<anchored to="name" width="20" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="0" />
+				</anchored>
+				<script file="common/scripts/button_crosslink.lua" />
+			</button_char_inv_carried>
+
+			<label name="label_damage">
+				<anchored height="20" width="55">
+					<top offset="28" />
+					<right offset="-145" />
+				</anchored>
+				<static textres="char_label_weapon_damage" />
+			</label>
+			<string_weapondamage name="damage">
+				<anchored height="20" width="100">
+					<top offset="28" />
+					<right offset="-35" />
+				</anchored>
+			</string_weapondamage>
+
+			<cycler_weapons_rateoffire name="rateoffire">
+				<anchored to="label_damage" width="70">
+					<top />
+					<right anchor="left" relation="relative" offset="-20" />
+				</anchored>
+			</cycler_weapons_rateoffire>
+			<label name="label_rateoffire">
+				<anchored to="label_damage" width="24">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="char_label_weapon_rate_of_fire" />
+			</label>
+
+			<basicnumber name="ammo">
+				<anchored to="label_damage" height="20" width="40">
+					<top />
+					<right anchor="left" relation="relative" offset="-20" />
+				</anchored>
+				<min>0</min>
+				<max>999</max>
+			</basicnumber>
+			<buttoncontrol name="resetammo">
+				<anchored to="ammo" position="insidebottomright" offset="-5,-3" width="12" height="12" />
+				<state icon="woundtrack_reset" color="4180C5" frame="fieldlight" frameoffset="4,4,4,4" tooltipres="char_label_woundtrack_reset_tooltip" />
+				<script>
+					function onButtonPress()
+						local nMaxAmmo = DB.getValue(window.getDatabaseNode(), "magazine", 0);
+						DB.setValue(window.getDatabaseNode(), "ammo", "number", nMaxAmmo);
+					end
+				</script>
+			</buttoncontrol>
+
+			<label name="label_ammo">
+				<anchored width="50">
+					<top parent="name" anchor="bottom" relation="relative" offset="5" />
+					<right parent="ammo" relation="left" offset="-40" />
+				</anchored>
+				<static textres="char_label_weapon_ammo" />
+			</label>
+
+			<button_toggledetail name="activatedetail">
+				<anchored>
+					<top offset="28" />
+					<left parent="damage" anchor="right" relation="relative" offset="5" />
+				</anchored>
+				<target>damageactions</target>
+				<script>
+					function onInit()
+						if DB.getChildCount(window.getDatabaseNode(), "damageactions") == 0 then
+							self.setVisible(false);
+						else
+							self.setVisible(true);
+						end
+					end
+					function onButtonPress()
+						window.damageactions.hideShowAmmoList(getValue());
+					end
+				</script>
+			</button_toggledetail>
+			<genericcontrol name="ammorightanchor">
+				<anchored width="0" height="0">
+					<top parent="damage" anchor="bottom" relation="relative" offset="10" />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+
+			<label name="label_ammo_damage">
+				<anchored to="ammorightanchor" width="100">
+					<top  />
+					<right anchor="left" relation="relative" offset="-50" />
+				</anchored>
+				<static textres="char_label_weapon_damage" />
+				<center />
+				<invisible />
+			</label>
+			<label name="label_ammo_attack">
+				<anchored to="ammorightanchor" width="40">
+					<top  />
+					<right anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<static textres="char_label_weapon_attack" />
+				<tooltip textres="char_tooltip_weapon_attack" />
+				<center />
+				<invisible />
+			</label>
+			<label name="label_ammo_rof">
+				<anchored to="ammorightanchor" width="60">
+					<top />
+					<right anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<static textres="char_label_weapon_rate_of_fire" />
+				<tooltip textres="char_tooltip_weapon_rate_of_fire" />
+				<center />
+				<invisible />
+			</label>
+			<label name="label_ammo_current_ammo">
+				<anchored to="ammorightanchor" width="45">
+					<top />
+					<right anchor="left" relation="relative" offset="-12" />
+				</anchored>
+				<static textres="char_label_weapon_ammo" />
+				<tooltip textres="char_tooltip_weapon_ammo" />
+				<center />
+				<invisible />
+			</label>
+			<label name="label_ammo_name">
+				<anchored to="ammorightanchor">
+					<top />
+					<left parent="" offset="0" />
+					<right anchor="left" relation="relative" offset="0"/>
+				</anchored>
+				<static textres="char_label_weapon_name" />
+				<center />
+				<invisible />
+			</label>
+
+			<list_damageaction name="damageactions">
+				<anchored>
+					<top parent="ammorightanchor" anchor="bottom" relation="relative" offset="20" />
+					<left offset="10" />
+					<right offset="-10" />
+				</anchored>
+				<invisible />
+			</list_damageaction>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="damage_action">
+		<margins control="0,0,0,10" />
+		<script file="campaign/scripts/damage_action.lua" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+
+			<hn name="order" />
+
+			<button_idelete name="idelete">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<editmode>weapons_iedit</editmode>
+			</button_idelete>
+
+			<linkfield name="shortcut">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<class>reference_ammunition</class>
+				<description field="name" />
+				<readonly />
+			</linkfield>
+
+			<string_weapondamage name="damage">
+				<anchored width="100" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+			</string_weapondamage>
+
+			<number_weaponattack name="attack">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="damage" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<source><name>...attack</name><op>+</op></source>
+				<displaysign />
+			</number_weaponattack>
+
+			<cycler_weapons_rateoffire name="ammorateoffire" source="rateoffire">
+				<anchored height="20" width="60">
+					<top offset="2" />
+					<right parent="damage" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+			</cycler_weapons_rateoffire>
+
+			<basicnumber name="ammo">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="damage" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<min>0</min>
+				<max>999</max>
+			</basicnumber>
+			<buttoncontrol name="resetammo">
+				<anchored to="ammo" position="insidebottomright" offset="-5,-3" width="12" height="12" />
+				<state icon="woundtrack_reset" color="4180C5" frame="fieldlight" frameoffset="4,4,4,4" tooltipres="char_label_woundtrack_reset_tooltip" />
+				<script>
+					function onButtonPress()
+						local nMaxAmmo = DB.getValue(window.getDatabaseNode(), "magazine", 0);
+						DB.setValue(window.getDatabaseNode(), "ammo", "number", nMaxAmmo);
+					end
+				</script>
+			</buttoncontrol>
+			<string_textlistitem name="ammotype">
+				<anchored height="20">
+					<top offset="2" />
+					<left offset="5" />
+					<right parent="damage" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+			</string_textlistitem>
+			<label name="label_traits">
+				<anchored width="40">
+					<top parent="ammotype" anchor="bottom" relation="relative" offset="5" />
+					<left offset="40" />
+				</anchored>
+				<static textres="char_label_weapon_traits" />
+			</label>
+			<basicstring name="traits">
+				<anchored height="20">
+					<top offset="28" />
+					<left parent="label_traits" anchor="right" relation="relative" offset="5" />
+					<right offset="-35" />
+				</anchored>
+			</basicstring>
+
+		</sheetdata>
+	</windowclass>
+</root>

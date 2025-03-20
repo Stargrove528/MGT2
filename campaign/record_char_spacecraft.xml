@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+Please see the license.html file included with this distribution for
+attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet_actions_spacecraft">
+		<script file="campaign/scripts/char_actions_spacecraft.lua" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<frame_char name="shiplistframe">
+				<anchored position="insidetop" height="175" />
+			</frame_char>
+			<label_frametop>
+				<anchored to="shiplistframe" />
+				<static textres="char_label_ships" />
+			</label_frametop>
+			<label>
+				<anchored position="insidetopright" offset="100,12" width="180" />
+				<center />
+				<static textres="char_label_role" />
+			</label>
+			<label>
+				<anchored to="shiplistframe" position="insidetopright" offset="20,12" width="70" />
+				<center />
+				<static textres="char_label_shipview" />
+			</label>
+
+			<windowlist name="shiplist">
+				<anchored to="shiplistframe" position="insidetop" offset="-10,30">
+					<bottom offset="-10" />
+				</anchored>
+				<class>charspacecraft_shiplistentry</class>
+				<readonly />
+			</windowlist>
+			<scrollbar_content_base>
+				<anchored to="shiplist" />
+				<target>shiplist</target>
+			</scrollbar_content_base>
+
+			<frame_char name="shipweaponsframe">
+				<anchored position="insidetop" offset="0,175">
+					<bottom />
+				</anchored>
+			</frame_char>
+			<label_frametop name="shipweaponstitle">
+				<anchored to="shipweaponsframe" />
+				<static textres="char_label_shipactions" />
+			</label_frametop>
+
+			<genericcontrol name="rightanchorshipsweapons">
+				<anchored to="shipweaponsframe" width="0" height="0">
+					<top offset="25" />
+					<right anchor="right" offset="-15" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+
+			<label name="label_actions_attack">
+				<anchored to="rightanchorshipsweapons" width="45">
+					<top />
+					<right anchor="left" relation="relative" offset="-20" />
+				</anchored>
+				<static textres="spacecraft_label_actions_attack" />
+				<center />
+			</label>
+			<label name="label_actions_mod">
+				<anchored to="rightanchorshipsweapons" width="40">
+					<top />
+					<right anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<static textres="spacecraft_label_actions_mod" />
+				<center />
+			</label>
+			<label name="label_actions_skilldm">
+				<anchored to="rightanchorshipsweapons" width="30">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="spacecraft_label_actions_skilldm" />
+				<center />
+			</label>
+			<label name="label_actions_attribute">
+				<anchored to="rightanchorshipsweapons" width="95">
+					<top />
+					<right anchor="left" relation="relative" offset="-7" />
+				</anchored>
+				<static textres="spacecraft_label_actions_attribute" />
+				<center />
+			</label>
+			<label name="label_actions_weapon_name">
+				<anchored to="rightanchorshipsweapons">
+					<top />
+					<left parent="" offset="50" />
+					<right anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<static textres="spacecraft_label_actions_weapon_name" />
+				<center />
+			</label>
+			<label name="count_label">
+				<anchored>
+					<top parent="rightanchorshipsweapons"/>
+					<right />
+					<left offset="32" />
+				</anchored>
+				<static>#</static>
+			</label>
+			<windowlist name="shipweapons">
+				<anchored to="shipweaponsframe" position="insidetop" offset="-10,45">
+					<bottom offset="-10" />
+				</anchored>
+				<class>char_mountlistentry</class>
+			</windowlist>
+			<scrollbar name="scroll_shipweapons">
+				<anchored to="shipweapons" offset="-5,-15" />
+				<target>shipweapons</target>
+			</scrollbar>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="charspacecraft_shiplistentry">
+		<margins control="0,0,0,0" />
+		<sheetdata>
+			<frame_char name="shipframe">
+				<bounds>0,0,-2,40</bounds>
+			</frame_char>
+			<hlink name="link" />
+			<hs name="role" />
+
+			<tokencontrol name="token">
+				<anchored position="insidetopleft" width="20" height="20">
+					<left parent="" offset="5" />
+					<top offset="10" />
+				</anchored>
+				<empty>token_empty</empty>
+				<disabled />
+			</tokencontrol>
+
+			<genericcontrol name="rightanchor">
+				<anchored to="shipframe" width="0" height="0">
+					<top offset="10"/>
+					<right offset="-60"/>
+				</anchored>
+				<invisible />
+			</genericcontrol>
+
+			<button_char_showhideactions name="showhideactions">
+				<anchored to="rightanchor" width="40" height="20">
+					<top />
+					<left />
+				</anchored>
+				<tooltip>
+					<textres>charspacecraft_tooltip_crew_actions</textres>
+				</tooltip>
+			</button_char_showhideactions>
+
+			<combobox name="rolelabel">
+				<anchored to="rightanchor" width="180" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-30" />
+				</anchored>
+				<listdirection>down</listdirection>
+				<nohide />
+				<center />
+				<script>
+					function onInit()
+						super.onInit();
+
+						updateLabel();
+					end
+
+					function updateLabel()
+						local _,vShipRecord = window.link.getValue();
+    					local nodeShip = DB.findNode(vShipRecord);
+						local sCrewRequirements = DB.getValue(nodeShip, "crew_requirements", "");
+						local aCrewRequired = SpacecraftManager.getRequiredCrewList(sCrewRequirements);
+						addItems(aCrewRequired);
+					end
+
+					local updating = false;
+					function optionClicked(wNewSelection)
+						super.optionClicked(wNewSelection);
+
+						if updating then
+							return
+						end
+
+						updating = true;
+
+						local _,vShipRecord = window.link.getValue();
+    					local nodeShip = DB.findNode(vShipRecord);
+						local sRole = getValue();
+
+						if window.windowlist.window.bInitialize then
+							window.windowlist.window.roleChange(nodeShip, sRole);
+						end
+
+						updating = false;
+					end
+				</script>
+			</combobox>
+
+			<stringfield name="shipname">
+				<anchored position="insidetopleft" width="180" height="20">
+					<left offset="35" />
+					<top offset="10" />
+				</anchored>
+				<font>sheetlabel</font>
+				<readonly />
+			</stringfield>
+
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_mountlistentry" >
+		<margins control="0,0,0,15" />
+		<script file="campaign/scripts/spacecraft_weapons.lua" />
+		<sheetdata>
+			<hn name="order" />
+			<hs name="range" />
+			<hs name="traits" />
+			<hlink name="link" />
+			<hlinkc name="shipLink" />
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top/>
+					<right />
+				</anchored>
+			</genericcontrol>
+			<linkfield name="shortcut">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<class>item</class>
+				<description field="name" />
+				<readonly />
+				<script>
+					function onInit()
+						onValueChanged();
+					end
+					function onValueChanged()
+						local sClass, sRecord = window.link.getValue();
+						if sRecord == "" then
+							setVisible(false);
+							window.shortcut_spacer.setVisible(true);
+						else
+							setVisible(true);
+							window.shortcut_spacer.setVisible(false);
+						end
+					end
+					function onClickRelease()
+                    	local sClass, sRecord = window.link.getValue();
+                        Interface.openWindow(sClass, sRecord);
+						return false;
+                    end
+				</script>
+			</linkfield>
+			<genericcontrol name="shortcut_spacer">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<basicnumber name="attack">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<readonly/>
+				<rollable />
+				<script>
+					function onSourceUpdate(source)
+						local nValue = window.skillDM.getValue();
+						nValue = nValue + window.characteristicDM.getValue();
+						nValue = nValue + window.actionMod.getValue();
+						if getValue() ~= nValue then
+							setValue(nValue);
+						end
+					end
+
+					function action(draginfo)
+						window.actionAttack(draginfo);
+						return true;
+					end
+					function onDragStart(button, x, y, draginfo)
+						return self.action(draginfo);
+					end
+					function onDoubleClick(button, x, y)
+						return self.action();
+					end
+				</script>
+				<tabtarget next="damage" prev="range" />
+			</basicnumber>
+			<basicnumber name="actionMod">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-20" />
+				</anchored>
+				<tabtarget prev="skillDM" next="attack" />
+				<script>
+					function onValueChanged()
+						window.attack.onSourceUpdate();
+					end
+				</script>
+			</basicnumber>
+
+			<number_charskillDMfield name="skillDM">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<tabtarget prev="characteristicDM" next="actionMod" />
+			</number_charskillDMfield>
+
+			<!-- The attribute/characteristic Dice Modifier -->
+			<number_charskillDMfield name="characteristicDM">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<tabtarget prev="characteristic" next="level" />
+			</number_charskillDMfield>
+			<basicstring name="characteristic">
+				<anchored width="35" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<center/>
+				<tabtarget prev="name" next="characteristicDM" />
+			</basicstring>
+
+			<string_textlistitem name="name">
+				<readonly/>
+				<anchored position="insidetopleft" offset="40,2" height="20">
+					<right parent="rightanchor" anchor="left" relation="current" offset="-10" />
+				</anchored>
+				<tabtarget next="tl" prev="attacks" />
+			</string_textlistitem>
+
+			<number_charinv name="attacks">
+				<readonly/>
+				<bounds>5,2,25,20</bounds>
+				<tabtarget next="name" />
+				<default>1</default>
+			</number_charinv>
+
+			<label name="label_damage">
+				<anchored height="20" width="55">
+					<top offset="28" />
+					<right offset="-145" />
+				</anchored>
+				<static textres="char_label_weapon_damage" />
+			</label>
+			<string_weapondamage name="damage">
+				<anchored height="20" width="100">
+					<top offset="28" />
+					<right offset="-35" />
+				</anchored>
+				<script>
+					function action(draginfo)
+						window.actionDamage(draginfo);
+						return true;
+					end
+					function onDragStart(button, x, y, draginfo)
+						return self.action(draginfo);
+					end
+					function onDoubleClick(button, x, y)
+						return self.action();
+					end
+				</script>
+			</string_weapondamage>
+		</sheetdata>
+	</windowclass>
+
+	<template name="button_char_showhideactions">
+		<button_text>
+			<state textres="char_label_show" />
+			<script file="campaign/scripts/button_char_showhideactions.lua" />
+		</button_text>
+	</template>
+
+	<template name="button_ship_showhideactions">
+		<button_text>
+			<state textres="char_label_show" />
+			<script file="campaign/scripts/button_ship_showhideactions.lua" />
+		</button_text>
+	</template>
+</root>

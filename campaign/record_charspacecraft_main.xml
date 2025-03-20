@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charspacecraft_main">
+		<!-- <script file="campaign/scripts/charspacecraft_main.lua" /> -->
+		<script>
+			function onInit()
+				if Session.IsHost then
+					local node = getDatabaseNode();
+					if node then
+						if DB.getName(DB.getParent(node)) == "charspacecraftsheet" then
+							DB.setValue(node, 'locked', 'number', 0);
+						end
+					end
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<!-- Type -->
+			<frame_char name="typeframe">
+				<anchored position="insidetopleft" offset="0,0" width="170" height="45"/>
+				<!-- <bounds>0,0,150,45</bounds> -->
+			</frame_char>
+            <charspacecraft_string_labeled name="type">
+				<anchored to="typeframe" position="insidetop" offset="-15,10" height="20" />
+				<labelres>spacecraft_label_type</labelres>
+				<tooltip>
+					<textres>spacecraft_tooltip_type</textres>
+				</tooltip>
+			</charspacecraft_string_labeled>
+
+			<!-- Class -->
+			<frame_char name="classframe">
+				<!-- <bounds>160,0,-10,45</bounds> -->
+				<anchored to="typeframe" position="righthigh" offset="5,0" height="45">
+					<right parent="" offset="0"/>
+				</anchored>
+			</frame_char>
+			<charspacecraft_string_labeled name="class">
+				<anchored to="classframe" position="insidetop" offset="-15,10" height="20" />
+				<labelres>spacecraft_label_class</labelres>
+				<tooltip>
+					<textres>spacecraft_tooltip_class</textres>
+				</tooltip>
+			</charspacecraft_string_labeled>
+
+			<frame_char name="crewrequirementsframe">
+				<!-- <bounds>0,45,-10,140</bounds> -->
+				<anchored height="140">
+					<top parent="typeframe" anchor="bottom" offset="5"/>
+					<left parent="typeframe" offset="0"/>
+					<right parent="classframe" offset="0"/>
+				</anchored>
+			</frame_char>
+
+			<label_frametop>
+				<anchored to="crewrequirementsframe" />
+				<static textres="spacecraft_label_crew_requirements" />
+			</label_frametop>
+
+			<string_column_full name="crew_requirements">
+                <anchored to="crewrequirementsframe">
+					<top offset="80"/>
+					<left offset="15" />
+					<right offset="-15" />
+					<bottom offset="-40" />
+				</anchored>
+			</string_column_full>
+
+			<label_column name="crew_morale_label">
+				<static textres="spacecraft_label_crew_morale" />
+                <anchored>
+                    <top offset="10" />
+					<left offset="35" />
+				</anchored>
+			</label_column>
+			<number_column name="crew_morale">
+                <anchored width="40">
+                    <top offset="10" />
+					<left offset="130" />
+				</anchored>
+            </number_column>
+			<number_dm name="crew_morale_dm">
+                <anchored width="40">
+                    <top parent="crew_morale" />
+					<left parent="crew_morale" position="right" offset="50" />
+				</anchored>
+				<source><name>crew_morale</name><op>+</op></source>
+            </number_dm>
+
+			<frame_char name="runningcostsframe">
+				<!-- <bounds>0,185,-10,110</bounds> -->
+				<anchored to="crewrequirementsframe" height="115">
+					<top anchor="bottom" offset="5"/>
+					<left offset="0"/>
+					<right offset="0"/>
+				</anchored>
+			</frame_char>
+
+			<label_frametop name="running_costs_label">
+				<anchored to="runningcostsframe" />
+				<static textres="spacecraft_label_running_costs" />
+			</label_frametop>
+
+			<anchor_column name="columnanchor" />
+			<string_column name="maintenance_cost">
+				<anchored to="runningcostsframe">
+					<top offset="40" />
+                    <left offset="35" />
+					<right offset="-300" />
+                </anchored>
+                <center />
+            </string_column>
+			<string_column name="purchase_cost">
+				<anchored to="maintenance_cost">
+					<top offset="-20" />
+					<left parent="maintenance_cost" anchor="right" relation="relative" offset="20" />
+                    <right parent="runningcostsframe" offset="-20" />
+                </anchored>
+                <center />
+			</string_column>
+
+			<label_frametop name="running_costs_label">
+				<anchored to="runningcostsframe">
+					<left parent="purchase_cost" offset="-5" />
+				</anchored>
+				<static textres="spacecraft_label_purchase_costs" />
+			</label_frametop>
+
+			<label_frametop name="mortage_label">
+				<anchored height="20">
+				 	<top parent="maintenance_cost" anchor="bottom" offset="10"/>
+					<left parent="running_costs_label" anchor="left" offset="0" />
+				</anchored>
+				<static textres="spacecraft_label_mortgage" />
+			</label_frametop>
+
+			<label_column name="mortage_remaining_label">
+				<static textres="spacecraft_label_mortgage_remaining" />
+                <anchored to="mortage_label">
+					<top anchor="bottom" offset="30"/>
+					<left offset="10"/>
+				</anchored>
+			</label_column>
+			<string_column name="mortgage_payment_remaining">
+                <anchored height="20">
+					<top parent="mortage_remaining_label" anchor="top" offset="0"/>
+					<left parent="mortage_remaining_label" anchor="right" offset="10"/>
+					<right parent="purchase_cost" anchor="left" offset="-5"/>
+				</anchored>
+				<center />
+            </string_column>
+
+			<label_column name="mortgage_payments_left_label">
+				<static textres="spacecraft_label_mortgage_payments_remaining" />
+                <anchored height="20">
+					<top parent="mortgage_payment_remaining" anchor="top" offset="0"/>
+					<left parent="mortgage_payment_remaining" anchor="right" offset="10"/>
+				</anchored>
+			</label_column>
+			<basicnumber name="mortgage_payments_left">
+				<anchored to="mortgage_payments_left_label" position="righthigh" offset="10,0" height="20">
+					<right parent="runningcostsframe" offset="-20"/>
+                </anchored>
+                <center />
+			</basicnumber>
+
+			<subwindow name="power_requirements">
+				<frame>groupbox</frame>
+				<anchored to="runningcostsframe" position="belowleft" offset="0,5">
+					<bottom parent="" offset="-10"/>
+				</anchored>
+				<class>charspacecraft_power</class>
+				<activate />
+				<fastinit />
+			</subwindow>
+
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="charspacecraft_power">
+		<margins control="0,0,10,10" />
+		<sheetdata>
+			<label_frametop name="header_power_requirements">
+				<anchored position="insidetopleft" offset="10,10" height="20"/>
+				<static textres="spacecraft_label_power_requirements" />
+			</label_frametop>
+
+			<windowlist name="power_requirements">
+				<anchored position="insidetopleft" offset="10,35">
+					<right parent="header_power_requirements" offset="45"/>
+					<bottom parent="" offset="-10"/>
+				</anchored>
+				<datasource>.power_requirements</datasource>
+				<class>spacecraft_power_requirements</class>
+				<sortby><control>order</control></sortby>
+			</windowlist>
+			<button_iedit name="power_requirements_iedit">
+				<anchored to="header_power_requirements" position="righthigh" offset="30,0" />
+				<edittarget>power_requirements</edittarget>
+			</button_iedit>
+			<button_iadd name="power_requirements_iadd">
+				<anchored to="power_requirements_iedit" position="lefthigh" offset="5,0" />
+				<target>power_requirements</target>
+			</button_iadd>
+
+
+			<!-- <spacer_column name="spacer" /> -->
+
+			<label name="total_power_label">
+                <anchored to="power_requirements_iedit" position="righthigh" offset="60,0"/>
+				<static textres="spacecraft_label_total_power" />
+			</label>
+			<basicnumber name="total_power" source="power.total">
+                <anchored to="total_power_label" position="righthigh" offset="10,0" width="80" height="20"/>
+				<script>
+					function onInit()
+						local nTotalPower = SpacecraftManager.getPowerTotalFromSystem(DB.getChild(getDatabaseNode(), '...'));
+						if nTotalPower > 0 then
+							window.current_power.setValue(nTotalPower);
+							setValue(nTotalPower);
+						end
+					end
+				</script>
+            </basicnumber>
+			<label name="current_power_label">
+                <anchored to="total_power_label" position="belowleft" offset="0,10" height="20"/>
+				<static textres="spacecraft_label_current_power" />
+			</label>
+			<basicnumber name="current_power" source="power.current">
+				<anchored to="current_power_label" position="righthigh" offset="10,0" width="60" height="20"/>
+                <center />
+			</basicnumber>
+		</sheetdata>
+	</windowclass>
+</root>

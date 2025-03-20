@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="reference_psionicawarenesstable" copy="reference_groupindex_window">
+		<sheetdata>
+			<list_content_framed_groupbox name="grouplist">
+				<datasource>.psionic</datasource>
+				<class>reference_psionictablegroupitem</class>
+				<sortby><control>name</control></sortby>
+			</list_content_framed_groupbox>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_psionicclairvoyancetable" copy="reference_psionicawarenesstable" />
+	<windowclass name="reference_psionictelekinesistable" copy="reference_psionicawarenesstable" />
+	<windowclass name="reference_psionictelepathytable" copy="reference_psionicawarenesstable" />
+	<windowclass name="reference_psionicteleportationtable" copy="reference_psionicawarenesstable" />
+	<windowclass name="reference_psioniczhodanitable" copy="reference_psionicawarenesstable" />
+
+	<windowclass name="reference_psionictablegroupitem" copy="reference_groupindex_item" />
+</root>

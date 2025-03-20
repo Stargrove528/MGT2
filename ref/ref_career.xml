@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="reference_career" copy="record_window" />
+
+	<windowclass name="reference_career_main">
+        <script>
+			function onInit()
+				self.update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+
+				text.setReadOnly(bReadOnly);
+				qualification.setReadOnly(bReadOnly);
+				commission.setReadOnly(bReadOnly);
+				assignments.setReadOnly(bReadOnly);
+
+				if bReadOnly then
+					if (text.isEmpty()) then
+						text.setVisible(false);
+					end
+					if (qualification.isEmpty()) then
+						qualificationlabel.setVisible(false);
+						qualification.setVisible(false);
+					end
+					if (commission.isEmpty()) then
+						commissionlabel.setVisible(false);
+						commission.setVisible(false);
+					end
+					if (assignments.isEmpty()) then
+						assignmentslabel.setVisible(false);
+						assignments.setVisible(false);
+					end
+				else
+					text.setVisible(true);
+					qualificationlabel.setVisible(true);
+					qualification.setVisible(true);
+					commissionlabel.setVisible(true);
+					commission.setVisible(true);
+					assignmentslabel.setVisible(true);
+					assignments.setVisible(true);
+				end
+			end
+        </script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+            <ft_columnh name="text" />
+            <label_column name="qualificationlabel">
+				<static textres="ref_label_qualification" />
+                <font>reference-b-large</font>
+			</label_column>
+			<string_columnh name="qualification">
+                <anchored>
+					<top offset="30"/>
+					<left offset="10" />
+				</anchored>
+				<readonly />
+			</string_columnh>
+            <label_column name="commissionlabel">
+				<static textres="ref_label_commission" />
+                <font>reference-b-large</font>
+			</label_column>
+			<string_columnh name="commission">
+                <anchored>
+					<top offset="30"/>
+					<left offset="10" />
+				</anchored>
+				<readonly />
+			</string_columnh>
+			<label_column name="assignmentslabel">
+				<static textres="ref_label_assignments" />
+				<font>reference-b-large</font>
+			</label_column>
+            <ft_columnh name="assignments">
+                <separator>type_assignments</separator>
+                <anchored>
+					<top offset="30"/>
+					<left offset="10" />
+				</anchored>
+				<readonly />
+			</ft_columnh>
+		</sheetdata>
+	</windowclass>
+</root>

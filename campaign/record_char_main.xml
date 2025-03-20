@@ -1,0 +1,1066 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet_main">
+		<script>
+			function onDrop(x, y, draginfo)
+				if draginfo.isType("shortcut") then
+
+					local sClass = draginfo.getShortcutData();
+					local node = draginfo.getDatabaseNode();
+
+					if StringManager.contains({"reference_class", "reference_race", "reference_homeworld"}, sClass) then
+						CharManager.addInfoDB(getDatabaseNode(), node, sClass);
+						return true;
+					end
+				end
+			end
+
+		</script>
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<frame_char name="attributeframe">
+				<anchored position="insidetopleft" height="450">
+					<right anchor="center" offset="55" />
+				</anchored>
+			</frame_char>
+			<label_frametop>
+				<anchored to="attributeframe" />
+				<static textres="char_label_attributes" />
+			</label_frametop>
+			<subwindow name="sub_attributes">
+				<anchored to="attributeframe" position="insidetop" offset="-10,20">
+					<bottom offset="-10" />
+				</anchored>
+				<class>char_main_attributes</class>
+				<activate />
+				<fastinit />
+			</subwindow>
+
+			<frame_char name="additionaldetailsframe">
+				<anchored position="insidetopright" height="120">
+					<left anchor="center" offset="55" />
+				</anchored>
+			</frame_char>
+			<label_frametop>
+				<anchored to="additionaldetailsframe" />
+				<static textres="char_label_extracharacterdetails" />
+			</label_frametop>
+			<subwindow name="sub_additionaldetails">
+				<anchored to="additionaldetailsframe" position="insidetop" offset="-10,20">
+					<bottom offset="-10" />
+				</anchored>
+				<class>char_main_additionaldetails</class>
+				<activate />
+				<fastinit />
+			</subwindow>
+
+			<frame_char name="racialtraitsframe">
+				<anchored position="insidetopright" offset="0,120" height="130">
+					<left anchor="center" offset="55" />
+				</anchored>
+			</frame_char>
+			<label_frametop>
+				<anchored to="racialtraitsframe" />
+				<static textres="char_label_racialtraits" />
+			</label_frametop>
+			<list_racialtraits name="racialtraits">
+				<anchored to="racialtraitsframe" position="insidetop" offset="-10,30">
+					<bottom offset="-10" />
+				</anchored>
+			</list_racialtraits>
+			<scrollbar_content_base>
+				<anchored to="racialtraits" />
+				<target>racialtraits</target>
+			</scrollbar_content_base>
+			<button_iedit name="racialtraits_iedit">
+				<anchored to="racialtraits" position="aboveright" offset="0,5" />
+				<target>racialtraits</target>
+			</button_iedit>
+			<button_iadd name="racialtraits_iadd">
+				<anchored to="racialtraits_iedit" position="lefthigh" offset="0,0" />
+				<target>racialtraits</target>
+			</button_iadd>
+
+			<frame_char name="financesframe">
+				<anchored position="insidetopright" offset="0,250" height="200">
+					<left anchor="center" offset="55" />
+				</anchored>
+			</frame_char>
+			<label_frametop>
+				<anchored to="financesframe" />
+				<static textres="char_label_finances" />
+			</label_frametop>
+			<subwindow name="finances_detail">
+				<anchored to="financesframe" position="insidetop" offset="-10,20">
+					<bottom offset="-10" />
+				</anchored>
+				<class>char_finances</class>
+				<fastinit />
+				<activate />
+			</subwindow>
+			<scrollbar_content_base>
+				<anchored to="finances_detail" />
+				<target>finances_detail</target>
+			</scrollbar_content_base>
+
+			<frame_char name="alliesframe">
+				<anchored position="insidetop" offset="0,450">
+					<bottom />
+				</anchored>
+			</frame_char>
+			<label_frametop>
+				<anchored to="alliesframe" />
+				<static textres="char_label_alliesetc" />
+			</label_frametop>
+			<stringu name="allies">
+				<anchored to="alliesframe" position="insidetop" offset="-10,20">
+					<bottom offset="-10" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</stringu>
+			<scrollbar_content_base>
+				<anchored to="allies" />
+				<target>allies</target>
+			</scrollbar_content_base>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_main_attributes">
+		<margins control="0,0,0,5" />
+		<sheetdata>
+			<!-- Strength -->
+			<label name="label_strength">
+				<anchored position="insidetopleft" offset="0,15" height="20" />
+				<static textres="char_label_strength" />
+			</label>
+
+			<!-- Characteristic -->
+			<number_characteristic name="strength" source="attributes.strength">
+				<anchored width="30" height="20">
+					<top parent="label_strength" />
+					<left offset="145" />
+				</anchored>
+			</number_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="str_mod" source="attributes.str_mod2">
+				<anchored width="30" height="20">
+					<top parent="strength" />
+					<left parent="strength" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="str_equipment" source="attributes.str_equipment">
+				<anchored width="30" height="20">
+					<top parent="strength" />
+					<left parent="strength" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="str_dm" source="attributes.str_mod">
+				<anchored width="30" height="20">
+					<top parent="strength" />
+					<left parent="strength" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.strength</name><op>+</op></source>
+				<source><name>attributes.str_mod2</name><op>+</op></source>
+				<source><name>attributes.str_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+
+			<label_fieldtop>
+				<anchored to="strength" />
+				<static textres="char_label_characteristic" />
+			</label_fieldtop>
+			<label_fieldtop>
+				<anchored to="str_mod" />
+				<static textres="char_label_mod" />
+			</label_fieldtop>
+			<label_fieldtop>
+				<anchored to="str_equipment" />
+				<static textres="char_label_equip" />
+			</label_fieldtop>
+			<label_fieldtop>
+				<anchored to="str_dm" />
+				<static textres="char_label_dm" />
+			</label_fieldtop>
+
+			<!-- Dexterity -->
+			<label name="label_dexterity">
+				<anchored height="20" >
+					<top parent="label_strength" position="bottom" offset="26" />
+					<left parent="label_strength" />
+				</anchored>
+				<static textres="char_label_dexterity" />
+			</label>
+
+			<!-- Characteristic -->
+			<number_characteristic name="dexterity" source="attributes.dexterity">
+				<anchored width="30" height="20">
+					<top parent="label_dexterity" />
+					<left offset="145" />
+				</anchored>
+			</number_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="dex_mod" source="attributes.dex_mod2">
+				<anchored width="30" height="20">
+					<top parent="dexterity" />
+					<left parent="dexterity" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="dex_equipment" source="attributes.dex_equipment">
+				<anchored width="30" height="20">
+					<top parent="dexterity" />
+					<left parent="dexterity" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="dex_dm" source="attributes.dex_mod">
+				<anchored width="30" height="20">
+					<top parent="dexterity" />
+					<left parent="dexterity" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.dexterity</name><op>+</op></source>
+				<source><name>attributes.dex_mod2</name><op>+</op></source>
+				<source><name>attributes.dex_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+
+			<!-- Endurance -->
+			<label name="label_endurance">
+				<anchored height="20" >
+					<top parent="label_dexterity" position="bottom" offset="26" />
+					<left parent="label_strength" />
+				</anchored>
+				<static textres="char_label_endurance" />
+			</label>
+
+			<!-- Characteristic -->
+			<number_characteristic name="endurance" source="attributes.endurance">
+				<anchored width="30" height="20">
+					<top parent="label_endurance" />
+					<left offset="145" />
+				</anchored>
+			</number_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="end_mod" source="attributes.end_mod2">
+				<anchored width="30" height="20">
+					<top parent="endurance" />
+					<left parent="endurance" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="end_equipment" source="attributes.end_equipment">
+				<anchored width="30" height="20">
+					<top parent="endurance" />
+					<left parent="endurance" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="end_dm" source="attributes.end_mod">
+				<anchored width="30" height="20">
+					<top parent="endurance" />
+					<left parent="endurance" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.endurance</name><op>+</op></source>
+				<source><name>attributes.end_mod2</name><op>+</op></source>
+				<source><name>attributes.end_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+
+			<!-- Intelligence -->
+			<label name="label_intelligence">
+				<anchored height="20" >
+					<top parent="label_endurance" position="bottom" offset="26" />
+					<left parent="label_strength" />
+				</anchored>
+				<static textres="char_label_intelligence" />
+			</label>
+
+			<!-- Characteristic -->
+			<number_characteristic name="intelligence" source="attributes.intelligence">
+				<anchored width="30" height="20">
+					<top parent="label_intelligence" />
+					<left offset="145" />
+				</anchored>
+			</number_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="int_mod" source="attributes.int_mod2">
+				<anchored width="30" height="20">
+					<top parent="intelligence" />
+					<left parent="intelligence" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="int_equipment" source="attributes.int_equipment">
+				<anchored width="30" height="20">
+					<top parent="intelligence" />
+					<left parent="intelligence" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="int_dm" source="attributes.int_mod">
+				<anchored width="30" height="20">
+					<top parent="intelligence" />
+					<left parent="intelligence" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.intelligence</name><op>+</op></source>
+				<source><name>attributes.int_mod2</name><op>+</op></source>
+				<source><name>attributes.int_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+
+			<!-- Education -->
+			<label name="label_education">
+				<anchored height="20" >
+					<top parent="label_intelligence" position="bottom" offset="26" />
+					<left parent="label_strength" />
+				</anchored>
+				<static textres="char_label_education" />
+			</label>
+
+			<!-- Characteristic -->
+			<number_characteristic name="education" source="attributes.education">
+				<anchored width="30" height="20">
+					<top parent="label_education" />
+					<left offset="145" />
+				</anchored>
+			</number_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="edu_mod" source="attributes.edu_mod2">
+				<anchored width="30" height="20">
+					<top parent="education" />
+					<left parent="education" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="edu_equipment" source="attributes.edu_equipment">
+				<anchored width="30" height="20">
+					<top parent="education" />
+					<left parent="education" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="edu_dm" source="attributes.edu_mod">
+				<anchored width="30" height="20">
+					<top parent="education" />
+					<left parent="education" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.education</name><op>+</op></source>
+				<source><name>attributes.edu_mod2</name><op>+</op></source>
+				<source><name>attributes.edu_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+
+			<!-- Social -->
+			<label name="label_social">
+				<anchored height="20" >
+					<top parent="label_education" position="bottom" offset="26" />
+					<left parent="label_strength" />
+				</anchored>
+				<static textres="char_label_social" />
+			</label>
+
+			<!-- Characteristic -->
+			<number_characteristic name="social" source="attributes.social">
+				<anchored width="30" height="20">
+					<top parent="label_social" />
+					<left offset="145" />
+				</anchored>
+			</number_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="soc_mod" source="attributes.soc_mod2">
+				<anchored width="30" height="20">
+					<top parent="social" />
+					<left parent="social" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="soc_equipment" source="attributes.soc_equipment">
+				<anchored width="30" height="20">
+					<top parent="social" />
+					<left parent="social" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="soc_dm" source="attributes.soc_mod">
+				<anchored width="30" height="20">
+					<top parent="social" />
+					<left parent="social" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.social</name><op>+</op></source>
+				<source><name>attributes.soc_mod2</name><op>+</op></source>
+				<source><name>attributes.soc_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+
+			<!-- OPTIONAL  -->
+			<genericcontrol name="secondcolumnanchor">
+				<anchored width="0" height="0">
+					<top parent="label_social" position="bottom" offset="20" />
+					<left parent="label_strength" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+
+			<!-- PSI -->
+			<label_optional_characteristic name="label_psi">
+				<anchored height="20" >
+					<top parent="secondcolumnanchor" anchor="bottom" relation="relative" offset="6" />
+					<left parent="label_strength" />
+				</anchored>
+				<static textres="char_label_psi" />
+			</label_optional_characteristic>
+
+			<!-- Characteristic -->
+			<number_optional_characteristic name="psi" source="attributes.psi">
+				<anchored width="30" height="20">
+					<top parent="label_psi" />
+					<left offset="145" />
+				</anchored>
+			</number_optional_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="psi_mod" source="attributes.psi_mod2">
+				<anchored width="30" height="20">
+					<top parent="psi" />
+					<left parent="psi" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="psi_equipment" source="attributes.psi_equipment">
+				<anchored width="30" height="20">
+					<top parent="psi" />
+					<left parent="psi" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="psi_dm" source="attributes.psi_mod">
+				<anchored width="30" height="20">
+					<top parent="psi" />
+					<left parent="psi" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.psi</name><op>+</op></source>
+				<source><name>attributes.psi_mod2</name><op>+</op></source>
+				<source><name>attributes.psi_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+
+			<!-- Morale -->
+			<label_optional_characteristic name="label_morale">
+				<anchored height="20" >
+					<top parent="secondcolumnanchor" anchor="bottom" relation="relative" offset="6" />
+					<left parent="label_strength" />
+				</anchored>
+				<static textres="char_label_morale" />
+			</label_optional_characteristic>
+
+			<!-- Characteristic -->
+			<number_optional_characteristic name="morale" source="attributes.morale">
+				<anchored width="30" height="20">
+					<top parent="label_morale" />
+					<left offset="145" />
+				</anchored>
+			</number_optional_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="mor_mod" source="attributes.mor_mod2">
+				<anchored width="30" height="20">
+					<top parent="morale" />
+					<left parent="morale" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="mor_equipment" source="attributes.mor_equipment">
+				<anchored width="30" height="20">
+					<top parent="morale" />
+					<left parent="morale" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="mor_dm" source="attributes.mor_mod">
+				<anchored width="30" height="20">
+					<top parent="morale" />
+					<left parent="morale" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.morale</name><op>+</op></source>
+				<source><name>attributes.mor_mod2</name><op>+</op></source>
+				<source><name>attributes.mor_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+
+			<!-- Luck -->
+			<label_optional_characteristic name="label_luck">
+				<anchored height="20" >
+					<top parent="secondcolumnanchor" anchor="bottom" relation="relative" offset="6" />
+					<left parent="label_strength" />
+				</anchored>
+				<static textres="char_label_luck" />
+			</label_optional_characteristic>
+
+			<!-- Characteristic -->
+			<number_optional_characteristic name="luck" source="attributes.luck">
+				<anchored width="30" height="20">
+					<top parent="label_luck" />
+					<left offset="145" />
+				</anchored>
+			</number_optional_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="luc_mod" source="attributes.luc_mod2">
+				<anchored width="30" height="20">
+					<top parent="luck" />
+					<left parent="luck" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="luc_equipment" source="attributes.luc_equipment">
+				<anchored width="30" height="20">
+					<top parent="luck" />
+					<left parent="luck" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="luc_dm" source="attributes.luc_mod">
+				<anchored width="30" height="20">
+					<top parent="luck" />
+					<left parent="luck" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.luck</name><op>+</op></source>
+				<source><name>attributes.luc_mod2</name><op>+</op></source>
+				<source><name>attributes.luc_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+
+			<!-- Sanity -->
+			<label_optional_characteristic name="label_sanity">
+				<anchored height="20" >
+					<top parent="secondcolumnanchor" anchor="bottom" relation="relative" offset="6" />
+					<left parent="label_strength" />
+				</anchored>
+				<static textres="char_label_sanity" />
+			</label_optional_characteristic>
+
+			<!-- Characteristic -->
+			<number_optional_characteristic name="sanity" source="attributes.sanity">
+				<anchored width="30" height="20">
+					<top parent="label_sanity" />
+					<left offset="145" />
+				</anchored>
+			</number_optional_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="san_mod" source="attributes.san_mod2">
+				<anchored width="30" height="20">
+					<top parent="sanity" />
+					<left parent="sanity" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="san_equipment" source="attributes.san_equipment">
+				<anchored width="30" height="20">
+					<top parent="sanity" />
+					<left parent="sanity" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="san_dm" source="attributes.san_mod">
+				<anchored width="30" height="20">
+					<top parent="sanity" />
+					<left parent="sanity" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.sanity</name><op>+</op></source>
+				<source><name>attributes.san_mod2</name><op>+</op></source>
+				<source><name>attributes.san_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+
+			<!-- Wealth -->
+			<label_optional_characteristic name="label_wealth">
+				<anchored height="20" >
+					<top parent="secondcolumnanchor" anchor="bottom" relation="relative" offset="6" />
+					<left parent="label_strength" />
+				</anchored>
+				<static textres="char_label_wealth" />
+			</label_optional_characteristic>
+
+			<!-- Characteristic -->
+			<number_optional_characteristic name="wealth" source="attributes.wealth">
+				<anchored width="30" height="20">
+					<top parent="label_wealth" />
+					<left offset="145" />
+				</anchored>
+			</number_optional_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="wea_mod" source="attributes.wea_mod2">
+				<anchored width="30" height="20">
+					<top parent="wealth" />
+					<left parent="wealth" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="wea_equipment" source="attributes.wea_equipment">
+				<anchored width="30" height="20">
+					<top parent="wealth" />
+					<left parent="wealth" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="wea_dm" source="attributes.wea_mod">
+				<anchored width="30" height="20">
+					<top parent="wealth" />
+					<left parent="wealth" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.wealth</name><op>+</op></source>
+				<source><name>attributes.wea_mod2</name><op>+</op></source>
+				<source><name>attributes.wea_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+
+			<!-- Charm -->
+			<label_optional_characteristic name="label_charm">
+				<anchored height="20" >
+					<top parent="secondcolumnanchor" anchor="bottom" relation="relative" offset="6" />
+					<left parent="label_strength" />
+				</anchored>
+				<static textres="char_label_charm" />
+			</label_optional_characteristic>
+
+			<!-- Characteristic -->
+			<number_optional_characteristic name="charm" source="attributes.charm">
+				<anchored width="30" height="20">
+					<top parent="label_charm" />
+					<left offset="145" />
+				</anchored>
+			</number_optional_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="cha_mod" source="attributes.cha_mod2">
+				<anchored width="30" height="20">
+					<top parent="charm" />
+					<left parent="charm" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="cha_equipment" source="attributes.cha_equipment">
+				<anchored width="30" height="20">
+					<top parent="charm" />
+					<left parent="charm" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="cha_dm" source="attributes.cha_mod">
+				<anchored width="30" height="20">
+					<top parent="charm" />
+					<left parent="charm" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.charm</name><op>+</op></source>
+				<source><name>attributes.cha_mod2</name><op>+</op></source>
+				<source><name>attributes.cha_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+
+			<!-- Territory -->
+			<label_optional_characteristic name="label_territory">
+				<anchored height="20" >
+					<top parent="secondcolumnanchor" anchor="bottom" relation="relative" offset="6" />
+					<left parent="label_strength" />
+				</anchored>
+				<static textres="char_label_territory" />
+			</label_optional_characteristic>
+
+			<!-- Characteristic -->
+			<number_optional_characteristic name="territory" source="attributes.territory">
+				<anchored width="30" height="20">
+					<top parent="label_territory" />
+					<left offset="145" />
+				</anchored>
+			</number_optional_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="ter_mod" source="attributes.ter_mod2">
+				<anchored width="30" height="20">
+					<top parent="territory" />
+					<left parent="territory" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="ter_equipment" source="attributes.ter_equipment">
+				<anchored width="30" height="20">
+					<top parent="territory" />
+					<left parent="territory" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="ter_dm" source="attributes.ter_mod">
+				<anchored width="30" height="20">
+					<top parent="territory" />
+					<left parent="territory" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.territory</name><op>+</op></source>
+				<source><name>attributes.ter_mod2</name><op>+</op></source>
+				<source><name>attributes.ter_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+
+			<!-- Resolve -->
+			<label_optional_characteristic name="label_resolve">
+				<anchored height="20" >
+					<top parent="secondcolumnanchor" anchor="bottom" relation="relative" offset="6" />
+					<left parent="label_strength" />
+				</anchored>
+				<static textres="char_label_resolve" />
+			</label_optional_characteristic>
+
+			<!-- Characteristic -->
+			<number_optional_characteristic name="resolve" source="attributes.resolve">
+				<anchored width="30" height="20">
+					<top parent="label_resolve" />
+					<left offset="145" />
+				</anchored>
+			</number_optional_characteristic>
+
+			<!-- Modifier -->
+			<number_charattributes_mod name="res_mod" source="attributes.res_mod2">
+				<anchored width="30" height="20">
+					<top parent="resolve" />
+					<left parent="resolve" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_mod>
+
+			<!-- Equipment -->
+			<number_charattributes_equipment name="res_equipment" source="attributes.res_equipment">
+				<anchored width="30" height="20">
+					<top parent="resolve" />
+					<left parent="resolve" anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_charattributes_equipment>
+
+			<!-- DM -->
+			<number_charattributesdm name="res_dm" source="attributes.res_mod">
+				<anchored width="30" height="20">
+					<top parent="resolve" />
+					<left parent="resolve" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<source><name>attributes.resolve</name><op>+</op></source>
+				<source><name>attributes.res_mod2</name><op>+</op></source>
+				<source><name>attributes.res_equipment</name><op>+</op></source>
+			</number_charattributesdm>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_main_additionaldetails">
+		<margins control="0,0,0,5" />
+		<sheetdata>
+			<string_labeled name="age">
+				<anchored position="insidetopleft" offset="0,0" width="40" height="20" />
+				<labelres>char_label_age</labelres>
+			</string_labeled>
+
+			<string_labeled name="gender">
+				<anchored to="age" position="righthigh" offset="5,2">
+					<right parent="" offset="-35" />
+				</anchored>
+				<labelres>char_label_gender</labelres>
+			</string_labeled>
+
+			<string_labeled name="race">
+				<anchored to="age">
+					<left />
+					<top anchor="bottom" relation="relative" offset="10" />
+					<right parent="" offset="-60" />
+				</anchored>
+				<labelres>char_label_race</labelres>
+			</string_labeled>
+			<linkfield name="racelink">
+				<anchored to="race" position="righthigh" offset="10,0" width="20" height="20" />
+				<description field="race" />
+				<closetoggle />
+				<invisible />
+				<script>
+					function onInit()
+						onValueChanged();
+					end
+					function onValueChanged()
+						if isEmpty() then
+							setVisible(false);
+						else
+							setVisible(true);
+						end
+					end
+				</script>
+			</linkfield>
+
+			<string_labeled name="homeworld">
+				<anchored to="age">
+					<left />
+					<top anchor="bottom" relation="relative" offset="10" />
+					<right parent="" offset="-60" />
+				</anchored>
+				<labelres>char_label_homeworld</labelres>
+			</string_labeled>
+			<linkfield name="homeworldlink">
+				<anchored to="homeworld" position="righthigh" offset="10,0" width="20" height="20" />
+				<description field="homeworld" />
+				<closetoggle />
+				<invisible />
+				<script>
+					function onInit()
+						onValueChanged();
+					end
+					function onValueChanged()
+						if isEmpty() then
+							setVisible(false);
+						else
+							setVisible(true);
+						end
+					end
+				</script>
+			</linkfield>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_racialtraits">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top />
+					<right />
+				</anchored>
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored>
+					<top />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="0" />
+				</anchored>
+			</button_idelete>
+			<hs name="details">
+				<script>
+					function onValueChanged()
+						window.name.setTooltipText(getValue());
+					end
+				</script>
+			</hs>
+			<string_textlistitem name="name" source="name">
+				<anchored height="20">
+					<top />
+					<left />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="0" />
+				</anchored>
+				<script>
+					function onInit()
+						setTooltipText(window.details.getValue());
+					end
+				</script>
+			</string_textlistitem>
+		</sheetdata>
+	</windowclass>
+
+	<!-- char_armour_actions class -->
+	<windowclass name="char_armour_actions">
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			<header_column name="armourlabel">
+				<static textres="char_label_armour" />
+				<anchored><left offset="5" /><top offset="0" /></anchored>
+				<font>subwindowsmalltitle</font>
+			</header_column>
+
+			<genericcontrol name="rightanchor_armour">
+				<anchored width="0" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="0" />
+					<right />
+				</anchored>
+			</genericcontrol>
+
+			<!-- Columns from right to left -->
+			<label>
+				<anchored to="rightanchor_armour" width="100">
+					<top />
+					<right anchor="left" relation="relative" offset="-20" />
+				</anchored>
+				<static textres="char_label_armour_notes" />
+				<center />
+			</label>
+			<label>
+				<anchored to="rightanchor_armour" width="60">
+					<top />
+					<right anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<static textres="char_label_armour_mass" />
+				<center />
+			</label>
+			<label>
+				<anchored to="rightanchor_armour" width="100">
+					<top />
+					<right anchor="left" relation="relative" offset="-0" />
+				</anchored>
+				<static textres="char_label_armour_rating" />
+				<center />
+			</label>
+			<label>
+				<anchored to="rightanchor_armour">
+					<left parent="" offset="0" />
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="char_label_armour_name" />
+				<center />
+			</label>
+
+			<windowlist name="armour">
+				<anchored>
+					<left />
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="0" />
+					<right />
+				</anchored>
+				<child></child>
+				<child><backcolor>1A40301E</backcolor></child>
+				<datasource>.inventorylist</datasource>
+				<class>char_armour</class>
+				<sortby><control>name</control></sortby>
+				<noscroll />
+				<script>
+					function onFilter(w)
+						return w.isArmour();
+					end
+				</script>
+			</windowlist>
+			<scrollbar>
+				<anchored to="armour" />
+				<target>armour</target>
+			</scrollbar>
+		</sheetdata>
+	</windowclass>
+
+	<!-- char_armour class -->
+	<windowclass name="char_armour">
+		<margins control="0,0,0,2" />
+		<script file="campaign/scripts/char_armour.lua" />
+		<sheetdata>
+			<!-- Armour data structure -->
+			<hn name="recordtype" />
+			<hn name="carried" />
+			<hs name="type" />
+
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+
+			<linkcontrol name="shortcut">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<class>reference_armor</class>
+				<description field="name" />
+				<readonly />
+			</linkcontrol>
+			<string_textlistitem name="armournotes">
+				<anchored width="100" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<tabtarget prev="mass" />
+				<multilinespacing>20</multilinespacing>
+			</string_textlistitem>
+			<basicnumber name="mass">
+				<anchored width="35" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<center />
+				<nodrag />
+				<tabtarget prev="resistances" next="notes"/>
+			</basicnumber>
+			<string_textlistitem name="resistances">
+				<anchored width="100" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<nodrag />
+				<tabtarget prev="name" next="mass" />
+				<multilinespacing>20</multilinespacing>
+			</string_textlistitem>
+			<string_textlistitem name="name">
+				<anchored height="20">
+					<top offset="2" />
+					<left offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget next="resistances" />
+				<multilinespacing>20</multilinespacing>
+			</string_textlistitem>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_finances">
+		<margins control="0,0,-1,2" />
+		<sheetdata>
+			<anchor_column name="columnanchor">
+				<anchored>
+					<top offset="5" />
+					<left />
+				</anchored>
+			</anchor_column>
+
+			<label_column>
+				<static textres="char_label_finances_pension" />
+			</label_column>
+			<string_column name="pension" />
+			<label_column>
+				<static textres="char_label_finances_debt" />
+			</label_column>
+			<string_column name="debt"/>
+			<label_column>
+				<static textres="char_label_finances_cash" />
+			</label_column>
+			<string_column name="cashonhand" />
+			<label_column>
+				<static textres="char_label_finances_monthly_ship_payment" />
+				<tooltip textres="char_tooltip_finances_monthly_ship_payment" />
+			</label_column>
+			<string_column name="monthlyshippayment" />
+			<label_column>
+				<static textres="char_label_finances_other" />
+			</label_column>
+			<string_column_full name="other">
+				<anchored>
+					<top offset="30" />
+					<left />
+				</anchored>
+			</string_column_full>
+		</sheetdata>
+	</windowclass>
+</root>

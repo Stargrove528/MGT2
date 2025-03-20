@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet_personal">
+		<sheetdata>
+			<anchor_content_top />
+			<anchor_content_bottom />
+
+			<area_content_framed_groupbox_top name="frame_careerhistoryactions">
+				<anchored height="140" />
+			</area_content_framed_groupbox_top>
+			<label_frametop name="careerhistorylabel">
+				<anchored to="frame_careerhistoryactions" position="insidetop" offset="5,-10" />
+				<static textres="char_label_career_history" />
+			</label_frametop>
+			<button_iedit name="careerhistory_iedit">
+				<anchored to="frame_careerhistoryactions" position="insidetopright" offset="0,-10" />
+				<edittarget>careerhistoryactions</edittarget>
+			</button_iedit>
+			<button_iadd name="careerhistory_iadd">
+				<anchored to="careerhistory_iedit" position="lefthigh" offset="0,0" />
+				<edittarget>careerhistoryactions</edittarget>
+			</button_iadd>
+			<subwindow name="careerhistoryactions">
+				<anchored to="frame_careerhistoryactions" position="insidetop" offset="0,10">
+					<bottom offset="-10" />
+				</anchored>
+				<class>char_careerhistory_actions</class>
+				<fastinit />
+				<activate />
+			</subwindow>
+			<scrollbar_content_base>
+				<anchored to="careerhistoryactions" />
+				<target>careerhistoryactions</target>
+			</scrollbar_content_base>
+
+			<!-- Background -->
+			<area_content_framed_groupbox_top name="frame_background">
+				<anchored height="120" />
+			</area_content_framed_groupbox_top>
+			<label_frametop>
+				<anchored to="frame_background" position="insidetop" offset="5,-10" />
+				<static textres="char_label_background" />
+			</label_frametop>
+			<stringu name="background">
+				<anchored to="frame_background" position="insidetop" offset="0,20">
+					<bottom offset="-10" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</stringu>
+			<scrollbar_content_base>
+				<anchored to="background" />
+				<target>background</target>
+			</scrollbar_content_base>
+
+			<!-- Notes -->
+			<area_content_framed_groupbox name="frame_notes">
+				<anchored>
+					<right anchor="center" offset="-15" />
+				</anchored>
+			</area_content_framed_groupbox>
+			<label_frametop>
+				<anchored to="frame_notes" position="insidetop" offset="5,-10" />
+				<static textres="char_label_notes" />
+			</label_frametop>
+			<stringu name="notes">
+				<anchored to="frame_notes" position="insidetop" offset="0,20">
+					<bottom offset="-10" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</stringu>
+			<scrollbar_content_base>
+				<anchored to="notes" />
+				<target>notes</target>
+			</scrollbar_content_base>
+
+			<area_content_framed_groupbox name="languageframe">
+				<anchored>
+					<left anchor="center" offset="15" />
+				</anchored>
+			</area_content_framed_groupbox>
+			<label_frametop>
+				<anchored to="languageframe" position="insidetop" offset="5,-10" />
+				<static textres="char_label_languages" />
+			</label_frametop>
+			<list_language name="languages">
+				<anchored to="languageframe" position="insidetop" offset="0,20">
+					<bottom offset="-10" />
+				</anchored>
+			</list_language>
+			<scrollbar_content_base>
+				<anchored to="languages" />
+				<target>languages</target>
+			</scrollbar_content_base>
+			<button_iedit name="languages_iedit">
+				<anchored to="languageframe" position="insidetopright" offset="0,-10" />
+				<edittarget>languages</edittarget>
+			</button_iedit>
+			<button_iadd name="languages_iadd">
+				<anchored to="languages_iedit" position="lefthigh" offset="0,0" />
+				<target>languages</target>
+			</button_iadd>
+		</sheetdata>
+	</windowclass>
+
+	<!-- char_careerhistory_actions class -->
+	<windowclass name="char_careerhistory_actions">
+		<script>
+			function addEntry()
+				careerhistory.createWindow(nil, true);
+			end
+		</script>
+		<sheetdata>
+			<anchor_content_top />
+
+			<!-- Columns from right to left -->
+			<genericcontrol name="rightanchor">
+				<anchored position="insidetopright" width="0" height="0" />
+			</genericcontrol>
+			<spacer_header_idelete name="idelete_header">
+				<editmode>careerhistory_iedit</editmode>
+			</spacer_header_idelete>
+			<label>
+				<anchored to="rightanchor" width="70">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<static textres="char_label_career_title" />
+				<center />
+			</label>
+			<label>
+				<anchored to="rightanchor" width="35">
+					<top />
+					<right anchor="left" relation="relative" offset="5" />
+				</anchored>
+				<static textres="char_label_career_rank" />
+				<center />
+			</label>
+			<label>
+				<anchored to="rightanchor" width="130">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="char_label_career_events" />
+				<center />
+			</label>
+			<label>
+				<anchored to="rightanchor" width="135">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<static textres="char_label_career_branch" />
+				<center />
+			</label>
+			<label>
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="0" />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<static textres="char_label_career_name" />
+				<center />
+			</label>
+
+			<windowlist name="careerhistory">
+				<anchored>
+					<top parent="contentanchor" anchor="bottom" relation="relative" offset="20" />
+					<left />
+					<right />
+				</anchored>
+				<datasource>.careerhistorylist</datasource>
+				<class>char_careerhistory</class>
+				<allowdelete />
+				<noscroll />
+				<script file="campaign/scripts/char_careerhistorylist.lua" />
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+
+	<!-- char_careerhistory class -->
+	<windowclass name="char_careerhistory">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<!-- Career History data structure -->
+			<hn name="careerhistorytype">
+				<script>
+					function onValueChanged()
+						window.updateWindow();
+					end
+				</script>
+			</hn>
+
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<editmode>careerhistory_iedit</editmode>
+			</button_idelete>
+
+			<stringu name="title">
+				<anchored width="70" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<tabtarget prev="rank" />
+			</stringu>
+			<stringu name="rank">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<center />
+				<tabtarget prev="events" next="title"/>
+			</stringu>
+			<stringu name="events">
+				<anchored width="130" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<tabtarget prev="branch" next="rank" />
+			</stringu>
+			<stringu name="branch">
+				<anchored width="135" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<tabtarget prev="career" next="events" />
+			</stringu>
+			<string_textlistitem name="career">
+				<anchored height="20">
+					<top offset="2" />
+					<left offset="0" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<tabtarget next="branch" />
+			</string_textlistitem>
+
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_personal_notes">
+		<margin controls="0,0,0,2" />
+		<sheetdata>
+			<label_frametop>
+				<static textres="char_label_notes" />
+			</label_frametop>
+			<stringu name="notes">
+				<anchored>
+					<left offset="15" />
+					<top offset="25" />
+					<right offset="-20" />
+					<bottom offset="-10" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</stringu>
+			<scrollbar_list>
+				<anchored to="notes" />
+				<target>notes</target>
+			</scrollbar_list>
+		</sheetdata>
+	</windowclass>
+</root>

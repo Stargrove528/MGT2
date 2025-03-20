@@ -1,0 +1,942 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="ps_partyship">
+		<script>
+			function onDrop(x, y, draginfo)
+				if Session.IsHost then
+					if draginfo.isType("shortcut") then
+						local sClass, sRecord = draginfo.getShortcutData();
+						if sClass == "charspacecraftsheet" then
+							VehicleManager.addVehicle(draginfo.getDatabaseNode());
+						end
+						return true;
+					end
+				end
+				return false;
+			end
+		</script>
+		<sheetdata>
+			<anchor_content_top />
+			<anchor_content_bottom />
+
+			<sub_content_framed_groupbox name="sub_content">
+				<class>ps_partyship_content</class>
+			</sub_content_framed_groupbox>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="ps_partyship_content">
+		<sheetdata>
+			<anchor_content_top />
+			<anchor_content_bottom />
+
+			<sub_content_top name="sub_labels">
+				<anchored height="40" />
+				<class>ps_partyship_labels</class>
+			</sub_content_top>
+			<button_iedit name="list_iedit">
+				<anchored to="sub_labels" position="insidebottomright" offset="25,5" />
+				<edittarget>list</edittarget>
+				<gmvisibleonly />
+			</button_iedit>
+
+			<list_content name="list">
+				<datasource>.shipinformation</datasource>
+				<class>ps_spacecraftmainitem</class>
+				<sortby><control>name</control></sortby>
+				<empty font="list-empty" textres="ps_emptyshiplist" />
+			</list_content>
+			<scrollbar_content_list />
+		</sheetdata>
+	</windowclass>
+	<windowclass name="ps_partyship_labels">
+		<sheetdata>
+			<label_list_content_base name="namelabel">
+				<anchored position="insidetopleft" offset="35,17" width="180" />
+				<static textres="ps_label_shipname" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="label_hp">
+				<anchored position="insidetopleft" offset="245,17" width="80" />
+				<static textres="sct_label_maximumhullpoints" />
+				<tooltip textres="sct_tooltip_maximumhullpoints" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="label_damage">
+				<anchored position="insidetopleft" offset="315,17" width="80" />
+				<static textres="sct_label_hulldamage" />
+				<tooltip textres="sct_tooltip_hulldamage" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="label_hullpointstitle">
+				<anchored position="insidetopleft" offset="270,0" width="100" />
+				<static textres="sct_label_hullpoints" />
+				<tooltip textres="sct_tooltip_hullpoints" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="tllabel">
+				<anchored position="insidetopleft" offset="400,17" width="40" />
+				<static textres="ps_label_shiptl" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="tonslabel">
+				<anchored position="insidetopleft" offset="455,17" width="40" />
+				<static textres="ps_label_shiptons" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="armourlabel">
+				<anchored position="insidetopleft" offset="520,17" width="60" />
+				<static textres="ps_label_shiparmour" />
+				<center />
+			</label_list_content_base>
+			<label_list_content_base name="armourratinglabel">
+				<anchored width="50">
+					<top offset="17" />
+					<right parent="" anchor="right" offset="-45" />
+				</anchored>
+				<static textres="ps_label_shiparmourrating" />
+				<center />
+			</label_list_content_base>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="ps_spacecraftmainitem">
+		<margins control="0,0,0,10" />
+		<frame>fieldlight</frame>
+		<sheetdata>
+			<hlink name="link" />
+
+			<tokenfield name="token">
+				<bounds>10,5,40,45</bounds>
+				<empty>token_empty</empty>
+				<tooltip textres="char_tooltip_token" />
+				<script>
+                    function onDoubleClick(x, y)
+                        local sClass, sRecord = window.link.getValue();
+                        Interface.openWindow("charspacecraftsheet", sRecord);
+                    end
+					function onDragStart(button, x, y, draginfo)
+						local nodeShip = window.getDatabaseNode();
+
+						if nodeShip then
+							draginfo.setType("shortcut");
+							draginfo.setTokenData(getPrototype());
+							draginfo.setShortcutData("charspacecraftsheet", DB.getPath(nodeShip));
+
+							local base = draginfo.createBaseData();
+							base.setType("token");
+							base.setTokenData(getPrototype());
+						end
+
+						return true;
+					end
+                </script>
+			</tokenfield>
+
+			<string_ps name="name">
+				<anchored position="insidetopleft" offset="55,10" width="180" />
+				<empty textres="library_recordtype_empty_charsheet" />
+			</string_ps>
+
+			<button_idelete name="idelete">
+				<anchored position="insidetopright" offset="10,10" />
+				<editmode>list_iedit</editmode>
+			</button_idelete>
+
+			<number_ps_linked name="hull_points">
+				<anchored to="name" width="60" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="20" />
+				</anchored>
+			</number_ps_linked>
+
+			<number_ps_linked name="hull_damage">
+				<anchored to="hull_points" width="60" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_ps_linked>
+
+			<number_ps_linked name="tl">
+				<anchored to="hull_damage" width="40" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="15" />
+				</anchored>
+			</number_ps_linked>
+
+			<number_ps_linked name="tons">
+				<anchored to="tl" width="50" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="15" />
+				</anchored>
+			</number_ps_linked>
+
+			<string_ps name="armour">
+				<anchored to="tons" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="15" />
+					<right parent="" anchor="right" offset="-80" />
+				</anchored>
+			</string_ps>
+
+			<number_ps_linked name="armour_rating">
+				<anchored to="armour" width="30" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_ps_linked>
+
+			<frame_char name="crewframe">
+				<bounds>10,50,320,420</bounds>
+				<!-- <invisible /> -->
+			</frame_char>
+
+			<windowlist name="crewlist">
+                <anchored to="crewframe">
+                    <left offset="5" />
+					<top offset="25" />
+					<right offset="-20" />
+					<bottom offset="-10" />
+                </anchored>
+                <datasource>.crew</datasource>
+                <class>ps_crew</class>
+                <sortby><control>role</control><control>name</control></sortby>
+                <allowdelete />
+                <script>
+                    function onDrop(x, y, draginfo)
+                        if draginfo.isType("shortcut") or draginfo.isType("token") then
+                            local sClass, sRecord = draginfo.getShortcutData();
+
+                            if StringManager.contains({"charsheet", "npc"}, sClass) then
+                                if StringManager.contains({"charsheet"}, sClass) then
+                                    VehicleManager.addCrew(window.getDatabaseNode(), sClass, sRecord);
+                                else
+                                    VehicleManager.addNPCCrew(window.getDatabaseNode(), sClass, sRecord);
+                                end
+
+                                return true;
+                            end
+                        end
+                    end
+                </script>
+            </windowlist>
+			<scrollbar>
+				<anchored to="crewlist" />
+				<target>crewlist</target>
+			</scrollbar>
+            <label_frametop>
+				<anchored to="crewframe" />
+                <static textres="charspacecraft_label_crew" />
+			</label_frametop>
+
+			<frame_char name="cargoframe">
+				<bounds>330,50,-10,420</bounds>
+			</frame_char>
+
+			<label_frametop>
+				<anchored to="cargoframe" />
+                <static textres="charspacecraft_label_cargo" />
+			</label_frametop>
+
+			<genericcontrol name="rightanchor">
+				<anchored to="cargoframe" width="0" height="0">
+					<top offset="10" />
+					<right offset="-20" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<spacer_header_idelete name="idelete_header">
+				<editmode>cargolist_iedit</editmode>
+			</spacer_header_idelete>
+
+			<list_ps_charspacecraft_cargo name="cargolist">
+				<anchored to="cargoframe">
+					<top offset="30" />
+					<left offset="10" />
+					<right offset="-20" />
+					<bottom offset="-55" />
+				</anchored>
+				<datasource>.cargolist</datasource>
+				<!-- REMOVED: Cargolist personal script (redundant from datasource?)-->
+			</list_ps_charspacecraft_cargo>
+			<scrollbar>
+				<anchored to="cargolist" />
+				<target>cargolist</target>
+			</scrollbar>
+			<button_iedit name="cargolist_iedit">
+				<anchored to="cargolist" position="aboveright" offset="10,5" />
+			</button_iedit>
+			<button_iadd name="cargolist_iadd">
+				<anchored to="cargolist_iedit" position="lefthigh" offset="5,0" />
+				<target>cargolist</target>
+			</button_iadd>
+
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="25" />
+					<right anchor="right" offset="0" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+
+			<genericcontrol name="cargoanchor">
+				<anchored to="cargolist" position="belowleft" offset="0,20" width="0" height="30" />
+				<invisible />
+			</genericcontrol>
+
+			<basicnumber name="cargospace" source="cargo.space">
+				<script>
+					function onInit()
+						local _, sRecord = DB.getValue(window.getDatabaseNode(), "link", "", "");
+						if sRecord ~= "" then
+							nodeShip = DB.findNode(sRecord);
+							local nValue = DB.getValue(nodeShip,'cargo.space', -1);
+							setValue(nValue);
+						else
+							DB.addHandler(DB.getPath(window.getDatabaseNode()) .. ".link", "onUpdate", linkCargo);
+						end
+					end
+
+					function linkCargo()
+						local _, sRecord = DB.getValue(window.getDatabaseNode(), "link", "", "");
+						nodeShip = DB.findNode(sRecord);
+						local nValue = DB.getValue(nodeShip,'cargo.space', -1);
+						setValue(nValue);
+					end
+				</script>
+				<anchored to="cargoanchor" width="65" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</basicnumber>
+			<label_fieldtop name="cargospace_label">
+				<anchored to="cargospace"/>
+				<static textres="char_label_cargo_space" />
+			</label_fieldtop>
+
+			<basicnumber name="cargototal" source="cargo.total">
+				<anchored to="cargoanchor" width="65" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="80" />
+				</anchored>
+				<script>
+					function onInit()
+						local _, sRecord = DB.getValue(window.getDatabaseNode(), "link", "", "");
+						if sRecord ~= "" then
+							nodeShip = DB.findNode(sRecord);
+							local nValue = DB.getValue(nodeShip,'cargo.total', -1);
+							setValue(nValue);
+						else
+							DB.addHandler(DB.getPath(window.getDatabaseNode()) .. ".link", "onUpdate", linkCargo);
+						end
+					end
+					function linkCargo()
+						local _, sRecord = DB.getValue(window.getDatabaseNode(), "link", "", "");
+						nodeShip = DB.findNode(sRecord);
+						local nValue = DB.getValue(nodeShip,'cargo.total', -1);
+						setValue(nValue);
+					end
+				</script>
+			</basicnumber>
+			<label_fieldtop name="cargototal_label">
+				<anchored to="cargototal" />
+				<static textres="char_label_cargo_totals" />
+			</label_fieldtop>
+			<number_linked_framed name="cargofreespace" source="cargo.freespace">
+				<anchored to="cargoanchor" width="65" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="20" />
+				</anchored>
+				<source><name>cargo.space</name><op>+</op></source>
+				<source><name>cargo.total</name><op>-</op></source>
+				<script>
+					function onSourceUpdate(source)
+						local nValue = calculateSources();
+						setValue(nValue);
+
+						local _, sRecord = DB.getValue(window.getDatabaseNode(), "link", "", "");
+						nodeShip = DB.findNode(sRecord);
+						if Session.IsHost then
+							DB.setValue(nodeShip,'cargo.freespace', 'number', nValue);
+						end
+					end
+				</script>
+			</number_linked_framed>
+			<label_fieldtop name="cargofreespace_label">
+				<anchored to="cargofreespace" />
+				<static textres="char_label_cargo_free_space" />
+			</label_fieldtop>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="charspacecraft_ps_cargoitem">
+		<margins control="0,2,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<editmode>cargolist_iedit</editmode>
+			</button_idelete>
+			<number_charinv name="tons">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<delaykeyupdate />
+				<tabtarget prev="location" />
+			</number_charinv>
+			<string_charinvloc name="location">
+				<anchored width="120" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget next="tons" prev="name" />
+			</string_charinvloc>
+			<stringu name="name">
+				<anchored height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="current" offset="-5" />
+					<left offset="2" />
+				</anchored>
+				<tabtarget next="location" />
+			</stringu>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="ps_role">
+		<margins control="0,0,2,2" />
+		<sheetdata>
+			<frame_char name="roleframe">
+				<bounds>0,0,240,40</bounds>
+			</frame_char>
+			<hs name ="role" />
+			<label name="ps_label_role">
+				<anchored to="roleframe" position="insidetopleft" offset="10,10"/>
+			</label>
+			<windowlist name="rolelist">
+				<anchored to="roleframe" position="over">
+					<top offset="5" />
+					<left parent="" offset="100"/>
+					<right offset="-5" />
+				</anchored>
+				<class>ps_crew</class>
+				<columns width="28" fillwidth="true" />
+				<noscroll />
+				<script>
+					function onDrop(x, y, draginfo)
+						local sRole = window.role.getValue();
+						local nodeVehicle = window.windowlist.window.getDatabaseNode();
+						local sClass, sRecord = draginfo.getShortcutData();
+						if sClass == "charsheet" then
+							VehicleManager.addCrew(nodeVehicle, sRecord, sRole);
+							return true
+						end
+					end
+				</script>
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="ps_crew">
+		<margins control="0,0,001" />
+        <script>
+            function onInit()
+                local sClass,sRecord = DB.getValue(getDatabaseNode(), "link", "");
+                local node = DB.findNode(sRecord);
+
+                DB.addHandler(DB.getPath(node, "name"), "onUpdate", updateName);
+                DB.addHandler(DB.getPath(node, "token"), "onUpdate", updateToken);
+
+                updateName();
+                updateToken();
+            end
+
+            function onClose()
+                local sClass,sRecord = DB.getValue(getDatabaseNode(), "link", "");
+                local node = DB.findNode(sRecord);
+
+                DB.removeHandler(DB.getPath(node, "name"), "onUpdate", updateName);
+                DB.removeHandler(DB.getPath(node, "token"), "onUpdate", updateToken);
+            end
+
+            function updateName()
+                local nodeEntry = getDatabaseNode();
+                local sClass,sRecord = DB.getValue(nodeEntry, "link", "");
+                local sSrcName = DB.getValue(DB.findNode(sRecord), "name", "");
+				if Session.IsHost then
+                	DB.setValue(nodeEntry, "name", "string", sSrcName);
+				end
+            end
+
+            function updateToken()
+                local nodeEntry = getDatabaseNode();
+                local sClass,sRecord = DB.getValue(nodeEntry, "link", "");
+                local sToken = DB.getValue(DB.findNode(sRecord), "token", "");
+				if Session.IsHost then
+                	DB.setValue(nodeEntry, "token", "token", sToken);
+				end
+            end
+        </script>
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored position="insidetopright" height="0" width="0" />
+			</genericcontrol>
+			<hlink name="link">
+                <script>
+                    function onInit()
+                        update();
+                    end
+
+                    function onValueChanged()
+                        update();
+                    end
+
+                    function update()
+                        if getValue() ~= "" and getValue() ~= nil then
+                            local sClass,sRecord = getValue();
+                            if sClass == "npc" and Session.IsHost then
+                                window.npcrolehelper.setVisible(true);
+                            end
+                        end
+                    end
+                </script>
+            </hlink>
+			<hs name="tokenrefid" />
+			<hs name="tokenrefnode" />
+
+            <button_details name="npcrolehelper">
+                <anchored>
+					<top offset="10" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="0" />
+				</anchored>
+                <invisible />
+                <script>
+                    function onButtonPress()
+                        Interface.openWindow("ps_npccrew_helper", window.getDatabaseNode());
+                    end
+                </script>
+            </button_details>
+
+			<string_textlistitem name="role">
+                <anchored width="100" height="20">
+					<top offset="10" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<tabtarget next="bonus" />
+				<script>
+					function onInit()
+						onValueChanged();
+					end
+
+					function onValueChanged()
+					end
+				</script>
+                <static />
+			</string_textlistitem>
+
+			<string_textlistitem name="name">
+                <anchored position="insidetopleft" offset="45,10" height="20">
+					<right parent="rightanchor" anchor="left" relation="current" offset="-5" />
+				</anchored>
+				<tabtarget next="bonus" />
+				<script>
+					function onInit()
+						onValueChanged();
+					end
+
+					function onValueChanged()
+						window.token.setTooltipText(getValue());
+					end
+				</script>
+                <static />
+			</string_textlistitem>
+
+			<tokenfield name="token">
+                <anchored position="insidetopleft" offset="0,2" width="44" height="35" />
+				<empty>token_empty</empty>
+				<readonly />
+				<script>
+					function onInit()
+						if Session.IsHost then
+							registerMenuItem(Interface.getString("ps_menu_crewclear"), "erase", 4);
+						end
+					end
+
+                    function onDoubleClick(x, y)
+                        local _,sRecord = window.link.getValue();
+
+                        if DB.isOwner(sRecord) or Session.IsHost then
+                            window.link.activate();
+                        else
+                            return false
+                        end
+
+                        return true
+                    end
+					--[[function onDragStart(button, x, y, draginfo)
+						local _,sRecord = window.link.getValue();
+
+						if Session.IsHost or DB.isOwner(sRecord) then
+							draginfo.setType("shortcut");
+							draginfo.setShortcutData("charsheet", sRecord);
+							draginfo.setTokenData(window.token.getPrototype());
+
+							return true;
+						end
+
+						return false;
+					end--]]
+
+					function onMenuSelection(selection)
+						if Session.IsHost then
+							if selection == 4 then
+								DB.deleteNode(window.getDatabaseNode());
+							end
+						end
+					end
+				</script>
+			</tokenfield>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="ps_npccrew_helper">
+		<frame>utilitybox</frame>
+		<sizelimits>
+           <minimum width="551" height="601" />
+			<dynamic />
+		</sizelimits>
+		<sheetdata>
+			<hlink name="link" />
+
+			<windowtitlebar_utilitybox name="title">
+				<prefix>ps_ship_title</prefix>
+			</windowtitlebar_utilitybox>
+			<windowmenubar_utilitybox name="menubar" />
+			
+			<anchor_content_utilitybox_top />
+			<anchor_content_utilitybox_bottom />
+
+			<sub_content_framed_groupbox name="content">
+				<class>ps_npccrew_main</class>
+			</sub_content_framed_groupbox>
+
+			<resize_utilitybox />
+		</sheetdata>
+	</windowclass>
+
+    <windowclass name="ps_npccrew_main">
+        <script>
+            function onInit()
+                local sRole = DB.getValue(getDatabaseNode(), "role", "");
+                rolelabel.setValue(sRole);
+                showhideactions.setValue(0);
+            end
+        </script>
+        <sheetdata>
+			<anchor_column name="columnanchor" />
+			<label>
+				<anchored position="insidetopleft" offset="70,0" width="29" />
+				<center />
+				<static textres="char_label_role" />
+			</label>
+			<label>
+				<anchored position="insidetopleft" offset="165,0" width="70" />
+				<center />
+				<static textres="char_label_shipview" />
+			</label>
+
+			<combobox name="rolelabel">
+				<nohide />
+				<listdirection>down</listdirection>
+                <anchored position="insidetopleft" offset="10,23" width="150" height="25" />
+				<center />
+				<default></default>
+				<script>
+					function onInit()
+						super.onInit();
+						local aCrewRequired = SpacecraftManager.getRequiredCrewList(DB.getValue(DB.getChild(getDatabaseNode(), "...."), 'crew_requirements', ''));
+						addItems(aCrewRequired);
+					end
+					function optionClicked(wNewSelection)
+						super.optionClicked(wNewSelection);
+
+                        if updating then
+                            return
+                        end
+
+                        updating = true;
+
+						local sRole = getValue();
+                        DB.setValue(window.getDatabaseNode(), "role", "string", sRole);
+                        window.showhideactions.setValue(0);
+                        window.shipweapons.closeAll();
+
+                        VehicleManager.notifyRoleChange(window.getDatabaseNode(), sRole);
+
+						updating = false;
+					end
+				</script>
+			</combobox>
+
+            <button_ship_showhideactions name="showhideactions">
+                <anchored position="insidetopleft" offset="180,25" width="40" height="20" />
+				<tooltip>
+					<textres>charspacecraft_tooltip_crew_actions</textres>
+				</tooltip>
+			</button_ship_showhideactions>
+
+			<label_frametop name="shipweaponstitle">
+				<anchored position="insidetopleft" offset="0,60" width="85" height="20" />
+				<static textres="char_label_shipactions" />
+			</label_frametop>
+
+			<genericcontrol name="rightanchorshipsweapons">
+				<anchored width="0" height="20">
+					<top parent="shipweaponstitle" anchor="bottom" relation="relative" offset="5" />
+					<right />
+				</anchored>
+			</genericcontrol>
+
+			<label name="label_actions_attack">
+				<anchored to="rightanchorshipsweapons" width="45">
+					<top />
+					<right anchor="left" relation="relative" offset="-34" />
+				</anchored>
+				<static textres="spacecraft_label_actions_attack" />
+				<center />
+			</label>
+			<label name="label_actions_mod">
+				<anchored to="rightanchorshipsweapons" width="40">
+					<top />
+					<right anchor="left" relation="relative" offset="-12" />
+				</anchored>
+				<static textres="spacecraft_label_actions_mod" />
+				<center />
+			</label>
+			<label name="label_actions_skilldm">
+				<anchored to="rightanchorshipsweapons" width="30">
+					<top />
+					<right anchor="left" relation="relative" offset="-9" />
+				</anchored>
+				<static textres="spacecraft_label_actions_skilldm" />
+				<center />
+			</label>
+			<label name="label_actions_attribute">
+				<anchored to="rightanchorshipsweapons" width="95">
+					<top />
+					<right anchor="left" relation="relative" offset="-7" />
+				</anchored>
+				<static textres="spacecraft_label_actions_attribute" />
+				<center />
+			</label>
+			<label name="label_actions_weapon_name">
+				<anchored to="rightanchorshipsweapons">
+					<top />
+					<left parent="" offset="50" />
+					<right anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<static textres="spacecraft_label_actions_weapon_name" />
+				<center />
+			</label>
+			<label name="count_label">
+				<anchored>
+					<top parent="rightanchorshipsweapons"/>
+					<right />
+					<left offset="15" />
+				</anchored>
+				<static>#</static>
+			</label>
+			<frame_char name="shipweaponsframe">
+				<bounds>0,95,-1,-1</bounds>
+				<frame><name></name></frame>
+				<!-- <invisible/> -->
+			</frame_char>
+			<windowlist name="shipweapons">
+				<anchored>
+					<top parent="shipweaponsframe" anchor="top" relation="relative" offset="10" />
+					<left parent="shipweaponsframe" anchor="left" relation="relative" offset="0" />
+					<right parent="shipweaponsframe" anchor="right" relation="relative" offset="0" />
+					<bottom parent="shipweaponsframe" anchor="bottom" relation="relative" offset="0" />
+				</anchored>
+				<class>ps_ship_mountlistentry</class>
+			</windowlist>
+			<scrollbar name="scroll_shipweapons">
+				<anchored to="shipweapons" offset="-5,-15" />
+				<target>shipweapons</target>
+			</scrollbar>
+        </sheetdata>
+    </windowclass>
+
+	<windowclass name="ps_ship_mountlistentry" >
+		<margins control="0,0,0,15" />
+		<script file="campaign/scripts/spacecraft_weapons.lua" />
+		<sheetdata>
+			<hn name="order" />
+			<hs name="range" />
+			<hs name="traits" />
+			<hlink name="link" />
+			<hlink name="npclink" />
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top/>
+					<right />
+				</anchored>
+			</genericcontrol>
+			<linkfield name="shortcut">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<class>item</class>
+				<description field="name" />
+				<readonly />
+				<script>
+					function onInit()
+						onValueChanged();
+					end
+					function onValueChanged()
+						local sClass, sRecord = window.link.getValue();
+						if sRecord == "" then
+							setVisible(false);
+							window.shortcut_spacer.setVisible(true);
+						else
+							setVisible(true);
+							window.shortcut_spacer.setVisible(false);
+						end
+					end
+					function onClickRelease()
+                    	local sClass, sRecord = window.link.getValue();
+                        Interface.openWindow(sClass, sRecord);
+						return false;
+                    end
+				</script>
+			</linkfield>
+			<genericcontrol name="shortcut_spacer">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<basicnumber name="attack">
+				<readonly/>
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<rollable />
+				<script>
+					function onSourceUpdate(source)
+						local nValue = window.skillDM.getValue();
+						nValue = nValue + window.characteristicDM.getValue();
+						nValue = nValue + window.actionMod.getValue();
+						setValue(nValue);
+					end
+
+					function action(draginfo)
+						window.actionAttack(draginfo);
+						return true;
+					end
+					function onDragStart(button, x, y, draginfo)
+						return self.action(draginfo);
+					end
+					function onDoubleClick(button, x, y)
+						return self.action();
+					end
+				</script>
+				<tabtarget next="damage" prev="range" />
+			</basicnumber>
+			<basicnumber name="actionMod">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-20" />
+				</anchored>
+				<tabtarget prev="skillDM" next="attack" />
+				<script>
+					function onValueChanged()
+						window.attack.onSourceUpdate();
+					end
+				</script>
+			</basicnumber>
+
+			<number_charskillDMfield name="skillDM">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<tabtarget prev="characteristicDM" next="actionMod" />
+			</number_charskillDMfield>
+
+			<!-- The attribute/characteristic Dice Modifier -->
+			<number_charskillDMfield name="characteristicDM">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<tabtarget prev="characteristic" next="level" />
+			</number_charskillDMfield>
+			<basicstring name="characteristic">
+				<anchored width="35" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<center/>
+				<tabtarget prev="name" next="characteristicDM" />
+			</basicstring>
+
+			<string_textlistitem name="name">
+				<readonly/>
+				<anchored position="insidetopleft" offset="40,2" height="20">
+					<right parent="rightanchor" anchor="left" relation="current" offset="-10" />
+				</anchored>
+				<tabtarget next="tl" prev="attacks" />
+			</string_textlistitem>
+
+			<number_charinv name="attacks">
+				<readonly/>
+				<bounds>5,2,25,20</bounds>
+				<tabtarget next="name" />
+				<default>1</default>
+			</number_charinv>
+
+			<label name="label_damage">
+				<anchored height="20" width="55">
+					<top offset="28" />
+					<right offset="-145" />
+				</anchored>
+				<static textres="char_label_weapon_damage" />
+			</label>
+			<string_weapondamage name="damage">
+				<anchored height="20" width="100">
+					<top offset="28" />
+					<right offset="-35" />
+				</anchored>
+				<script>
+					function action(draginfo)
+						window.actionDamage(draginfo);
+						return true;
+					end
+					function onDragStart(button, x, y, draginfo)
+						return self.action(draginfo);
+					end
+					function onDoubleClick(button, x, y)
+						return self.action();
+					end
+				</script>
+			</string_weapondamage>
+		</sheetdata>
+	</windowclass>
+</root>

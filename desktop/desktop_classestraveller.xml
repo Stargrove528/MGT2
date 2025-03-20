@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- Ornate Elements (To be overlapped by all the other elements of the desktop except "desktopdecal" -->
+	<windowclass name="logoright">
+		<sizelimits>
+			<minimum width="401" height="125" />
+		</sizelimits>
+		<frame>logoright</frame>
+		<sheetdata>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="frameupper">
+		<sizelimits>
+			<minimum width="700" height="144" />
+		</sizelimits>
+		<frame>frame_upper</frame>
+		<sheetdata>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="lightsplatone">
+		<sizelimits>
+			<minimum width="800" height="800" />
+		</sizelimits>
+		<frame>lightsplat_one</frame>
+		<sheetdata>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="lightsplattwo">
+		<sizelimits>
+			<minimum width="800" height="800" />
+		</sizelimits>
+		<frame>lightsplat_two</frame>
+		<sheetdata>
+		</sheetdata>
+	</windowclass>
+
+	<template name="modifierstack_base">
+		<modifierstack_base_step>
+			<bounds>5,4,64,54</bounds>
+		</modifierstack_base_step>
+	</template>
+	<template name="modifierstack_modifier">
+		<modifierstack_modifier_step>
+			<bounds>15,6,42,30</bounds>
+		</modifierstack_modifier_step>
+	</template>
+	<template name="modifierstack_label">
+		<modifierstack_label_step>
+			<bounds>9,36,54,12</bounds>
+		</modifierstack_label_step>
+	</template>
+	<windowclass name="modifierstack" merge="join">
+		<sizelimits>
+			<minimum width="355" height="62" />
+		</sizelimits>
+		<sheetdata>
+			<button_modifierkey name="BOON">
+				<bounds>76,8,34,18</bounds>
+			</button_modifierkey>
+			<button_modifierkey name="BANE">
+				<bounds>76,35,34,18</bounds>
+			</button_modifierkey>
+			<button_modifierkey name="PLUS1">
+				<bounds>120,8,26,18</bounds>
+			</button_modifierkey>
+			<button_modifierkey name="MINUS1">
+				<bounds>120,35,26,18</bounds>
+			</button_modifierkey>
+			<button_modifierkey name="PLUS2">
+				<bounds>156,8,26,18</bounds>
+			</button_modifierkey>
+			<button_modifierkey name="MINUS2">
+				<bounds>156,35,26,18</bounds>
+			</button_modifierkey>
+			<button_modifierkey name="PLUS3">
+				<bounds>192,8,26,18</bounds>
+			</button_modifierkey>
+			<button_modifierkey name="MINUS3">
+				<bounds>192,35,26,18</bounds>
+			</button_modifierkey>
+			<button_modifierkey name="STR">
+				<bounds>233,8,30,18</bounds>
+			</button_modifierkey>
+			<button_modifierkey name="DEX">
+				<bounds>233,35,30,18</bounds>
+			</button_modifierkey>
+			<button_modifierkey name="END">
+				<bounds>273,8,30,18</bounds>
+			</button_modifierkey>
+			<button_modifierkey name="INT">
+				<bounds>273,35,30,18</bounds>
+			</button_modifierkey>
+			<button_modifierkey name="EDU">
+				<bounds>313,8,30,18</bounds>
+			</button_modifierkey>
+			<button_modifierkey name="SOC">
+				<bounds>313,35,30,18</bounds>
+			</button_modifierkey>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Difficulty Number -->
+	<windowclass name="difficultynumber">
+		<margins control="0,0,5,0" />
+		<noclose />
+		<sheetdata>
+			<genericcontrol name="boxbase">
+				<bounds>5,0,70,55</bounds>
+				<frame name="buttonup" />
+			</genericcontrol>
+			<numbercontrol name="difficultynumber">
+				<bounds>10,14,60,41</bounds>
+				<default>2</default>
+				<center />
+				<font>taskdifficulty</font>
+				<max>45</max>
+				<min>0</min>
+				<gmeditonly />
+				<script file="desktop/scripts/difficultynumber.lua" />
+				<tooltip textres="difficultynumber_tooltip" />
+			</numbercontrol>
+			<stringcontrol name="label">
+				<bounds>12,5,54,20</bounds>
+				<static textres="desktop_difficultynumber" />
+				<font>button-white</font>
+				<tooltip textres="difficultynumber_tooltip" />
+				<center />
+			</stringcontrol>
+
+			<button_taskdifficultykey name="SIMPLE">
+				<bounds>83,5,80,18</bounds>
+				<text>Simple</text>
+				<value>6</value>
+			</button_taskdifficultykey>
+			<button_taskdifficultykey name="EASY">
+				<bounds>83,32,80,18</bounds>
+				<text>Easy</text>
+				<value>7</value>
+			</button_taskdifficultykey>
+			<button_taskdifficultykey name="ROUTINE">
+				<bounds>170,5,80,18</bounds>
+				<text>Routine</text>
+			</button_taskdifficultykey>
+			<button_taskdifficultykey name="AVERAGE">
+				<bounds>170,32,80,18</bounds>
+				<text>Average</text>
+			</button_taskdifficultykey>
+			<button_taskdifficultykey name="DIFFICULT">
+				<bounds>257,5,80,18</bounds>
+				<text>Difficult</text>
+			</button_taskdifficultykey>
+			<button_taskdifficultykey name="VERYDIFFICULT">
+				<bounds>257,32,80,18</bounds>
+				<text>V Difficult</text>
+			</button_taskdifficultykey>
+			<button_taskdifficultykey name="FORMIDABLE">
+				<bounds>344,5,80,18</bounds>
+				<text>Formidable</text>
+			</button_taskdifficultykey>
+			<button_taskdifficultykey name="IMPOSSIBLE">
+				<bounds>344,32,80,18</bounds>
+				<text>Impossible</text>
+			</button_taskdifficultykey>
+		</sheetdata>
+	</windowclass>
+</root>

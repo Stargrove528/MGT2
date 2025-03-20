@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charspacecraft_systems">
+		<sheetdata>
+			<frame_char name="systemsframe">
+				<!-- <bounds>20,5,-25,-5</bounds> -->
+				<anchored position="insidetopleft" offset="0,5">
+					<right parent="" offset="0"/>
+					<bottom parent="" offset="-10"/>
+				</anchored>
+			</frame_char>
+
+			<label_frametop name="header_details">
+				<anchored height="20">
+					<top parent="systemsframe" offset="10" />
+					<left offset="30" />
+					<right offset="-10" />
+				</anchored>
+				<static textres="spacecraft_label_systems" />
+			</label_frametop>
+
+			<genericcontrol name="rightanchor">
+				<anchored to="systemsframe" width="0" height="0">
+					<top offset="35" />
+					<right offset="-25" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+
+			<button_iedit name="details_iedit">
+				<anchored to="header_details" position="righthigh" offset="-30,0" />
+				<edittarget>details</edittarget>
+			</button_iedit>
+			<button_iadd name="details_iadd">
+				<anchored to="details_iedit" position="lefthigh" offset="0,0" />
+				<target>details</target>
+			</button_iadd>
+
+			<label name="label_cost">
+				<anchored to="rightanchor" width="70">
+					<top />
+					<right anchor="left" relation="relative" offset="0" />
+				</anchored>
+				<static textres="spacecraft_label_cost" />
+			</label>
+
+			<label name="label_tons">
+				<anchored to="rightanchor" width="35">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="spacecraft_label_tons" />
+			</label>
+
+			<list_playerspacecraftdetails name="details">
+				<anchored to="systemsframe">
+					<top offset="60" />
+					<left offset="10" />
+					<right offset="-25" />
+					<bottom offset="-15" />
+				</anchored>
+				<activate />
+				<fastinit />
+				<datasource>.details</datasource>
+				<class>spacecraft_details</class>
+				<sortby><control>order</control></sortby>
+				<script file="ref/scripts/spacecraft_details.lua" />
+			</list_playerspacecraftdetails>
+            <scrollbar>
+				<anchored to="details" offset="-2,-20"/>
+				<target>details</target>
+			</scrollbar>
+		</sheetdata>
+	</windowclass>
+</root>

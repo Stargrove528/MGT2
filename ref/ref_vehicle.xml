@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="reference_vehicle" copy="record_window_tabbed">
+		<minimize>minimized_item</minimize>
+		<tab>
+			<name>main</name>
+			<resource>tab_main</resource>
+			<class>vehicle_main</class>
+			<embed />
+		</tab>
+		<tab merge="add">
+			<name>notes</name>
+			<resource>tab_notes</resource>
+			<class>record_content_description</class>
+			<embed />
+		</tab>
+	</windowclass>
+
+	<windowclass name="vehicle_main">
+		<script>
+			function onInit()
+				update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+
+				if bReadOnly and openclosed.getValue() == "" then
+					openclosed.setVisible(false)
+				else
+					openclosed.setVisible(true)
+				end
+
+				type.update(bReadOnly);
+				tl.update(bReadOnly);
+				skill.update(bReadOnly);
+				agility.update(bReadOnly);
+				speed.update(bReadOnly);
+				range.update(bReadOnly);
+				crew.update(bReadOnly);
+				passengers.update(bReadOnly);
+				cargo.update(bReadOnly);
+				hull.update(bReadOnly);
+				shipping.update(bReadOnly);
+				cost.update(bReadOnly);
+				armour_front.update(bReadOnly);
+				armour_sides.update(bReadOnly);
+				armour_rear.update(bReadOnly);
+				equipment.setReadOnly(bReadOnly);
+				weapons.setReadOnly(bReadOnly);
+
+				if bReadOnly and weapons.getValue() == "" then
+					weapons.setVisible(false)
+					weapons_label.setVisible(false)
+				else
+					weapons.setVisible(true)
+					weapons_label.setVisible(true)
+				end
+
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_column name="type_label">
+				<static textres="vehicle_label_type" />
+			</label_column>
+			<string_columnh name="type" />
+
+			<label_column name="tl_label">
+				<static textres="vehicle_label_tl" />
+			</label_column>
+			<number_columnh name="tl" />
+
+			<line_column name="divider" />
+
+			<label_column name="skill_label">
+				<static textres="vehicle_label_skill" />
+			</label_column>
+			<string_columnh name="skill" />
+
+			<label_column name="agility_label">
+				<static textres="vehicle_label_agility" />
+			</label_column>
+			<number_columnh name="agility" />
+
+			<label_column name="speed_label">
+				<static textres="vehicle_label_speed" />
+			</label_column>
+			<string_columnh name="speed" />
+
+			<label_column name="range_label">
+				<static textres="vehicle_label_range" />
+			</label_column>
+			<string_columnh name="range" />
+
+			<label_column name="crew_label">
+				<static textres="vehicle_label_crew" />
+			</label_column>
+			<string_columnh name="crew" />
+			<label_column name="passengers_label">
+				<static textres="vehicle_label_passengers" />
+			</label_column>
+			<string_columnh name="passengers" />
+
+			<label_column name="cargo_label">
+				<static textres="vehicle_label_cargo" />
+			</label_column>
+			<string_columnh name="cargo" />
+
+			<label_column name="hull_label">
+				<static textres="vehicle_label_hull" />
+			</label_column>
+			<number_columnh name="hull" />
+
+			<label_column name="shipping_label">
+				<static textres="vehicle_label_shipping" />
+			</label_column>
+			<string_columnh name="shipping" />
+
+			<label_column name="cost_label">
+				<static textres="vehicle_label_cost" />
+			</label_column>
+			<string_columnh name="cost" />
+
+			<line_column name="divider2" />
+			<!-- Armour -->
+			<label_column name="armour_label">
+				<static textres="vehicle_label_armour" />
+				<font>reference-b-large</font>
+			</label_column>
+			<spacer_column name="spacer" />
+			<spacer_column name="spacer" />
+			<spacer_column name="spacer" />
+			<spacer_column name="spacer" />
+			<spacer_column name="spacer" />
+			<label_column name="armour_front_label">
+				<static textres="vehicle_label_armour_front" />
+			</label_column>
+			<number_columnh name="armour_front" />
+
+			<label_column name="armour_sides_label">
+				<static textres="vehicle_label_armour_sides" />
+			</label_column>
+			<number_columnh name="armour_sides" />
+
+			<label_column name="armour_rear_label">
+				<static textres="vehicle_label_armour_rear" />
+			</label_column>
+			<number_columnh name="armour_rear" />
+
+			<line_column name="divider3" />
+			<label_column name="equipment_label">
+				<static textres="vehicle_label_equipment" />
+				<font>reference-b-large</font>
+			</label_column>
+			<spacer_column name="spacer" />
+			<spacer_column name="spacer" />
+			<spacer_column name="spacer" />
+			<spacer_column name="spacer" />
+			<spacer_column name="spacer" />
+			<spacer_column name="spacer" />
+
+			<string_column_full name="openclosed" />
+			<string_column_full name="equipment" />
+			<label_column name="weapons_label">
+				<static textres="vehicle_label_weapons" />
+			</label_column>
+			<string_columnh name="weapons" />
+
+			<!-- <line_column name="divider4" />
+			<ft_columnh name="description" /> -->
+			<spacer_column name="spacer" />
+		</sheetdata>
+	</windowclass>
+</root>

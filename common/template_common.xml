@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="basicstring_rollable">
+		<basicstring>
+			<script>
+				function onInit()
+					if rollable or (gmrollable and Session.IsHost) then
+						local w = addBitmapWidget("field_rollable");
+						w.setPosition("bottomleft", -1, -4);
+						setHoverCursor("hand");
+					elseif rollable2 or (gmrollable2 and Session.IsHost) then
+						local w = addBitmapWidget("field_rollable_transparent");
+						w.setPosition("topright", 0, 2);
+						w.sendToBack();
+						setHoverCursor("hand");
+					end
+				end
+			</script>
+		</basicstring>
+	</template>
+
+	<template name="label_column_right">
+		<label>
+			<anchored>
+				<top />
+				<right parent="" offset="-80" />
+			</anchored>
+		</label>
+	</template>
+	<template name="string_column_right">
+		<basicstring>
+			<anchored width="60" height="20">
+				<top />
+				<right parent="" offset="-5" />
+			</anchored>
+		</basicstring>
+	</template>
+
+	<template name="label_frametop">
+		<label>
+			<anchored position="insidetop" offset="-10,5" />
+			<font>subwindowsmalltitle</font>
+		</label>
+	</template>
+
+	<template name="string_column_left">
+		<string_column>
+			<anchored width="60">
+				<right merge="delete" />
+			</anchored>
+			<script file="common/scripts/column_string.lua" />
+		</string_column>
+	</template>
+	<template name="string_column_spacecraft_left">
+		<string_column>
+			<anchored width="60">
+				<right merge="delete" />
+			</anchored>
+		</string_column>
+	</template>
+	<template name="string_column_small">
+		<string_column>
+			<anchored width="20">
+				<right merge="delete" />
+			</anchored>
+			<center/>
+			<script file="common/scripts/column_string.lua" />
+		</string_column>
+	</template>
+
+	<template name="image_refblock">
+		<genericcontrol>
+			<anchored position="insidetopleft" />
+			<disabled />
+			<script>
+				function setData(sAsset)
+					setAsset(sAsset);
+				end
+			</script>
+		</genericcontrol>
+	</template>
+	<template name="linkc_refblock_image_clickcapture">
+		<windowreferencefield>
+			<anchored to="image" position="over" />
+			<script>
+				function onDragStart(button, x, y, draginfo)
+					draginfo.setType("shortcut");
+					draginfo.setIcon("button_link");
+					local sClass, sRecord = getValue();
+					draginfo.setShortcutData(sClass, sRecord);
+					draginfo.setDescription(DB.getValue(DB.findNode(sRecord), "name", ""));
+					return true;
+				end
+			</script>
+		</windowreferencefield>
+	</template>
+	<template name="hsequipmentimages">
+		<hs>
+			<script file="common/scripts/images_equipment.lua" />
+		</hs>
+	</template>
+	<template name="hsspacecraftimages">
+		<hs>
+			<script file="common/scripts/images_spacecraft.lua" />
+		</hs>
+	</template>
+	<template name="hsnpcimages">
+		<hs>
+			<script file="common/scripts/images_npc.lua" />
+		</hs>
+	</template>
+	<template name="hsraceimages">
+		<hs>
+			<script file="common/scripts/images_race.lua" />
+		</hs>
+	</template>
+</root>

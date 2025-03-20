@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- Desktop -->
+	<framedef name="desktop">
+		<bitmap file="graphics/frames/desktop.png" />
+		<middle>0,0,512,512</middle>
+	</framedef>
+	<framedef name="shortcuts">
+		<bitmap file="graphics/frames/shortcuts.png" />
+		<middle>0,0,398,400</middle>
+	</framedef>
+	<framedef name="logoright">
+		<bitmap file="graphics/frames/logoright.png" />
+		<middle>0,0,401,125</middle>
+	</framedef>
+	<framedef name="lightsplat_one">
+		<bitmap file="graphics/frames/lightsplat_one.png" />
+		<middle>0,0,800,800</middle>
+	</framedef>
+	<framedef name="lightsplat_two">
+		<bitmap file="graphics/frames/lightsplat_two.png" />
+		<middle>0,0,800,800</middle>
+	</framedef>
+	<framedef name="frame_upper">
+		<bitmap file="graphics/frames/frame_upper.png" />
+		<middle>0,0,700,144</middle>
+	</framedef>
+
+	<!-- Hot key bar -->
+	<framedef name="hotkeybox">
+		<bitmap file="graphics/frames/hotkeybox.png" />
+		<offset>21,34,24,21</offset>
+	</framedef>
+	<framedef name="hotkeytitlebox">
+		<bitmap file="graphics/frames/hotkeytitlebox.png" />
+		<offset>0,0,4,5</offset>
+	</framedef>
+
+	<!-- Sidebar -->
+	<framedef name="sidebar_dock_category">
+        <bitmap file="graphics/sidebar/sidebar_dock_category.png" />
+		<offset>12,12,12,12</offset>
+    </framedef>
+    <framedef name="sidebar_dock_category_down">
+        <bitmap file="graphics/sidebar/sidebar_dock_category_down.png" />
+		<offset>12,12,12,12</offset>
+    </framedef>
+    <framedef name="sidebar_dock_entry_icon">
+		<bitmap file="graphics/sidebar/sidebar_dock_icon.png" />
+		<offset>12,12,12,12</offset>
+    </framedef>
+	<framedef name="sidebar_dock_entry_icon_down">
+		<bitmap file="graphics/sidebar/sidebar_dock_entry_down.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+ 	<framedef name="sidebar_dock_entry">
+		<bitmap file="graphics/sidebar/sidebar_dock_entry.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+	<framedef name="sidebar_dock_entry_down">
+		<bitmap file="graphics/sidebar/sidebar_dock_entry_down.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+
+	<!-- Tooltips -->
+	<framedef name="tooltipbox">
+		<bitmap file="graphics/frames/tooltipbox.png" />
+		<offset>6,4,9,7</offset>
+	</framedef>
+
+	<!-- Character sheet -->
+	<framedef name="characteristicmodifier">
+		<bitmap file="graphics/frames/characteristicmodifier.png" />
+		<offset>7,7,7,7</offset>
+	</framedef>
+
+	<!-- Images -->
+	<framedef name="imagebox">
+		<bitmap file="graphics/frames/imagebox.png" />
+		<offset>150,135,50,50</offset>
+		<insideoffset>0,0,5,7</insideoffset>
+	</framedef>
+	<framedef name="imagepanel">
+		<bitmap file="graphics/frames/imagepanel.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+
+	<!-- Story and Notes -->
+	<framedef name="storybox">
+		<bitmap file="graphics/frames/storybox.png" />
+		<offset>71,172,71,49</offset>
+		<insideoffset>0,0,0,0</insideoffset>
+	</framedef>
+
+	<!-- Chat window -->
+	<framedef name="chatbox">
+		<bitmap file="graphics/frames/chatbox.png" />
+		<offset>74,75,200,90</offset>
+		<insideoffset>0,0,5,7</insideoffset>
+	</framedef>
+	<framedef name="chatentry">
+		<bitmap file="graphics/frames/chatentry.png" />
+		<offset>1,1,1,1</offset>
+	</framedef>
+	<framedef name="chatframe_chat">
+		<bitmap file="graphics/frames/chatframe_chat.png" />
+		<offset>17,17,7,7</offset>
+	</framedef>
+
+	<!-- Combat tracker -->
+	<framedef name="ctbox">
+		<bitmap file="graphics/frames/ctbox.png" />
+		<offset>32,42,46,46</offset>
+		<insideoffset>0,0,0,0</insideoffset>
+	</framedef>
+
+	<!-- Buttons -->
+	<framedef name="buttonup">
+		<bitmap file="graphics/frames/buttonup.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+	<framedef name="buttondown">
+		<bitmap file="graphics/frames/buttondown.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+
+	<!-- Reference -->
+	<framedef name="referencelist">
+		<bitmap file="graphics/frames/referencelist.png" />
+		<offset>90,60,90,60</offset>
+		<insideoffset>0,0,0,1</insideoffset>
+	</framedef>
+
+	<!-- Reference Blocks -->
+	<framedef name="referenceblock-trav1">
+		<bitmap file="graphics/frames/refblock_trav1.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav2">
+		<bitmap file="graphics/frames/refblock_trav2.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav3">
+		<bitmap file="graphics/frames/refblock_trav3.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav4">
+		<bitmap file="graphics/frames/refblock_trav4.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav5">
+		<bitmap file="graphics/frames/refblock_trav5.png" />
+		<offset>113,50,143,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav6">
+		<bitmap file="graphics/frames/refblock_trav6.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav7">
+		<bitmap file="graphics/frames/refblock_trav7.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav8">
+		<bitmap file="graphics/frames/refblock_trav8.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav9">
+		<bitmap file="graphics/frames/refblock_trav9.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav10">
+		<bitmap file="graphics/frames/refblock_trav10.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav11">
+		<bitmap file="graphics/frames/refblock_trav11.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav12">
+		<bitmap file="graphics/frames/refblock_trav12.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav13">
+		<bitmap file="graphics/frames/refblock_trav13.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav14">
+		<bitmap file="graphics/frames/refblock_trav14.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav15">
+		<bitmap file="graphics/frames/refblock_trav15.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav16">
+		<bitmap file="graphics/frames/refblock_trav16.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav17">
+		<bitmap file="graphics/frames/refblock_trav17.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav18">
+		<bitmap file="graphics/frames/refblock_trav18.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav19">
+		<bitmap file="graphics/frames/refblock_trav19.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav20">
+		<bitmap file="graphics/frames/refblock_trav20.png" />
+		<offset>113,50,143,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav21">
+		<bitmap file="graphics/frames/refblock_trav21.png" />
+		<offset>113,50,143,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav22">
+		<bitmap file="graphics/frames/refblock_trav22.png" />
+		<offset>113,50,143,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav23">
+		<bitmap file="graphics/frames/refblock_trav23.png" />
+		<offset>113,50,143,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav24">
+		<bitmap file="graphics/frames/refblock_trav24.png" />
+		<offset>113,50,143,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav25">
+		<bitmap file="graphics/frames/refblock_trav25.png" />
+		<offset>113,0,43,30</offset>
+	</framedef>
+	<framedef name="referenceblock-trav26">
+		<bitmap file="graphics/frames/refblock_trav26.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav27">
+		<bitmap file="graphics/frames/refblock_trav27.png" />
+		<offset>113,50,143,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav28">
+		<bitmap file="graphics/frames/refblock_trav28.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav29">
+		<bitmap file="graphics/frames/refblock_trav29.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>
+	<framedef name="referenceblock-trav30">
+		<bitmap file="graphics/frames/refblock_trav30.png" />
+		<offset>125,50,160,45</offset>
+	</framedef>			
+	<framedef name="referenceblock-trav202201">
+		<bitmap file="graphics/frames/refblock_trav202201.png" />
+		<offset>125,55,125,55</offset>
+	</framedef>
+	<framedef name="referenceblock-trav202202">
+		<bitmap file="graphics/frames/refblock_trav202202.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>	
+	<framedef name="referenceblock-trav202203">
+		<bitmap file="graphics/frames/refblock_trav202203.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>	
+	<framedef name="referenceblock-trav202204">
+		<bitmap file="graphics/frames/refblock_trav202204.png" />
+		<offset>125,50,125,50</offset>
+	</framedef>	
+
+	<!-- Utility -->
+	<framedef name="utilitybox">
+		<bitmap file="graphics/frames/utilitybox.png" />
+		<offset>50,50,50,50</offset>
+		<insideoffset>0,0,2,2</insideoffset>
+	</framedef>
+
+	<!-- Scrollbar -->
+	<framedef name="scrollbar_base">
+		<bitmap file="graphics/frames/scrollbar.png" />
+		<top rect="0,0,20,14" />
+		<middle rect="22,0,20,62" />
+		<bottom rect="0,48,20,14" />
+	</framedef>
+	<framedef name="scrollbutton_normal">
+		<bitmap file="graphics/frames/scrollbutton_normal.png" />
+		<top rect="0,0,20,16" />
+		<middle rect="0,16,20,8" />
+		<bottom rect="0,24,20,16" />
+	</framedef>
+
+	<!-- Override CoreRPG ruleset graphics -->
+	<!-- Characters -->
+	<framedef name="charsheet">
+		<bitmap file="graphics/frames/charsheet.png" />
+		<offset>100,200,300,200</offset>
+		<insideoffset>0,0,0,2</insideoffset>
+	</framedef>
+
+	<!-- Control frames -->
+	<framedef name="groupbox">
+		<bitmap file="graphics/frames/groupbox.png" />
+		<offset>18,18,17,17</offset>
+	</framedef>
+	<framedef name="fielddark">
+		<bitmap file="graphics/frames/fielddark.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+	<framedef name="fieldlight">
+		<bitmap file="graphics/frames/fieldlight.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+
+	<!-- Character selection -->
+	<framedef name="charselect">
+		<bitmap file="graphics/frames/utilitybox.png" />
+		<offset>50,50,50,50</offset>
+		<insideoffset>0,0,2,2</insideoffset>
+	</framedef>
+
+	<!-- Combat tracker -->
+	<framedef name="ct_groupbox">
+		<bitmap file="graphics/frames/ct_groupbox.png" />
+		<offset>19,22,20,24</offset>
+	</framedef>
+	<framedef name="ct_subgroupbox">
+		<bitmap file="graphics/frames/ct_subgroupbox.png" />
+		<offset>12,12,12,12</offset>
+	</framedef>
+	<framedef name="ctentrybox">
+		<bitmap file="graphics/frames/ctentrybox.png" />
+		<offset>28,3,5,6</offset>
+	</framedef>
+	<framedef name="ctentrybox_active">
+		<bitmap file="graphics/frames/ctentrybox_active.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+	<framedef name="ctentrybox_friend">
+		<bitmap file="graphics/frames/ctentrybox_friend.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+	<framedef name="ctentrybox_friend_active">
+		<bitmap file="graphics/frames/ctentrybox_friend_active.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+	<framedef name="ctentrybox_neutral">
+		<bitmap file="graphics/frames/ctentrybox_neutral.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+	<framedef name="ctentrybox_neutral_active">
+		<bitmap file="graphics/frames/ctentrybox_neutral_active.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+	<framedef name="ctentrybox_foe">
+		<bitmap file="graphics/frames/ctentrybox_foe.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+	<framedef name="ctentrybox_foe_active">
+		<bitmap file="graphics/frames/ctentrybox_foe_active.png" />
+		<offset>37,16,14,17</offset>
+	</framedef>
+	<framedef name="tcentrybox">
+		<bitmap file="graphics/frames/tcentrybox.png" />
+		<offset>5,3,5,6</offset>
+	</framedef>
+
+	<!-- Party Sheet -->
+	<framedef name="partysheet">
+		<bitmap file="graphics/frames/partysheet.png" />
+		<offset>55,55,55,55</offset>
+		<insideoffset>0,0,5,8</insideoffset>
+	</framedef>
+
+	<!-- Token Bag -->
+	<framedef name="tokenbag">
+		<bitmap file="graphics/frames/utilitybox.png" />
+		<offset>50,50,50,50</offset>
+		<insideoffset>0,0,2,2</insideoffset>
+	</framedef>
+
+	<!-- Other Campaign Records -->
+	<framedef name="recordsheet">
+		<bitmap file="graphics/frames/recordsheet.png" />
+		<offset>25,40,25,40</offset>
+		<insideoffset>0,0,2,12</insideoffset>
+	</framedef>
+
+	<!-- Windows -->
+	<framedef name="windowtitle">
+		<bitmap file="graphics/frames/windowtitle.png" />
+		<offset>25,40,30,0</offset>
+	</framedef>
+	<framedef name="windowmenubar_button">
+		<bitmap file="graphics/frames/windowmenubar_button.png" />
+		<offset>4,4,4,4</offset>
+	</framedef>
+	<framedef name="windowmenubar_button_down">
+		<bitmap file="graphics/frames/windowmenubar_button_down.png" />
+		<offset>4,4,4,4</offset>
+	</framedef>
+</root>

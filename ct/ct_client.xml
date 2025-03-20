@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="combattracker_client" merge="join">
+		<script>
+			function onInit()
+				if super and super.onInit then
+					super.onInit();
+				end
+				OptionsManager.registerCallback("SHPC", self.updateHealthDisplay);
+				OptionsManager.registerCallback("SHNPC", self.updateHealthDisplay);
+				self.updateHealthDisplay();
+			end
+			function onClose()
+				if super and super.onClose then
+					super.onClose();
+				end
+				OptionsManager.unregisterCallback("SHPC", self.updateHealthDisplay);
+				OptionsManager.unregisterCallback("SHNPC", self.updateHealthDisplay);
+			end
+			function updateHealthDisplay()
+				local sOptSHPC = OptionsManager.getOption("SHPC");
+				local sOptSHNPC = OptionsManager.getOption("SHNPC");
+				local bShowDetail = (sOptSHPC == "detailed") or (sOptSHNPC == "detailed");
+				local bShowStatus = ((sOptSHPC == "status") or (sOptSHNPC == "status")) and not bShowDetail;
+
+				local w = sub_header.subwindow;
+				w.label_endurance.setVisible(bShowDetail);
+				w.label_strength.setVisible(bShowDetail);
+				w.label_dexterity.setVisible(bShowDetail);
+
+				w.label_status.setVisible(bShowStatus);
+
+				for _,wChild in pairs(list.getWindows()) do
+					wChild.updateHealthDisplay();
+				end
+			end
+		</script>
+	</windowclass>
+	<windowclass name="sub_ct_header_client" merge="join">
+		<sheetdata>
+			<label_ct_header_right name="label_status" insertbefore="label_init">
+				<anchored width="110" />
+				<static textres="ct_label_status" />
+			</label_ct_header_right>
+			<label_ct_header_right name="label_dexterity" insertbefore="label_init">
+				<static textres="ct_label_dexterity" />
+				<tooltip textres="ct_tooltip_dexterity" />
+			</label_ct_header_right>
+			<label_ct_header_right name="label_strength" insertbefore="label_init">
+				<static textres="ct_label_strength" />
+				<tooltip textres="ct_tooltip_strength" />
+			</label_ct_header_right>
+			<label_ct_header_right name="label_endurance" insertbefore="label_init">
+				<static textres="ct_label_endurance" />
+				<tooltip textres="ct_tooltip_endurance" />
+			</label_ct_header_right>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="client_ct_entry" merge="join">
+		<script file="ct/scripts/clientct_entry.lua" />
+		<sheetdata>
+			<base_clientct_health name="healthbase" insertbefore="initresult" />
+			<string_clientct_status name="status" insertbefore="initresult" />
+			<number_clientct_dexterity name="dexterity" insertbefore="initresult" />
+			<number_clientct_strength name="strength" insertbefore="initresult" />
+			<number_clientct_endurance name="endurance" insertbefore="initresult" />
+		</sheetdata>
+	</windowclass>
+</root>

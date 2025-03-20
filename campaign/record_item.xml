@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="item_main">
+		<script file="campaign/scripts/item_main.lua" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_column name="type_label_summary">
+				<anchored>
+					<top relation="relative" offset="2" />
+				</anchored>
+				<font>sheetlabel</font>
+			</label_column>
+			<label_column name="subtype_label_summary">
+				<anchored>
+					<top relation="relative" offset="2" />
+				</anchored>
+				<font>sheetlabel</font>
+			</label_column>
+
+			<label_column name="type_label">
+				<static textres="item_label_type" />
+			</label_column>
+			<string_columnh name="type">
+				<delaykeyupdate />
+				<script>
+					function onValueChanged()
+						window.update();
+					end
+				</script>
+			</string_columnh>
+
+			<label_column name="subtype_label">
+				<static textres="item_label_subtype" />
+			</label_column>
+			<string_columnh name="subtype">
+				<delaykeyupdate />
+				<script>
+					function onValueChanged()
+						window.update();
+					end
+				</script>
+			</string_columnh>
+
+			<line_column name="divider" />
+
+			<label_column name="nonid_notes_label">
+				<static textres="item_label_unidentifiednotes" />
+			</label_column>
+			<string_columnh name="nonid_notes" />
+
+			<line_column name="divider1" />
+
+			<label_column name="tl_label">
+				<static textres="item_label_tl" />
+			</label_column>
+			<number_columnh name="tl" />
+
+			<label_column name="cost_label">
+				<static textres="item_label_cost" />
+			</label_column>
+			<string_columnh name="cost" />
+
+			<line_column name="divider2" />
+
+			<sub_column name="type_stats" />
+
+			<line_column name="divider3" />
+
+			<ft_columnh name="notes">
+				<readonly />
+			</ft_columnh>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="item_main_ammo">
+		<margins control="0,0,0,2" />
+		<script>
+			function update(bReadOnly)
+				damage.update(bReadOnly);
+				range.update(bReadOnly);
+				traits.update(bReadOnly);
+
+				pistol.update(bReadOnly);
+				rifle.update(bReadOnly);
+				shotgun.update(bReadOnly);
+				heavy.update(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_column name="damage_label">
+				<static textres="item_label_damage" />
+			</label_column>
+			<string_columnh name="damage" />
+			<label_column name="range_label">
+				<static textres="item_label_range" />
+			</label_column>
+			<string_columnh name="range">
+				<readonly />
+			</string_columnh>
+			<label_column name="traits_label">
+				<static textres="item_label_traits" />
+			</label_column>
+			<string_columnh name="traits">
+				<readonly />
+			</string_columnh>
+
+			<line_column name="divider" />
+
+			<label_column name="pistol_label">
+				<static textres="ref_label_pistol" />
+				<tooltip textres="ref_tooltip_listpistol" />
+			</label_column>
+			<string_columnh name="pistol">
+				<tooltip textres="ref_tooltip_pistol" />
+			</string_columnh>
+			<label_column name="rifle_label">
+				<static textres="ref_label_rifle" />
+				<tooltip textres="ref_tooltip_listrifle" />
+			</label_column>
+			<string_columnh name="rifle">
+				<tooltip textres="ref_tooltip_rifle" />
+			</string_columnh>
+			<label_column name="shotgun_label">
+				<static textres="ref_label_shotgun" />
+				<tooltip textres="ref_tooltip_listshotgun" />
+			</label_column>
+			<string_columnh name="shotgun">
+				<tooltip textres="ref_tooltip_shotgun" />
+			</string_columnh>
+			<label_column name="heavy_label">
+				<static textres="ref_label_heavy" />
+				<tooltip textres="ref_tooltip_listheavy" />
+			</label_column>
+			<string_columnh name="heavy">
+				<tooltip textres="ref_tooltip_heavy" />
+			</string_columnh>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="item_main_armor">
+		<margins control="0,0,0,2" />
+		<script>
+			function update(bReadOnly)
+				resistances.update(bReadOnly);
+
+				mass.update(bReadOnly);
+				description.update(bReadOnly);
+				skill.update(bReadOnly);
+				modifiers.update(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_column name="resistances_label">
+				<static textres="item_label_protection" />
+			</label_column>
+			<string_columnh name="resistances" />
+
+			<line_column name="divider" />
+
+			<label_column name="mass_label">
+				<static textres="item_label_mass" />
+			</label_column>
+			<number_columnh name="mass" />
+
+			<label_column name="description_label">
+				<static textres="ref_label_typeanddescription" />
+			</label_column>
+			<string_columnh name="description" />
+
+			<label_column name="skill_label">
+				<static textres="item_label_skill" />
+			</label_column>
+			<string_columnh name="skill" />
+
+			<label_column name="modifiers_label">
+				<static textres="item_label_modifiers" />
+				<tooltip textres="item_tooltip_modifiers" />
+			</label_column>
+			<string_columnh name="modifiers">
+				<tooltip textres="item_tooltip_modifiers" />
+			</string_columnh>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="item_main_electronics">
+		<margins control="0,0,0,2" />
+		<script>
+			function update(bReadOnly)
+				mass.update(bReadOnly);
+				skill.update(bReadOnly);
+				modifiers.update(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_column name="mass_label">
+				<static textres="item_label_mass" />
+			</label_column>
+			<number_columnh name="mass" />
+
+			<label_column name="skill_label">
+				<static textres="item_label_skill" />
+			</label_column>
+			<string_columnh name="skill" />
+
+			<label_column name="modifiers_label">
+				<static textres="item_label_modifiers" />
+				<tooltip textres="item_tooltip_modifiers" />
+			</label_column>
+			<string_columnh name="modifiers">
+				<tooltip textres="item_tooltip_modifiers" />
+			</string_columnh>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="item_main_other">
+		<margins control="0,0,0,2" />
+		<script>
+			function update(bReadOnly)
+				mass.update(bReadOnly);
+				description.update(bReadOnly);
+				skill.update(bReadOnly);
+				modifiers.update(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_column name="mass_label">
+				<static textres="item_label_mass" />
+			</label_column>
+			<number_columnh name="mass" />
+
+			<label_column name="description_label">
+				<static textres="ref_label_typeanddescription" />
+			</label_column>
+			<string_columnh name="description" />
+
+			<label_column name="skill_label">
+				<static textres="item_label_skill" />
+			</label_column>
+			<string_columnh name="skill" />
+
+			<label_column name="modifiers_label">
+				<static textres="item_label_modifiers" />
+				<tooltip textres="item_tooltip_modifiers" />
+			</label_column>
+			<string_columnh name="modifiers">
+				<tooltip textres="item_tooltip_modifiers" />
+			</string_columnh>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="item_main_spacecraft">
+		<margins control="0,0,0,2" />
+		<script>
+			function update(bReadOnly)
+				damage.update(bReadOnly);
+				range.update(bReadOnly);
+				traits.update(bReadOnly);
+				power.update(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_column name="damage_label">
+				<static textres="item_label_damage" />
+			</label_column>
+			<string_columnh name="damage" />
+
+			<label_column name="range_label">
+				<static textres="item_label_range" />
+			</label_column>
+			<string_columnh name="range">
+				<readonly />
+			</string_columnh>
+
+			<label_column name="traits_label">
+				<static textres="item_label_traits" />
+			</label_column>
+			<string_columnh name="traits">
+				<readonly />
+			</string_columnh>
+
+			<label_column name="power_label">
+				<static textres="item_label_power" />
+			</label_column>
+			<number_columnh name="power" />
+		</sheetdata>
+	</windowclass>
+	<windowclass name="item_main_weapon">
+		<margins control="0,0,0,2" />
+		<script>
+			function update(bReadOnly)
+				traits.setTooltipText(ItemManager2.updateToolTip(traits.getValue()));
+
+				damage.update(bReadOnly);
+				magazine.update(bReadOnly);
+				range.update(bReadOnly);
+				traits.update(bReadOnly);
+				ammocost.update(bReadOnly);
+
+				mass.update(bReadOnly);
+				description.update(bReadOnly);
+				skill.update(bReadOnly);
+				modifiers.update(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_column name="damage_label">
+				<static textres="item_label_damage" />
+			</label_column>
+			<string_columnh name="damage" />
+
+			<label_column name="magazine_label">
+				<static textres="item_label_magazine" />
+			</label_column>
+			<number_columnh name="magazine" />
+
+			<label_column name="range_label">
+				<static textres="item_label_range" />
+			</label_column>
+			<string_columnh name="range">
+				<readonly />
+			</string_columnh>
+
+			<label_column name="traits_label">
+				<static textres="item_label_traits" />
+			</label_column>
+			<string_columnh name="traits">
+				<readonly />
+			</string_columnh>
+
+			<label_column name="ammocost_label">
+				<static textres="item_label_ammocost" />
+			</label_column>
+			<string_columnh name="ammocost" />
+
+			<line_column name="divider" />
+
+			<label_column name="mass_label">
+				<static textres="item_label_mass" />
+			</label_column>
+			<number_columnh name="mass" />
+
+			<label_column name="description_label">
+				<static textres="ref_label_typeanddescription" />
+			</label_column>
+			<string_columnh name="description" />
+
+			<label_column name="skill_label">
+				<static textres="item_label_skill" />
+			</label_column>
+			<string_columnh name="skill" />
+
+			<label_column name="modifiers_label">
+				<static textres="item_label_modifiers" />
+				<tooltip textres="item_tooltip_modifiers" />
+			</label_column>
+			<string_columnh name="modifiers">
+				<tooltip textres="item_tooltip_modifiers" />
+			</string_columnh>
+		</sheetdata>
+	</windowclass>
+</root>

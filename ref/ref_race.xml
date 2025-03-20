@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="reference_race" copy="record_window" />
+	<windowclass name="reference_race_header" copy="record_header" />
+
+	<windowclass name="reference_race_main">
+        <script>
+            function onInit()
+				self.update();
+            end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+
+				description.setReadOnly(bReadOnly);
+
+				characteristics.setReadOnly(bReadOnly);
+				traitstext.setReadOnly(bReadOnly);
+				careerstext.setReadOnly(bReadOnly);
+				if bReadOnly then
+					if description.isEmpty() then
+						description.setVisible(false);
+					end
+					if traitstext.isEmpty() then
+						traitstext.setVisible(false)
+						traitslabel.setVisible(false)
+					end
+					if (characteristics.isEmpty()) then
+						type_characteristics.setVisible(false);
+						characteristics.setVisible(false);
+					else
+						type_characteristics.setVisible(true);
+						characteristics.setVisible(true);
+					end
+					if (careerstext.isEmpty()) then
+						careerslabel.setVisible(false);
+						careerstext.setVisible(false);
+					else
+						careerslabel.setVisible(true);
+						careerstext.setVisible(true);
+					end
+
+				else
+					type_characteristics.setVisible(true);
+					characteristics.setVisible(true);
+					traitstext.setVisible(true);
+					traitslabel.setVisible(true);
+					careerstext.setVisible(true);
+					careerslabel.setVisible(true);
+					description.setVisible(true);
+				end
+
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			<image_refblock name="image">
+				<anchored>
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
+					<left offset="5" />
+				</anchored>
+				<invisible />
+			</image_refblock>
+			<hsraceimages name="raceimage" />
+            <ft_columnh name="description">
+				<readonly />
+			</ft_columnh>
+			<label_column name="type_characteristics">
+				<static textres="ref_label_characteristics" />
+				<font>reference-b-large</font>
+			</label_column>
+            <string_columnh name="characteristics">
+                <anchored>
+					<top offset="30"/>
+					<left offset="10" />
+				</anchored>
+				<readonly />
+			</string_columnh>
+			<spacer_column name="spacer" />
+
+			<label_column name="traitslabel">
+				<static textres="ref_label_traits" />
+				<font>reference-b-large</font>
+			</label_column>
+            <ft_columnh name="traitstext">
+                <anchored>
+					<top offset="30"/>
+					<left offset="10" />
+				</anchored>
+				<readonly />
+			</ft_columnh>
+
+			<label_column name="careerslabel">
+				<static textres="ref_label_careers" />
+				<font>reference-b-large</font>
+			</label_column>
+            <ft_columnh name="careerstext">
+                <anchored>
+					<top offset="30"/>
+					<left offset="10" />
+				</anchored>
+				<readonly />
+			</ft_columnh>
+		</sheetdata>
+	</windowclass>
+</root>

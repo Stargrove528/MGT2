@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<!-- Traveller Core Rules -->
+
+<root>
+	<windowclass name="char_misc_actions">
+		<script>
+			function onDrop(x, y, draginfo)
+				if draginfo.isType("shortcut") then
+
+					local sClass = draginfo.getShortcutData();
+					local node = draginfo.getDatabaseNode();
+
+					if StringManager.contains({"reference_skill"}, sClass) then
+						CharManager.addMiscActionRef(getDatabaseNode(), node, sClass);
+						return true;
+					end
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			<label_charframetop name="miscactionstitle">
+				<anchored height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="10" />
+					<right offset="-10" />
+				</anchored>
+				<static textres="char_label_miscactions" />
+                <script>
+					function onInit()
+						local node = window.getDatabaseNode()
+					end
+
+					function onClickDown()
+						return true;
+					end
+					function onClickRelease()
+						local bVisible = window.miscactions.isVisible();
+
+                        if bVisible then
+							window.miscactionstitle.setValue("Misc Actions (collapsed)")
+						else
+							window.miscactionstitle.setValue("Misc Actions")
+						end
+
+						window.miscactions.setVisible(not bVisible);
+						window.miscaction_total.setVisible(not bVisible);
+						window.miscaction_mod.setVisible(not bVisible);
+						window.miscaction_skill.setVisible(not bVisible);
+						window.miscaction_characteristic.setVisible(not bVisible);
+						window.miscaction_action.setVisible(not bVisible);
+						window.miscaction_name.setVisible(not bVisible);
+
+						window.miscactions_iedit.setVisible(not bVisible);
+						window.miscactions_iadd.setVisible(not bVisible);
+
+						return true;
+					end
+				</script>
+			</label_charframetop>
+
+			<button_iadd name="miscactions_iadd">
+				<anchored>
+					<top parent="miscactionstitle" offset="0"/>
+					<right offset="-30" />
+				</anchored>
+				<target>miscactions</target>
+			</button_iadd>
+			<button_iedit name="miscactions_iedit">
+				<anchored>
+					<top parent="miscactionstitle" />
+					<right offset="-5" />
+				</anchored>
+			</button_iedit>
+
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="25" />
+					<right anchor="right" offset="-25" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<spacer_header_idelete name="idelete_header">
+				<editmode>miscactions_iedit</editmode>
+			</spacer_header_idelete>
+
+			<!-- Columns from right to left -->
+			<label name="miscaction_total">
+				<anchored to="rightanchor" width="40">
+					<top />
+					<right anchor="left" relation="relative" offset="15" />
+				</anchored>
+				<static textres="char_label_miscaction_total" />
+				<center />
+			</label>
+			<label name="miscaction_mod">
+				<anchored to="rightanchor" width="65">
+					<top />
+					<right anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<static textres="char_label_miscaction_mod" />
+				<center />
+			</label>
+            <label name="miscaction_skill">
+				<anchored to="rightanchor" width="40">
+					<top />
+					<right anchor="left" relation="relative" offset="4" />
+				</anchored>
+				<static textres="char_label_miscaction_skill" />
+				<center />
+			</label>
+			<label name="miscaction_characteristic">
+				<anchored to="rightanchor" width="95">
+					<top />
+					<right anchor="left" relation="relative" offset="-7" />
+				</anchored>
+				<static textres="char_label_miscaction_characteristic" />
+				<center />
+			</label>
+			<label name="miscaction_action">
+				<anchored to="rightanchor" width="45">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<static textres="char_label_miscaction_action" />
+				<center />
+			</label>
+			<label name="miscaction_name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="0" />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<static textres="char_label_miscaction_name" />
+				<center />
+			</label>
+
+			<list_charmiscaction name="miscactions">
+				<anchored>
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="20" />
+					<left offset="10" />
+					<right offset="5" />
+				</anchored>
+				<class>char_misc_action</class>
+				<noscroll />
+			</list_charmiscaction>
+        </sheetdata>
+	</windowclass>
+
+	<windowclass name="char_misc_action">
+		<margins control="0,0,0,5" />
+		<sheetdata>
+			<hn name="locked" />
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored width="20" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<editmode>miscactions_iedit</editmode>
+			</button_idelete>
+			<number_charactiontotal name="total">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-13" />
+				</anchored>
+				<displaysign />
+			</number_charactiontotal>
+			<basicnumber name="actionMod">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<displaysign />
+				<tabtarget prev="skill" />
+			</basicnumber>
+			<number_charskillfield name="skill">
+				<anchored width="40" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="characteristic" next="mod" />
+				<displaysign />
+				<script>
+					function onInit()
+						if window.locked.getValue() == 1 then
+							setEnabled(false);
+						else
+							setFrame("fieldlight",7,5,7,5);
+						end
+					end
+				</script>
+			</number_charskillfield>
+			<number_charskillDMfield name="characteristicDM">
+				<anchored width="30" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<displaysign />
+				<tabtarget prev="characteristic" next="level" />
+			</number_charskillDMfield>
+			<cycler_misccharacteristic name="characteristic">
+				<anchored width="35" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="action" next="characteristicDM" />
+			</cycler_misccharacteristic>
+
+			<cycler_actions_action name="action">
+				<anchored width="45" height="20">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-17" />
+				</anchored>
+				<tabtarget prev="name" next="characteristicDM" />
+			</cycler_actions_action>
+
+			<stringu name="name">
+				<anchored height="20">
+					<top offset="2" />
+					<left offset="5" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget next="attributeDM" />
+			</stringu>
+		</sheetdata>
+	</windowclass>
+</root>

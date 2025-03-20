@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="button_ct_controls_menu" merge="join">
+		<button_listitem_text_left_sm>
+			<script file="ct/scripts/ct_menu.lua" />
+		</button_listitem_text_left_sm>
+	</template>
+
+	<!-- General -->
+	<template name="string_ct_boxed">
+		<basicstring>
+			<script file="common/scripts/string_crosslink.lua" />
+		</basicstring>
+	</template>
+	<template name="string_ct_boxed_static">
+		<string_static>
+			<script file="common/scripts/string_crosslink.lua" />
+		</string_static>
+	</template>
+
+	<!-- GM combat tracker -->
+	<template name="base_ct_health">
+		<genericcontrol name="healthbase">
+			<anchored to="rightanchor" width="110" height="20">
+				<top />
+				<right anchor="left" relation="relative" offset="-10" />
+			</anchored>
+			<disabled />
+		</genericcontrol>
+	</template>
+	<template name="number_ctentry_health">
+		<number_ct_crosslink>
+			<script>
+				function handleDrop(draginfo)
+					if draginfo.getType() == "number" then
+						local node = window.getDatabaseNode();
+						local rActor = ActorManager.resolveActor(node);
+						ActionDamage.applyDamage(nil, rActor, CombatManager.isCTHidden(node), draginfo.getDescription(), draginfo.getNumberData());
+					end
+				end
+				function update()
+					window.onHealthChanged();
+				end
+			</script>
+		</number_ct_crosslink>
+	</template>
+	<template name="number_ct_dexterity">
+		<number_ctentry_health name="dexterity" source="woundtrack.dex">
+			<anchored to="healthbase" width="30" height="20">
+				<top />
+				<right />
+			</anchored>
+			<color>0000AA</color>
+		</number_ctentry_health>
+	</template>
+	<template name="number_ct_strength">
+		<number_ctentry_health name="strength" source="woundtrack.str">
+			<anchored to="dexterity" width="30" height="20">
+				<top />
+				<right anchor="left" offset="-10" />
+			</anchored>
+			<color>0000AA</color>
+		</number_ctentry_health>
+	</template>
+	<template name="number_ct_endurance">
+		<number_ctentry_health name="endurance" source="woundtrack.end">
+			<anchored to="strength" width="30" height="20">
+				<top />
+				<right anchor="left" offset="-10" />
+			</anchored>
+			<min value="0" />
+		</number_ctentry_health>
+	</template>
+	<template name="number_ct_hits">
+		<number_ctentry_health name="hits" source="woundtrack.hits">
+			<anchored to="healthbase" width="50" height="20">
+				<top />
+				<right offset="-15" />
+			</anchored>
+			<tooltip textres="ct_tooltip_hits" />
+		</number_ctentry_health>
+	</template>
+	<template name="number_ctentry_initmod">
+		<number_ct_crosslink name="init_mod">
+			<anchored to="rightanchor" width="30" height="20">
+				<top />
+				<right anchor="left" relation="relative" offset="-15" />
+			</anchored>
+			<script>
+				function onValueChanged()
+					local initResult = window.initresult_saved.getValue();
+					local dex_dm = window.dex_mod.getValue()
+					local nNewInitTotal = initResult + dex_dm + getValue()
+
+					window.initresult.setValue(nNewInitTotal);
+					window.windowlist.applySort();
+				end
+			</script>
+		</number_ct_crosslink>
+	</template>
+
+	<!-- Player combat tracker -->
+	<template name="number_clientct_dexterity">
+		<number_ct_static name="dexterity" source="woundtrack.dex">
+			<anchored to="healthbase" width="30" height="20">
+				<top />
+				<right />
+			</anchored>
+			<color>0000AA</color>
+			<script>
+				function onValueChanged()
+					window.onHealthChanged();
+				end
+			</script>
+		</number_ct_static>
+	</template>
+	<template name="number_clientct_strength">
+		<number_ct_static name="strength" source="woundtrack.str">
+			<anchored to="dexterity" width="30" height="20">
+				<top />
+				<right anchor="left" offset="-10" />
+			</anchored>
+			<color>0000AA</color>
+			<script>
+				function onValueChanged()
+					window.onHealthChanged();
+				end
+			</script>
+		</number_ct_static>
+	</template>
+	<template name="number_clientct_endurance">
+		<number_ct_static name="endurance" source="woundtrack.end">
+			<anchored to="strength" width="30" height="20">
+				<top />
+				<right anchor="left" offset="-10" />
+			</anchored>
+			<min value="0" />
+			<script>
+				function onValueChanged()
+					window.onHealthChanged();
+				end
+			</script>
+		</number_ct_static>
+	</template>
+</root>

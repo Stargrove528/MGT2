@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charspacecraft_status">
+		<sheetdata>
+
+			<frame_char name="statusframe">
+				<!-- <bounds>20,5,-25,90</bounds> -->
+				<anchored position="insidetopleft" offset="0,5" height="90">
+					<right parent="" offset="0"/>
+					<!-- <bottom parent="" offset="-10"/> -->
+				</anchored>
+			</frame_char>
+
+			<label_frametop name="status_label">
+				<anchored to="statusframe" />
+				<static textres="spacecraft_label_status" />
+			</label_frametop>
+
+			<anchor_column name="columnanchor" />
+            <genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top/>
+					<right />
+				</anchored>
+			</genericcontrol>
+
+            <label_column name="remaining_fuel_label">
+				<static textres="spacecraft_label_remaining_fuel" />
+                <anchored>
+                    <top offset="40" />
+					<left offset="35" />
+				</anchored>
+			</label_column>
+			<number_columnh name="remaining_fuel">
+                <anchored width="70">
+                    <top offset="40" />
+					<left offset="190" />
+				</anchored>
+            </number_columnh>
+			<label_column name="remaining_refined_fuel_label">
+				<static textres="spacecraft_label_refined_fuel" />
+                <anchored>
+                    <top offset="-20" />
+					<left offset="270" />
+				</anchored>
+			</label_column>
+			<number_columnh name="remaining_fuel_unrefined">
+                <anchored width="70">
+                    <top offset="5" />
+					<left offset="190" />
+				</anchored>
+            </number_columnh>
+			<label_column name="remaining_unrefined_fuel_label">
+				<static textres="spacecraft_label_unrefined_fuel" />
+                <anchored>
+                    <top offset="-20" />
+					<left offset="270" />
+				</anchored>
+			</label_column>
+        </sheetdata>
+
+	</windowclass>
+
+</root>

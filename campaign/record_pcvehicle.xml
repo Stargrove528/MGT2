@@ -1,0 +1,48 @@
+<windowclass name="pcvehicle">
+    <title>PC Vehicle</title>
+    <sheetdata>
+        <description>Record for PC-controlled vehicles.</description>
+        <layout>
+            <closebutton />
+            <horizontallist>
+                <label value="Vehicle Name:" />
+                <stringfield name="name" width="200" />
+            </horizontallist>
+
+            <horizontallist>
+                <label value="Tech Level:" />
+                <numberfield name="tl" width="50" />
+            </horizontallist>
+
+            <horizontallist>
+                <label value="Crew Size:" />
+                <numberfield name="crew" width="50" />
+            </horizontallist>
+
+            <horizontallist>
+                <label value="Speed:" />
+                <numberfield name="speed" width="100" />
+            </horizontallist>
+
+            <horizontallist>
+                <label value="Armor (Front):" />
+                <numberfield name="armor_front" width="50" />
+            </horizontallist>
+
+            <horizontallist>
+                <label value="Armor (Rear):" />
+                <numberfield name="armor_rear" width="50" />
+            </horizontallist>
+
+            <horizontallist>
+                <label value="Armor (Sides):" />
+                <numberfield name="armor_sides" width="50" />
+            </horizontallist>
+
+            <horizontallist>
+                <label value="Armor (Under):" />
+                <numberfield name="armor_under" width="50" />
+            </horizontallist>
+        </layout>
+    </sheetdata>
+</windowclass>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="reference_homeworld" copy="record_window" />
+	<windowclass name="reference_homeworld_main">
+		<script>
+			function onInit()
+				self.update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				skill.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+            <label_column>
+				<static textres="ref_label_skill" />
+				<anchored>
+					<top offset="6"/>
+					<left offset="60" />
+				</anchored>
+			</label_column>
+			<string_column name="skill">
+				<readonly />
+			</string_column>
+		</sheetdata>
+	</windowclass>
+</root>

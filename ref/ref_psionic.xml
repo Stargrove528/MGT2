@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="reference_psionic" copy="record_window" />
+
+	<windowclass name="reference_psionic_main">
+		<script>
+			function onInit()
+				self.update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				local node = getDatabaseNode();
+
+				text.setReadOnly(bReadOnly);
+				check.setReadOnly(bReadOnly);
+				reach.setReadOnly(bReadOnly);
+				psicost.setReadOnly(bReadOnly);
+
+				if bReadOnly then
+					psitalent_label.setVisible(false);
+					talent.setVisible(false);
+					if text.isEmpty() then
+						text.setVisible(false);
+					else
+						text.setVisible(true);
+					end
+					if check.isEmpty() then
+						checklabel.setVisible(false);
+						check.setVisible(false);
+					else
+						checklabel.setVisible(true);
+						check.setVisible(true);
+					end
+					if reach.isEmpty() then
+						reachlabel.setVisible(false);
+						reach.setVisible(false);
+					else
+						reachlabel.setVisible(true);
+						reach.setVisible(true);
+					end
+					if psicost.isEmpty() then
+						psicostlabel.setVisible(false);
+						psicost.setVisible(false);
+					else
+						psicostlabel.setVisible(true);
+						psicost.setVisible(true);
+					end
+				else
+					psitalent_label.setVisible(true);
+					talent.setVisible(true);
+					checklabel.setVisible(true);
+					check.setVisible(true);
+					reachlabel.setVisible(true);
+					reach.setVisible(true);
+					text.setVisible(true);
+					psicostlabel.setVisible(true);
+					psicost.setVisible(true);
+				end
+			end
+		</script>
+
+				<!-- if (noedit.getValue() == 1) then
+					return;
+				end -->
+
+		<margins control="0,0,0,7" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			<hn name="noedit" />
+
+			<label_column name="psitalent_label">
+				<static textres="psionic_label_talent" />
+			</label_column>
+			<string_columnh name="talent">
+				<delaykeyupdate />
+				<script>
+					function onValueChanged()
+						window.update();
+					end
+				</script>
+			</string_columnh>
+
+			<ft_columnh name="text">
+				<readonly />
+			</ft_columnh>
+
+			<label_column name="checklabel" >
+				<anchored>
+					<top relation="relative" />
+				</anchored>
+				<font>reference-b-large</font>
+				<static textres="ref_label_check" />
+			</label_column>
+
+      		<ft_columnh name="check">
+				<readonly />
+			</ft_columnh>
+
+			<label_column name="reachlabel" >
+				<anchored>
+					<top relation="relative" />
+				</anchored>
+				<font>reference-b-large</font>
+				<static textres="ref_label_reach" />
+			</label_column>
+
+			<ft_columnh name="reach">
+				<readonly />
+			</ft_columnh>
+
+			<label_column name="psicostlabel" >
+				<anchored>
+					<top relation="relative" />
+				</anchored>
+				<font>reference-b-large</font>
+				<static textres="ref_label_psicost" />
+			</label_column>
+
+			<ft_columnh name="psicost">
+				<readonly />
+			</ft_columnh>
+
+		</sheetdata>
+	</windowclass>
+</root>

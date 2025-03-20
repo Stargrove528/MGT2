@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- Weapons table -->
+	<windowclass name="reference_weaponstable" copy="reference_groupindex_labeled_window">
+		<sizelimits>
+			<minimum width="650" height="650" />
+		</sizelimits>
+		<sheetdata>
+			<list_content_labeled_framed_groupbox name="grouplist">
+				<class>reference_weaponstablegroup</class>
+				<sortby><control>tl</control></sortby>
+				<sortby><control>name</control></sortby>
+			</list_content_labeled_framed_groupbox>
+
+			<spacer_list_content_link_label_left />
+			<label_list_content_string_noframe_left name="headername">
+				<anchored width="220" />
+				<static textres="ref_label_listname" />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headertl">
+				<anchored width="50" />
+				<static textres="ref_label_listtl" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headerdamage">
+				<anchored width="100" />
+				<static textres="ref_label_listdamage" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_number_left name="headermass">
+				<anchored width="100" />
+				<static textres="ref_label_listmass" />
+			</label_list_content_number_left>
+			<label_list_content_string_noframe_left name="headercost">
+				<anchored width="100" />
+				<static textres="ref_label_listcost" />
+				<center />
+			</label_list_content_string_noframe_left>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_weaponstablegroup" copy="reference_groupindex_group">
+		<sheetdata>
+			<list_content_groupitems name="list">
+				<datasource>.equipment</datasource>
+				<class>reference_weaponstablegroupitem</class>
+			</list_content_groupitems>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_weaponstablegroupitem">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<anchor_listitem_left_sm />
+			<link_listitem_left name="link" />
+			<string_listitem_left_noframe_static_linked name="name">
+				<anchored width="220" />
+			</string_listitem_left_noframe_static_linked>
+			<string_listitem_left_noframe_static name="tl">
+				<anchored width="50" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<stringc_listitem_left_noframe_static name="damage">
+				<anchored width="100" />
+				<center />
+			</stringc_listitem_left_noframe_static>
+			<number_text_listitem_left_noframe_static name="mass">
+				<anchored width="100" />
+			</number_text_listitem_left_noframe_static>
+			<string_listitem_left_noframe_static name="cost">
+				<anchored width="100" />
+				<center />
+			</string_listitem_left_noframe_static>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Heavy Weapons table -->
+	<windowclass name="reference_heavyweaponrytable" copy="reference_weaponstable" />
+
+	<!-- Armour table -->
+	<windowclass name="reference_armourtable" copy="reference_groupindex_labeled_window">
+		<sizelimits>
+			<minimum width="780" height="650" />
+		</sizelimits>
+		<sheetdata>
+			<list_content_labeled_framed_groupbox name="grouplist">
+				<class>reference_armourtablegroup</class>
+				<sortby><control>tl</control></sortby>
+				<sortby><control>name</control></sortby>
+			</list_content_labeled_framed_groupbox>
+
+			<spacer_list_content_link_label_left />
+			<label_list_content_string_noframe_left name="headername">
+				<anchored width="220" />
+				<static textres="ref_label_listname" />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headertl">
+				<anchored width="50" />
+				<static textres="ref_label_listtl" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_number_left name="headerprotection">
+				<anchored width="80" />
+				<static textres="ref_label_listprotection" />
+			</label_list_content_number_left>
+			<label_list_content_number_left name="headerrad">
+				<anchored width="50" />
+				<static textres="ref_label_listrad" />
+			</label_list_content_number_left>
+			<label_list_content_number_left name="headermass">
+				<anchored width="80" />
+				<static textres="ref_label_listmass" />
+			</label_list_content_number_left>
+			<label_list_content_string_noframe_left name="headercost">
+				<anchored width="100" />
+				<static textres="ref_label_listcost" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headerskill">
+				<anchored width="100" />
+				<static textres="ref_label_listskill" />
+				<center />
+			</label_list_content_string_noframe_left>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_armourtablegroup" copy="reference_groupindex_group">
+		<sheetdata>
+			<list_content_groupitems name="list">
+				<datasource>.equipment</datasource>
+				<class>reference_armourtablegroupitem</class>
+				<sortby><control>tl</control></sortby>
+				<sortby><control>name</control></sortby>
+			</list_content_groupitems>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_armourtablegroupitem">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<anchor_listitem_left_sm />
+			<link_listitem_left name="link" />
+			<string_listitem_left_noframe_static_linked name="name">
+				<anchored width="220" />
+			</string_listitem_left_noframe_static_linked>
+			<string_listitem_left_noframe_static name="tl">
+				<anchored width="50" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<number_text_listitem_left_noframe_static name="protection">
+				<anchored width="80" />
+			</number_text_listitem_left_noframe_static>
+			<number_text_listitem_left_noframe_static name="rad">
+				<anchored width="50" />
+			</number_text_listitem_left_noframe_static>
+			<number_text_listitem_left_noframe_static name="mass">
+				<anchored width="80" />
+			</number_text_listitem_left_noframe_static>
+			<string_listitem_left_noframe_static name="cost">
+				<anchored width="100" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<stringc_listitem_left_noframe_static name="skill">
+				<anchored width="100" />
+				<center />
+			</stringc_listitem_left_noframe_static>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Augments table -->
+	<windowclass name="reference_augmentstable" copy="reference_groupindex_labeled_window">
+		<sizelimits>
+			<minimum width="650" height="650" />
+		</sizelimits>
+		<sheetdata>
+			<list_content_labeled_framed_groupbox name="grouplist">
+				<class>reference_augmentstablegroup</class>
+				<sortby><control>tl</control></sortby>
+				<sortby><control>name</control></sortby>
+			</list_content_labeled_framed_groupbox>
+
+			<spacer_list_content_link_label_left />
+			<label_list_content_string_noframe_left name="headername">
+				<anchored width="300" />
+				<static textres="ref_label_listname" />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headertl">
+				<anchored width="50" />
+				<static textres="ref_label_listtl" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headercost">
+				<anchored width="100" />
+				<static textres="ref_label_listcost" />
+				<center />
+			</label_list_content_string_noframe_left>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_augmentstablegroup" copy="reference_groupindex_group">
+		<sheetdata>
+			<list_content_groupitems name="list">
+				<datasource>.equipment</datasource>
+				<class>reference_augmentstablegroupitem</class>
+				<sortby><control>tl</control></sortby>
+				<sortby><control>name</control></sortby>
+			</list_content_groupitems>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_augmentstablegroupitem">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<anchor_listitem_left_sm />
+			<link_listitem_left name="link" />
+			<string_listitem_left_noframe_static_linked name="description">
+				<anchored width="300" />
+			</string_listitem_left_noframe_static_linked>
+			<string_listitem_left_noframe_static name="tl">
+				<anchored width="50" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<string_listitem_left_noframe_static name="cost">
+				<anchored width="100" />
+				<center />
+			</string_listitem_left_noframe_static>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Communications table -->
+	<windowclass name="reference_communicationstable" copy="reference_groupindex_labeled_window">
+		<sizelimits>
+			<minimum width="650" height="650" />
+		</sizelimits>
+		<sheetdata>
+			<list_content_labeled_framed_groupbox name="grouplist">
+				<class>reference_communicationstablegroup</class>
+				<sortby><control>tl</control></sortby>
+				<sortby><control>name</control></sortby>
+			</list_content_labeled_framed_groupbox>
+
+			<spacer_list_content_link_label_left />
+			<label_list_content_string_noframe_left name="headername">
+				<anchored width="300" />
+				<static textres="ref_label_listname" />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headertl">
+				<anchored width="50" />
+				<static textres="ref_label_listtl" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_number_left name="headermass">
+				<anchored width="80" />
+				<static textres="ref_label_listmass" />
+			</label_list_content_number_left>
+			<label_list_content_string_noframe_left name="headercost">
+				<anchored width="100" />
+				<static textres="ref_label_listcost" />
+				<center />
+			</label_list_content_string_noframe_left>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_communicationstablegroup" copy="reference_groupindex_group">
+		<sheetdata>
+			<list_content_groupitems name="list">
+				<datasource>.equipment</datasource>
+				<class>reference_communicationstablegroupitem</class>
+				<sortby><control>tl</control></sortby>
+				<sortby><control>name</control></sortby>
+			</list_content_groupitems>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_communicationstablegroupitem">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<anchor_listitem_left_sm />
+			<link_listitem_left name="link" />
+			<string_listitem_left_noframe_static_linked name="description">
+				<anchored width="300" />
+			</string_listitem_left_noframe_static_linked>
+			<string_listitem_left_noframe_static name="tl">
+				<anchored width="50" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<number_text_listitem_left_noframe_static name="mass">
+				<anchored width="80" />
+			</number_text_listitem_left_noframe_static>
+			<string_listitem_left_noframe_static name="cost">
+				<anchored width="100" />
+				<center />
+			</string_listitem_left_noframe_static>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Computers table -->
+	<windowclass name="reference_computerstable" copy="reference_communicationstable" />
+
+	<!-- Medical supplies -->
+	<windowclass name="reference_medicalsuppliestable" copy="reference_communicationstable" />
+
+	<!-- Robots and Drones -->
+	<windowclass name="reference_robotsanddronestable" copy="reference_augmentstable" />
+
+	<!-- Sensors table -->
+	<windowclass name="reference_sensorstable" copy="reference_communicationstable" />
+
+	<!-- Survival Gear and Supplies table -->
+	<windowclass name="reference_survivalgearandsuppliestable" copy="reference_communicationstable" />
+
+	<!-- Tookits table -->
+	<windowclass name="reference_toolkitstable" copy="reference_communicationstable" />
+
+	<!-- Ammunition table -->
+	<windowclass name="reference_ammunitiontable" copy="reference_groupindex_labeled_window">
+		<sizelimits>
+			<minimum width="700" height="650" />
+		</sizelimits>
+		<sheetdata>
+			<list_content_labeled_framed_groupbox name="grouplist">
+				<class>reference_ammunitiontablegroup</class>
+				<sortby><control>tl</control></sortby>
+				<sortby><control>name</control></sortby>
+			</list_content_labeled_framed_groupbox>
+
+			<spacer_list_content_link_label_left />
+			<label_list_content_string_noframe_left name="headername">
+				<anchored width="220" />
+				<static textres="ref_label_listname" />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headertl">
+				<anchored width="40" />
+				<static textres="ref_label_listtl" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headerdamage">
+				<anchored width="60" />
+				<static textres="ref_label_listdmg" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headercost">
+				<anchored width="50" />
+				<static textres="ref_label_listcost" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headertraits">
+				<anchored width="120" />
+				<static textres="ref_label_listtraits" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headerpistol">
+				<anchored width="35" />
+				<static textres="ref_label_listpistol" />
+				<tooltip textres="ref_tooltip_listpistol" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headerrifle">
+				<anchored width="35" />
+				<static textres="ref_label_listrifle" />
+				<tooltip textres="ref_tooltip_listrifle" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headershotgun">
+				<anchored width="35" />
+				<static textres="ref_label_listshotgun" />
+				<tooltip textres="ref_tooltip_listshotgun" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headerheavy">
+				<anchored width="35" />
+				<static textres="ref_label_listheavy" />
+				<tooltip textres="ref_tooltip_listheavy" />
+				<center />
+			</label_list_content_string_noframe_left>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_ammunitiontablegroup" copy="reference_groupindex_group">
+		<sheetdata>
+			<list_content_groupitems name="list">
+				<datasource>.equipment</datasource>
+				<class>reference_ammunitiontablegroupitem</class>
+				<sortby><control>tl</control></sortby>
+				<sortby><control>name</control></sortby>
+			</list_content_groupitems>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_ammunitiontablegroupitem">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<anchor_listitem_left_sm />
+			<link_listitem_left name="link" />
+			<string_listitem_left_noframe_static_linked name="name">
+				<anchored width="220" />
+			</string_listitem_left_noframe_static_linked>
+			<string_listitem_left_noframe_static name="tl">
+				<anchored width="40" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<stringc_listitem_left_noframe_static name="damage">
+				<anchored width="60" />
+				<center />
+			</stringc_listitem_left_noframe_static>
+			<string_listitem_left_noframe_static name="cost">
+				<anchored width="50" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<string_listitem_left_noframe_static name="traits">
+				<anchored width="120" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<string_listitem_left_noframe_static name="pistol">
+				<anchored width="35" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<string_listitem_left_noframe_static name="rifle">
+				<anchored width="35" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<string_listitem_left_noframe_static name="shotgun">
+				<anchored width="35" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<string_listitem_left_noframe_static name="heavy">
+				<anchored width="35" />
+				<center />
+			</string_listitem_left_noframe_static>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Sighting Aids table -->
+	<windowclass name="reference_sightingaidstable" copy="reference_groupindex_labeled_window">
+		<sizelimits>
+			<minimum width="650" height="650" />
+		</sizelimits>
+		<sheetdata>
+			<list_content_labeled_framed_groupbox name="grouplist">
+				<class>reference_signtingaidstablegroup</class>
+				<sortby><control>tl</control></sortby>
+				<sortby><control>name</control></sortby>
+			</list_content_labeled_framed_groupbox>
+
+			<spacer_list_content_link_label_left />
+			<label_list_content_string_noframe_left name="headername">
+				<anchored width="150" />
+				<static textres="ref_label_listname" />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headertl">
+				<anchored width="40" />
+				<static textres="ref_label_listtl" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headerrange">
+				<anchored width="60" />
+				<static textres="ref_label_listrange" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headerdamage">
+				<anchored width="60" />
+				<static textres="ref_label_listdmg" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_number_left name="headermass">
+				<anchored width="50" />
+				<static textres="ref_label_listmass" />
+			</label_list_content_number_left>
+			<label_list_content_string_noframe_left name="headercost">
+				<anchored width="50" />
+				<static textres="ref_label_listcost" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headertraits">
+				<anchored width="120" />
+				<static textres="ref_label_listtraits" />
+				<center />
+			</label_list_content_string_noframe_left>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_signtingaidstablegroup" copy="reference_groupindex_group">
+		<sheetdata>
+			<list_content_groupitems name="list">
+				<datasource>.equipment</datasource>
+				<class>reference_sightingaidstablegroupitem</class>
+				<sortby><control>tl</control></sortby>
+				<sortby><control>name</control></sortby>
+			</list_content_groupitems>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_sightingaidstablegroupitem">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<anchor_listitem_left_sm />
+			<link_listitem_left name="link" />
+			<string_listitem_left_noframe_static_linked name="name">
+				<anchored width="150" />
+			</string_listitem_left_noframe_static_linked>
+			<string_listitem_left_noframe_static name="tl">
+				<anchored width="40" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<stringc_listitem_left_noframe_static name="range">
+				<anchored width="60" />
+				<center />
+			</stringc_listitem_left_noframe_static>
+			<stringc_listitem_left_noframe_static name="damage">
+				<anchored width="60" />
+				<center />
+			</stringc_listitem_left_noframe_static>
+			<number_text_listitem_left_noframe_static name="mass">
+				<anchored width="50" />
+			</number_text_listitem_left_noframe_static>
+			<string_listitem_left_noframe_static name="cost">
+				<anchored width="50" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<string_listitem_left_noframe_static name="traits">
+				<anchored width="120" />
+				<center />
+			</string_listitem_left_noframe_static>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Medical supplies -->
+	<windowclass name="reference_miscellaneoustable" copy="reference_communicationstable" />
+
+	<!-- Spacecraft Weapons table -->
+	<windowclass name="reference_spacecraftscaleweaponstable" copy="reference_groupindex_labeled_window">
+		<sizelimits>
+			<minimum width="650" height="650" />
+		</sizelimits>
+		<sheetdata>
+			<list_content_labeled_framed_groupbox name="grouplist">
+				<class>reference_spacecraftscaleweaponstablegroup</class>
+				<sortby><control>tl</control></sortby>
+				<sortby><control>name</control></sortby>
+			</list_content_labeled_framed_groupbox>
+
+			<spacer_list_content_link_label_left />
+			<label_list_content_string_noframe_left name="headername">
+				<anchored width="200" />
+				<static textres="ref_label_listname" />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headertl">
+				<anchored width="50" />
+				<static textres="ref_label_listtl" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headerdamage">
+				<anchored width="100" />
+				<static textres="ref_label_listdamage" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headerrange">
+				<anchored width="100" />
+				<static textres="ref_label_listrange" />
+				<center />
+			</label_list_content_string_noframe_left>
+			<label_list_content_string_noframe_left name="headercost">
+				<anchored width="100" />
+				<static textres="ref_label_listcost" />
+				<center />
+			</label_list_content_string_noframe_left>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_spacecraftscaleweaponstablegroup" copy="reference_groupindex_group">
+		<sheetdata>
+			<list_content_groupitems name="list">
+				<datasource>.equipment</datasource>
+				<class>reference_spacecraftscaleweaponstablegroupitem</class>
+				<sortby><control>tl</control></sortby>
+				<sortby><control>name</control></sortby>
+			</list_content_groupitems>
+		</sheetdata>
+	</windowclass>
+	<windowclass name="reference_spacecraftscaleweaponstablegroupitem">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<anchor_listitem_left_sm />
+			<link_listitem_left name="link" />
+			<string_listitem_left_noframe_static_linked name="name">
+				<anchored width="200" />
+			</string_listitem_left_noframe_static_linked>
+			<string_listitem_left_noframe_static name="tl">
+				<anchored width="50" />
+				<center />
+			</string_listitem_left_noframe_static>
+			<stringc_listitem_left_noframe_static name="damage">
+				<anchored width="100" />
+				<center />
+			</stringc_listitem_left_noframe_static>
+			<stringc_listitem_left_noframe_static name="range">
+				<anchored width="100" />
+				<center />
+			</stringc_listitem_left_noframe_static>
+			<string_listitem_left_noframe_static name="cost">
+				<anchored width="100" />
+				<center />
+			</string_listitem_left_noframe_static>
+		</sheetdata>
+	</windowclass>
+</root>

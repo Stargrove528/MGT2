@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<string name="tab_equipment">Equipment</string>
+	<string name="tab_psi">Psi</string>
+	<string name="tab_trade">Trade</string>
+	<string name="tab_spaceports">Spaceports</string>
+	<string name="tab_status">Status</string>
+	<string name="tab_systems">Systems</string>
+	
+	<framedef name="tabs">
+		<bitmap file="graphics/tabs/tabs.png" />
+		<topleft rect="0,0,18,69" />
+		<left rect="0,69,18,134" />
+		<bottomleft rect="0,203,18,23" />
+	</framedef>
+	<icon name="tabtop" file="graphics/tabs/tabtop.png" />
+
+	<font name="tabfont">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="14" />
+		<color value="#FFFFFF" />
+	</font>
+</root>
