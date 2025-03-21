@@ -14,13 +14,6 @@
 			<class>vehicle_main</class>
 			<embed />
 		</tab>
-  
-		<tab merge="add">
-			<name>weapons</name>
-			<resource>tab_weapons</resource>
-			<class>vehicle_weapons_tab</class>
-			<embed />
-		</tab>	
 		<tab merge="add">
 			<name>notes</name>
 			<resource>tab_notes</resource>
@@ -58,7 +51,6 @@
 				armour_front.update(bReadOnly);
 				armour_sides.update(bReadOnly);
 				armour_rear.update(bReadOnly);
-				armour_under.update(bReadOnly);
 				equipment.setReadOnly(bReadOnly);
 				weapons.setReadOnly(bReadOnly);
 
@@ -162,11 +154,6 @@
 			</label_column>
 			<number_columnh name="armour_rear" />
 
-			<label_column name="armour_under_label">
-				<static textres="vehicle_label_armour_under" />
-			</label_column>
-			<number_columnh name="armour_under" />
-
 			<line_column name="divider3" />
 			<label_column name="equipment_label">
 				<static textres="vehicle_label_equipment" />
@@ -189,58 +176,6 @@
 			<!-- <line_column name="divider4" />
 			<ft_columnh name="description" /> -->
 			<spacer_column name="spacer" />
-		</sheetdata>
-	</windowclass>
-	<windowclass name="vehicle_weapons_tab">
-		<sheetdata>
-			<header_column>
-				<static textres="spacecraft_label_weaponname" />
-			</header_column>
-			<header_column>
-				<static textres="spacecraft_label_weaponrange" />
-			</header_column>
-			<header_column>
-				<static textres="spacecraft_label_weapondamage" />
-			</header_column>
-			<header_column>
-				<static textres="spacecraft_label_weapontraits" />
-			</header_column>
-			<windowlist name="weaponlist" class="vehicleweapon" newbutton="true" allowdelete="true" allowdrop="true">
-				<anchored width="600" height="300">
-					<top />
-					<left />
-					<right />
-					<bottom />
-				</anchored>
-			</windowlist>
-		</sheetdata>
-	</windowclass>
-	<windowclass name="vehicleweapon">
-		<sheetdata>
-			<stringcontrol name="name">
-				<anchored to="*" width="150">
-					<top />
-					<left />
-				</anchored>
-			</stringcontrol>
-			<stringcontrol name="range">
-				<anchored to="name" width="100">
-					<top />
-					<left anchor="right" />
-				</anchored>
-			</stringcontrol>
-			<stringcontrol name="damage">
-				<anchored to="range" width="100">
-					<top />
-					<left anchor="right" />
-				</anchored>
-			</stringcontrol>
-			<stringcontrol name="traits">
-				<anchored to="damage" width="250">
-					<top />
-					<left anchor="right" />
-				</anchored>
-			</stringcontrol>
 		</sheetdata>
 	</windowclass>
 </root>

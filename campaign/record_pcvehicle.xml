@@ -1,48 +1,112 @@
-<windowclass name="pcvehicle">
+<root>
+  <windowclass name="record_pcvehicle" copy="record_window_tabbed">
     <title>PC Vehicle</title>
+
+    <tab>
+      <name>main</name>
+      <resource>tab_main</resource>
+      <class>vehicle_main_pc</class>
+      <embed />
+    </tab>
+    
+    <tab merge="add">
+      <name>weapons</name>
+      <resource>tab_weapons</resource>
+      <class>vehicle_weapons_tab</class>
+      <embed />
+    </tab>
+    <tab merge="add">
+      <name>notes</name>
+      <resource>tab_notes</resource>
+      <class>record_content_description</class>
+      <embed />
+    </tab>
+  </windowclass>
+
+  <windowclass name="vehicle_main_pc">
     <sheetdata>
-        <description>Record for PC-controlled vehicles.</description>
-        <layout>
-            <closebutton />
-            <horizontallist>
-                <label value="Vehicle Name:" />
-                <stringfield name="name" width="200" />
-            </horizontallist>
+      <anchor_column name="columnanchor" />
 
-            <horizontallist>
-                <label value="Tech Level:" />
-                <numberfield name="tl" width="50" />
-            </horizontallist>
+      <label_column name="type_label"><static text="Type" /></label_column>
+      <string_columnh name="type" />
 
-            <horizontallist>
-                <label value="Crew Size:" />
-                <numberfield name="crew" width="50" />
-            </horizontallist>
+      <label_column name="tl_label"><static text="TL" /></label_column>
+      <number_columnh name="tl" />
 
-            <horizontallist>
-                <label value="Speed:" />
-                <numberfield name="speed" width="100" />
-            </horizontallist>
+      <line_column name="divider3" /> 
 
-            <horizontallist>
-                <label value="Armor (Front):" />
-                <numberfield name="armor_front" width="50" />
-            </horizontallist>
+      <label_column name="skill_label"><static text="Skill" /></label_column>
+      <string_columnh name="skill" />
 
-            <horizontallist>
-                <label value="Armor (Rear):" />
-                <numberfield name="armor_rear" width="50" />
-            </horizontallist>
+      <label_column name="agility_label"><static text="Agility" /></label_column>
+      <number_columnh name="agility" />
 
-            <horizontallist>
-                <label value="Armor (Sides):" />
-                <numberfield name="armor_sides" width="50" />
-            </horizontallist>
+      <label_column name="speed_label"><static text="Speed" /></label_column>
+      <string_columnh name="speed" />
 
-            <horizontallist>
-                <label value="Armor (Under):" />
-                <numberfield name="armor_under" width="50" />
-            </horizontallist>
-        </layout>
+      <label_column name="range_label"><static text="Range" /></label_column>
+      <string_columnh name="range" />
+
+      <label_column name="crew_label"><static text="Crew" /></label_column>
+      <number_columnh name="crew" />
+
+      <label_column name="passengers_label"><static text="Passengers" /></label_column>
+      <number_columnh name="passengers" />
+
+      <label_column name="cargo_label"><static text="Cargo" /></label_column>
+      <string_columnh name="cargo" />
+
+      <label_column name="hull_label"><static text="Hull" /></label_column>
+      <string_columnh name="hull" />
+
+      <label_column name="shipping_label"><static text="Shipping" /></label_column>
+      <string_columnh name="shipping" />
+
+      <label_column name="cost_label"><static text="Cost" /></label_column>
+      <string_columnh name="cost" />
+
+      <header_column name="armour_header"><static text="Armour" /></header_column>
+
+      <label_column name="armor_front_label"><static text="Front" /></label_column>
+      <number_columnh name="armor_front" />
+
+      <label_column name="armor_sides_label"><static text="Sides" /></label_column>
+      <number_columnh name="armor_sides" />
+
+      <label_column name="armor_rear_label"><static text="Rear" /></label_column>
+      <number_columnh name="armor_rear" />
+
+      <label_column name="armor_under_label"><static text="Under/Top" /></label_column>
+      <number_columnh name="armor_under" />
+
+      <line_column name="divider3" />      
+
+      <label_column name="equipment_label"><static text="Equipment" /></label_column>
+      <string_columnh name="equipment" />
+
+      <label_column name="traits_label"><static text="Traits" /></label_column>
+      <string_columnh name="traits" />
+
+      <label_column name="techlabel"><static text="Technology" /></label_column>
+      <string_columnh name="tech" />
     </sheetdata>
-</windowclass>
+  </windowclass>
+
+  <windowclass name="vehicleweapon">
+    <sheetdata>
+      <stringcontrol name="name" label="Weapon Name" />
+    </sheetdata>
+  </windowclass>
+  <windowclass name="vehicle_weapons_tab">
+    <sheetdata>
+      <windowlist name="weaponlist" class="vehicleweapon" newbutton="true" allowdelete="true" allowdrop="true">
+        <anchored>
+          <top />
+          <left />
+          <right />
+          <height>150</height>
+        </anchored>
+      </windowlist>
+    </sheetdata>
+  </windowclass>
+</root>

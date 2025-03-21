@@ -78,6 +78,7 @@
 	<includefile source="campaign/record_psiabilities.xml" />
 	<includefile source="campaign/record_char_misc_actions.xml" />
 	<includefile source="campaign/record_char_spacecraft.xml" />
+	
 
 	<includefile source="campaign/record_battlespacecraft.xml" />
 	<includefile source="campaign/record_item.xml" />
@@ -158,6 +159,9 @@
 	<script name="SpacecraftManager" file="scripts/manager_spacecraft.lua" />
 	<script name="SpacecraftCriticalsManager" file="scripts/manager_spacecraft_criticals.lua" />
 
+	<!-- Vehicle -->
+	<includefile source="campaign/record_vehicleweapon.xml" />
+
 	<!-- PC Ship -->
 	<includefile source="campaign/record_charspacecraft.xml" />
 	<includefile source="campaign/record_charspacecraft_main.xml" />
@@ -167,6 +171,9 @@
 	<includefile source="campaign/record_charspacecraft_weapons.xml" />
 	<includefile source="campaign/record_charspacecraft_status.xml" />
 
+	<!-- PC Vehicle -->
+	<includefile source="campaign/record_pcvehicle.xml" />
+	
 	<!-- Task Chains -->
 	<includefile source="tc/tc_host.xml" />
 	<includefile source="tc/tc_client.xml" />

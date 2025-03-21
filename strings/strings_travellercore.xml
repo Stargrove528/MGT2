@@ -630,6 +630,8 @@
 	<string name="vehicle_label_armour_front">Front</string>
 	<string name="vehicle_label_armour_sides">Sides</string>
 	<string name="vehicle_label_armour_rear">Rear</string>
+	<string name="vehicle_label_armour_under">Rear/Top</string>
+
 	<string name="vehicle_label_hull">Hull</string>
 	<string name="vehicle_label_structure">Structure</string>
 	<string name="vehicle_label_weapons">Weapons</string>
@@ -655,6 +657,9 @@
 	<string name="vehiclerole_administator">Administator</string>
 	<string name="vehiclerole_officer">Officer</string>
 	<string name="vehiclerole_othercrew">Other Crew</string>
+
+	<string name="library_recordtype_label_pcvehicle">PC Vehicles</string>
+	<string name="library_recordtype_empty_pcvehicle">&#171; New PC Vehicle &#187;</string>
 
 	<!-- Spacecraft  -->
 	<string name="spacecraft_label_tl">TL</string>
@@ -826,6 +831,7 @@
 	<string name="tc_tooltip_effect">This is the DM applied to the next check in this chain</string>
 	<string name="sidebar_tooltip_taskchains">Task Chains</string>
 	<string name="tc_completed">The task chain '%s' has been completed</string>
+
 
 	<string name="library_recordview_label_item_armor">Armour</string>
 	<string name="library_recordview_label_item_armour">Armour</string>
