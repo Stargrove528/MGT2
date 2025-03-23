@@ -351,7 +351,14 @@
 			<label_column name="mass_label">
 				<static textres="item_label_mass" />
 			</label_column>
-			<number_columnh name="mass" />
+			<number_columnh name="mass">
+				<anchored>
+					<size>
+						<width>80</width>
+					</size>
+				</anchored>
+				<readonly />
+			</number_columnh>
 
 			<label_column name="description_label">
 				<static textres="ref_label_typeanddescription" />

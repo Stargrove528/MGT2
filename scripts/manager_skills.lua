@@ -18,7 +18,6 @@ function onInit()
     ["Engineer"] = { sublabeling=true, spent=-3, attribute="", attributeDM=0},
     ["Explosives"] = { spent=-3, attribute="", attributeDM=0},
     ["Flyer"] = { sublabeling=true, spent=-3, attribute="", attributeDM=0},
-    ["Explosives"] = { spent=-3, attribute="", attributeDM=0},
     ["Gambler"] = { spent=-3, attribute="", attributeDM=0},
     ["Gun Combat"] = { sublabeling=true, spent=-3, attribute="", attributeDM=0},
     ["Gunner"] = { sublabeling=true, spent=-3, attribute="", attributeDM=0},

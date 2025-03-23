@@ -159,9 +159,6 @@
 	<script name="SpacecraftManager" file="scripts/manager_spacecraft.lua" />
 	<script name="SpacecraftCriticalsManager" file="scripts/manager_spacecraft_criticals.lua" />
 
-	<!-- Vehicle -->
-	<includefile source="campaign/record_vehicleweapon.xml" />
-
 	<!-- PC Ship -->
 	<includefile source="campaign/record_charspacecraft.xml" />
 	<includefile source="campaign/record_charspacecraft_main.xml" />
@@ -171,8 +168,13 @@
 	<includefile source="campaign/record_charspacecraft_weapons.xml" />
 	<includefile source="campaign/record_charspacecraft_status.xml" />
 
-	<!-- PC Vehicle -->
+	<!-- PC Vehicle 
 	<includefile source="campaign/record_pcvehicle.xml" />
+	-->
+
+	<!-- Vehicle 
+	<includefile source="campaign/record_vehicleweapon.xml" />
+	-->
 	
 	<!-- Task Chains -->
 	<includefile source="tc/tc_host.xml" />
